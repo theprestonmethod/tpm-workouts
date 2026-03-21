@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>TPM Weekly Check-In</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --red:#a0443e;--red-dk:#7a332e;--red-lt:#fdf0f0;
+  --sage:#b1cbb4;--sage-lt:#d8e9da;--sage-dk:#7fa882;
+  --orange:#d6a27a;--orange-lt:#faf0e8;
+  --cyan:#20cbd6;--cyan-dk:#17a8b2;
+  --cream:#F4F1ED;--cream-dk:#E8E4DC;
+  --off:#F8F6F3;--border:#D4CFC8;
+  --text:#1C1C1C;--gray:#808080;--gray2:#696767;
+  --white:#fff;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;}
+
+/* ── HEADER ── */
+.site-header{background:var(--red);padding:0;}
+.header-inner{max-width:600px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;gap:14px;}
+.logo-box{width:48px;height:48px;background:white;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.logo-box span{font-family:'Bebas Neue';font-size:18px;color:var(--red);letter-spacing:1px;}
+.header-text h1{font-family:'Bebas Neue';font-size:20px;color:white;letter-spacing:2.5px;line-height:1;}
+.header-text p{font-size:11px;color:rgba(255,255,255,0.65);margin-top:2px;}
+
+/* ── PROGRESS BAR ── */
+.progress-wrap{background:var(--red-dk);padding:10px 24px;}
+.progress-inner{max-width:600px;margin:0 auto;}
+.progress-label{font-size:11px;color:rgba(255,255,255,0.7);margin-bottom:6px;display:flex;justify-content:space-between;}
+.progress-track{background:rgba(255,255,255,0.2);border-radius:4px;height:5px;}
+.progress-fill{background:white;border-radius:4px;height:5px;transition:width 0.4s ease;}
+
+/* ── MAIN ── */
+.main{max-width:600px;margin:0 auto;padding:32px 20px 60px;}
+
+/* ── QUESTION CARDS ── */
+.question-card{background:white;border-radius:14px;border:1.5px solid var(--border);box-shadow:0 2px 12px rgba(160,68,62,0.06);margin-bottom:20px;overflow:hidden;display:none;}
+.question-card.active{display:block;animation:slideIn 0.3s ease;}
+@keyframes slideIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.q-header{background:var(--cream);padding:16px 20px 14px;border-bottom:1px solid var(--cream-dk);}
+.q-number{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:4px;}
+.q-title{font-family:'Bebas Neue';font-size:22px;letter-spacing:1px;color:var(--text);line-height:1.1;}
+.q-subtitle{font-size:12px;color:var(--gray);margin-top:4px;}
+.q-body{padding:20px;}
+
+/* ── INPUTS ── */
+.form-input{width:100%;font-family:'DM Sans';font-size:14px;background:var(--off);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);transition:border-color 0.2s;}
+.form-input:focus{outline:none;border-color:var(--red);background:white;}
+textarea.form-input{resize:vertical;min-height:80px;}
+
+/* ── CHOICE BUTTONS ── */
+.choices{display:flex;flex-direction:column;gap:10px;}
+.choice-btn{width:100%;text-align:left;background:var(--off);border:2px solid var(--border);border-radius:10px;padding:13px 16px;font-family:'DM Sans';font-size:14px;font-weight:500;color:var(--text);cursor:pointer;transition:all 0.18s;display:flex;align-items:center;gap:12px;}
+.choice-btn:hover{border-color:var(--sage-dk);background:var(--sage-lt);}
+.choice-btn.selected{border-color:var(--red);background:var(--red-lt);color:var(--red);font-weight:600;}
+.choice-btn.selected .choice-dot{background:var(--red);}
+.choice-dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;transition:all 0.18s;display:flex;align-items:center;justify-content:center;}
+.choice-btn.selected .choice-dot::after{content:'✓';font-size:10px;color:white;}
+.choice-btn.selected .choice-dot{background:var(--red);border-color:var(--red);}
+
+/* ── SCALE ── */
+.scale-row{display:flex;gap:8px;}
+.scale-btn{flex:1;padding:12px 4px;border-radius:10px;border:2px solid var(--border);background:var(--off);font-size:15px;font-weight:700;cursor:pointer;color:var(--gray2);transition:all 0.15s;text-align:center;}
+.scale-btn:hover{border-color:var(--sage-dk);background:var(--sage-lt);}
+.scale-btn.selected{background:var(--red);border-color:var(--red);color:white;}
+.scale-labels{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:var(--gray);padding:0 2px;}
+
+/* ── PAIN SLIDER ── */
+.pain-wrap{padding:8px 0;}
+.pain-slider{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:4px;background:linear-gradient(to right,var(--sage) 0%,var(--orange) 50%,var(--red) 100%);outline:none;}
+.pain-slider::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--red);cursor:pointer;box-shadow:0 2px 8px rgba(160,68,62,0.3);}
+.pain-value{text-align:center;margin-top:10px;}
+.pain-num{font-family:'Bebas Neue';font-size:40px;color:var(--red);line-height:1;}
+.pain-label{font-size:12px;color:var(--gray2);}
+.pain-scale-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--gray);margin-top:6px;}
+
+/* ── YES/NO ── */
+.yesno-row{display:flex;gap:12px;}
+.yesno-btn{flex:1;padding:16px;border-radius:12px;border:2px solid var(--border);background:var(--off);font-family:'Bebas Neue';font-size:20px;letter-spacing:2px;cursor:pointer;transition:all 0.18s;color:var(--gray2);}
+.yesno-btn:hover{border-color:var(--sage-dk);}
+.yesno-btn.yes.selected{background:#fdf0f0;border-color:var(--red);color:var(--red);}
+.yesno-btn.no.selected{background:var(--sage-lt);border-color:var(--sage-dk);color:var(--sage-dk);}
+
+/* ── NAVIGATION ── */
+.nav-row{display:flex;gap:10px;margin-top:20px;}
+.btn-back{flex:1;background:var(--off);color:var(--gray2);border:1.5px solid var(--border);border-radius:10px;padding:13px;font-family:'DM Sans';font-size:14px;font-weight:600;cursor:pointer;transition:all 0.18s;}
+.btn-back:hover{background:var(--cream-dk);}
+.btn-next{flex:2;background:var(--red);color:white;border:none;border-radius:10px;padding:13px;font-family:'Bebas Neue';font-size:18px;letter-spacing:2px;cursor:pointer;transition:all 0.18s;}
+.btn-next:hover{background:var(--red-dk);}
+.btn-next:disabled{background:var(--border);color:var(--gray);cursor:not-allowed;}
+
+/* ── REQUIRED INDICATOR ── */
+.required{color:var(--red);margin-left:3px;}
+
+/* ── ALERT BOX ── */
+.alert-box{background:#fdf0f0;border:1.5px solid var(--red);border-radius:10px;padding:14px 16px;margin-top:14px;display:none;}
+.alert-box.show{display:block;}
+.alert-box p{font-size:13px;color:var(--red);font-weight:600;}
+
+/* ── COMPLETION SCREEN ── */
+.complete-screen{display:none;text-align:center;}
+.complete-screen.show{display:block;}
+.complete-icon{font-size:64px;margin-bottom:16px;}
+.complete-title{font-family:'Bebas Neue';font-size:36px;letter-spacing:3px;color:var(--red);margin-bottom:8px;}
+.complete-sub{font-size:15px;color:var(--gray2);line-height:1.7;margin-bottom:24px;}
+.complete-card{background:white;border-radius:14px;border:1.5px solid var(--border);padding:20px;margin-bottom:20px;text-align:left;}
+.complete-card-title{font-family:'Bebas Neue';font-size:16px;letter-spacing:1.5px;color:var(--red);margin-bottom:12px;}
+.summary-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--off);font-size:13px;}
+.summary-row:last-child{border-bottom:none;}
+.summary-label{color:var(--gray2);font-weight:500;}
+.summary-value{color:var(--text);font-weight:600;text-align:right;max-width:60%;}
+.submit-status{font-size:13px;color:var(--gray);text-align:center;margin-bottom:16px;}
+.btn-restart{background:var(--off);color:var(--gray2);border:1.5px solid var(--border);border-radius:10px;padding:12px 24px;font-family:'DM Sans';font-size:14px;font-weight:600;cursor:pointer;}
+
+/* ── FOOTER ── */
+.tpm-footer{text-align:center;padding:24px 20px;font-size:11px;color:var(--gray);line-height:2;}
+
+/* ── SHEETS URL SETUP ── */
+.setup-banner{background:var(--orange-lt);border:1.5px solid var(--orange);border-radius:10px;padding:14px 16px;margin-bottom:20px;}
+.setup-banner p{font-size:12px;color:var(--gray2);margin-bottom:8px;}
+.setup-row{display:flex;gap:8px;}
+.setup-input{flex:1;font-family:'DM Sans';font-size:12px;background:white;border:1.5px solid var(--border);border-radius:7px;padding:8px 10px;color:var(--text);}
+.setup-btn{background:var(--red);color:white;border:none;border-radius:7px;padding:8px 14px;font-family:'DM Sans';font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo-box"><span>TPM</span></div>
+    <div class="header-text">
+      <h1>WEEKLY CHECK-IN</h1>
+      <p>The Preston Method™ · Oasis Training &amp; Education</p>
+    </div>
+  </div>
+</header>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-inner">
+    <div class="progress-label">
+      <span id="progressLabel">Question 1 of 12</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- Sheets URL setup (hidden once saved) -->
+  <div class="setup-banner" id="setupBanner">
+    <p>📊 <strong>Coach setup:</strong> Paste your Google Sheets Apps Script URL to receive check-in data automatically.</p>
+    <div class="setup-row">
+      <input class="setup-input" id="sheetsUrlInput" type="text" placeholder="https://script.google.com/macros/s/…/exec">
+      <button class="setup-btn" onclick="saveSheetUrl()">Save URL</button>
+    </div>
+  </div>
+
+  <!-- Q1: Client Name -->
+  <div class="question-card active" id="q1">
+    <div class="q-header">
+      <div class="q-number">Question 1 of 12</div>
+      <div class="q-title">What is your name?<span class="required">*</span></div>
+    </div>
+    <div class="q-body">
+      <input class="form-input" type="text" id="clientName" placeholder="Your full name…" oninput="validateCurrent()">
+      <div class="nav-row">
+        <button class="btn-next" id="next1" onclick="goTo(2)" disabled>NEXT →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2: Pack Code -->
+  <div class="question-card" id="q2">
+    <div class="q-header">
+      <div class="q-number">Question 2 of 12</div>
+      <div class="q-title">Pack Code</div>
+      <div class="q-subtitle">The package phase you are working on</div>
+    </div>
+    <div class="q-body">
+      <div class="choices" id="packCodeChoices">
+        <button class="choice-btn" onclick="selectChoice('packCode','MO-SH-01 — Shoulder Phase 1',this)">
+          <div class="choice-dot"></div> MO-SH-01 — Shoulder Phase 1
+        </button>
+        <button class="choice-btn" onclick="selectChoice('packCode','RT-KNEE-01 — Knee Phase 1',this)">
+          <div class="choice-dot"></div> RT-KNEE-01 — Knee Phase 1
+        </button>
+        <button class="choice-btn" onclick="selectChoice('packCode','SM-FB-01 — Full Body Phase 1',this)">
+          <div class="choice-dot"></div> SM-FB-01 — Full Body Phase 1
+        </button>
+        <button class="choice-btn" onclick="selectChoice('packCode','Other',this)">
+          <div class="choice-dot"></div> Other
+        </button>
+      </div>
+      <div class="nav-row">
+        <button class="btn-back" onclick="goTo(1)">← BACK</button>
+        <button class="btn-next" onclick="goTo(3)">NEXT →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3: Week Starting -->
+  <div class="question-card" id="q3">
+    <div class="q-header">
+      <div class="q-number">Question 3 of 12</div>
+      <div class="q-title">Week Starting (Monday)</div>
+      <div class="q-subtitle">Approximate is fine</div>
+    </div>
+    <div class="q-body">
+      <input class="form-input" type="date" id="weekStarting">
+      <div class="nav-row">
+        <button class="btn-back" onclick="goTo(2)">← BACK</button>
+        <button class="btn-next" onclick="goTo(4)">NEXT →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4: Sessions Completed -->
+  <div class="question-card" id="q4">
+    <div class="q-header">
+      <div class="q-number">Question 4 of 12</div>
+      <div class="q-title">Sessions Completed<span class="required">*</span></div>
+      <div class="q-subtitle">Independent sessions completed this week</div>
+    </div>
+    <div class="q-body">
+      <div class="choices">
+        <button class="choice-btn" onclick="selectChoice('sessionsCompleted','2/2 — Full week! 🎉',this)">
+          <div class="choice-dot"></div> 2/2 — Full week! 🎉
+        </button>
+        <button class="choice-btn" onclick="selectChoice('sessionsCompleted','1/2 — Halfway there',this)">
+          <div class="choice-dot"></div> 1/2 — Halfway there
+        </button>
+        <button class="choice-btn" onclick="selectChoice('sessionsCompleted','0/2 — Not this week',this)">
+          <div class="choice-dot"></div> 0/2 — Not this week
+        </button>
+      </div>
+      <div class="nav-row">
+        <button class="btn-back" onclick="goTo(3)">← BACK</button>
+        <button class="btn-next" onclick="goTo(5)">NEXT →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5: Videos Submitted -->
+  <div class="question-card" id="q5">
+    <div class="q-header">
+      <div class="q-number">Question 5 of 12</div>
+      <div class="q-title">Videos Submitted</div>
+    </div>
+    <div class="q-body">
+      <div class="choices">
+        <button class="choice-btn" onclick="selectChoice('videosSubmitted','2 videos ✓',this)">
+          <div class="choice-dot"></div> 2 videos ✓
+        </button>
+        <button class="choice-btn" onclick="selectChoice('videosSubmitted','1 video',this)">
+          <div class="choice-dot"></div> 1 video
+        </button>
+        <button class="choice-btn" onclick="selectChoice('videosSubmitted','0 — not yet',this)">
+          <div class="choice-dot"></div> 0 — not yet
+        </button>
+        <button class="choice-btn" onclick="selectChoice('videosSubmitted','Not required this week',this)">
+          <div class="choice-dot"></div> Not required this week
+        </button>
+      </div>
+      <div class="nav-row">
+        <button class="btn-back" onclick="goTo(4)">← BACK</button>
+        <button class="btn-next" onclick="goTo(6)">NEXT →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6: Pain / Discomfort -->
+  <div class="question-card" id="q6">
+    <div class="q-header">
+      <div class="q-number">Question 6 of 12</div>
+      <div class="q-title">Pain / Discomfort</div>
+      <div class="q-subtitle">0 = none · 10 = severe</div>
+    </div>
+    <div class="q-body">
+      <div class="pain-wrap">
+        <input class="pain-slider" type="range" min="0" max="10" value="0" id="painSlider" oninput="updatePain(this.value)">
+        <div class="pain-value">
+          <div class="pain-num" id="painNum">0</div>
+          <div class="pain-label" id="painLabel">No pain — feeling great</div>
+        </div>
+        <div class="pain-scale-labels"><span>0 — None</span><span>5 — Moderate</span><span>10 — Severe</span></div>
+      </div>
+      <div class="alert-box" id="painAlert">
+        <p>⚠ Pain level 7 or above — your coach will follow up with you directly.</p>
+      </div>
+      <div class="nav-row">
+        <button class="btn-back" onclick="goTo(5)">← BACK</button>
+        <button class="btn-next" onclick="goTo(7)">NEXT →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7: Movement Quality -->
+  <div class="question-card" id="q7">
+    <div class="q-header">
+      <div class="q-number">Question 7 of 12</div>
+      <div class="q-title">Movement Quality vs Last Week</div>
+    </div>
+    <div class="q-body">
+      <div class="choices">
+        <button class="choice-btn" onclick="selectChoice('movementQuality','Improved 📈',this)" style="border-color:var(--sage);color:var(--sage-dk);">
+          <div class="choice-dot" style="border-color:var(--sage-dk);"></div> Improved 📈
+        </button>
+        <button class="choice-btn" onclick="selectChoice('movementQuality','Same as last week',this)">
+          <div class="choice-dot"></div> Same as last week
+        </button>
+        <button class="choice-btn" onclick="selectChoice('movementQuality','Worse this week',this)" style="border-color:#f0c8c6;color:var(--red);">
+          <div class="choice-dot" style="border-color:var(--red);"></div> Worse this week
+        </button>
+      </div>
+      <div class="nav-row">
+        <button class="btn-back" onclick="goTo(6)">← BACK</button>
+        <button class="btn-next" onclick="goTo(8)">NEXT →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8: Confidence -->
+  <div class="question-card" id="q8">
+    <div class="q-header">
+      <div class="q-number">Question 8 of 12</div>
+      <div class="q-title">Confidence This Week</div>
+      <div class="q-subtitle">1 = hesitant · 5 = strong &amp; controlled</div>
+    </div>
+    <div class="q-body">
+      <div class="scale-row" id="confidenceScale">
+        <button class="scale-btn" onclick="selectScale('confidence','1',this)">1</button>
+        <button class="scale-btn" onclick="selectScale('confidence','2',this)">2</button>
+        <button class="scale-btn" onclick="selectScale('confidence','3',this)">3</button>
+        <button class="scale-btn" onclick="selectScale('confidence','4',this)">4</button>
+        <button class="scale-btn" onclick="selectScale('confidence','5',this)">5</button>
+      </div>
+      <div class="scale-labels"><span>Hesitant</span><span>Strong &amp; Controlled</span></div>
+      <div class="nav-row">
+        <button class="btn-back" onclick="goTo(7)">← BACK</button>
+        <button class="btn-next" onclick="goTo(9)">NEXT →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q9: What felt better -->
+  <div class="question-card" id="q9">
+    <div class="q-header">
+      <div class="q-number">Question 9 of 12</div>
+      <div class="q-title">What Felt Better This Week?</div>
+    </div>
+    <div class="q-body">
+      <textarea class="form-input" id="feltBetter" placeholder="e.g. My shoulder feels less tight in the morning…" rows="4"></textarea>
+      <div class="nav-row">
+        <button class="btn-back" onclick="goTo(8)">← BACK</button>
+        <button class="btn-next" onclick="goTo(10)">NEXT →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q10: What felt tight -->
+  <div class="question-card" id="q10">
+    <div class="q-header">
+      <div class="q-number">Question 10 of 12</div>
+      <div class="q-title">What Felt Tight or Irritated?</div>
+    </div>
+    <div class="q-body">
+      <textarea class="form-input" id="feltTight" placeholder="e.g. Left hip still a bit stiff after sitting…" rows="4"></textarea>
+      <div class="nav-row">
+        <button class="btn-back" onclick="goTo(9)">← BACK</button>
+        <button class="btn-next" onclick="goTo(11)">NEXT →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q11: Sharp pain / new symptoms -->
+  <div class="question-card" id="q11">
+    <div class="q-header">
+      <div class="q-number">Question 11 of 12</div>
+      <div class="q-title">Any Sharp Pain or New Symptoms?<span class="required">*</span></div>
+      <div class="q-subtitle">Anything that feels wrong — new or different from usual</div>
+    </div>
+    <div class="q-body">
+      <div class="yesno-row">
+        <button class="yesno-btn yes" onclick="selectYesNo('sharpPain','Yes',this)">YES</button>
+        <button class="yesno-btn no" onclick="selectYesNo('sharpPain','No',this)">NO</button>
+      </div>
+      <div class="alert-box" id="sharpPainAlert">
+        <p>⚠ Please describe what happened in the next question. Your coach will follow up with you.</p>
+      </div>
+      <div class="nav-row">
+        <button class="btn-back" onclick="goTo(10)">← BACK</button>
+        <button class="btn-next" id="next11" onclick="goTo(12)" disabled>NEXT →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q12: Quick note -->
+  <div class="question-card" id="q12">
+    <div class="q-header">
+      <div class="q-number">Question 12 of 12</div>
+      <div class="q-title">Quick Note</div>
+      <div class="q-subtitle">Anything else you want your coach to know?</div>
+    </div>
+    <div class="q-body">
+      <textarea class="form-input" id="quickNote" placeholder="What happened this week? Any questions for your coach?…" rows="4"></textarea>
+      <div class="nav-row">
+        <button class="btn-back" onclick="goTo(11)">← BACK</button>
+        <button class="btn-next" onclick="submitForm()">SUBMIT CHECK-IN ✓</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPLETION SCREEN -->
+  <div class="complete-screen" id="completeScreen">
+    <div class="complete-icon">🎉</div>
+    <div class="complete-title">CHECK-IN COMPLETE!</div>
+    <div class="complete-sub" id="completeSub">Thank you! Your coach will review your check-in and be in touch.</div>
+
+    <div class="complete-card">
+      <div class="complete-card-title">YOUR SUMMARY</div>
+      <div id="summaryRows"></div>
+    </div>
+
+    <div class="submit-status" id="submitStatus"></div>
+
+    <div class="tpm-footer">
+      <strong>THE PRESTON METHOD™</strong><br>
+      Delivered by Oasis Training &amp; Education<br>
+      604.993.1888 · info@oasistraining.ca<br>
+      www.theprestonmethod.com · Trademark #2460203
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+// ── STATE ──
+const answers = {
+  clientName: '',
+  packCode: '',
+  weekStarting: '',
+  sessionsCompleted: '',
+  videosSubmitted: '',
+  pain: '0',
+  movementQuality: '',
+  confidence: '',
+  feltBetter: '',
+  feltTight: '',
+  sharpPain: '',
+  quickNote: '',
+};
+
+let currentQ = 1;
+const TOTAL_Q = 12;
+
+// ── SHEETS URL ──
+function initSheets() {
+  const url = localStorage.getItem('tpm_checkin_sheets_url');
+  if (url) {
+    document.getElementById('setupBanner').style.display = 'none';
+  }
+}
+
+function saveSheetUrl() {
+  const url = document.getElementById('sheetsUrlInput').value.trim();
+  if (!url) return;
+  localStorage.setItem('tpm_checkin_sheets_url', url);
+  document.getElementById('setupBanner').style.display = 'none';
+  alert('✓ Sheets URL saved!');
+}
+
+// ── NAVIGATION ──
+function goTo(q) {
+  document.getElementById('q' + currentQ).classList.remove('active');
+  currentQ = q;
+  document.getElementById('q' + q).classList.add('active');
+  updateProgress(q);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress(q) {
+  const pct = Math.round(((q - 1) / TOTAL_Q) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = 'Question ' + q + ' of ' + TOTAL_Q;
+  document.getElementById('progressPct').textContent = pct + '%';
+}
+
+// ── VALIDATION ──
+function validateCurrent() {
+  const name = document.getElementById('clientName').value.trim();
+  document.getElementById('next1').disabled = name.length < 2;
+  answers.clientName = name;
+}
+
+// ── CHOICE SELECTION ──
+function selectChoice(field, value, btn) {
+  // Deselect siblings
+  btn.closest('.choices').querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  answers[field] = value;
+}
+
+function selectScale(field, value, btn) {
+  btn.closest('.scale-row').querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  answers[field] = value;
+}
+
+function selectYesNo(field, value, btn) {
+  btn.closest('.yesno-row').querySelectorAll('.yesno-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  answers[field] = value;
+  document.getElementById('next11').disabled = false;
+  // Show alert if yes
+  const alert = document.getElementById('sharpPainAlert');
+  alert.classList.toggle('show', value === 'Yes');
+}
+
+// ── PAIN SLIDER ──
+const painLabels = [
+  'No pain — feeling great',
+  'Very mild — barely noticeable',
+  'Mild — manageable',
+  'Mild-moderate',
+  'Moderate — affects movement',
+  'Moderate-severe',
+  'Severe — hard to ignore',
+  'Very severe',
+  'Intense — very limiting',
+  'Extreme',
+  'Unbearable — please rest'
+];
+
+function updatePain(val) {
+  answers.pain = val;
+  document.getElementById('painNum').textContent = val;
+  document.getElementById('painLabel').textContent = painLabels[parseInt(val)];
+  document.getElementById('painAlert').classList.toggle('show', parseInt(val) >= 7);
+}
+
+// ── SUBMIT ──
+function submitForm() {
+  // Collect free-text answers
+  answers.weekStarting  = document.getElementById('weekStarting').value || 'Not specified';
+  answers.feltBetter    = document.getElementById('feltBetter').value.trim() || '—';
+  answers.feltTight     = document.getElementById('feltTight').value.trim() || '—';
+  answers.quickNote     = document.getElementById('quickNote').value.trim() || '—';
+
+  // Hide all questions
+  document.querySelectorAll('.question-card').forEach(c => c.classList.remove('active'));
+  document.getElementById('setupBanner').style.display = 'none';
+
+  // Show completion
+  const complete = document.getElementById('completeScreen');
+  complete.classList.add('show');
+
+  // Personalise message
+  document.getElementById('completeSub').textContent =
+    'Thank you, ' + (answers.clientName || 'there') + '! Your coach will review your check-in and be in touch.';
+
+  // Build summary
+  const summaryData = [
+    ['Client',              answers.clientName],
+    ['Pack Code',           answers.packCode || 'Not selected'],
+    ['Week Starting',       answers.weekStarting],
+    ['Sessions Completed',  answers.sessionsCompleted || 'Not selected'],
+    ['Videos Submitted',    answers.videosSubmitted || 'Not selected'],
+    ['Pain Level',          answers.pain + '/10'],
+    ['Movement Quality',    answers.movementQuality || 'Not selected'],
+    ['Confidence',          answers.confidence ? answers.confidence + '/5' : 'Not selected'],
+    ['What Felt Better',    answers.feltBetter],
+    ['What Felt Tight',     answers.feltTight],
+    ['Sharp Pain / New Symptoms', answers.sharpPain || 'Not answered'],
+    ['Coach Note',          answers.quickNote],
+  ];
+
+  document.getElementById('summaryRows').innerHTML = summaryData.map(([label, value]) =>
+    '<div class="summary-row"><span class="summary-label">' + label + '</span>' +
+    '<span class="summary-value">' + value + '</span></div>'
+  ).join('');
+
+  updateProgress(TOTAL_Q);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  postToSheets();
+}
+
+function postToSheets() {
+  const url = localStorage.getItem('tpm_checkin_sheets_url');
+  if (!url) {
+    document.getElementById('submitStatus').textContent = 'No Sheets URL configured — ask your coach to set one up.';
+    return;
+  }
+
+  document.getElementById('submitStatus').textContent = '⏳ Saving to Google Sheets…';
+
+  const payload = {
+    type: 'weekly_checkin',
+    timestamp: new Date().toISOString(),
+    clientName:         answers.clientName,
+    packCode:           answers.packCode,
+    weekStarting:       answers.weekStarting,
+    sessionsCompleted:  answers.sessionsCompleted,
+    videosSubmitted:    answers.videosSubmitted,
+    pain:               answers.pain,
+    movementQuality:    answers.movementQuality,
+    confidence:         answers.confidence,
+    feltBetter:         answers.feltBetter,
+    feltTight:          answers.feltTight,
+    sharpPain:          answers.sharpPain,
+    quickNote:          answers.quickNote,
+  };
+
+  fetch(url, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  .then(() => {
+    document.getElementById('submitStatus').textContent = '✓ Check-in saved to your Google Sheet!';
+  })
+  .catch(() => {
+    document.getElementById('submitStatus').textContent = '⚠ Could not reach Sheets — check your connection.';
+  });
+}
+
+// ── SET DEFAULT DATE TO LAST MONDAY ──
+function setDefaultDate() {
+  const today = new Date();
+  const day = today.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  const monday = new Date(today);
+  monday.setDate(today.getDate() + diff);
+  document.getElementById('weekStarting').value = monday.toISOString().split('T')[0];
+}
+
+// ── INIT ──
+initSheets();
+setDefaultDate();
+</script>
+</body>
+</html>
