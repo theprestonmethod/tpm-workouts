@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>The Preston Method™ — Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--red:#a0443e;--cream:#F4F1ED;--off:#F8F6F3;--border:#D4CFC8;--text:#1C1C1C;--gray:#808080;--green:#3d6b52;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+header{background:var(--red);padding:32px 24px 28px;text-align:center;}
+.logo{width:56px;height:56px;background:white;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 4px 16px rgba(0,0,0,0.2);}
+.logo span{font-family:'Bebas Neue';font-size:22px;color:var(--red);}
+h1{font-family:'Bebas Neue';font-size:28px;letter-spacing:3px;color:white;margin-bottom:4px;}
+.sub{font-size:13px;color:rgba(255,255,255,0.75);}
+main{flex:1;padding:32px 20px;max-width:480px;margin:0 auto;width:100%;}
+.section-label{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--gray);text-transform:uppercase;margin-bottom:12px;margin-top:28px;}
+.section-label:first-child{margin-top:0;}
+.tool-card{display:flex;align-items:center;gap:16px;background:white;border:1.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:12px;text-decoration:none;color:var(--text);transition:all 0.15s;box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+.tool-card:hover{border-color:var(--red);box-shadow:0 4px 16px rgba(160,68,62,0.12);transform:translateY(-1px);}
+.tool-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.tool-info{flex:1;}
+.tool-name{font-family:'Bebas Neue';font-size:18px;letter-spacing:1px;margin-bottom:2px;}
+.tool-desc{font-size:12px;color:var(--gray);line-height:1.4;}
+.tool-arrow{font-size:18px;color:var(--border);}
+.upload-hint{font-size:12px;color:var(--gray);background:var(--off);border:1.5px dashed var(--border);border-radius:10px;padding:14px;text-align:center;margin-top:8px;line-height:1.8;}
+.upload-hint strong{color:var(--text);}
+footer{padding:24px;text-align:center;font-size:11px;color:var(--gray);line-height:1.8;}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo"><span>TPM</span></div>
+  <h1>TPM TOOLS</h1>
+  <div class="sub">THE PRESTON METHOD™ &middot; Oasis Training &amp; Education</div>
+</header>
+<main>
+  <div class="section-label">Coach Tools</div>
+  <a href="tpm-exercise-library-TODAY.html" class="tool-card">
+    <div class="tool-icon" style="background:#f0f4ff;">📚</div>
+    <div class="tool-info">
+      <div class="tool-name">Exercise Library</div>
+      <div class="tool-desc">Browse exercises, build programs &amp; generate client workout players</div>
+    </div>
+    <div class="tool-arrow">›</div>
+  </a>
+  <a href="tpm-assessment-v11.html" class="tool-card">
+    <div class="tool-icon" style="background:#f0fff4;">📋</div>
+    <div class="tool-info">
+      <div class="tool-name">Client Assessment</div>
+      <div class="tool-desc">Functional neuromotor assessment with scoring &amp; Google Sheets export</div>
+    </div>
+    <div class="tool-arrow">›</div>
+  </a>
+  <div class="section-label">Client Tools</div>
+  <a href="tpm-weekly-checkin.html" class="tool-card">
+    <div class="tool-icon" style="background:#fff4f0;">✅</div>
+    <div class="tool-info">
+      <div class="tool-name">Weekly Check-In</div>
+      <div class="tool-desc">Client weekly progress &amp; wellness check-in form</div>
+    </div>
+    <div class="tool-arrow">›</div>
+  </a>
+  <div class="section-label">Client Workout Programs</div>
+  <a href="workouts/" class="tool-card">
+    <div class="tool-icon" style="background:#fff8f0;">💪</div>
+    <div class="tool-info">
+      <div class="tool-name">Workout Programs</div>
+      <div class="tool-desc">All generated client workout files</div>
+    </div>
+    <div class="tool-arrow">›</div>
+  </a>
+  <div class="upload-hint">
+    <strong>Workflow:</strong> Generate workout → Upload to <strong>workouts/</strong> folder on GitHub<br>
+    Share: <strong>theprestonmethod.github.io/tpm-workouts/workouts/filename.html</strong>
+  </div>
+</main>
+<footer>
+  <strong>THE PRESTON METHOD™</strong><br>
+  604.993.1888 &middot; www.theprestonmethod.com &middot; Trademark #2460203
+</footer>
+</body>
+</html>
