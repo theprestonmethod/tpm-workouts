@@ -419,7 +419,7 @@ let currentQ = 1;
 const TOTAL_Q = 12;
 
 function initSheets() {
-  const url = localStorage.getItem('tpm_checkin_sheets_url');
+  const url = 'https://script.google.com/macros/s/AKfycbwxQZMJY3vlt5SEDVKlbCBe3dYmkkme4O1sOdTtKs4ii05KwF98D2fJ7X6LHmnb-9Bl/exec';
   if (url) document.getElementById('setupBanner').style.display = 'none';
 }
 
@@ -507,7 +507,7 @@ function submitForm() {
 }
 
 function postToSheets() {
-  const url = localStorage.getItem('tpm_checkin_sheets_url');
+  const url = 'https://script.google.com/macros/s/AKfycbwxQZMJY3vlt5SEDVKlbCBe3dYmkkme4O1sOdTtKs4ii05KwF98D2fJ7X6LHmnb-9Bl/exec';
   if (!url) {
     document.getElementById('submitStatus').textContent = 'No Sheets URL configured — ask your coach to set one up.';
     return;
