@@ -394,6 +394,7 @@ textarea.form-input{resize:vertical;min-height:100px;}
       <div id="summaryRows"></div>
     </div>
     <div class="submit-status" id="submitStatus"></div>
+    <button class="btn-next" style="max-width:300px;margin:0 auto 20px;" onclick="resetForm()">＋ SUBMIT ANOTHER CHECK-IN</button>
     <div class="tpm-footer">
       <strong>THE PRESTON METHOD™</strong><br>
       Delivered by Oasis Training &amp; Education<br>
@@ -419,7 +420,7 @@ let currentQ = 1;
 const TOTAL_Q = 12;
 
 function initSheets() {
-  const url = 'https://script.google.com/macros/s/AKfycbwxQZMJY3vlt5SEDVKlbCBe3dYmkkme4O1sOdTtKs4ii05KwF98D2fJ7X6LHmnb-9Bl/exec';
+  const url = localStorage.getItem('tpm_checkin_sheets_url');
   if (url) document.getElementById('setupBanner').style.display = 'none';
 }
 
@@ -507,7 +508,7 @@ function submitForm() {
 }
 
 function postToSheets() {
-  const url = 'https://script.google.com/macros/s/AKfycbwxQZMJY3vlt5SEDVKlbCBe3dYmkkme4O1sOdTtKs4ii05KwF98D2fJ7X6LHmnb-9Bl/exec';
+  const url = localStorage.getItem('tpm_checkin_sheets_url');
   if (!url) {
     document.getElementById('submitStatus').textContent = 'No Sheets URL configured — ask your coach to set one up.';
     return;
@@ -543,6 +544,28 @@ function setDefaultDate() {
   const monday = new Date(today);
   monday.setDate(today.getDate() + diff);
   document.getElementById('weekStarting').value = monday.toISOString().split('T')[0];
+}
+
+function resetForm() {
+  // Reset all answers
+  Object.keys(answers).forEach(k => answers[k] = '');
+  // Clear all choice selections
+  document.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
+  // Clear text inputs
+  document.getElementById('clientName').value = '';
+  document.getElementById('feltBetter').value = '';
+  document.getElementById('feltTight').value = '';
+  document.getElementById('quickNote').value = '';
+  document.getElementById('painSlider').value = '0';
+  updatePain('0');
+  document.getElementById('next1').disabled = true;
+  // Hide complete screen, show Q1
+  document.getElementById('completeScreen').style.display = 'none';
+  currentQ = 1;
+  document.getElementById('q1').classList.add('active');
+  setDefaultDate();
+  updateProgress(1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 initSheets();
