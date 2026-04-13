@@ -37,12 +37,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 
 .main-wrap{max-width:600px;margin:0 auto;padding:24px 16px 48px;}
 
-.setup-banner{background:#fff3cd;border:1px solid #ffc107;border-radius:10px;padding:16px;margin-bottom:20px;}
-.setup-banner h3{font-size:13px;font-weight:700;color:#7a5500;margin-bottom:8px;}
-.setup-banner p{font-size:12px;color:#7a5500;margin-bottom:10px;}
-.setup-row{display:flex;gap:8px;}
-.setup-row input{flex:1;padding:8px 12px;border:1px solid #ffc107;border-radius:6px;font-size:13px;}
-.setup-row button{background:#ffc107;border:none;border-radius:6px;padding:8px 14px;font-weight:700;font-size:12px;cursor:pointer;}
 
 .question-card{display:none;background:white;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.07);overflow:hidden;}
 .question-card.active{display:block;}
@@ -127,16 +121,6 @@ textarea.form-input{resize:vertical;min-height:100px;}
 </div>
 
 <div class="main-wrap">
-
-  <!-- SETUP BANNER -->
-  <div class="setup-banner" id="setupBanner">
-    <h3>⚙️ Coach Setup (one-time)</h3>
-    <p>Paste your Google Apps Script URL below. It will be saved to this device and won't appear again.</p>
-    <div class="setup-row">
-      <input type="url" id="sheetsUrlInput" placeholder="https://script.google.com/macros/s/...">
-      <button onclick="saveSheetUrl()">SAVE</button>
-    </div>
-  </div>
 
   <!-- Q1: Client Name -->
   <div class="question-card active" id="q1">
@@ -421,17 +405,9 @@ const TOTAL_Q = 12;
 
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwxQZMJY3vlt5SEDVKlbCBe3dYmkkme4O1sOdTtKs4ii05KwF98D2fJ7X6LHmnb-9Bl/exec';
 
-function initSheets() {
-  document.getElementById('setupBanner').style.display = 'none';
-}
 window.addEventListener('DOMContentLoaded', function() {
-  initSheets();
   setDefaultDate();
 });
-
-function saveSheetUrl() {
-  document.getElementById('setupBanner').style.display = 'none';
-}
 
 function goTo(q) {
   document.getElementById('q' + currentQ).classList.remove('active');
