@@ -295,7 +295,7 @@ footer strong{color:var(--text-mid);}
   const titleEl    = document.getElementById('overlay-title');
 
   function openTool(url, title) {
-    frame.src = url;
+    frame.src = url + '?v=' + Date.now();
     titleEl.textContent = title.toUpperCase();
     overlay.classList.add('open');
     // Prevent body scroll while overlay is open
