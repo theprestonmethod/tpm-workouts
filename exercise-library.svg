@@ -1,0 +1,27 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256' width='256' height='256' fill='none'>
+  <rect x='42' y='38' width='172' height='136' rx='12' stroke='#2D7E8A' stroke-width='12'/>
+  <path d='M42 62 h172' stroke='#2D7E8A' stroke-width='12' stroke-linecap='round'/>
+  <circle cx='58' cy='56' r='6' fill='#FFFFFF'/>
+  <circle cx='76' cy='56' r='6' fill='#FFFFFF'/>
+  <circle cx='94' cy='56' r='6' fill='#FFFFFF'/>
+  <!-- mini library brain -->
+  <g transform='translate(86 72) scale(0.72)'>
+    <path d='M22 23 C38 8, 56 8, 69 18 C74 22, 77 29, 76 38 C75 49, 69 56, 61 61 C51 68, 47 76, 48 88 C36 83, 28 75, 22 64 C13 47, 13 32, 22 23 Z' fill='#2D7E8A'/>
+    <path d='M90 23 C106 8, 124 8, 137 18 C146 25, 150 36, 148 49 C146 65, 136 75, 122 81 C111 86, 103 93, 101 106 C85 97, 74 84, 71 66 C68 49, 74 33, 90 23 Z' fill='#2D7E8A'/>
+    <path d='M80 8 C92 18, 98 31, 93 45 C89 57, 78 67, 67 77 C56 87, 53 96, 59 106 C47 102, 39 93, 36 81 C31 64, 38 48, 53 34 C67 21, 70 15, 80 8 Z' fill='#64C8CC'/>
+    <path d='M84 5 C94 14, 102 22, 108 31 C113 39, 113 47, 109 54 C104 62, 95 70, 83 78 C72 85, 63 95, 59 106' stroke='#FFFFFF' stroke-width='8' stroke-linecap='round'/>
+    <path d='M112 34 l22 -16' stroke='#FFFFFF' stroke-width='7' stroke-linecap='round'/>
+    <path d='M133 18 l5 9' stroke='#FFFFFF' stroke-width='5' stroke-linecap='round'/>
+    <path d='M133 18 l10 -2' stroke='#FFFFFF' stroke-width='5' stroke-linecap='round'/>
+  </g>
+  <!-- database -->
+  <ellipse cx='72' cy='160' rx='34' ry='16' fill='#1B3A5C'/>
+  <path d='M38 160 v28 c0 9 15 16 34 16 s34 -7 34 -16 v-28' fill='#1B3A5C'/>
+  <path d='M38 176 c0 9 15 16 34 16 s34 -7 34 -16' stroke='#FFFFFF' stroke-width='4'/>
+  <rect x='89' y='170' width='12' height='6' rx='3' fill='#59C9A5'/>
+  <rect x='89' y='192' width='12' height='6' rx='3' fill='#59C9A5'/>
+  <!-- metadata lines -->
+  <rect x='126' y='166' width='52' height='10' rx='5' fill='#59C9A5'/>
+  <rect x='126' y='186' width='24' height='10' rx='5' fill='#B8CF5A'/>
+  <rect x='156' y='186' width='50' height='10' rx='5' fill='#59C9A5'/>
+</svg>
