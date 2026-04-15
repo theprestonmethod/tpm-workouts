@@ -4354,7 +4354,7 @@
     // PRACTITIONER REPORT
     // ══════════════════════════════
     if (practReport) {
-      html += rptBlock('HEALTHCARE PRACTITIONER REPORT', '#2a6a8a', `
+      html += rptBlock('HEALTHCARE PRACTITIONER REPORT', '#1B3A5C', `
 
         ${rptPractHeader(d)}
 
@@ -4587,7 +4587,7 @@
       const timeline = activityLevelTimeline[d.activityLevel] || activityLevelTimeline['Light'];
       const timelineText = `Based on your current activity level and training frequency, you can expect to notice a difference in ${timeline.notice}. Significant improvement in strength, mobility, and energy typically appears around ${timeline.significant}. With consistent training, meaningful transformation happens within ${timeline.transformed}.`;
 
-      html += rptBlock('YOUR MOVEMENT ASSESSMENT REPORT', '#a0443e', `
+      html += rptBlock('YOUR MOVEMENT ASSESSMENT REPORT', '#1B3A5C', `
 
         ${rptClientHeader(d)}
 
