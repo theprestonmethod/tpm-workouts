@@ -6203,7 +6203,121 @@ document.getElementById('cimTestDate')?.addEventListener('change', function() {
   this._manuallyEdited = true;
 });
 window.addEventListener('load', () => setTimeout(syncCimDate, 300));
-</script>
 
+</script>
+// ══════════════════════════════════════════════
+// SECTION CONTROL PANEL + JUMP NAV
+// ══════════════════════════════════════════════
+
+const SCP_SECTIONS = [
+  { id: 's1',  label: 'Client Intake',       short: '1',  anchor: 's1'  },
+  { id: 's2',  label: 'Health Screening',    short: '2',  anchor: 's2'  },
+  { id: 's3',  label: 'Body Metrics',        short: '3',  anchor: 's3'  },
+  { id: 's4',  label: 'Performance',         short: '4',  anchor: 's4'  },
+  { id: 's5',  label: 'Movement Screen',     short: '5',  anchor: 's5'  },
+  { id: 's5b', label: 'CIM Neuromotor',      short: '5B', anchor: 's5b' },
+  { id: 's5c', label: 'Condition-Specific',  short: '5C', anchor: 's5c' },
+  { id: 's6',  label: 'Strength Snapshot',   short: '6',  anchor: 's6'  },
+  { id: 's7',  label: '12-Week Plan',        short: '7',  anchor: 's7'  },
+  { id: 's8',  label: 'Report Generator',    short: '8',  anchor: 's8'  },
+  { id: 's9',  label: 'Progress Estimator',  short: '9',  anchor: 's9'  },
+];
+
+// State: 'both' | 'session' | 'skip'
+const scpState = {};
+SCP_SECTIONS.forEach(s => scpState[s.id] = 'both');
+
+function scpBuildGrid() {
+  const grid = document.getElementById('scpGrid');
+  if (!grid) return;
+  grid.innerHTML = SCP_SECTIONS.map(s => {
+    const state = scpState[s.id];
+    const cls   = state === 'both' ? 'active' : state === 'skip' ? 'skipped' : '';
+    const badge = state === 'both'
+      ? `<span class="scp-badge session">Session</span><span class="scp-badge report">Report</span>`
+      : state === 'session'
+      ? `<span class="scp-badge session">Session</span><span class="scp-badge skip">No report</span>`
+      : `<span class="scp-badge skip">Skipped</span>`;
+    return `<div class="scp-item ${cls}" onclick="scpCycle('${s.id}')" title="Click to cycle: both → session only → skip">
+      <div class="scp-dot"></div>
+      <div class="scp-label">${s.short}. ${s.label}</div>
+      <div class="scp-badges">${badge}</div>
+    </div>`;
+  }).join('');
+  scpApply();
+}
+
+function scpCycle(id) {
+  const cur = scpState[id];
+  scpState[id] = cur === 'both' ? 'session' : cur === 'session' ? 'skip' : 'both';
+  scpBuildGrid();
+}
+
+function scpSetAll(mode) {
+  SCP_SECTIONS.forEach(s => scpState[s.id] = mode);
+  scpBuildGrid();
+}
+
+function scpReset() {
+  SCP_SECTIONS.forEach(s => scpState[s.id] = 'both');
+  scpBuildGrid();
+}
+
+function scpApply() {
+  SCP_SECTIONS.forEach(s => {
+    const el = document.getElementById(s.id);
+    if (!el) return;
+    // Never fully hide s5c — it's controlled by condition flags
+    if (s.id === 's5c') return;
+    el.style.display = scpState[s.id] === 'skip' ? 'none' : 'block';
+  });
+  buildJumpNav();
+}
+
+function toggleSCP() {
+  const body    = document.getElementById('scpBody');
+  const chevron = document.getElementById('scpChevron');
+  const open    = body.style.display !== 'none';
+  body.style.display    = open ? 'none' : 'block';
+  chevron.classList.toggle('open', !open);
+}
+
+// ── JUMP NAV ──
+function buildJumpNav() {
+  const nav = document.getElementById('jumpNav');
+  if (!nav) return;
+  const visible = SCP_SECTIONS.filter(s => scpState[s.id] !== 'skip');
+  nav.innerHTML = visible.map(s =>
+    `<a onclick="jumpTo('${s.anchor}')" id="jn_${s.id}">
+      <div class="jump-nav-pill">${s.short}&nbsp; ${s.label}</div>
+    </a>`
+  ).join('');
+}
+
+function jumpTo(anchor) {
+  const el = document.getElementById(anchor);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Highlight active section on scroll
+function updateJumpHighlight() {
+  const scrollY = window.scrollY + 120;
+  let active = null;
+  SCP_SECTIONS.forEach(s => {
+    const el = document.getElementById(s.id);
+    if (el && el.offsetTop <= scrollY) active = s.id;
+  });
+  document.querySelectorAll('.jump-nav a').forEach(a => a.classList.remove('active'));
+  if (active) {
+    const activeLink = document.getElementById(`jn_${active}`);
+    if (activeLink) activeLink.classList.add('active');
+  }
+}
+
+window.addEventListener('scroll', updateJumpHighlight);
+window.addEventListener('load', () => {
+  scpBuildGrid();
+  buildJumpNav();
+});
 </body>
 </html>
