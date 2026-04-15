@@ -5994,6 +5994,29 @@
     else if (sys >= 140 || dia >= 90) el.value = '⚠ High Stage 2';
     if (sys >= 180 || dia >= 120)    el.value = '⚑ Crisis — refer immediately';
   }
+  // CIM date defaults to assessment date, editable
+function syncCimDate() {
+  const cimDate = document.getElementById('cimTestDate');
+  const assessDate = document.getElementById('assessDate');
+  const cimAdmin = document.getElementById('cimAdministeredBy');
+  const assessor = document.getElementById('assessorName');
+  if (cimDate && assessDate && !cimDate.value) {
+    cimDate.value = assessDate.value;
+  }
+  if (cimAdmin && assessor && !cimAdmin.value) {
+    cimAdmin.value = assessor.value;
+  }
+}
+document.getElementById('assessDate').addEventListener('change', () => {
+  const cimDate = document.getElementById('cimTestDate');
+  if (cimDate && !cimDate._manuallyEdited) {
+    cimDate.value = document.getElementById('assessDate').value;
+  }
+});
+document.getElementById('cimTestDate')?.addEventListener('change', function() {
+  this._manuallyEdited = true;
+});
+window.addEventListener('load', () => setTimeout(syncCimDate, 300));
 </script>
 
 </body>
