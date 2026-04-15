@@ -825,6 +825,30 @@
       </select>
     </div>
   </div>
+  <!-- ── SECTION CONTROL PANEL ── -->
+<div class="section-control-panel" id="scpPanel">
+  <div class="scp-header" onclick="toggleSCP()">
+    <div class="scp-title">
+      ⚙ Session &amp; Report Configuration
+      <span style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:400;color:var(--gray);letter-spacing:0;text-transform:none;">— choose which sections to include in this session and report</span>
+    </div>
+    <span class="scp-chevron" id="scpChevron">▼</span>
+  </div>
+  <div id="scpBody">
+    <div class="scp-grid" id="scpGrid"></div>
+    <div class="scp-actions">
+      <button class="scp-btn" onclick="scpSetAll('both')">✓ All sections — session + report</button>
+      <button class="scp-btn" onclick="scpSetAll('session')">Session only — exclude all from report</button>
+      <button class="scp-btn" onclick="scpReset()">Reset to defaults</button>
+    </div>
+    <p style="font-size:11px;color:var(--text-light);font-style:italic;margin-top:10px;">
+      Click once = include in session + report &nbsp;·&nbsp; Click twice = session only (not in report) &nbsp;·&nbsp; Click three times = skip entirely
+    </p>
+  </div>
+</div>
+
+<!-- ── STICKY JUMP NAV ── -->
+<nav class="jump-nav" id="jumpNav"></nav>
 
   <!-- ─────────────────────────────────────
        SECTION 1: CLIENT INTAKE
