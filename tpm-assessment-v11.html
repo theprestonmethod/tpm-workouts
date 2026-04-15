@@ -600,6 +600,150 @@
     .section-header { background: #1E3A2F !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .main-wrap { padding: 10px; }
   }
+  /* ── JUMP NAV ── */
+.jump-nav {
+  position: fixed;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.jump-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  group: true;
+}
+.jump-nav-pill {
+  background: rgba(27,58,92,0.12);
+  color: var(--red);
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+  white-space: nowrap;
+  max-width: 28px;
+  overflow: hidden;
+  text-align: right;
+}
+.jump-nav a:hover .jump-nav-pill {
+  max-width: 160px;
+  background: var(--red);
+  color: white;
+  padding: 5px 14px;
+}
+.jump-nav a.active .jump-nav-pill {
+  background: var(--red);
+  color: white;
+  max-width: 160px;
+  padding: 5px 14px;
+}
+@media (max-width: 1100px) { .jump-nav { display: none; } }
+
+/* ── SECTION CONTROL PANEL ── */
+.section-control-panel {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow);
+}
+.scp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  cursor: pointer;
+  user-select: none;
+}
+.scp-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.scp-chevron {
+  font-size: 12px;
+  color: var(--gray);
+  transition: transform 0.2s;
+}
+.scp-chevron.open { transform: rotate(180deg); }
+.scp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+}
+.scp-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--off-white);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+.scp-item:hover { border-color: var(--cyan-dark); }
+.scp-item.active { background: rgba(32,203,214,0.08); border-color: var(--cyan-dark); }
+.scp-item.skipped { background: var(--cream); border-color: var(--border); opacity: 0.5; }
+.scp-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--border);
+  transition: background 0.15s;
+}
+.scp-item.active .scp-dot { background: var(--cyan-dark); }
+.scp-item.skipped .scp-dot { background: var(--border); }
+.scp-label { font-size: 12px; font-weight: 600; color: var(--gray2); flex: 1; }
+.scp-badges {
+  display: flex;
+  gap: 4px;
+}
+.scp-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
+.scp-badge.session { background: rgba(32,203,214,0.15); color: var(--cyan-dark); }
+.scp-badge.report  { background: rgba(27,58,92,0.12);   color: var(--red); }
+.scp-badge.skip    { background: var(--cream-dark);      color: var(--gray); }
+.scp-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.scp-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 12px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--gray2);
+  transition: all 0.15s;
+}
+.scp-btn:hover { border-color: var(--cyan-dark); color: var(--cyan-dark); }
 </style>
 </head>
 <body>
