@@ -6316,8 +6316,18 @@ function updateJumpHighlight() {
 
 window.addEventListener('scroll', updateJumpHighlight);
 window.addEventListener('load', () => {
-  scpBuildGrid();
-  buildJumpNav();
+  setTimeout(() => {
+    scpBuildGrid();
+    buildJumpNav();
+  }, 150);
 });
+
+// Also build immediately in case load already fired
+if (document.readyState === 'complete') {
+  setTimeout(() => {
+    scpBuildGrid();
+    buildJumpNav();
+  }, 150);
+}
 </body>
 </html>
