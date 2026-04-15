@@ -3913,7 +3913,7 @@
     banner.classList.toggle('visible', flags.length > 0);
   }
 
-  // ── CONDITION MODULE TOGGLE ──
+// ── CONDITION MODULE TOGGLE ──
   function updateConditionModules() {
     const pd  = document.getElementById('flagParkinsons')?.checked || document.getElementById('cimFlagPD')?.checked;
     const ms  = document.getElementById('flagMS')?.checked || document.getElementById('cimFlagMS')?.checked;
@@ -3926,10 +3926,17 @@
     const msMod = document.getElementById('msModule');
     if (pdMod) pdMod.style.display = pd ? 'block' : 'none';
     if (msMod) msMod.style.display = ms ? 'block' : 'none';
-
     // Show note in CIM section
     const note = document.getElementById('conditionBatteryNote');
     if (note) note.style.display = either ? 'block' : 'none';
+    // Auto-enable CIM toggle when condition flagged — never force it off
+    if (either) {
+      const tog = document.getElementById('cimToggle');
+      if (tog && !tog.checked) {
+        tog.checked = true;
+        toggleCIM();
+      }
+    }
   }
 
   function toggleCIM() {
