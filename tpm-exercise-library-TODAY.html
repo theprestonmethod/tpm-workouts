@@ -1626,9 +1626,20 @@ function readImageFile(file) {
             setImageStatus('⚠ Upload failed — image stored locally only', '#b45309');
           }
         });
+     } else if (GITHUB_TOKEN) {
+        setImageStatus('⬆ Uploading to GitHub…', '#1A56DB');
+        const filename = 'img-' + Date.now() + '.jpg';
+        uploadImageToGitHub(base64, filename, GITHUB_TOKEN).then(url => {
+          if (url) {
+            currentImageData = url;
+            setImageStatus('✓ Saved to GitHub — will work on all devices', '#059669');
+          } else {
+            setImageStatus('⚠ Upload failed — image stored locally only', '#b45309');
+          }
+        });
       } else {
         setImageStatus('ℹ No GitHub token — image stored locally. Add token in Settings.', '#b45309');
-      }
+      }    
     };
     img.src = e.target.result;
   };
