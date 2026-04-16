@@ -1552,7 +1552,7 @@ function saveSettings() {
 }
 
 function updateGhStatus() {
-  const token = localStorage.getItem('tpm_github_token') || GITHUB_TOKEN;
+  const token = localStorage.getItem('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') || GITHUB_TOKEN;
   const el = document.getElementById('ghStatusBadge');
   if (!el) return;
   if (token) {
