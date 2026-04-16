@@ -997,23 +997,29 @@ function init() {
     localStorage.removeItem('tpm_exercise_library');
     localStorage.setItem('tpm_data_version', DATA_VERSION);
   }
-  const saved = localStorage.getItem('tpm_exercise_library');
-  if (saved) {
-    try {
-      const parsed = JSON.parse(saved);
-      // Use cache only if it has same count as DEFAULT_EXERCISES AND has images
-      const hasImages = parsed.some(e => e.image && e.image.length > 100);
-      const sameCount = parsed.length >= DEFAULT_EXERCISES.length;
-      exercises = (hasImages && sameCount) ? parsed : [...DEFAULT_EXERCISES];
-    }
-    catch { exercises = [...DEFAULT_EXERCISES]; }
-  } else {
-    exercises = [...DEFAULT_EXERCISES];
-  }
   document.getElementById('prog_date').valueAsDate = new Date();
   updateGhStatus();
-  renderLibrary();
-  renderPicker();
+  // Load from GitHub JSON first, fall back to localStorage then DEFAULT_EXERCISES
+  fetch('https://theprestonmethod.github.io/tpm-workouts/exercises.json?v=' + Date.now())
+    .then(r => r.json())
+    .then(data => {
+      exercises = data;
+      localStorage.setItem('tpm_exercise_library', JSON.stringify(data));
+      localStorage.setItem('tpm_data_version', DATA_VERSION);
+      renderLibrary();
+      renderPicker();
+    })
+    .catch(() => {
+      const saved = localStorage.getItem('tpm_exercise_library');
+      if (saved) {
+        try { exercises = JSON.parse(saved); }
+        catch { exercises = [...DEFAULT_EXERCISES]; }
+      } else {
+        exercises = [...DEFAULT_EXERCISES];
+      }
+      renderLibrary();
+      renderPicker();
+    });
 }
 
 function saveLibrary() {
@@ -1630,6 +1636,7 @@ function readImageFile(file) {
         setImageStatus('ℹ No GitHub token — image stored locally. Add token in Settings.', '#b45309');
       }    
     };
+    
     img.src = e.target.result;
   };
   reader.readAsDataURL(file);
