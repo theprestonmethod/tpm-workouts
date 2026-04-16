@@ -1280,8 +1280,14 @@ function saveExercise() {
     contraindications: document.getElementById('f_contraindications').value.trim(),
     progression:       document.getElementById('f_progression').value.trim(),
     video:             document.getElementById('f_video').value.trim(),
-    image:             currentImageData || null,
+    image: (currentImageData && currentImageData.startsWith('https://')) ? currentImageData : null,
   };
+
+  // Warn if image is still mid-upload — base64 in exercises.json breaks GitHub sync
+  if (currentImageData && currentImageData.startsWith('data:')) {
+    showToast('⚠ Image still uploading — wait for "Saved to GitHub" then save exercise');
+    return;
+  }
 
   if (editingId) {
     const idx = exercises.findIndex(e => e.id === editingId);
@@ -1697,7 +1703,11 @@ function readImageFile(file) {
       const token = localStorage.getItem('tpm_github_token') || GITHUB_TOKEN;
       if (token) {
         setImageStatus('⬆ Uploading to GitHub…', '#1A56DB');
-        const filename = 'img-' + Date.now() + '.jpg';
+        const exerciseName = document.getElementById('f_name').value.trim();
+        const safeName = exerciseName
+          ? exerciseName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '')
+          : 'exercise';
+        const filename = safeName + '-' + Date.now().toString().slice(-5) + '.jpg';
         uploadImageToGitHub(base64, filename, token).then(url => {
           if (url) {
             currentImageData = url;
