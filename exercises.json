@@ -1203,5 +1203,28 @@
     "progression": "Do a forearm plank with no pike.",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/img-1776363616286.jpg"
+  },
+  {
+    "id": "ex-1776364370546",
+    "name": "Heel Taps",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Spine Mobility",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Control",
+    "sets": "3",
+    "reps": "10 each side",
+    "rpe": "6-7",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Intermediate",
+    "code": "M-CORE-03-heeltaps",
+    "cues": "",
+    "coachingFocus": "Look upward not at your knees",
+    "contraindications": "if you have neck pain, rest your head on the floor instead or support your head.",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/heel-taps-26001.jpg"
   }
 ]
