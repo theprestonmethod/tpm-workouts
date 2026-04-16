@@ -1613,23 +1613,12 @@ function readImageFile(file) {
       document.getElementById('removeImageBtn').style.display = 'inline';
       document.getElementById('imageUploadArea').style.borderColor = '#1A56DB';
 
-      // Try GitHub upload in background
-      const token = localStorage.getItem('tpm_github_token');
+     // Try GitHub upload in background
+      const token = localStorage.getItem('tpm_github_token') || GITHUB_TOKEN;
       if (token) {
         setImageStatus('⬆ Uploading to GitHub…', '#1A56DB');
         const filename = 'img-' + Date.now() + '.jpg';
         uploadImageToGitHub(base64, filename, token).then(url => {
-          if (url) {
-            currentImageData = url;
-            setImageStatus('✓ Saved to GitHub — will work on all devices', '#059669');
-          } else {
-            setImageStatus('⚠ Upload failed — image stored locally only', '#b45309');
-          }
-        });
-     } else if (GITHUB_TOKEN) {
-        setImageStatus('⬆ Uploading to GitHub…', '#1A56DB');
-        const filename = 'img-' + Date.now() + '.jpg';
-        uploadImageToGitHub(base64, filename, GITHUB_TOKEN).then(url => {
           if (url) {
             currentImageData = url;
             setImageStatus('✓ Saved to GitHub — will work on all devices', '#059669');
