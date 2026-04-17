@@ -1257,7 +1257,7 @@ function saveExercise() {
   const name = document.getElementById('f_name').value.trim();
   if (!name) { showToast('⚠ Exercise name is required'); return; }
   const pillar = document.getElementById('f_pillar').value;
-  if (!pillar) { showToast('⚠ Please select a Pillar'); return; }
+  if (!pillar) { showToast('⚠ Please select an Element'); return; }
 
   const ex = {
     id:                editingId || ('ex-' + Date.now()),
