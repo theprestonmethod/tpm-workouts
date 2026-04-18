@@ -95,7 +95,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);}
       <div class="wlabel">Date</div><div class="wval">2026-04-18</div>
       <div class="wlabel">Exercises</div><div class="wval" id="exCount">Loading…</div>
     </div>
-    <button class="start-btn" onclick="startWorkout()">&#9654; START WORKOUT</button>
+<div class="wnotes"><strong>Coach Note:</strong><br>You are a joke. You can't vaccum. </div>    <button class="start-btn" onclick="startWorkout()">&#9654; START WORKOUT</button>
   </div>
 </div>
 <div class="screen hidden" id="scrEx" style="display:flex;">
@@ -126,8 +126,9 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);}
   </div>
   <div class="tpm-footer"><strong>THE PRESTON METHOD™</strong><br>604.993.1888 &middot; info@oasistraining.ca<br>www.theprestonmethod.com &middot; Trademark #2460203</div>
 </div>
+<script type="application/json" id="tpm_ex_data">[{"id":"wu-2","name":"Torso Twists","pillar":"WU","sets":"1","reps":"10–12 each side","rpe":"","equipment":"None / Bodyweight","cues":"Rotate through upper back, hips mostly forward","coachingFocus":"","contraindications":"","progression":"","code":"WU-UNI-01","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-2.jpg","pillarColor":"#8c52ff"},{"id":"wu-3","name":"Hip Openers","pillar":"WU","sets":"1","reps":"20–30 sec","rpe":"","equipment":"None / Bodyweight","cues":"Relax shoulders, ribs down, tall spine","coachingFocus":"","contraindications":"","progression":"","code":"WU-UNI-02","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-3.jpg","pillarColor":"#8c52ff"}]</script>
 <script>
-const EXERCISES=[{"id":"wu-1","name":"Arm Swings","pillar":"WU","sets":"1","reps":"20–30 sec","rpe":"","equipment":"None / Bodyweight","cues":"Relax shoulders, ribs down, tall spine","coachingFocus":"","contraindications":"","progression":"Increase range gradually","code":"WU-UNI-01","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-1.jpg","pillarColor":"#8c52ff"},{"id":"wu-6","name":"Butt Kicks","pillar":"WU","sets":"1","reps":"20–30 sec","rpe":"","equipment":"None / Bodyweight","cues":"Relax shoulders, keep posture tall, try to reach heel to butt","coachingFocus":"","contraindications":"","progression":"","code":"WU-UNI-03","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-6.jpg","pillarColor":"#8c52ff"}];
+const EXERCISES=JSON.parse(document.getElementById("tpm_ex_data").textContent);
 const SESSION_META={"client":"My Roomba","coach":"Coach","date":"2026-04-18","title":"Training Program","phase":""};
 const SHEETS_URL="";
 const CHECKIN="https://theprestonmethod.github.io/tpm-workouts/tpm-weekly-checkin.html";
@@ -166,13 +167,13 @@ function loadEx(idx){
   document.getElementById("exBody").innerHTML=
     (ex.image?'<div class="ex-img"><img src="'+ex.image+'" alt="'+ex.name+'"></div>':'<div class="ex-no-img">&#x1F4AA;</div>')
     +'<div class="meta-row">'
-    +(ex.sets?'<span class="meta-pill">'+ex.sets+' sets</span>':""")
-    +(ex.reps?'<span class="meta-pill">'+ex.reps+'</span>':""")
-    +(ex.rpe?'<span class="meta-pill">RPE '+ex.rpe+'</span>':""")
-    +(ex.equipment&&ex.equipment!=="None / Bodyweight"?'<span class="meta-pill">&#x1F3CB; '+ex.equipment+'</span>':""")
+    +(ex.sets?'<span class="meta-pill">'+ex.sets+' sets</span>':'')
+    +(ex.reps?'<span class="meta-pill">'+ex.reps+'</span>':'')
+    +(ex.rpe?'<span class="meta-pill">RPE '+ex.rpe+'</span>':'')
+    +(ex.equipment&&ex.equipment!=="None / Bodyweight"?'<span class="meta-pill">&#x1F3CB; '+ex.equipment+'</span>':'')
     +"</div>"
-    +(ex.cues?'<div class="cues-box">&#8220;'+ex.cues+'&#8221;</div>':""")
-    +(ex.contraindications?'<div class="caution-box">&#9888; '+ex.contraindications+'</div>':""")
+    +(ex.cues?'<div class="cues-box">&#8220;'+ex.cues+'&#8221;</div>':'')
+    +(ex.contraindications?'<div class="caution-box">&#9888; '+ex.contraindications+'</div>':'')
     +'<div class="sets-label">TRACK YOUR SETS</div>'
     +sHtml+rHtml
     +'<textarea class="notes-ta" id="exNotes" rows="2" placeholder="Notes for this exercise..."></textarea>'
