@@ -95,7 +95,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);}
       <div class="wlabel">Date</div><div class="wval">2026-04-18</div>
       <div class="wlabel">Exercises</div><div class="wval" id="exCount">Loading…</div>
     </div>
-<div class="wnotes"><strong>Coach Note:</strong><br>You are a bad vaccuum, work harder.</div>    <button class="start-btn" onclick="startWorkout()">&#9654; START WORKOUT</button>
+<div class="wnotes"><strong>Coach Note:</strong><br>I can't say you suck - because you dont, your vacuuming is terrible. :) </div>    <button class="start-btn" onclick="startWorkout()">&#9654; START WORKOUT</button>
   </div>
 </div>
 <div class="screen hidden" id="scrEx" style="display:flex;">
@@ -126,9 +126,8 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);}
   </div>
   <div class="tpm-footer"><strong>THE PRESTON METHOD™</strong><br>604.993.1888 &middot; info@oasistraining.ca<br>www.theprestonmethod.com &middot; Trademark #2460203</div>
 </div>
-<script type="application/json" id="tpm_ex_data">[{"id":"wu-5","name":"Inchworms","pillar":"WU","sets":"1","reps":"5+ reps","rpe":"","equipment":"None / Bodyweight","cues":"Slow and controlled. Hinge at hips, crawl out to straight-arm plank and back.","coachingFocus":"","contraindications":"","progression":"","code":"WU-UNI-03","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-5.jpg","pillarColor":"#8c52ff"},{"id":"wu-2","name":"Torso Twists","pillar":"WU","sets":"1","reps":"10–12 each side","rpe":"","equipment":"None / Bodyweight","cues":"Rotate through upper back, hips mostly forward","coachingFocus":"","contraindications":"","progression":"","code":"WU-UNI-01","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-2.jpg","pillarColor":"#8c52ff"}]</script>
 <script>
-const EXERCISES=JSON.parse(document.getElementById("tpm_ex_data").textContent);
+const EXERCISES=JSON.parse(decodeURIComponent(escape(atob("W3siaWQiOiJ3dS0xIiwibmFtZSI6IkFybSBTd2luZ3MiLCJwaWxsYXIiOiJXVSIsInNldHMiOiIxIiwicmVwcyI6IjIw4oCTMzAgc2VjIiwicnBlIjoiIiwiZXF1aXBtZW50IjoiTm9uZSAvIEJvZHl3ZWlnaHQiLCJjdWVzIjoiUmVsYXggc2hvdWxkZXJzLCByaWJzIGRvd24sIHRhbGwgc3BpbmUiLCJjb2FjaGluZ0ZvY3VzIjoiIiwiY29udHJhaW5kaWNhdGlvbnMiOiIiLCJwcm9ncmVzc2lvbiI6IkluY3JlYXNlIHJhbmdlIGdyYWR1YWxseSIsImNvZGUiOiJXVS1VTkktMDEiLCJpbWFnZSI6Imh0dHBzOi8vdGhlcHJlc3Rvbm1ldGhvZC5naXRodWIuaW8vdHBtLXdvcmtvdXRzL2ltYWdlcy9leGVyY2lzZXMvd3UtMS5qcGciLCJwaWxsYXJDb2xvciI6IiM4YzUyZmYifSx7ImlkIjoid3UtMyIsIm5hbWUiOiJIaXAgT3BlbmVycyIsInBpbGxhciI6IldVIiwic2V0cyI6IjEiLCJyZXBzIjoiMjDigJMzMCBzZWMiLCJycGUiOiIiLCJlcXVpcG1lbnQiOiJOb25lIC8gQm9keXdlaWdodCIsImN1ZXMiOiJSZWxheCBzaG91bGRlcnMsIHJpYnMgZG93biwgdGFsbCBzcGluZSIsImNvYWNoaW5nRm9jdXMiOiIiLCJjb250cmFpbmRpY2F0aW9ucyI6IiIsInByb2dyZXNzaW9uIjoiIiwiY29kZSI6IldVLVVOSS0wMiIsImltYWdlIjoiaHR0cHM6Ly90aGVwcmVzdG9ubWV0aG9kLmdpdGh1Yi5pby90cG0td29ya291dHMvaW1hZ2VzL2V4ZXJjaXNlcy93dS0zLmpwZyIsInBpbGxhckNvbG9yIjoiIzhjNTJmZiJ9XQ==")));
 const SESSION_META={"client":"Roomba","coach":"Coach","date":"2026-04-18","title":"Training Program","phase":""};
 const SHEETS_URL="";
 const CHECKIN="https://theprestonmethod.github.io/tpm-workouts/tpm-weekly-checkin.html";
