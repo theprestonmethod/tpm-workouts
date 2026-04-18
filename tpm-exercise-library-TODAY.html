@@ -1,0 +1,2225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TPM Exercise Library — Oasis Training & Education</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red:      #1B3A5C;
+  --red-dark: #7a332e;
+  --sage:     #b1cbb4;
+  --sage-dk:  #7fa882;
+  --sage-lt:  #d8e9da;
+  --orange:   #d6a27a;
+  --cyan:     #20cbd6;
+  --cyan-dk:  #17a8b2;
+  --gray:     #808080;
+  --gray2:    #696767;
+  --white:    #fff;
+  --off:      #F8F6F3;
+  --cream:    #F4F1ED;
+  --cream-dk: #E8E4DC;
+  --border:   #D4CFC8;
+  --text:     #1C1C1C;
+  --shadow:   0 2px 12px rgba(160,68,62,0.08);
+  --shadow-lg:0 8px 32px rgba(160,68,62,0.14);
+  /* Pillar colours */
+  --pilA:  #1A56DB;  /* Mobility Foundations — Royal Blue */
+  --pilB:  #E85D04;  /* Strength + Mobility — Vivid Orange */
+  --pilC:  #059669;  /* Performance + Longevity — Emerald */
+  --pilWU: #8c52ff;  /* Warm-Up — vivid violet */
+  --pilST: #1B3A5C;  /* Seated / At-Home — red */
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); font-size: 14px; line-height: 1.6; }
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--red);
+  padding: 0;
+  position: sticky; top: 0; z-index: 200;
+  box-shadow: 0 2px 16px rgba(160,68,62,0.3);
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 28px; gap: 16px; flex-wrap: wrap;
+}
+.logo { display: flex; align-items: center; gap: 12px; }
+.logo-box {
+  width: 46px; height: 46px; background: white; border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+}
+.logo-box span { font-family: 'Bebas Neue'; font-size: 20px; color: var(--red); letter-spacing: 1px; }
+.logo-text h1 { font-family: 'Bebas Neue'; font-size: 20px; color: white; letter-spacing: 2.5px; line-height: 1; }
+.logo-text p  { font-size: 10px; color: rgba(255,255,255,0.65); letter-spacing: 0.5px; margin-top: 2px; }
+.header-tabs { display: flex; gap: 4px; }
+.tab-btn {
+  font-family: 'DM Sans'; font-size: 12px; font-weight: 600;
+  background: white; color: var(--red);
+  border: 1px solid rgba(255,255,255,0.4); border-radius: 6px;
+  padding: 7px 16px; cursor: pointer; transition: all 0.18s;
+  letter-spacing: 0.3px; opacity: 0.6;
+}
+.tab-btn:hover { opacity: 0.85; }
+.tab-btn.active { opacity: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.header-actions { display: flex; gap: 8px; align-items: center; }
+.hbtn {
+  font-family: 'DM Sans'; font-size: 11px; font-weight: 600;
+  border: none; border-radius: 5px; padding: 6px 12px; cursor: pointer; transition: all 0.18s;
+}
+.hbtn-save { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); }
+.hbtn-save:hover { background: rgba(255,255,255,0.25); }
+
+/* Sync status indicator in header */
+.sync-indicator {
+  font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 12px;
+  transition: all 0.3s; white-space: nowrap;
+}
+.sync-idle    { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); }
+.sync-syncing { background: rgba(255,255,255,0.2); color: white; }
+.sync-ok      { background: rgba(5,150,105,0.3);  color: #6ee7b7; }
+.sync-error   { background: rgba(220,38,38,0.3);  color: #fca5a5; }
+
+/* ── VIEWS ── */
+.view { display: none; }
+.view.active { display: block; }
+
+/* ── LIBRARY VIEW ── */
+.library-wrap { max-width: 1100px; margin: 0 auto; padding: 28px 20px 60px; }
+
+/* Filters bar */
+.filters-bar {
+  background: white; border-radius: 10px; padding: 16px 20px;
+  box-shadow: var(--shadow); margin-bottom: 22px;
+  display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+}
+.filter-search {
+  flex: 1; min-width: 180px;
+  font-family: 'DM Sans'; font-size: 13px;
+  background: var(--off); border: 1.5px solid var(--border);
+  border-radius: 7px; padding: 8px 12px; color: var(--text);
+  transition: border-color 0.2s;
+}
+.filter-search:focus { outline: none; border-color: var(--red); background: white; }
+.filter-select {
+  font-family: 'DM Sans'; font-size: 12px; font-weight: 500;
+  background: var(--off); border: 1.5px solid var(--border);
+  border-radius: 7px; padding: 8px 12px; color: var(--gray2); cursor: pointer;
+  -webkit-appearance: none; appearance: none;
+}
+.filter-select:focus { outline: none; border-color: var(--red); }
+.filter-count {
+  font-size: 11px; color: var(--gray); white-space: nowrap; margin-left: auto;
+}
+.btn-add {
+  background: var(--red); color: white; border: none; border-radius: 7px;
+  padding: 8px 16px; font-family: 'DM Sans'; font-size: 12px; font-weight: 600;
+  cursor: pointer; white-space: nowrap; transition: all 0.18s;
+}
+.btn-add:hover { background: var(--red-dark); }
+
+/* Pillar filter pills */
+.pillar-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.pillar-pill {
+  display: flex; align-items: center; gap: 6px;
+  padding: 5px 14px; border-radius: 20px; border: 2px solid transparent;
+  font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.18s;
+  background: white;
+}
+.pillar-pill.all    { border-color: var(--border); color: var(--gray2); }
+.pillar-pill.all.on { border-color: var(--red); background: var(--red); color: white; }
+.pillar-pill.A      { border-color: var(--pilA); color: var(--pilA); }
+.pillar-pill.A.on   { background: var(--pilA); color: white; }
+.pillar-pill.B      { border-color: var(--pilB); color: var(--pilB); }
+.pillar-pill.B.on   { background: var(--pilB); color: white; }
+.pillar-pill.C      { border-color: var(--pilC); color: var(--pilC); }
+.pillar-pill.C.on   { background: var(--pilC); color: white; }
+.pillar-pill.WU     { border-color: var(--pilWU); color: var(--pilWU); }
+.pillar-pill.WU.on  { background: var(--pilWU); color: white; }
+.pillar-pill.ST     { border-color: var(--pilST); color: var(--pilST); }
+.pillar-pill.ST.on  { background: var(--pilST); color: white; }
+.pillar-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+
+/* Exercise grid */
+.ex-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+.ex-card {
+  background: white; border-radius: 10px; box-shadow: var(--shadow);
+  border: 1.5px solid var(--border); overflow: hidden;
+  transition: all 0.2s; cursor: pointer;
+}
+.ex-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.ex-card-header {
+  padding: 10px 14px 8px;
+  display: flex; align-items: center; gap: 8px;
+}
+.pillar-badge {
+  font-family: 'Bebas Neue'; font-size: 11px; letter-spacing: 1px;
+  padding: 2px 8px; border-radius: 4px; color: white; white-space: nowrap; flex-shrink: 0;
+}
+.ex-card-code { font-size: 10px; color: var(--gray); letter-spacing: 0.3px; }
+.ex-card-name {
+  font-family: 'Bebas Neue'; font-size: 18px; letter-spacing: 1px;
+  color: var(--text); padding: 0 14px 4px; line-height: 1.1;
+}
+.ex-card-sub { font-size: 11px; color: var(--gray2); padding: 0 14px 8px; }
+.ex-card-meta {
+  display: flex; gap: 6px; padding: 0 14px 10px; flex-wrap: wrap;
+}
+.meta-chip {
+  font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 4px;
+  background: var(--off); color: var(--gray2); border: 1px solid var(--cream-dk);
+}
+.ex-card-actions {
+  border-top: 1px solid var(--cream-dk); padding: 8px 14px;
+  display: flex; gap: 8px;
+}
+.ex-btn {
+  font-family: 'DM Sans'; font-size: 11px; font-weight: 600;
+  border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; transition: all 0.15s;
+}
+.ex-btn-add  { background: var(--sage-lt); color: var(--pilA); }
+.ex-btn-add:hover { background: var(--sage); }
+.ex-btn-edit { background: var(--off); color: var(--gray2); }
+.ex-btn-edit:hover { background: var(--cream-dk); }
+.ex-btn-del  { background: var(--off); color: var(--red); margin-left: auto; }
+.ex-btn-del:hover { background: #fde8e8; }
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+  z-index: 500; display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.hidden { display: none; }
+.modal-box {
+  background: white; border-radius: 14px; max-width: 560px; width: 100%;
+  max-height: 88vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+}
+.modal-header {
+  background: var(--red); padding: 16px 22px;
+  border-radius: 14px 14px 0 0;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.modal-title { font-family: 'Bebas Neue'; font-size: 20px; color: white; letter-spacing: 2px; }
+.modal-close {
+  background: rgba(255,255,255,0.15); border: none; color: white;
+  width: 28px; height: 28px; border-radius: 50%; cursor: pointer;
+  font-size: 16px; display: flex; align-items: center; justify-content: center;
+}
+.modal-body { padding: 22px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.form-row.single { grid-template-columns: 1fr; }
+.form-row.triple { grid-template-columns: 1fr 1fr 1fr; }
+.form-field { display: flex; flex-direction: column; gap: 4px; }
+.form-field label { font-size: 11px; font-weight: 600; color: var(--gray2); letter-spacing: 0.3px; }
+.form-input {
+  font-family: 'DM Sans'; font-size: 13px; color: var(--text);
+  background: var(--off); border: 1.5px solid var(--border);
+  border-radius: 7px; padding: 8px 11px; width: 100%;
+  transition: border-color 0.2s;
+}
+.form-input:focus { outline: none; border-color: var(--red); background: white; }
+textarea.form-input { resize: vertical; min-height: 60px; }
+.modal-footer {
+  border-top: 1px solid var(--cream-dk); padding: 14px 22px;
+  display: flex; gap: 10px; justify-content: flex-end;
+}
+.btn-cancel {
+  background: var(--off); color: var(--gray2); border: 1.5px solid var(--border);
+  border-radius: 7px; padding: 9px 18px; font-family: 'DM Sans'; font-size: 13px;
+  font-weight: 500; cursor: pointer;
+}
+.btn-save-ex {
+  background: var(--red); color: white; border: none;
+  border-radius: 7px; padding: 9px 18px; font-family: 'DM Sans'; font-size: 13px;
+  font-weight: 600; cursor: pointer;
+}
+
+/* ── PROGRAM BUILDER VIEW ── */
+.builder-wrap { max-width: 1100px; margin: 0 auto; padding: 28px 20px 60px; }
+.builder-layout { display: grid; grid-template-columns: 340px 1fr; gap: 20px; }
+@media (max-width: 800px) { .builder-layout { grid-template-columns: 1fr; } }
+
+.builder-panel {
+  background: white; border-radius: 10px; box-shadow: var(--shadow);
+  border: 1px solid rgba(212,207,200,0.5); overflow: hidden;
+}
+.panel-header {
+  padding: 14px 18px; background: var(--cream-dk);
+  border-bottom: 1px solid var(--border);
+}
+.panel-title {
+  font-family: 'Bebas Neue'; font-size: 16px; letter-spacing: 1.5px; color: var(--gray2);
+}
+.panel-body { padding: 16px; }
+
+/* Client info */
+.client-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.ci-field { display: flex; flex-direction: column; gap: 4px; }
+.ci-label { font-size: 10px; font-weight: 600; color: var(--gray2); letter-spacing: 0.5px; text-transform: uppercase; }
+
+/* Program slots */
+.program-section { margin-bottom: 18px; }
+.program-section-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gray2); margin-bottom: 8px; padding-bottom: 5px;
+  border-bottom: 1px solid var(--cream-dk);
+}
+.program-slot {
+  background: var(--off); border: 1.5px dashed var(--border); border-radius: 8px;
+  padding: 10px 12px; margin-bottom: 8px; min-height: 52px;
+  transition: all 0.18s; position: relative;
+}
+.program-slot.filled {
+  background: white; border-style: solid; border-color: var(--sage);
+}
+.program-slot.filled.pilA { border-color: var(--pilA); }
+.program-slot.filled.pilB { border-color: var(--pilB); }
+.program-slot.filled.pilC { border-color: var(--pilC); }
+.program-slot.filled.pilWU { border-color: var(--pilWU); }
+.program-slot.filled.pilST { border-color: var(--pilST); }
+.slot-empty-text { font-size: 11px; color: var(--gray); font-style: italic; }
+.slot-name { font-weight: 600; font-size: 13px; color: var(--text); }
+.slot-detail { font-size: 11px; color: var(--gray2); margin-top: 2px; }
+.slot-remove {
+  position: absolute; top: 8px; right: 8px;
+  background: var(--off); border: 1px solid var(--border); border-radius: 4px;
+  width: 20px; height: 20px; cursor: pointer; font-size: 11px;
+  display: flex; align-items: center; justify-content: center; color: var(--red);
+}
+.slot-remove:hover { background: #fde8e8; }
+
+/* Mini exercise cards for picker */
+.picker-search {
+  width: 100%; font-family: 'DM Sans'; font-size: 12px;
+  background: var(--off); border: 1.5px solid var(--border);
+  border-radius: 7px; padding: 7px 11px; margin-bottom: 10px; color: var(--text);
+}
+.picker-search:focus { outline: none; border-color: var(--red); }
+.picker-list { max-height: 360px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+.picker-item {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--off); border: 1.5px solid var(--border); border-radius: 7px;
+  padding: 8px 10px; cursor: pointer; transition: all 0.15s;
+}
+.picker-item:hover { border-color: var(--sage-dk); background: var(--sage-lt); }
+.picker-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.picker-name { font-size: 12px; font-weight: 600; flex: 1; line-height: 1.2; }
+.picker-meta { font-size: 10px; color: var(--gray); white-space: nowrap; }
+.picker-add-btn {
+  background: var(--sage-lt); color: var(--pilA); border: none;
+  border-radius: 4px; padding: 3px 8px; font-size: 10px; font-weight: 700;
+  cursor: pointer; white-space: nowrap;
+}
+
+/* Program output panel */
+.output-panel { flex: 1; }
+.program-meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+
+/* ── PRINT VIEW ── */
+.print-btn-bar {
+  background: var(--red); padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.print-btn-bar-title { font-family: 'Bebas Neue'; font-size: 18px; color: white; letter-spacing: 2px; }
+.print-actions { display: flex; gap: 10px; }
+.pbtn {
+  font-family: 'DM Sans'; font-size: 12px; font-weight: 600;
+  border: none; border-radius: 6px; padding: 8px 16px; cursor: pointer;
+}
+.pbtn-print { background: white; color: var(--red); }
+.pbtn-close  { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 22px; right: 22px;
+  background: var(--red); color: white;
+  padding: 11px 18px; border-radius: 8px;
+  font-size: 13px; font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  opacity: 0; transform: translateY(8px);
+  transition: all 0.3s; pointer-events: none; z-index: 999;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+
+/* ── SECTION HEADERS IN BUILDER ── */
+.section-hd {
+  font-family: 'Bebas Neue'; font-size: 22px; letter-spacing: 2px; color: var(--red);
+  margin-bottom: 16px;
+}
+
+/* ── PRINT STYLES ── */
+@media print {
+  .site-header, .filters-bar, .pillar-pills, .ex-card-actions,
+  .modal-overlay, .toast, .tab-btn, .header-actions,
+  .hbtn, .print-btn-bar { display: none !important; }
+  body { background: white; }
+  .library-wrap { padding: 0; }
+  .ex-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  @page { margin: 15mm; }
+}
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  grid-column: 1 / -1; text-align: center; padding: 48px 20px;
+  color: var(--gray);
+}
+.empty-state .em-icon { font-size: 40px; margin-bottom: 10px; }
+.empty-state p { font-size: 14px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-box"><img src="01_TPM_master_icon.png" style="width:42px;height:42px;border-radius:6px;object-fit:cover;"></div>
+      <div class="logo-text">
+        <h1>EXERCISE LIBRARY</h1>
+        <p>The Preston Method™ · Oasis Training &amp; Education</p>
+      </div>
+    </div>
+    <div class="header-tabs">
+      <button class="tab-btn active" onclick="switchView('library')">📚 Library</button>
+      <button class="tab-btn" onclick="switchView('builder')">🏗 Program Builder</button>
+    </div>
+    <div class="header-actions">
+      <span class="sync-indicator sync-idle" id="syncIndicator">⬡ GitHub</span>
+      <button class="hbtn hbtn-save" onclick="openSettings()">⚙ GitHub Settings</button>
+      <button class="hbtn hbtn-save" onclick="exportLibrary()">📥 Export JSON</button>
+      <button class="hbtn hbtn-save" onclick="exportToSheets()">📊 Export to Sheets</button>
+      <label class="hbtn hbtn-save" style="cursor:pointer;">
+        📂 Import Library
+        <input type="file" accept=".json" style="display:none" onchange="importLibrary(this)">
+      </label>
+    </div>
+  </div>
+</header>
+
+<!-- ════════════════════════════════
+     VIEW 1: LIBRARY
+════════════════════════════════ -->
+<div class="view active" id="view-library">
+  <div class="library-wrap">
+
+    <!-- Pillar pills -->
+    <div class="pillar-pills">
+      <div class="pillar-pill all on" data-pillar="all" onclick="setPillar('all',this)">
+        <div class="pillar-dot" style="background:var(--red);"></div> All
+      </div>
+      <div class="pillar-pill A" data-pillar="A" onclick="setPillar('A',this)">
+        <div class="pillar-dot" style="background:var(--pilA);"></div> A · Mobility Foundations
+      </div>
+      <div class="pillar-pill B" data-pillar="B" onclick="setPillar('B',this)">
+        <div class="pillar-dot" style="background:var(--pilB);"></div> B · Strength + Mobility
+      </div>
+      <div class="pillar-pill C" data-pillar="C" onclick="setPillar('C',this)">
+        <div class="pillar-dot" style="background:var(--pilC);"></div> C · Performance + Longevity
+      </div>
+      <div class="pillar-pill WU" data-pillar="WU" onclick="setPillar('WU',this)">
+        <div class="pillar-dot" style="background:var(--pilWU);"></div> Warm-Up
+      </div>
+      <div class="pillar-pill ST" data-pillar="ST" onclick="setPillar('ST',this)">
+        <div class="pillar-dot" style="background:var(--pilST);"></div> Seated / At-Home
+      </div>
+    </div>
+
+    <!-- Filters bar -->
+    <div class="filters-bar">
+      <input class="filter-search" type="text" id="searchInput" placeholder="🔍 Search exercises…" oninput="renderLibrary()">
+      <select class="filter-select" id="filterCategory" onchange="renderLibrary()">
+        <option value="">All Categories</option>
+        <option>Push</option><option>Pull</option><option>Hinge</option>
+        <option>Squat</option><option>Core</option><option>Mobility</option>
+        <option>Balance</option><option>Plyo</option><option>Cardio</option>
+        <option>Warm-Up</option><option>Grip / Hand</option>
+      </select>
+      <select class="filter-select" id="filterEquipment" onchange="renderLibrary()">
+        <option value="">All Equipment</option>
+        <option>None / Bodyweight</option><option>Dumbbells</option>
+        <option>Band</option><option>Kettlebell</option>
+        <option>Medicine Ball</option><option>Cable Machine</option>
+        <option>Bench</option><option>Box</option><option>Tennis Ball</option>
+        <option>Exercise Ball</option>
+      </select>
+      <select class="filter-select" id="filterDifficulty" onchange="renderLibrary()">
+        <option value="">All Levels</option>
+        <option>Foundational</option><option>Intermediate</option><option>Advanced</option>
+      </select>
+      <span class="filter-count" id="filterCount"></span>
+      <button class="btn-add" onclick="openAddModal()">+ Add Exercise</button>
+    </div>
+
+    <!-- Exercise grid -->
+    <div class="ex-grid" id="exGrid"></div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     VIEW 2: PROGRAM BUILDER
+════════════════════════════════ -->
+<div class="view" id="view-builder">
+  <div class="builder-wrap">
+    <div class="section-hd">PROGRAM BUILDER</div>
+    <div class="builder-layout">
+
+      <!-- LEFT: Program Canvas -->
+      <div>
+        <div class="builder-panel" style="margin-bottom:14px;">
+          <div class="panel-header">
+            <div class="panel-title">CLIENT INFO</div>
+          </div>
+          <div class="panel-body">
+            <div class="client-info-grid">
+              <div class="ci-field">
+                <div class="ci-label">Client Name</div>
+                <input class="form-input" id="prog_client" placeholder="Client name…" oninput="updateProgramHeader()">
+              </div>
+              <div class="ci-field">
+                <div class="ci-label">Date</div>
+                <input class="form-input" type="date" id="prog_date" oninput="updateProgramHeader()">
+              </div>
+              <div class="ci-field">
+                <div class="ci-label">Coach</div>
+                <input class="form-input" id="prog_coach" placeholder="Coach name…">
+              </div>
+              <div class="ci-field">
+                <div class="ci-label">Phase / Week</div>
+                <input class="form-input" id="prog_phase" placeholder="e.g. Phase 1 · Week 1">
+              </div>
+              <div class="ci-field" style="grid-column:span 2;">
+                <div class="ci-label">Program Title</div>
+                <input class="form-input" id="prog_title" placeholder="e.g. Mobility Foundations — At-Home Program">
+              </div>
+              <div class="ci-field" style="grid-column:span 2;">
+                <div class="ci-label">Check-in Link (optional)</div>
+                <input class="form-input" id="prog_checkin" placeholder="https://…" value="https://theprestonmethod.github.io/tpm-workouts/tpm-weekly-checkin.html">
+              </div>
+              <div class="ci-field" style="grid-column:span 2;">
+                <div class="ci-label">Coach Notes</div>
+                <textarea class="form-input" id="prog_notes" rows="2" placeholder="Personalised message for this client…"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Program slots -->
+        <div class="builder-panel">
+          <div class="panel-header" style="display:flex;align-items:center;justify-content:space-between;">
+            <div class="panel-title">PROGRAM SLOTS</div>
+            <button onclick="clearProgram()" style="font-size:10px;background:transparent;border:none;color:var(--red);cursor:pointer;font-weight:600;">Clear All</button>
+          </div>
+          <div class="panel-body">
+            <div class="program-section">
+              <div class="program-section-label">Warm-Up (1–3 exercises)</div>
+              <div id="slot-warmup-1" class="program-slot" data-section="warmup" data-index="0"><span class="slot-empty-text">Click an exercise → Add to Program</span></div>
+              <div id="slot-warmup-2" class="program-slot" data-section="warmup" data-index="1"><span class="slot-empty-text">Optional</span></div>
+              <div id="slot-warmup-3" class="program-slot" data-section="warmup" data-index="2"><span class="slot-empty-text">Optional</span></div>
+            </div>
+            <div class="program-section">
+              <div class="program-section-label">Primary Exercises (3 Non-Negotiables)</div>
+              <div id="slot-primary-1" class="program-slot" data-section="primary" data-index="0"><span class="slot-empty-text">Non-negotiable #1</span></div>
+              <div id="slot-primary-2" class="program-slot" data-section="primary" data-index="1"><span class="slot-empty-text">Non-negotiable #2</span></div>
+              <div id="slot-primary-3" class="program-slot" data-section="primary" data-index="2"><span class="slot-empty-text">Non-negotiable #3</span></div>
+            </div>
+            <div class="program-section">
+              <div class="program-section-label">Accessory / Secondary</div>
+              <div id="slot-accessory-1" class="program-slot" data-section="accessory" data-index="0"><span class="slot-empty-text">Accessory #1</span></div>
+              <div id="slot-accessory-2" class="program-slot" data-section="accessory" data-index="1"><span class="slot-empty-text">Accessory #2</span></div>
+            </div>
+            <div class="program-section">
+              <div class="program-section-label">Conditioning / Core</div>
+              <div id="slot-conditioning-1" class="program-slot" data-section="conditioning" data-index="0"><span class="slot-empty-text">Conditioning or Core exercise</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Generate button -->
+        <button onclick="generateProgram()" style="width:100%;margin-top:14px;background:var(--red);color:white;border:none;border-radius:8px;padding:13px;font-family:'DM Sans';font-size:14px;font-weight:700;cursor:pointer;letter-spacing:0.3px;">
+          ⚡ Generate Program Card
+        </button>
+
+        <button onclick="generateWorkoutPlayer()" style="width:100%;margin-top:10px;background:var(--cyan-dk);color:white;border:none;border-radius:8px;padding:13px;font-family:'DM Sans';font-size:14px;font-weight:700;cursor:pointer;letter-spacing:0.3px;">
+          📱 Generate Workout Player
+        </button>
+
+        <!-- QR Code Generator -->
+        <div id="qrSection" style="display:none;margin-top:14px;background:white;border-radius:10px;border:1.5px solid var(--border);padding:18px;box-shadow:var(--shadow);">
+          <div style="font-family:'Bebas Neue';font-size:15px;letter-spacing:1.5px;color:var(--red);margin-bottom:10px;">📲 CREATE CLIENT QR CODE</div>
+          <div id="uploadStatusMsg" style="font-size:12px;color:var(--gray2);margin-bottom:8px;line-height:1.6;"></div>
+          <div id="shareableLinkBox" style="display:none;font-size:12px;background:var(--off);border:1.5px solid var(--border);border-radius:7px;padding:8px 12px;margin-bottom:8px;word-break:break-all;color:var(--text);"></div>
+          <div style="display:flex;gap:8px;margin-bottom:12px;">
+            <input class="form-input" id="qrUrl" placeholder="Link appears automatically — or paste manually…" style="flex:1;font-size:12px;" oninput="generateQR()">
+            <button onclick="document.getElementById('qrUrl').value='';document.getElementById('qrOutput').style.display='none'" style="background:var(--off);border:1.5px solid var(--border);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:11px;color:var(--gray2);">✕</button>
+          </div>
+          <div id="qrOutput" style="display:none;text-align:center;">
+            <img id="qrImg" style="width:180px;height:180px;border-radius:8px;border:2px solid var(--border);">
+            <div style="margin-top:8px;font-size:11px;color:var(--gray2);" id="qrClientLabel"></div>
+            <div style="display:flex;gap:8px;justify-content:center;margin-top:10px;">
+              <button onclick="downloadQR()" style="background:var(--red);color:white;border:none;border-radius:6px;padding:7px 16px;font-family:'DM Sans';font-size:12px;font-weight:600;cursor:pointer;">⬇ Download QR</button>
+              <button onclick="printQR()" style="background:var(--off);color:var(--gray2);border:1.5px solid var(--border);border-radius:6px;padding:7px 16px;font-family:'DM Sans';font-size:12px;font-weight:600;cursor:pointer;">🖨 Print QR</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Exercise Picker -->
+      <div>
+        <div class="builder-panel" style="height:100%;">
+          <div class="panel-header">
+            <div class="panel-title">EXERCISE PICKER</div>
+            <div style="font-size:11px;color:var(--gray);margin-top:2px;">Click an exercise then choose which slot to add it to</div>
+          </div>
+          <div class="panel-body">
+            <input class="picker-search" type="text" id="pickerSearch" placeholder="🔍 Search exercises…" oninput="renderPicker()">
+            <!-- Pillar filter for picker -->
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;" id="pickerPillarFilter">
+              <button onclick="pickerPillar='all';renderPicker();updatePickerBtns(this)" class="ppill on" data-p="all">All</button>
+              <button onclick="pickerPillar='A';renderPicker();updatePickerBtns(this)" class="ppill" data-p="A" style="color:var(--pilA);">A</button>
+              <button onclick="pickerPillar='B';renderPicker();updatePickerBtns(this)" class="ppill" data-p="B" style="color:var(--pilB);">B</button>
+              <button onclick="pickerPillar='C';renderPicker();updatePickerBtns(this)" class="ppill" data-p="C" style="color:var(--pilC);">C</button>
+              <button onclick="pickerPillar='WU';renderPicker();updatePickerBtns(this)" class="ppill" data-p="WU" style="color:var(--pilWU);">WU</button>
+              <button onclick="pickerPillar='ST';renderPicker();updatePickerBtns(this)" class="ppill" data-p="ST" style="color:var(--pilST);">Seated</button>
+            </div>
+            <div class="picker-list" id="pickerList"></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /builder-layout -->
+  </div>
+</div>
+
+<!-- Slot selector modal (shown when user clicks Add to Program) -->
+<div class="modal-overlay hidden" id="slotModal">
+  <div class="modal-box" style="max-width:380px;">
+    <div class="modal-header">
+      <div class="modal-title">ADD TO SLOT</div>
+      <button class="modal-close" onclick="closeSlotModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13px;color:var(--gray2);margin-bottom:14px;">Where should <strong id="slotExName"></strong> go?</p>
+      <div id="slotOptions" style="display:flex;flex-direction:column;gap:8px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     ADD / EDIT EXERCISE MODAL
+════════════════════════════════ -->
+<div class="modal-overlay hidden" id="exModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">ADD EXERCISE</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row single">
+        <div class="form-field">
+          <label>Exercise Name *</label>
+          <input class="form-input" id="f_name" placeholder="e.g. Deadbug">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Element *</label>
+          <select class="form-input" id="f_pillar">
+            <option value="">Select…</option>
+            <option value="A">A — Mobility</option>
+            <option value="B">B — Strength + Mobility</option>
+            <option value="C">C — Performance + Longevity</option>
+            <option value="WU">Warm-Up</option>
+            <option value="ST">Seated / At-Home</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Category</label>
+          <select class="form-input" id="f_category">
+            <option value="">Select…</option>
+            <option>Push</option><option>Pull</option><option>Hinge</option>
+            <option>Squat</option><option>Core</option><option>Mobility</option>
+            <option>Balance</option><option>Plyo</option><option>Cardio</option>
+            <option>Warm-Up</option><option>Grip / Hand</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row triple">
+        <div class="form-field">
+          <label>Sets</label>
+          <input class="form-input" id="f_sets" placeholder="e.g. 3">
+        </div>
+        <div class="form-field">
+          <label>Reps / Duration</label>
+          <input class="form-input" id="f_reps" placeholder="e.g. 10–12 or 30s">
+        </div>
+        <div class="form-field">
+          <label>RPE</label>
+          <input class="form-input" id="f_rpe" placeholder="e.g. 7–8">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Equipment</label>
+          <select class="form-input" id="f_equipment">
+            <option value="">Select…</option>
+            <option>None / Bodyweight</option><option>Dumbbells</option>
+            <option>Band</option><option>Kettlebell</option>
+            <option>Medicine Ball</option><option>Cable Machine</option>
+            <option>Bench</option><option>Box</option>
+            <option>Tennis Ball</option><option>Exercise Ball</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Difficulty</label>
+          <select class="form-input" id="f_difficulty">
+            <option value="">Select…</option>
+            <option>Foundational</option><option>Intermediate</option><option>Advanced</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Card ID</label>
+          <input class="form-input" id="f_code" placeholder="e.g. SM-014">
+        </div>
+        <div class="form-field">
+          <label>Status</label>
+          <select class="form-input" id="f_status">
+            <option value="Active">Active</option>
+            <option value="Draft">Draft</option>
+            <option value="Needs Image">Needs Image</option>
+            <option value="Needs Video">Needs Video</option>
+            <option value="Needs Review">Needs Review</option>
+            <option value="Retired">Retired</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Movement Family</label>
+          <select class="form-input" id="f_movementFamily">
+            <option value="">Select…</option>
+            <option>Push</option><option>Pull</option><option>Squat</option>
+            <option>Hinge</option><option>Lunge</option><option>Carry</option>
+            <option>Rotate</option><option>Anti-Rotation</option>
+            <option>Breath/Core</option><option>Balance</option>
+            <option>Mobility</option><option>Gait</option><option>Locomotion</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Movement Pattern</label>
+          <select class="form-input" id="f_movementPattern">
+            <option value="">Select…</option>
+            <option>Vertical Push</option><option>Horizontal Push</option>
+            <option>Vertical Pull</option><option>Horizontal Pull</option>
+            <option>Bilateral Squat</option><option>Split Squat</option>
+            <option>Hinge</option><option>Single-Leg</option>
+            <option>Rotation</option><option>Anti-Rotation</option>
+            <option>Loaded Carry</option><option>Crawling</option>
+            <option>Spine Mobility</option><option>Shoulder Mobility</option>
+            <option>Hip Mobility</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Body Region</label>
+          <select class="form-input" id="f_bodyRegion">
+            <option value="">Select…</option>
+            <option>Full Body</option><option>Upper Body</option><option>Lower Body</option>
+            <option>Shoulder / Core</option><option>Chest / Shoulder</option>
+            <option>Back / Shoulder</option><option>Arms</option>
+            <option>Hips / Glutes</option><option>Legs</option>
+            <option>Core / Spine</option><option>Hands / Wrists</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Load Style</label>
+          <select class="form-input" id="f_loadStyle">
+            <option value="">Select…</option>
+            <option>Mobility</option><option>Control</option><option>Stability</option>
+            <option>Strength</option><option>Power</option><option>Endurance</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row single">
+        <div class="form-field">
+          <label>Key Cues / Instructions</label>
+          <textarea class="form-input" id="f_cues" rows="3" placeholder="Coach cues, how-to instructions…"></textarea>
+        </div>
+      </div>
+      <div class="form-row single">
+        <div class="form-field">
+          <label>Coaching Focus</label>
+          <input class="form-input" id="f_coachingFocus" placeholder="e.g. Stability + overhead control">
+        </div>
+      </div>
+      <div class="form-row single">
+        <div class="form-field">
+          <label>Contraindications / Cautions</label>
+          <input class="form-input" id="f_contraindications" placeholder="e.g. Avoid with painful overhead impingement">
+        </div>
+      </div>
+      <div class="form-row single">
+        <div class="form-field">
+          <label>Progression / Too Hard?</label>
+          <input class="form-input" id="f_progression" placeholder="e.g. Reduce band tension / Add weight when consistent">
+        </div>
+      </div>
+      <div class="form-row single">
+        <div class="form-field">
+          <label>Video Link (optional)</label>
+          <input class="form-input" id="f_video" placeholder="https://…">
+        </div>
+      </div>
+      <div class="form-row single">
+        <div class="form-field">
+          <label>Exercise Card Image <span style="font-weight:400;font-style:italic;color:var(--gray);font-size:10px;">— export from Canva as JPG or PNG</span></label>
+          <div id="imageUploadArea" style="border:2px dashed var(--border);border-radius:8px;padding:16px;text-align:center;cursor:pointer;transition:all 0.2s;background:var(--off);"
+            onclick="document.getElementById('f_image').click()"
+            ondragover="event.preventDefault();this.style.borderColor='var(--red)'"
+            ondragleave="this.style.borderColor='var(--border)'"
+            ondrop="handleImageDrop(event)">
+            <div id="imagePreview" style="display:none;margin-bottom:10px;">
+              <img id="imagePreviewImg" style="max-width:100%;max-height:180px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+            </div>
+            <div id="imageUploadPrompt">
+              <div style="font-size:24px;margin-bottom:6px;">🖼</div>
+              <div style="font-size:12px;font-weight:600;color:var(--gray2);">Click to upload or drag &amp; drop</div>
+              <div style="font-size:11px;color:var(--gray);margin-top:3px;">JPG, PNG — your Canva card export</div>
+            </div>
+          </div>
+          <input type="file" id="f_image" accept="image/*" style="display:none;" onchange="handleImageSelect(this)">
+          <button type="button" id="removeImageBtn" onclick="removeImage()" style="display:none;margin-top:6px;font-family:'DM Sans';font-size:11px;background:transparent;border:none;color:var(--red);cursor:pointer;font-weight:600;">✕ Remove image</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save-ex" onclick="saveExercise()">Save Exercise</button>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRAM OUTPUT (hidden, shown on generate) -->
+<div class="modal-overlay hidden" id="programModal">
+  <div class="modal-box" style="max-width:700px;">
+    <div class="print-btn-bar">
+      <div class="print-btn-bar-title">PROGRAM CARD</div>
+      <div class="print-actions">
+        <button class="pbtn pbtn-print" onclick="printProgram()">🖨 Print / Save PDF</button>
+        <button class="pbtn pbtn-close" onclick="document.getElementById('programModal').classList.add('hidden')">✕ Close</button>
+      </div>
+    </div>
+    <div id="programOutput" style="padding:28px 32px;font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.7;"></div>
+  </div>
+</div>
+
+<!-- GITHUB SETTINGS MODAL -->
+<div class="modal-overlay hidden" id="settingsModal">
+  <div class="modal-box" style="max-width:480px;">
+    <div class="modal-header">
+      <div class="modal-title">⚙ GITHUB IMAGE SETTINGS</div>
+      <button class="modal-close" onclick="closeSettings()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="ghStatusBadge" style="display:inline-block;font-size:11px;font-weight:700;padding:4px 10px;border-radius:5px;margin-bottom:16px;"></div>
+
+      <div style="font-size:13px;color:var(--gray2);margin-bottom:16px;line-height:1.7;">
+        When a GitHub token is set, exercise images you upload are automatically saved to your
+        <strong>tpm-workouts</strong> GitHub repo and will work on every device — not just this browser.
+        Exercise data (exercises.json) also syncs automatically whenever you save or delete an exercise.
+      </div>
+
+      <div style="background:var(--off);border:1px solid var(--cream-dk);border-radius:8px;padding:14px 16px;margin-bottom:18px;font-size:12px;line-height:1.8;color:var(--gray2);">
+        <strong style="color:var(--text);">To get your token (takes ~2 minutes):</strong><br>
+        1. Go to <strong>github.com → Settings → Developer settings</strong><br>
+        2. Click <strong>Personal access tokens → Fine-grained tokens</strong><br>
+        3. Click <strong>Generate new token</strong><br>
+        4. Under <strong>Repository access</strong>, select <em>Only select repositories</em> → pick <strong>tpm-workouts</strong><br>
+        5. Under <strong>Permissions → Repository permissions → Contents</strong>, choose <strong>Read and write</strong><br>
+        6. Click <strong>Generate token</strong> and copy it here
+      </div>
+
+      <div class="form-field">
+        <label>GitHub Personal Access Token</label>
+        <input class="form-input" id="ghTokenInput" type="password" placeholder="github_pat_…" autocomplete="off">
+      </div>
+      <div style="font-size:11px;color:var(--gray);margin-top:6px;">Your token is stored only in this browser. Clear the field and save to remove it.</div>
+
+      <div class="form-field" style="margin-top:16px;">
+        <label>Bit.ly API Token <span style="font-weight:400;font-style:italic;color:var(--gray);font-size:10px;">— optional, shortens QR code links</span></label>
+        <input class="form-input" id="bitlyTokenInput" type="password" placeholder="Enter Bit.ly generic access token…" autocomplete="off">
+      </div>
+      <div style="font-size:11px;color:var(--gray);margin-top:6px;">Get a free token at <strong>app.bitly.com → Settings → API</strong>. Clear and save to remove.</div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeSettings()">Cancel</button>
+      <button class="btn-save-ex" onclick="saveSettings()">Save Settings</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<style>
+.ppill {
+  font-family:'DM Sans';font-size:11px;font-weight:700;
+  background:var(--off);border:1.5px solid var(--border);border-radius:5px;
+  padding:4px 10px;cursor:pointer;transition:all 0.15s;color:var(--gray2);
+}
+.ppill.on { background:var(--red);border-color:var(--red);color:white; }
+</style>
+
+<script>
+// ══════════════════════════════════════
+// EXERCISE DATA
+// ══════════════════════════════════════
+
+const PILLAR_COLORS = {
+  A: '#1A56DB', MF: '#1A56DB', B: '#E85D04', C: '#059669', WU: '#8c52ff', ST: '#1B3A5C', CIM: '#1A56DB', CORE: '#059669'
+};
+const PILLAR_LABELS = {
+  A: 'A · Mobility', MF: 'MF · Mobility Foundations', B: 'B · Strength+Mob', C: 'C · Performance', WU: 'Warm-Up', ST: 'Seated/At-Home', CIM: 'CIM · Overlay', CORE: 'Core'
+};
+
+// Pre-loaded exercise library from your PDFs
+const DEFAULT_EXERCISES = [
+  // ── WARM-UP ──
+  { id:'wu-1',  name:'Arm Swings',            pillar:'WU', category:'Warm-Up',    sets:'1', reps:'20–30 sec', rpe:'', equipment:'None / Bodyweight',  difficulty:'Foundational', code:'WU-UNI-01', cues:'Relax shoulders, ribs down, tall spine', progression:'Increase range gradually', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-1.jpg'},
+  { id:'wu-2',  name:'Torso Twists',           pillar:'WU', category:'Warm-Up',    sets:'1', reps:'10–12 each side', rpe:'', equipment:'None / Bodyweight', difficulty:'Foundational', code:'WU-UNI-01', cues:'Rotate through upper back, hips mostly forward', progression:'', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-2.jpg'},
+  { id:'wu-3',  name:'Hip Openers',             pillar:'WU', category:'Warm-Up',    sets:'1', reps:'20–30 sec', rpe:'', equipment:'None / Bodyweight', difficulty:'Foundational', code:'WU-UNI-02', cues:'Relax shoulders, ribs down, tall spine', progression:'', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-3.jpg'},
+  { id:'wu-4',  name:'Step Back Lunges',        pillar:'WU', category:'Warm-Up',    sets:'1', reps:'10 each side', rpe:'', equipment:'None / Bodyweight', difficulty:'Foundational', code:'WU-UNI-02', cues:'Step back softly. Front heel grounded. Torso tall. Control the return.', progression:'', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-4.jpg'},
+  { id:'wu-5',  name:'Inchworms',               pillar:'WU', category:'Warm-Up',    sets:'1', reps:'5+ reps', rpe:'', equipment:'None / Bodyweight', difficulty:'Foundational', code:'WU-UNI-03', cues:'Slow and controlled. Hinge at hips, crawl out to straight-arm plank and back.', progression:'', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-5.jpg'},
+  { id:'wu-6',  name:'Butt Kicks',              pillar:'WU', category:'Warm-Up',    sets:'1', reps:'20–30 sec', rpe:'', equipment:'None / Bodyweight', difficulty:'Foundational', code:'WU-UNI-03', cues:'Relax shoulders, keep posture tall, try to reach heel to butt', progression:'', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-6.jpg'},
+  { id:'wu-7',  name:'Lateral Lunges',          pillar:'WU', category:'Warm-Up',    sets:'1', reps:'10 each side', rpe:'', equipment:'None / Bodyweight', difficulty:'Foundational', code:'WU-UNI-04', cues:'Drive from heel of bent knee', progression:'', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-7.jpg'},
+  { id:'wu-8',  name:'High Knees',              pillar:'WU', category:'Warm-Up',    sets:'1', reps:'20–30 sec', rpe:'', equipment:'None / Bodyweight', difficulty:'Foundational', code:'WU-UNI-04', cues:'Drive knee to hip height. Stay tall. Increase speed only if posture stays controlled.', progression:'', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-8.jpg'},
+  { id:'wu-9',  name:'T-Spine Windmills',       pillar:'WU', category:'Warm-Up',    sets:'1', reps:'10 each side', rpe:'', equipment:'None / Bodyweight', difficulty:'Foundational', code:'WU-UNI-05', cues:'Obliques, shoulders, spinal rotation', progression:'', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-9.jpg'},
+  { id:'wu-10', name:'Leg Swings',              pillar:'WU', category:'Warm-Up',    sets:'1', reps:'10–12 each side', rpe:'', equipment:'None / Bodyweight', difficulty:'Foundational', code:'WU-UNI-05', cues:'Light support if needed. Swing from hip, not low back. Control both directions.', progression:'', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-10.jpg'},
+
+  // ── MOBILITY FOUNDATIONS (Pillar A) ──
+  { id:'a-1',  name:'Breathing + Posture Reset', pillar:'A', category:'Mobility',  sets:'1', reps:'1–2 min', rpe:'', equipment:'None / Bodyweight', difficulty:'Foundational', code:'MO-PH1-V1', cues:'Sit tall. Inhale through nose. Exhale through mouth. Feel tall, shoulders soft.', progression:'Eyes closed may help', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-1.jpg' },
+  { id:'a-2',  name:'Core Bracing',              pillar:'A', category:'Core',       sets:'1', reps:'Hold during exercises', rpe:'', equipment:'None / Bodyweight', difficulty:'Foundational', code:'MO-PH1-V1', cues:'Zip up a snug jacket around your waist. Breathe normally. Do not hold breath.', progression:'Maintain gentle brace during all exercises', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-2.jpg' },
+  { id:'a-3',  name:'Seated Marches',            pillar:'A', category:'Mobility',   sets:'2', reps:'8–12 each side', rpe:'', equipment:'None / Bodyweight', difficulty:'Foundational', code:'MO-PH1-V1', cues:'Tall posture. Smooth lift. Lift only as high as comfortable.', progression:'', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-3.jpg' },
+  { id:'a-4',  name:'Deadbug',                   pillar:'CORE', category:'Core',       sets:'2', reps:'10 each side', rpe:'', equipment:'None / Bodyweight', difficulty:'Foundational', code:'MO-PH1-02-BaLPD', cues:'Rest head on floor. Do not let lower back arch when straightening leg.', progression:'Add hold at end range', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-4.jpg'},
+  { id:'a-5',  name:'Lying Leg Lifts',            pillar:'CORE', category:'Core',       sets:'2', reps:'10 reps', rpe:'', equipment:'None / Bodyweight', difficulty:'Foundational', code:'MO-PH1-13-LLifts', cues:'Start with legs at 90. Only lower where you can control core with no lower back pain.', progression:'Increase range as strength improves', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-5.jpg'},
+  { id:'a-6',  name:'Wall Angels',               pillar:'A', category:'Mobility',   sets:'2', reps:'10 reps', rpe:'', equipment:'None / Bodyweight', difficulty:'Foundational', code:'PL-Plyo-V1', cues:'Stand with back flat against wall. Slide arms up and down in Y-T-W pattern.', progression:'', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-6.jpg'},
+  { id:'a-7',  name:'Hip Hinges',                pillar:'A', category:'Hinge',      sets:'3', reps:'20 reps', rpe:'', equipment:'Kettlebell', difficulty:'Foundational', code:'PL-Plyo-V1', cues:'Drive hips back. Neutral spine. Squeeze glutes at top.', progression:'Add load when pattern is solid', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-7.jpg'},
+
+  // ── SEATED / AT-HOME (Pillar ST) ──
+  { id:'st-1',  name:'Grip + Hand Health',       pillar:'ST', category:'Grip / Hand', sets:'1', reps:'1–3 min total', rpe:'', equipment:'Tennis Ball', difficulty:'Foundational', code:'AT-HOME-01', cues:'Squeeze: firm grip, no pain. Pinch and Roll. Palm Massage. Wrist Circles. Keep what feels good.', progression:'', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-1.jpg' },
+  { id:'st-2',  name:'Shoulder Blade Squeezes',  pillar:'ST', category:'Pull',        sets:'2', reps:'10–12 slow reps', rpe:'', equipment:'None / Bodyweight', difficulty:'Foundational', code:'AT-HOME-02', cues:'Back and down. No shrug. Pause + squeeze back (not up).', progression:'Hold each squeeze 3–4 seconds', video:'' },
+  { id:'st-3',  name:'Band Rotation (Rotator Cuff)', pillar:'ST', category:'Mobility', sets:'2', reps:'8–10 each side', rpe:'', equipment:'Band', difficulty:'Foundational', code:'AT-HOME-03', cues:'Elbow stays glued to your side. Rotate forearm outward. Reduce band tension if too hard.', progression:'Progress to 3 sets', video:'' },
+  { id:'st-4',  name:'Band Pull-Apart',           pillar:'ST', category:'Pull',        sets:'2', reps:'8–12 reps', rpe:'', equipment:'Band', difficulty:'Foundational', code:'AT-HOME-04', cues:'Ribs down, do not shrug. Arms straight out front, pull band apart.', progression:'Slow 3 sec out, 2 sec hold', video:'' },
+  { id:'st-5',  name:'Band Leg Extensions',       pillar:'ST', category:'Squat',       sets:'1', reps:'6–10 each leg', rpe:'', equipment:'Band', difficulty:'Foundational', code:'AT-HOME-05', cues:'Smooth. Do not snap the band. Band around ankle, anchor to chair leg, extend knee forward slowly.', progression:'Lighter band or smaller range if too hard', video:'' },
+  { id:'st-6',  name:'Seated Dumbbell Row',       pillar:'ST', category:'Pull',        sets:'2', reps:'10–12 reps', rpe:'', equipment:'Dumbbells', difficulty:'Foundational', code:'AT-HOME-06', cues:'Pull with the elbow, not the hand. Hinge slightly forward.', progression:'1–2 reps before adding weight', video:'' },
+  { id:'st-7',  name:'Seated Bicep Curl',         pillar:'ST', category:'Push',        sets:'2', reps:'10–12 reps', rpe:'', equipment:'Dumbbells', difficulty:'Foundational', code:'AT-HOME-07', cues:'Smooth and controlled. Sitting tall, curl weights to shoulder.', progression:'Too hard? Use one dumbbell', video:'' },
+  { id:'st-8',  name:'Straight Leg Circles',      pillar:'ST', category:'Core',        sets:'2', reps:'15–30 sec each direction', rpe:'', equipment:'None / Bodyweight', difficulty:'Foundational', code:'AT-HOME-08', cues:'Small circles. Keep quad tight.', progression:'Make circles smaller if too hard', video:'' },
+
+  // ── STRENGTH + MOBILITY (Pillar B) ──
+  { id:'b-1',  name:'Pushups Against the Wall',   pillar:'B', category:'Push',      sets:'2', reps:'10 reps', rpe:'', equipment:'Exercise Ball', difficulty:'Foundational', code:'SM-PH1-V1-01-WBPU', cues:'Core engaged, do not let hips drop. Hands below shoulder height. Adjust to avoid wrist pain.', progression:'Move hands/ball lower to increase difficulty', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-1.jpg'},
+  { id:'b-2',  name:'Bicep Curls',                pillar:'B', category:'Pull',      sets:'3', reps:'6–8 reps', rpe:'7–8', equipment:'Dumbbells', difficulty:'Intermediate', code:'SM-PH1-V1-02-DBCurls', cues:'Smooth and controlled', progression:'Add reps before adding weight', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-2.jpg'},
+  { id:'b-3',  name:'DB Tricep Kickbacks',        pillar:'B', category:'Push',      sets:'2', reps:'10 each side', rpe:'', equipment:'Dumbbells', difficulty:'Intermediate', code:'SM-PH1-03-TriKickB', cues:'Elbows locked to side. Elbows above body height. Neutral spine — look 45 degrees down.', progression:'Stay in deep lunge for additional challenge', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-3.jpg'},
+  { id:'b-4',  name:'Reverse Flys',               pillar:'B', category:'Pull',      sets:'2', reps:'10 reps', rpe:'', equipment:'Dumbbells', difficulty:'Intermediate', code:'SM-PH1-03-TriKickB', cues:'Arms straight in front. Pull back, widen hands, squeeze elbows behind to activate upper back.', progression:'', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-4.jpg'},
+  { id:'b-5',  name:'Lat Pulldowns',              pillar:'B', category:'Pull',      sets:'3', reps:'8 reps', rpe:'', equipment:'Cable Machine', difficulty:'Intermediate', code:'PL-B-01', cues:'Pull bar to chin. Squeeze lats. Control return.', progression:'Increase load when form is solid', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-5.jpg'},
+
+  // ── PERFORMANCE + LONGEVITY (Pillar C) ──
+  { id:'c-1',  name:'DB Chest Press',             pillar:'C', category:'Push',      sets:'3', reps:'6–8 reps', rpe:'7–8', equipment:'Dumbbells', difficulty:'Intermediate', code:'PM-P1-06-CPress', cues:'Control descent. Pause at chest. Drive up.', progression:'Rest 30 sec', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-1.jpg'},
+  { id:'c-2',  name:'Bent Over Row',              pillar:'C', category:'Pull',      sets:'3', reps:'6–8 reps', rpe:'7–8', equipment:'Dumbbells', difficulty:'Intermediate', code:'PM-P1-05-BORow', cues:'Hinge at hips. Pull elbows back. Squeeze shoulder blades.', progression:'Rest 30 sec', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-2.jpg'},
+  { id:'c-3',  name:'DB Flys — Flat Bench',       pillar:'C', category:'Push',      sets:'3', reps:'6–8 reps', rpe:'7–8', equipment:'Bench', difficulty:'Intermediate', code:'PM-P1-07-DBflys', cues:'Wide arc with slight elbow bend. Feel chest stretch at bottom.', progression:'Rest 30 sec', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-3.jpg'},
+  { id:'c-4',  name:'Lat Pullovers',              pillar:'C', category:'Pull',      sets:'3', reps:'6–8 reps', rpe:'7–8', equipment:'Bench', difficulty:'Intermediate', code:'PM-P1-07-LPOvs', cues:'Keep slight elbow bend. Feel lat stretch at top.', progression:'Rest 30 sec', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-4.jpg'},
+  { id:'c-5',  name:'Plie Squats',                pillar:'C', category:'Squat',     sets:'3', reps:'6–8 reps', rpe:'7–8', equipment:'Kettlebell', difficulty:'Intermediate', code:'PM-P1-08-PSqt', cues:'Toes out. Knees tracking over toes. Chest up.', progression:'Rest 30 sec', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-5.jpg'},
+  { id:'c-6',  name:'Single-Leg Deadlift',        pillar:'C', category:'Hinge',     sets:'3', reps:'6–8 each side', rpe:'7–8', equipment:'Kettlebell', difficulty:'Advanced', code:'PM-P1-09-1LDL', cues:'Hinge from hip. Maintain long spine. Working leg soft.', progression:'Rest 30 sec', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-6.jpg'},
+  { id:'c-7',  name:'Hamstring Curls on Ball',    pillar:'C', category:'Hinge',     sets:'3', reps:'6–8 reps', rpe:'7–8', equipment:'Exercise Ball', difficulty:'Advanced', code:'PM-P1-09-HSCBall', cues:'Bridge first then curl. Control the extension.', progression:'Rest 30 sec', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-7.jpg'},
+  { id:'c-8',  name:'Skull Crushers',             pillar:'C', category:'Push',      sets:'3', reps:'6–8 reps', rpe:'7–8', equipment:'Dumbbells', difficulty:'Intermediate', code:'PM-P1-09-SkCsh', cues:'Elbows in. Only forearm moves. Controlled descent.', progression:'Rest 30 sec', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-8.jpg'},
+  { id:'c-9',  name:'Seated Shoulder Press',      pillar:'C', category:'Push',      sets:'3', reps:'6–8 reps', rpe:'7–8', equipment:'Dumbbells', difficulty:'Intermediate', code:'PM-P1-09-SSPS', cues:'Start at ear height. Press overhead. Do not arch lower back.', progression:'Rest 30 sec', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-9.jpg'},
+  { id:'c-10', name:'Box Jumps',                  pillar:'C', category:'Plyo',      sets:'2', reps:'10 reps', rpe:'', equipment:'Box', difficulty:'Advanced', code:'PL-Plyo-V1-Bjump', cues:'Knees soft. Use arms to lift. Bend knees on landing. Start with lower box.', progression:'Do not work through knee pain', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-10.jpg'},
+  { id:'c-11', name:'Standing Long Jumps',        pillar:'C', category:'Plyo',      sets:'2', reps:'10 reps', rpe:'', equipment:'None / Bodyweight', difficulty:'Advanced', code:'PL-Plyo-V1-LJumps', cues:'Light bounce to prepare. Land on whole foot. Knees soft.', progression:'', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-11.jpg'},
+  { id:'c-12', name:'Oblique Med Ball Throw',     pillar:'C', category:'Core',      sets:'2', reps:'10 each side', rpe:'', equipment:'Medicine Ball', difficulty:'Advanced', code:'PL-Plyo-V1-LJumps', cues:'Core fully engaged — especially obliques. Shoulders braced. Swing from middle, throw on angle upward at wall.', progression:'Start light — med balls do not bounce', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-12.jpg'},
+  { id:'cim-1', name:'Table Toss', pillar:'CIM', category:'Cognition in Motion', sets:'2-3', reps:'10–15', rpe:'', equipment:'Tennis Ball', difficulty:'Foundational', code:'MF-CIM-14', cues:'Hinge at hips, eyes tracking ball. React to bounce — do not anticipate. Keep knees soft.', progression:'Vary drop height and distance from body', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/cim-1.jpg' },
+  { id:'cim-2', name:'Wall Throw', pillar:'CIM', category:'Cognition in Motion', sets:'2-3', reps:'10–15', rpe:'', equipment:'Tennis Ball', difficulty:'Foundational', code:'MF-CIM-15', cues:'Stand arm-length from wall. Throw with one hand, catch with both. Eyes stay on ball.', progression:'Single-hand catch, add reaction colour cue', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/cim-2.jpg' },
+  { id:'cim-3', name:'Left-Right Toss', pillar:'CIM', category:'Cognition in Motion', sets:'2-3', reps:'10–15', rpe:'', equipment:'Tennis Ball', difficulty:'Foundational', code:'MF-CIM-16', cues:'Toss hand to hand. Cross midline. Eyes track ball, not hands. Tall posture throughout.', progression:'Add counting backward, colour naming, or single-leg stance', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/cim-3.jpg' },
+  { id:'cim-4', name:'Variable Ball Toss', pillar:'CIM', category:'Cognition in Motion', sets:'2-3', reps:'10–15', rpe:'', equipment:'Tennis Ball', difficulty:'Foundational', code:'MF-CIM-17', cues:'Match stance to your level: seated, single-leg, walking, or dual-task. Ball tracks midline.', progression:'Progress through seated to single-leg to walking to dual-task with colour/number cue', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/cim-4.jpg' },
+  { id:'c-13', name:'DB Bicep Curl', pillar:'C', category:'Strength', sets:'3', reps:'10-12 each', rpe:'', equipment:'Dumbbells', difficulty:'Intermediate', code:'PL-11', cues:'Elbows stay at sides. Full range of motion — extend fully at bottom. Control the descent.', progression:'Add weight when 12 reps feel fully controlled', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-13.jpg' },
+  { id:'c-14', name:'Gorilla Rows', pillar:'C', category:'Strength', sets:'2', reps:'10 each side', rpe:'', equipment:'Kettlebells', difficulty:'Advanced', code:'PL-14', cues:'Legs wider than hip width, kettlebells inside legs. Back flat, core engaged. Elbows tight to body. Alternate rows — brace hard on the support side.', progression:'Increase KB weight when form is solid for all 20 reps', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-14.jpg' },
+  { id:'c-15', name:'Plyo Incline Push-Ups', pillar:'C', category:'Power', sets:'2', reps:'20 (or 4x10)', rpe:'', equipment:'Bench', difficulty:'Advanced', code:'PL-15', cues:'Hands on bench, body in straight plank. Lower with control then push explosively. Lightly lift hands off bench at top of each rep.', progression:'Full floor push-up with clap between reps', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-15.jpg' },
+  { id:'c-16', name:'Medicine Ball Smash', pillar:'C', category:'Power', sets:'2', reps:'20 (or 4x10)', rpe:'', equipment:'Medicine Ball', difficulty:'Advanced', code:'PL-16', cues:'Both feet parallel, slight bend in knees. Hold ball with palms, elbows bent. Stand close to wall. Push and smash ball at wall quickly — grab it immediately on rebound.', progression:'4 sets of 10 with heavier medicine ball', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-16.jpg' },
+  { id:'c-17', name:'Weight Plate Walking Lunges', pillar:'C', category:'Strength', sets:'2-3', reps:'10 each leg', rpe:'', equipment:'Weight Plate', difficulty:'Advanced', code:'PL-17', cues:'Relax traps — they engage naturally. Core fully engaged, breathing concentrated. Keep arms as straight as possible overhead. Can pause at each step or move continuously.', progression:'Heavier plate, or continuous walking without stop', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-17.jpg' },
+  { id:'c-18', name:'Lunge Tricep Kickbacks', pillar:'C', category:'Strength', sets:'2-3', reps:'12 each arm', rpe:'', equipment:'Dumbbells', difficulty:'Intermediate', code:'PL-18', cues:'Lean forward in lunge position. Elbows stay above body, hugged close to sides. Upper arm is fixed — only the elbow straightens. Do not swing upper arm away from body.', progression:'Increase weight or add a pause at full extension', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-18.jpg' },
+  { id:'st-9', name:'Lateral Arm Raises', pillar:'MF', category:'Shoulder Health', sets:'2', reps:'10-12', rpe:'', equipment:'Light Dumbbells', difficulty:'Foundational', code:'MF-SH-01', cues:'Stand tall, ribs down. Soft bend in elbows. Lift arms out to the side toward shoulder height. Lower slowly with control.', progression:'Add very light weight only when fully pain-free at shoulder height', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-9.jpg' },
+  { id:'st-10', name:'Front Raises', pillar:'MF', category:'Shoulder Health', sets:'2', reps:'10-12', rpe:'', equipment:'Light Dumbbells', difficulty:'Foundational', code:'MF-SH-02', cues:'Stand tall, ribs down. Soft bend in elbows. Raise arms straight in front. Stop before shoulder height. Lower slowly.', progression:'Increase range only when pain-free. Stay below your pain threshold', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-10.jpg' },
+  { id:'st-11', name:'Robots', pillar:'MF', category:'Shoulder Health', sets:'2', reps:'10 slow', rpe:'', equipment:'None', difficulty:'Foundational', code:'MF-SH-03', cues:'Keep arms low to start. Palms facing outward. Keep elbows at comfortable level as you turn palms down. NO pain. Stay low and work slow.', progression:'Goal image is the end point — not the starting point. Progress gradually', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-11.jpg' },
+  { id:'st-12', name:'Chest Taps', pillar:'MF', category:'Shoulder Health', sets:'2', reps:'10 each', rpe:'', equipment:'None', difficulty:'Foundational', code:'MF-SH-04', cues:'Keep bicep and elbow close to body. Palm facing chest. Tap across body. Try for 10 each side. Do not swing arm outward to tap.', progression:'Increase range only when movement is pain-free and controlled', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-12.jpg' },
+  { id:'st-13', name:'Chest/Deltoid Stretch', pillar:'MF', category:'Shoulder Health', sets:'1', reps:'30-60s', rpe:'', equipment:'None', difficulty:'Foundational', code:'MF-SH-05', cues:'Start with your good arm first. Test slowly how far you can reach without pain. Goal is to have both arms back and pull elbows toward spine.', progression:'Do not force range — test your pain threshold to find your pain-free limit', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-13.jpg' },
+  { id:'st-14', name:'Internal Rotations', pillar:'MF', category:'Shoulder Health', sets:'2', reps:'10 each', rpe:'', equipment:'Light Dumbbell', difficulty:'Foundational', code:'MF-SH-06', cues:'Lie on your side on a bench or floor. Keep elbow against your side as you raise your fist. Internal to external rotation. No pain.', progression:'Do not use weight until you have no pain through full range of motion', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-14.jpg' },
+  { id:'st-15', name:'Wall Push-Ups', pillar:'MF', category:'Shoulder Health', sets:'2', reps:'10-15', rpe:'', equipment:'None', difficulty:'Foundational', code:'MF-SH-08', cues:'Engage core before beginning. Hands below shoulder height. Bend elbows and let body weight move toward wall — even one inch at a time. No pain only.', progression:'Move closer to wall to make easier. Move feet back as you improve', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-15.jpg' },
+  { id:'st-16', name:'Lateral Shoulder Mobility', pillar:'MF', category:'Shoulder Health', sets:'2', reps:'10 each', rpe:'', equipment:'None', difficulty:'Foundational', code:'MF-SH-09', cues:'Press back against wall. Hold arms out straight at shoulder height. Keep one arm pressed to wall while the other crosses to touch the inside of the opposite arm.', progression:'Increase range as mobility improves — always pain-free', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-16.jpg' },
+  { id:'a-8', name:'Single-Leg Bridge', pillar:'CORE', category:'Core', sets:'2', reps:'10s hold', rpe:'', equipment:'None', difficulty:'Foundational', code:'CORE-UNI-03', cues:'Start with both feet on floor. Lift hips as high as you can with no back pain. When stable, lift one leg and hold 10 seconds. Keep hips level.', progression:'If back pain or hamstring cramp occurs, lower hips. Progress to full bridge before single-leg', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-8.jpg' },
+  { id:'a-9', name:'Seated Straight Leg Lifts', pillar:'A', category:'Hip Mobility', sets:'2', reps:'10 each', rpe:'', equipment:'None', difficulty:'Foundational', code:'MF-HIP-01', cues:'Sit tall at 90 degrees with straight back and straight legs. Hands beside you for support. Sit against a wall for better posture. Engage core and lift one leg without bending the knee, then alternate.', progression:'Goal is to sit fully upright at 90 degrees — hamstring flexibility is required. Use wall support until posture improves', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-9.jpg' },
+  { id:'a-10', name:'Russian Twists', pillar:'CORE', category:'Core', sets:'2', reps:'20 total', rpe:'', equipment:'Medicine Ball', difficulty:'Intermediate', code:'CORE-UNI-04', cues:'Use a medicine ball or kettlebell. Keep heels on ground to protect your back. Rotate slowly through full range of motion. Keep core braced throughout.', progression:'Lift feet off floor for added challenge when back is fully protected', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-10.jpg' },
+  { id:'a-11', name:'Cable Band Chops', pillar:'CORE', category:'Core', sets:'2', reps:'10 each side', rpe:'', equipment:'Resistance Band', difficulty:'Intermediate', code:'CORE-UNI-05', cues:'Anchor band at high point. Kneel and pull band diagonally down across body. Core must be fully engaged. Rotate from trunk, not arms.', progression:'Move further from anchor or double up band if resistance is too light', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-11.jpg' },
+  { id:'st-17', name:'Band Internal-External Rotation', pillar:'MF', category:'Shoulder Health', sets:'2', reps:'12 each', rpe:'', equipment:'Resistance Band', difficulty:'Foundational', code:'MF-SH-09', cues:'Use a band with enough resistance to feel the work. Keep elbows and biceps close to sides throughout. Rotate internally then externally with control.', progression:'Increase band resistance only when full range is pain-free and controlled', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-17.jpg' },
+  { id:'c-19', name:'Weighted Side Bends', pillar:'C', category:'Core', sets:'3', reps:'12 each side', rpe:'', equipment:'Kettlebells', difficulty:'Intermediate', code:'PL-25', cues:'Hold a kettlebell in each hand, stand tall. Alternate leaning as far as you can to each side. Pause between sides to reset posture. Core stays engaged.', progression:'Increase weight when full range is controlled with good posture', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-19.jpg' },
+  { id:'c-20', name:'Advanced Weighted Side Bends', pillar:'C', category:'Core', sets:'3', reps:'10 each side', rpe:'', equipment:'Kettlebells', difficulty:'Advanced', code:'PL-26', cues:'One KB pressed overhead, one held at side. Lean toward the lowered side with full control. Overhead arm stays locked. Core fully braced.', progression:'Progress from double KB side bends. Increase overhead weight gradually', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-20.jpg' },
+  { id:'st-18', name:'Scapular Push-Ups', pillar:'MF', category:'Shoulder Health', sets:'2', reps:'10-15', rpe:'', equipment:'None', difficulty:'Foundational', code:'PL-SH-24', cues:'Hold a straight-arm plank. Press shoulders away from ears — spread shoulder blades apart (protraction). Then let go and squeeze shoulder blades together (retraction). Repeat with control.', progression:'Progress to full push-up range when scapular control is strong', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-18.jpg' },
+  { id:'c-21', name:'Olympic Bar Deadlifts', pillar:'C', category:'Strength', sets:'3', reps:'5-8', rpe:'', equipment:'Olympic Barbell', difficulty:'Advanced', code:'PL-27', cues:'Hinge at hips. Core strong throughout. Back flat — neutral spine. Drive through heels to stand. Do not overlift — perfect form over heavy weight. Stop if you feel back pain beyond normal muscle work.', progression:'Ask for coaching before increasing weight. Form must be perfect before progressing', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-21.jpg' },
+  { id:'c-22', name:'Landmine Rows', pillar:'C', category:'Strength', sets:'3', reps:'10 each side', rpe:'', equipment:'Barbell / Landmine', difficulty:'Advanced', code:'PL-28', cues:'Hinge forward with flat back. Pull the end of the bar toward your hip. Elbow stays close to body. If you feel too much in your lower back, stagger one foot back slightly.', progression:'Stagger stance reduces lower back load. Increase weight when form is solid', video:'', image:'https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-22.jpg' }
+];
+
+// ══════════════════════════════════════
+// STATE
+// ══════════════════════════════════════
+let exercises = [];
+let editingId = null;
+let currentPillar = 'all';
+let pickerPillar = 'all';
+let pendingPickerEx = null;
+
+// Program slots state
+const SLOTS = {
+  warmup:      [null, null, null],
+  primary:     [null, null, null],
+  accessory:   [null, null],
+  conditioning:[null],
+};
+
+// ══════════════════════════════════════
+// GITHUB CONFIG
+// ══════════════════════════════════════
+const GITHUB_TOKEN = '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';
+const GITHUB_OWNER = 'theprestonmethod';
+const GITHUB_REPO  = 'tpm-workouts';
+const DATA_VERSION = '2026-04-03-v2';
+const BITLY_TOKEN  = '';
+
+// ══════════════════════════════════════
+// INIT
+// ══════════════════════════════════════
+function init() {
+  // Clear old cache if version mismatch
+  const savedVersion = localStorage.getItem('tpm_data_version');
+  if (savedVersion !== DATA_VERSION) {
+    localStorage.removeItem('tpm_exercise_library');
+    localStorage.setItem('tpm_data_version', DATA_VERSION);
+  }
+  document.getElementById('prog_date').valueAsDate = new Date();
+  updateGhStatus();
+  // Load from GitHub JSON first, fall back to localStorage then DEFAULT_EXERCISES
+  fetch('https://theprestonmethod.github.io/tpm-workouts/exercises.json?v=' + Date.now())
+    .then(r => r.json())
+    .then(data => {
+      exercises = data;
+      localStorage.setItem('tpm_exercise_library', JSON.stringify(data));
+      localStorage.setItem('tpm_data_version', DATA_VERSION);
+      renderLibrary();
+      renderPicker();
+    })
+    .catch(() => {
+      const saved = localStorage.getItem('tpm_exercise_library');
+      if (saved) {
+        try { exercises = JSON.parse(saved); }
+        catch { exercises = [...DEFAULT_EXERCISES]; }
+      } else {
+        exercises = [...DEFAULT_EXERCISES];
+      }
+      renderLibrary();
+      renderPicker();
+    });
+}
+
+// ══════════════════════════════════════
+// SAVE LIBRARY — localStorage + GitHub
+// ══════════════════════════════════════
+function saveLibrary() {
+  localStorage.setItem('tpm_exercise_library', JSON.stringify(exercises));
+  saveExercisesToGitHub(); // async — runs in background
+}
+
+// ══════════════════════════════════════
+// AUTO-SYNC exercises.json TO GITHUB
+// ══════════════════════════════════════
+async function saveExercisesToGitHub() {
+  const token = localStorage.getItem('tpm_github_token') || GITHUB_TOKEN;
+  if (!token) return;
+
+  setSyncIndicator('syncing', '⟳ Syncing…');
+
+  const path    = 'exercises.json';
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(exercises, null, 2))));
+
+  // Get current SHA so GitHub allows the update
+  let sha = null;
+  try {
+    const check = await fetch(
+      'https://api.github.com/repos/' + GITHUB_OWNER + '/' + GITHUB_REPO + '/contents/' + path,
+      { headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github+json' } }
+    );
+    if (check.ok) {
+      const existing = await check.json();
+      sha = existing.sha;
+    }
+  } catch {}
+
+  const body = {
+    message: 'Update exercises.json — ' + new Date().toISOString().split('T')[0],
+    content
+  };
+  if (sha) body.sha = sha;
+
+  try {
+    const res = await fetch(
+      'https://api.github.com/repos/' + GITHUB_OWNER + '/' + GITHUB_REPO + '/contents/' + path,
+      {
+        method: 'PUT',
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github+json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      }
+    );
+    if (res.ok) {
+      setSyncIndicator('ok', '✓ Synced');
+      setTimeout(() => setSyncIndicator('idle', '⬡ GitHub'), 4000);
+    } else {
+      const err = await res.json().catch(() => ({}));
+      console.warn('GitHub sync error:', res.status, err.message || '');
+      setSyncIndicator('error', '⚠ Sync failed');
+      setTimeout(() => setSyncIndicator('idle', '⬡ GitHub'), 5000);
+    }
+  } catch (e) {
+    console.warn('GitHub sync exception:', e);
+    setSyncIndicator('error', '⚠ No connection');
+    setTimeout(() => setSyncIndicator('idle', '⬡ GitHub'), 5000);
+  }
+}
+
+function setSyncIndicator(state, label) {
+  const el = document.getElementById('syncIndicator');
+  if (!el) return;
+  el.className = 'sync-indicator sync-' + state;
+  el.textContent = label;
+}
+
+// ══════════════════════════════════════
+// VIEW SWITCHING
+// ══════════════════════════════════════
+function switchView(view) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('view-' + view).classList.add('active');
+  document.querySelectorAll('.tab-btn')[view === 'library' ? 0 : 1].classList.add('active');
+  if (view === 'builder') renderPicker();
+}
+
+// ══════════════════════════════════════
+// LIBRARY RENDERING
+// ══════════════════════════════════════
+function setPillar(p, el) {
+  currentPillar = p;
+  document.querySelectorAll('.pillar-pill').forEach(pill => {
+    pill.classList.remove('on');
+  });
+  el.classList.add('on');
+  renderLibrary();
+}
+
+function renderLibrary() {
+  const search   = document.getElementById('searchInput').value.toLowerCase();
+  const category = document.getElementById('filterCategory').value;
+  const equipment= document.getElementById('filterEquipment').value;
+  const difficulty=document.getElementById('filterDifficulty').value;
+
+  let filtered = exercises.filter(e => {
+    if (currentPillar !== 'all' && e.pillar !== currentPillar) return false;
+    if (search && !e.name.toLowerCase().includes(search) && !e.cues.toLowerCase().includes(search)) return false;
+    if (category && e.category !== category) return false;
+    if (equipment && e.equipment !== equipment) return false;
+    if (difficulty && e.difficulty !== difficulty) return false;
+    return true;
+  });
+
+  document.getElementById('filterCount').textContent = `${filtered.length} of ${exercises.length} exercises`;
+  const grid = document.getElementById('exGrid');
+  grid.innerHTML = '';
+
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="empty-state">
+      <div class="em-icon">🔍</div>
+      <p>No exercises match your filters.<br>Try adjusting the search or add a new exercise.</p>
+    </div>`;
+    return;
+  }
+
+  filtered.forEach(ex => {
+    const color = PILLAR_COLORS[ex.pillar] || '#808080';
+    const card = document.createElement('div');
+    card.className = 'ex-card';
+    card.innerHTML = `
+      <div class="ex-card-header">
+        <span class="pillar-badge" style="background:${color};">${PILLAR_LABELS[ex.pillar] || ex.pillar}</span>
+        ${ex.code ? `<span class="ex-card-code">${ex.code}</span>` : ''}
+        ${ex.status && ex.status !== 'Active' ? `<span style="margin-left:auto;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;background:${ex.status==='Draft'?'#f0e6c8':ex.status==='Retired'?'#f0d0ce':'#d4ecd5'};color:${ex.status==='Draft'?'#8a6200':ex.status==='Retired'?'#7a332e':'#2e6e3e'};">${ex.status}</span>` : ''}
+      </div>
+      <div style="display:flex;gap:0;align-items:stretch;">
+        <div style="flex:1;min-width:0;">
+          <div class="ex-card-name">${ex.name}</div>
+          ${ex.category ? `<div class="ex-card-sub">${ex.category}${ex.difficulty ? ' · ' + ex.difficulty : ''}</div>` : ''}
+          <div class="ex-card-meta">
+            ${ex.sets ? `<span class="meta-chip">${ex.sets} sets</span>` : ''}
+            ${ex.reps ? `<span class="meta-chip">${ex.reps}</span>` : ''}
+            ${ex.rpe  ? `<span class="meta-chip">RPE ${ex.rpe}</span>` : ''}
+            ${ex.equipment && ex.equipment !== 'None / Bodyweight' ? `<span class="meta-chip">🏋 ${ex.equipment}</span>` : ''}
+          </div>
+          ${ex.cues ? `<div style="font-size:11px;color:var(--gray2);padding:0 14px 8px;line-height:1.5;">"${ex.cues.substring(0,80)}${ex.cues.length>80?'…':''}"</div>` : ''}
+        </div>
+        ${ex.image ? `
+        <div style="width:100px;flex-shrink:0;overflow:hidden;border-radius:0 0 8px 0;border-left:1px solid var(--cream-dk);">
+          <img src="${ex.image}" alt="${ex.name}" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+        </div>` : ''}
+      </div>
+      <div class="ex-card-actions">
+        <button class="ex-btn ex-btn-add" onclick="addToProgram('${ex.id}')">+ Add to Program</button>
+        <button class="ex-btn ex-btn-edit" onclick="openEditModal('${ex.id}')">Edit</button>
+        <button class="ex-btn ex-btn-del" onclick="deleteExercise('${ex.id}')">✕</button>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+// ══════════════════════════════════════
+// ADD / EDIT MODAL
+// ══════════════════════════════════════
+function openAddModal() {
+  editingId = null;
+  document.getElementById('modalTitle').textContent = 'ADD EXERCISE';
+  ['f_name','f_pillar','f_category','f_sets','f_reps','f_rpe','f_equipment',
+   'f_difficulty','f_code','f_cues','f_progression','f_video',
+   'f_movementFamily','f_movementPattern','f_bodyRegion','f_loadStyle',
+   'f_coachingFocus','f_contraindications']
+    .forEach(id => { document.getElementById(id).value = ''; });
+  document.getElementById('f_status').value = 'Active';
+  currentImageData = null;
+  resetImageUI();
+  document.getElementById('exModal').classList.remove('hidden');
+}
+
+function openEditModal(id) {
+  const ex = exercises.find(e => e.id === id);
+  if (!ex) return;
+  editingId = id;
+  document.getElementById('modalTitle').textContent = 'EDIT EXERCISE';
+  document.getElementById('f_name').value            = ex.name || '';
+  document.getElementById('f_pillar').value          = ex.pillar || '';
+  document.getElementById('f_category').value        = ex.category || '';
+  document.getElementById('f_sets').value            = ex.sets || '';
+  document.getElementById('f_reps').value            = ex.reps || '';
+  document.getElementById('f_rpe').value             = ex.rpe || '';
+  document.getElementById('f_equipment').value       = ex.equipment || '';
+  document.getElementById('f_difficulty').value      = ex.difficulty || '';
+  document.getElementById('f_code').value            = ex.code || '';
+  document.getElementById('f_cues').value            = ex.cues || '';
+  document.getElementById('f_progression').value     = ex.progression || '';
+  document.getElementById('f_video').value           = ex.video || '';
+  document.getElementById('f_status').value          = ex.status || 'Active';
+  document.getElementById('f_movementFamily').value  = ex.movementFamily || '';
+  document.getElementById('f_movementPattern').value = ex.movementPattern || '';
+  document.getElementById('f_bodyRegion').value      = ex.bodyRegion || '';
+  document.getElementById('f_loadStyle').value       = ex.loadStyle || '';
+  document.getElementById('f_coachingFocus').value   = ex.coachingFocus || '';
+  document.getElementById('f_contraindications').value = ex.contraindications || '';
+  // Restore image preview
+  currentImageData = ex.image || null;
+  if (ex.image) {
+    document.getElementById('imagePreviewImg').src = ex.image;
+    document.getElementById('imagePreview').style.display = 'block';
+    document.getElementById('imageUploadPrompt').style.display = 'none';
+    document.getElementById('removeImageBtn').style.display = 'inline';
+  } else {
+    resetImageUI();
+  }
+  document.getElementById('exModal').classList.remove('hidden');
+}
+
+function closeModal() {
+  document.getElementById('exModal').classList.add('hidden');
+}
+
+function saveExercise() {
+  const name = document.getElementById('f_name').value.trim();
+  if (!name) { showToast('⚠ Exercise name is required'); return; }
+  const pillar = document.getElementById('f_pillar').value;
+  if (!pillar) { showToast('⚠ Please select an Element'); return; }
+
+  const ex = {
+    id:                editingId || ('ex-' + Date.now()),
+    name,
+    pillar,
+    status:            document.getElementById('f_status').value,
+    category:          document.getElementById('f_category').value,
+    movementFamily:    document.getElementById('f_movementFamily').value,
+    movementPattern:   document.getElementById('f_movementPattern').value,
+    bodyRegion:        document.getElementById('f_bodyRegion').value,
+    loadStyle:         document.getElementById('f_loadStyle').value,
+    sets:              document.getElementById('f_sets').value.trim(),
+    reps:              document.getElementById('f_reps').value.trim(),
+    rpe:               document.getElementById('f_rpe').value.trim(),
+    equipment:         document.getElementById('f_equipment').value,
+    difficulty:        document.getElementById('f_difficulty').value,
+    code:              document.getElementById('f_code').value.trim(),
+    cues:              document.getElementById('f_cues').value.trim(),
+    coachingFocus:     document.getElementById('f_coachingFocus').value.trim(),
+    contraindications: document.getElementById('f_contraindications').value.trim(),
+    progression:       document.getElementById('f_progression').value.trim(),
+    video:             document.getElementById('f_video').value.trim(),
+    image: (currentImageData && currentImageData.startsWith('https://')) ? currentImageData : null,
+  };
+
+  // Warn if image is still mid-upload — base64 in exercises.json breaks GitHub sync
+  if (currentImageData && currentImageData.startsWith('data:')) {
+    showToast('⚠ Image still uploading — wait for "Saved to GitHub" then save exercise');
+    return;
+  }
+
+  if (editingId) {
+    const idx = exercises.findIndex(e => e.id === editingId);
+    if (idx > -1) exercises[idx] = ex;
+  } else {
+    exercises.push(ex);
+  }
+  saveLibrary();
+  closeModal();
+  renderLibrary();
+  renderPicker();
+  showToast(`✓ "${name}" saved — syncing to GitHub…`);
+}
+
+function deleteExercise(id) {
+  const ex = exercises.find(e => e.id === id);
+  if (!ex) return;
+  if (!confirm(`Delete "${ex.name}"? This cannot be undone.`)) return;
+  exercises = exercises.filter(e => e.id !== id);
+  saveLibrary();
+  renderLibrary();
+  renderPicker();
+  showToast(`✓ "${ex.name}" deleted — syncing to GitHub…`);
+}
+
+// ══════════════════════════════════════
+// EXPORT / IMPORT
+// ══════════════════════════════════════
+function exportLibrary() {
+  const blob = new Blob([JSON.stringify(exercises, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'TPM-Exercise-Library-' + new Date().toISOString().split('T')[0] + '.json';
+  a.click();
+  showToast('✓ Library JSON exported');
+}
+
+function exportToSheets() {
+  const PILLAR_FULL = { A:'Mobility Foundations', B:'Strength + Mobility', C:'Performance + Longevity', WU:'Universal Warm-Up', ST:'Seated / At-Home' };
+  const cols = [
+    'Card ID','Exercise Name','Status','Pillar Primary','Card Type',
+    'Phase','Level','Version',
+    'Movement Family','Movement Pattern','Category',
+    'Equipment','Body Region','Load Style','Difficulty',
+    'Sets','Reps / Duration','RPE',
+    'Coaching Focus','Key Cues / Instructions',
+    'Contraindications / Cautions','Progression / Regression',
+    'Video URL','Image Filename','Last Updated'
+  ];
+
+  const today = new Date().toISOString().split('T')[0];
+
+  const rows = exercises
+    .filter(e => e.status !== 'Retired')
+    .map(e => {
+      const imgFilename = e.code ? e.code + '.jpg' : e.name.replace(/[^a-zA-Z0-9]/g,'_') + '.jpg';
+      return [
+        e.code || '',
+        e.name || '',
+        e.status || 'Active',
+        PILLAR_FULL[e.pillar] || e.pillar || '',
+        e.pillar === 'WU' ? 'Universal Warm-Up' : 'Exercise',
+        '',
+        e.difficulty === 'Foundational' ? '1' : e.difficulty === 'Intermediate' ? '2' : e.difficulty === 'Advanced' ? '3' : '',
+        'V1',
+        e.movementFamily || e.category || '',
+        e.movementPattern || '',
+        e.category || '',
+        e.equipment || '',
+        e.bodyRegion || '',
+        e.loadStyle || '',
+        e.difficulty || '',
+        e.sets || '',
+        e.reps || '',
+        e.rpe || '',
+        e.coachingFocus || '',
+        e.cues || '',
+        e.contraindications || '',
+        e.progression || '',
+        e.video || '',
+        imgFilename,
+        today,
+      ].map(v => `"${String(v).replace(/"/g,'""')}"`);
+    });
+
+  const csv = [cols.map(c => `"${c}"`).join(','), ...rows.map(r => r.join(','))].join('\n');
+  const blob2 = new Blob([csv], { type: 'text/csv' });
+  const b = document.createElement('a');
+  b.href = URL.createObjectURL(blob2);
+  b.download = 'TPM-Exercise-Library-Sheets-' + today + '.csv';
+  b.click();
+  showToast('✓ Sheets CSV exported — ' + rows.length + ' exercises');
+}
+
+function importLibrary(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!Array.isArray(data)) throw new Error('Invalid format');
+      exercises = data;
+      saveLibrary();
+      renderLibrary();
+      renderPicker();
+      showToast(`✓ Loaded ${exercises.length} exercises — syncing to GitHub…`);
+    } catch { showToast('⚠ Could not read library file'); }
+  };
+  reader.readAsText(file);
+  input.value = '';
+}
+
+// ══════════════════════════════════════
+// PROGRAM BUILDER
+// ══════════════════════════════════════
+let pickerPillarState = 'all';
+
+function renderPicker() {
+  const search = (document.getElementById('pickerSearch')?.value || '').toLowerCase();
+  let filtered = exercises.filter(e => {
+    if (pickerPillar !== 'all' && e.pillar !== pickerPillar) return false;
+    if (search && !e.name.toLowerCase().includes(search)) return false;
+    return true;
+  });
+
+  const list = document.getElementById('pickerList');
+  if (!list) return;
+  list.innerHTML = '';
+  filtered.forEach(ex => {
+    const color = PILLAR_COLORS[ex.pillar] || '#808080';
+    const item = document.createElement('div');
+    item.className = 'picker-item';
+    item.innerHTML = `
+      <div class="picker-dot" style="background:${color};"></div>
+      <div class="picker-name">${ex.name}<br><span style="font-size:10px;color:var(--gray);font-weight:400;">${ex.sets ? ex.sets + ' × ' : ''}${ex.reps || ''}</span></div>
+      <button class="picker-add-btn" onclick="showSlotModal('${ex.id}')">+ Add</button>`;
+    list.appendChild(item);
+  });
+  if (!filtered.length) list.innerHTML = '<div style="font-size:12px;color:var(--gray);padding:10px;text-align:center;">No exercises found</div>';
+}
+
+function updatePickerBtns(el) {
+  document.querySelectorAll('.ppill').forEach(b => b.classList.remove('on'));
+  el.classList.add('on');
+}
+
+function addToProgram(id) {
+  showSlotModal(id);
+}
+
+function showSlotModal(id) {
+  const ex = exercises.find(e => e.id === id);
+  if (!ex) return;
+  pendingPickerEx = ex;
+  document.getElementById('slotExName').textContent = ex.name;
+
+  const opts = document.getElementById('slotOptions');
+  opts.innerHTML = '';
+
+  const sections = [
+    { key: 'warmup',       label: 'Warm-Up',     count: 3 },
+    { key: 'primary',      label: 'Primary (Non-Negotiable)', count: 3 },
+    { key: 'accessory',    label: 'Accessory',   count: 2 },
+    { key: 'conditioning', label: 'Conditioning / Core', count: 1 },
+  ];
+
+  sections.forEach(sec => {
+    for (let i = 0; i < sec.count; i++) {
+      const filled = SLOTS[sec.key][i];
+      const btn = document.createElement('button');
+      btn.style.cssText = 'width:100%;text-align:left;background:var(--off);border:1.5px solid var(--border);border-radius:7px;padding:8px 12px;cursor:pointer;font-family:"DM Sans";font-size:12px;font-weight:500;color:var(--gray2);transition:all 0.15s;';
+      btn.innerHTML = `<strong>${sec.label} #${i+1}</strong>${filled ? ` <span style="color:var(--red);font-size:10px;">→ replaces "${filled.name}"</span>` : ' <span style="color:var(--sage-dk);font-size:10px;">· Empty</span>'}`;
+      btn.onmouseenter = () => btn.style.borderColor = 'var(--sage-dk)';
+      btn.onmouseleave = () => btn.style.borderColor = 'var(--border)';
+      btn.onclick = () => { assignToSlot(sec.key, i); closeSlotModal(); };
+      opts.appendChild(btn);
+    }
+  });
+
+  document.getElementById('slotModal').classList.remove('hidden');
+}
+
+function closeSlotModal() {
+  document.getElementById('slotModal').classList.add('hidden');
+  pendingPickerEx = null;
+}
+
+function assignToSlot(section, index) {
+  if (!pendingPickerEx) return;
+  SLOTS[section][index] = pendingPickerEx;
+  renderSlots();
+  showToast(`✓ "${pendingPickerEx.name}" added to ${section} #${index+1}`);
+}
+
+function renderSlots() {
+  const sections = ['warmup','primary','accessory','conditioning'];
+  sections.forEach(sec => {
+    SLOTS[sec].forEach((ex, i) => {
+      const el = document.getElementById(`slot-${sec}-${i+1}`);
+      if (!el) return;
+      const color = ex ? (PILLAR_COLORS[ex.pillar] || '#808080') : null;
+      el.className = 'program-slot' + (ex ? ' filled pil' + (ex.pillar || '') : '');
+      el.innerHTML = ex
+        ? `<div class="slot-name" style="color:${color};">${ex.name}</div>
+           <div class="slot-detail">${ex.sets ? ex.sets + ' × ' : ''}${ex.reps || ''}${ex.rpe ? ' · RPE ' + ex.rpe : ''}</div>
+           <button class="slot-remove" onclick="removeSlot('${sec}',${i})">✕</button>`
+        : `<span class="slot-empty-text">Empty — pick from Exercise List</span>`;
+    });
+  });
+}
+
+function removeSlot(section, index) {
+  SLOTS[section][index] = null;
+  renderSlots();
+}
+
+function clearProgram() {
+  Object.keys(SLOTS).forEach(k => SLOTS[k] = SLOTS[k].map(() => null));
+  renderSlots();
+  showToast('Program cleared');
+}
+
+// ══════════════════════════════════════
+// PROGRAM OUTPUT
+// ══════════════════════════════════════
+function generateProgram() {
+  const client  = document.getElementById('prog_client').value || 'Client';
+  const date    = document.getElementById('prog_date').value || '';
+  const coach   = document.getElementById('prog_coach').value || '';
+  const phase   = document.getElementById('prog_phase').value || '';
+  const title   = document.getElementById('prog_title').value || 'Training Program';
+  const checkin = document.getElementById('prog_checkin').value || '';
+  const notes   = document.getElementById('prog_notes').value || '';
+
+  const hasAny = Object.values(SLOTS).some(s => s.some(e => e));
+  if (!hasAny) { showToast('⚠ Add at least one exercise before generating'); return; }
+
+  const sectionRows = (section, label) => {
+    const filled = SLOTS[section].filter(Boolean);
+    if (!filled.length) return '';
+    return `
+      <div style="margin-bottom:16px;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1.5px;color:var(--red);border-bottom:2px solid #E8E4DC;padding-bottom:4px;margin-bottom:10px;text-transform:uppercase;">${label}</div>
+        ${filled.map((ex, i) => `
+          <div style="display:flex;gap:12px;align-items:flex-start;padding:8px 10px;background:${i%2?'#F8F6F3':'white'};border-radius:6px;margin-bottom:4px;border:1px solid #E8E4DC;">
+            ${ex.image ? `<img src="${ex.image}" alt="${ex.name}" style="width:70px;height:70px;object-fit:cover;border-radius:6px;flex-shrink:0;border:1px solid #E8E4DC;">` :
+              `<div style="width:22px;height:22px;border-radius:50%;background:${PILLAR_COLORS[ex.pillar]||'#808080'};display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+                <span style="font-family:'Bebas Neue',sans-serif;font-size:10px;color:white;">${i+1}</span>
+              </div>`}
+            <div style="flex:1;">
+              <div style="font-weight:700;font-size:13px;color:#1C1C1C;">${ex.name}</div>
+              <div style="font-size:11px;color:#696767;">${ex.sets ? ex.sets + ' sets × ' : ''}${ex.reps || ''}${ex.rpe ? ' · RPE ' + ex.rpe : ''}${ex.equipment && ex.equipment !== 'None / Bodyweight' ? ' · ' + ex.equipment : ''}</div>
+              ${ex.cues ? `<div style="font-size:11px;color:#7fa882;margin-top:2px;font-style:italic;">"${ex.cues}"</div>` : ''}
+              ${ex.contraindications ? `<div style="font-size:10px;color:#1B3A5C;margin-top:2px;">⚠ ${ex.contraindications}</div>` : ''}
+              ${ex.progression ? `<div style="font-size:10px;color:#c97a1a;margin-top:1px;">Progress: ${ex.progression}</div>` : ''}
+              ${ex.video ? `<div style="font-size:10px;margin-top:2px;"><a href="${ex.video}" style="color:var(--cyan-dk);">▶ Watch video</a></div>` : ''}
+            </div>
+          </div>`).join('')}
+      </div>`;
+  };
+
+  document.getElementById('programOutput').innerHTML = `
+    <div style="font-family:'DM Sans',sans-serif;">
+      <div style="background:#1B3A5C;color:white;padding:18px 22px;border-radius:8px;margin-bottom:18px;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:2px;opacity:0.75;margin-bottom:2px;">THE PRESTON METHOD™ · OASIS TRAINING &amp; EDUCATION</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;">${title.toUpperCase()}</div>
+        <div style="display:flex;gap:20px;margin-top:8px;font-size:12px;opacity:0.9;flex-wrap:wrap;">
+          <span><strong>Client:</strong> ${client}</span>
+          ${date ? `<span><strong>Date:</strong> ${date}</span>` : ''}
+          ${coach ? `<span><strong>Coach:</strong> ${coach}</span>` : ''}
+          ${phase ? `<span><strong>Phase:</strong> ${phase}</span>` : ''}
+        </div>
+      </div>
+      ${notes ? `<div style="background:#EFF6FF;border:1px solid #93C5FD;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:#1A56DB;"><strong>Coach Note:</strong> ${notes}</div>` : ''}
+      ${sectionRows('warmup',       'Warm-Up')}
+      ${sectionRows('primary',      'Primary Exercises — Non-Negotiables')}
+      ${sectionRows('accessory',    'Accessory / Secondary')}
+      ${sectionRows('conditioning', 'Conditioning / Core')}
+      ${checkin ? `
+        <div style="margin-top:20px;background:#1B3A5C;color:white;border-radius:10px;padding:18px 22px;text-align:center;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;margin-bottom:6px;">WORKOUT CHECK-IN</div>
+          <div style="font-size:13px;opacity:0.9;margin-bottom:12px;">Check in each time you complete this program. Comment on progress. Let us know about any pain.</div>
+          <a href="${checkin}" style="background:white;color:#1B3A5C;font-weight:700;font-size:14px;padding:10px 24px;border-radius:6px;text-decoration:none;">CLICK TO CHECK IN →</a>
+        </div>` : ''}
+      <div style="margin-top:22px;padding-top:14px;border-top:1.5px solid #E8E4DC;display:flex;justify-content:space-between;font-size:11px;color:#909090;">
+        <div><strong style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;color:#1B3A5C;">THE PRESTON METHOD™</strong><br>
+        Licensed for use by Oasis Training &amp; Education · 604.993.1888<br>
+        info@oasistraining.ca · www.theprestonmethod.com</div>
+        <div style="text-align:right;">Canadian Trademark #2460203<br>${date || ''}</div>
+      </div>
+    </div>`;
+
+  document.getElementById('programModal').classList.remove('hidden');
+}
+
+function printProgram() {
+  const content = document.getElementById('programOutput').innerHTML;
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html><html><head>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+      :root { --red:#1B3A5C; --cyan-dk:#17a8b2; }
+      body { font-family:'DM Sans',sans-serif; margin: 28px 36px; color:#1C1C1C; }
+      @page { margin:15mm; size:A4; }
+      @media print { button { display:none; } }
+    </style>
+    </head><body>${content}
+    <script>window.onload=()=>window.print();<\/script></body></html>`);
+  win.document.close();
+}
+
+function updateProgramHeader() {}
+
+// ══════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ══════════════════════════════════════
+// GITHUB SETTINGS
+// ══════════════════════════════════════
+function openSettings() {
+  const token = localStorage.getItem('tpm_github_token') || '';
+  document.getElementById('ghTokenInput').value = token;
+  const bitlyToken = localStorage.getItem('tpm_bitly_token') || '';
+  document.getElementById('bitlyTokenInput').value = bitlyToken;
+  updateGhStatus();
+  document.getElementById('settingsModal').classList.remove('hidden');
+}
+
+function closeSettings() {
+  document.getElementById('settingsModal').classList.add('hidden');
+}
+
+function saveSettings() {
+  const token = document.getElementById('ghTokenInput').value.trim();
+  if (token) {
+    localStorage.setItem('tpm_github_token', token);
+  } else {
+    localStorage.removeItem('tpm_github_token');
+  }
+
+  const bitlyToken = document.getElementById('bitlyTokenInput').value.trim();
+  if (bitlyToken) {
+    localStorage.setItem('tpm_bitly_token', bitlyToken);
+  } else {
+    localStorage.removeItem('tpm_bitly_token');
+  }
+
+  if (token && bitlyToken) {
+    showToast('\u2713 GitHub + Bit.ly tokens saved — workouts upload and links shorten automatically');
+  } else if (token) {
+    showToast('\u2713 GitHub token saved — workouts upload automatically');
+  } else if (bitlyToken) {
+    showToast('\u2713 Bit.ly token saved — GitHub token cleared (using hardcoded)');
+  } else {
+    showToast('Settings cleared — using hardcoded tokens');
+  }
+
+  updateGhStatus();
+  closeSettings();
+}
+
+function updateGhStatus() {
+  const token = localStorage.getItem('tpm_github_token') || GITHUB_TOKEN;
+  const el = document.getElementById('ghStatusBadge');
+  if (!el) return;
+  if (token) {
+    el.textContent = '✓ GitHub connected — exercises and images sync automatically';
+    el.style.background = '#d1fae5';
+    el.style.color = '#059669';
+  } else {
+    el.textContent = '⚠ No token — data stored locally only';
+    el.style.background = '#fef3c7';
+    el.style.color = '#b45309';
+  }
+}
+
+// ══════════════════════════════════════
+// IMAGE HANDLING
+// ══════════════════════════════════════
+let currentImageData = null;
+
+function handleImageSelect(input) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 4 * 1024 * 1024) {
+    showToast('⚠ Image too large — please use under 4MB. Export from Canva at medium quality.');
+    return;
+  }
+  readImageFile(file);
+}
+
+function handleImageDrop(event) {
+  event.preventDefault();
+  document.getElementById('imageUploadArea').style.borderColor = 'var(--border)';
+  const file = event.dataTransfer.files[0];
+  if (!file || !file.type.startsWith('image/')) { showToast('⚠ Please drop an image file'); return; }
+  readImageFile(file);
+}
+
+function readImageFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const maxW = 800;
+      const ratio = Math.min(maxW / img.width, maxW / img.height, 1);
+      canvas.width  = Math.round(img.width * ratio);
+      canvas.height = Math.round(img.height * ratio);
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      const base64 = canvas.toDataURL('image/jpeg', 0.85);
+      currentImageData = base64;
+
+      document.getElementById('imagePreviewImg').src = base64;
+      document.getElementById('imagePreview').style.display = 'block';
+      document.getElementById('imageUploadPrompt').style.display = 'none';
+      document.getElementById('removeImageBtn').style.display = 'inline';
+      document.getElementById('imageUploadArea').style.borderColor = '#1A56DB';
+
+      const token = localStorage.getItem('tpm_github_token') || GITHUB_TOKEN;
+      if (token) {
+        setImageStatus('⬆ Uploading to GitHub…', '#1A56DB');
+        const exerciseName = document.getElementById('f_name').value.trim();
+        const safeName = exerciseName
+          ? exerciseName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '')
+          : 'exercise';
+        const filename = safeName + '-' + Date.now().toString().slice(-5) + '.jpg';
+        uploadImageToGitHub(base64, filename, token).then(url => {
+          if (url) {
+            currentImageData = url;
+            setImageStatus('✓ Saved to GitHub — will work on all devices', '#059669');
+          } else {
+            setImageStatus('⚠ Upload failed — image stored locally only', '#b45309');
+          }
+        });
+      } else {
+        setImageStatus('ℹ No GitHub token — image stored locally. Add token in Settings.', '#b45309');
+      }
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function setImageStatus(msg, color) {
+  let el = document.getElementById('imageUploadStatus');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'imageUploadStatus';
+    el.style.cssText = 'font-size:11px;font-weight:600;margin-top:6px;padding:4px 8px;border-radius:5px;';
+    document.getElementById('removeImageBtn').insertAdjacentElement('afterend', el);
+  }
+  el.textContent = msg;
+  el.style.color = color;
+  el.style.background = color === '#059669' ? '#d1fae5' : color === '#1A56DB' ? '#EFF6FF' : '#fef3c7';
+}
+
+async function uploadImageToGitHub(base64Data, filename, token) {
+  token = token || GITHUB_TOKEN;
+  const path    = 'images/exercises/' + filename;
+  const content = base64Data.split(',')[1];
+
+  let sha = null;
+  try {
+    const check = await fetch(
+      'https://api.github.com/repos/' + GITHUB_OWNER + '/' + GITHUB_REPO + '/contents/' + path,
+      { headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github+json' } }
+    );
+    if (check.ok) {
+      const existing = await check.json();
+      sha = existing.sha;
+    }
+  } catch {}
+
+  const body = { message: 'Add exercise image: ' + filename, content };
+  if (sha) body.sha = sha;
+
+  try {
+    const res = await fetch(
+      'https://api.github.com/repos/' + GITHUB_OWNER + '/' + GITHUB_REPO + '/contents/' + path,
+      {
+        method: 'PUT',
+        headers: {
+          'Authorization': 'token ' + token,
+          'Accept': 'application/vnd.github+json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      }
+    );
+    if (res.ok) {
+      return 'https://theprestonmethod.github.io/tpm-workouts/' + path;
+    }
+    const err = await res.json().catch(() => ({}));
+    console.warn('GitHub upload error:', res.status, err.message || '');
+    return null;
+  } catch (e) {
+    console.warn('GitHub upload exception:', e);
+    return null;
+  }
+}
+
+function removeImage() {
+  currentImageData = null;
+  const statusEl = document.getElementById('imageUploadStatus');
+  if (statusEl) statusEl.remove();
+  resetImageUI();
+}
+
+function resetImageUI() {
+  document.getElementById('imagePreviewImg').src = '';
+  document.getElementById('imagePreview').style.display = 'none';
+  document.getElementById('imageUploadPrompt').style.display = 'block';
+  document.getElementById('removeImageBtn').style.display = 'none';
+  document.getElementById('imageUploadArea').style.borderColor = 'var(--border)';
+  document.getElementById('f_image').value = '';
+  const statusEl = document.getElementById('imageUploadStatus');
+  if (statusEl) statusEl.remove();
+}
+
+// ══════════════════════════════════════
+// WORKOUT PLAYER GENERATOR
+// ══════════════════════════════════════
+function generateWorkoutPlayer() {
+  const hasAny = Object.values(SLOTS).some(s => s.some(e => e));
+  if (!hasAny) { showToast('⚠ Add exercises to the program first'); return; }
+
+  const client   = document.getElementById('prog_client').value || 'Client';
+  const date     = document.getElementById('prog_date').value || new Date().toISOString().split('T')[0];
+  const coach    = document.getElementById('prog_coach').value || 'Coach';
+  const phase    = document.getElementById('prog_phase').value || '';
+  const title    = document.getElementById('prog_title').value || 'Training Program';
+  const checkin  = document.getElementById('prog_checkin').value || '';
+  const notes    = document.getElementById('prog_notes').value || '';
+  const sheetsUrl= localStorage.getItem('tpm_sheets_url') || '';
+
+  const allEx = [
+    ...SLOTS.warmup.filter(Boolean),
+    ...SLOTS.primary.filter(Boolean),
+    ...SLOTS.accessory.filter(Boolean),
+    ...SLOTS.conditioning.filter(Boolean),
+  ];
+
+  const PC = { A:'#1A56DB', MF:'#1A56DB', B:'#E85D04', C:'#059669', WU:'#8c52ff', ST:'#1B3A5C', CIM:'#1A56DB', CORE:'#059669' };
+
+  const exData = JSON.stringify(allEx.map((e) => ({
+    id: e.id, name: e.name, pillar: e.pillar,
+    sets: e.sets || '3', reps: e.reps || '',
+    rpe: e.rpe || '', equipment: e.equipment || '',
+    cues: e.cues || '', coachingFocus: e.coachingFocus || '',
+    contraindications: e.contraindications || '',
+    progression: e.progression || '', code: e.code || '',
+    image: e.image || null,
+    pillarColor: PC[e.pillar] || '#808080',
+  })));
+  _buildPlayer(exData, client, date, coach, phase, title, checkin, notes, sheetsUrl);
+}
+
+function _buildPlayer(exData, client, date, coach, phase, title, checkin, notes, sheetsUrl) {
+
+  const css = `
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--red:#1B3A5C;--sage:#b1cbb4;--sage-lt:#d8e9da;--cyan:#20cbd6;--cyan-dk:#17a8b2;--off:#F8F6F3;--cream:#F4F1ED;--border:#D4CFC8;--text:#1C1C1C;--gray:#808080;--gray2:#696767;}
+html,body{height:100%;overflow:hidden;background:var(--cream);}
+body{font-family:'DM Sans',sans-serif;color:var(--text);}
+.screen{position:fixed;inset:0;display:flex;flex-direction:column;background:var(--cream);transition:opacity 0.3s;overflow:hidden;}
+.screen.hidden{opacity:0;pointer-events:none;}
+.welcome-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow-y:auto;padding:36px 24px 40px;background:linear-gradient(160deg,#1B3A5C 0%,#142d47 100%);}
+.welcome-logo{width:72px;height:72px;background:white;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;box-shadow:0 6px 28px rgba(0,0,0,0.3);}
+.welcome-logo img{width:60px;height:60px;border-radius:10px;object-fit:cover;}
+.welcome-eyebrow{font-size:10px;font-weight:700;letter-spacing:2.5px;color:rgba(255,255,255,0.45);text-transform:uppercase;margin-bottom:10px;text-align:center;}
+.wt{font-family:'Bebas Neue';font-size:36px;letter-spacing:3px;color:white;line-height:1.05;margin-bottom:4px;text-align:center;}
+.welcome-motivation{font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:24px;text-align:center;font-style:italic;line-height:1.5;}
+.wcard{background:rgba(255,255,255,0.08);border-radius:14px;padding:18px 20px;margin-bottom:18px;text-align:left;border:1px solid rgba(255,255,255,0.15);width:100%;}
+.wlabel{font-size:10px;font-weight:700;letter-spacing:1.5px;color:rgba(255,255,255,0.45);text-transform:uppercase;margin-bottom:3px;}
+.wval{font-size:15px;color:white;font-weight:500;margin-bottom:12px;}
+.wval:last-child{margin-bottom:0;}
+.wnotes{font-size:13px;color:rgba(255,255,255,0.85);background:rgba(255,255,255,0.08);border-radius:10px;padding:14px;margin-bottom:20px;width:100%;border:1px solid rgba(255,255,255,0.15);}
+.start-btn{width:100%;background:#C73B30;color:white;border:none;border-radius:14px;padding:20px;font-family:'Bebas Neue';font-size:26px;letter-spacing:3px;cursor:pointer;box-shadow:0 6px 24px rgba(199,59,48,0.4);transition:all 0.2s;}
+.start-btn:hover{background:#a0302a;transform:translateY(-1px);box-shadow:0 8px 28px rgba(199,59,48,0.5);}
+.start-btn:active{transform:translateY(0);}
+.ex-top-bar{background:var(--red);padding:12px 20px 10px;flex-shrink:0;}
+.ex-prog-label{font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:6px;display:flex;justify-content:space-between;}
+.prog-track{background:rgba(255,255,255,0.2);border-radius:4px;height:5px;}
+.prog-fill{background:white;border-radius:4px;height:5px;transition:width 0.4s ease;}
+.ex-header{padding:14px 20px 8px;flex-shrink:0;}
+.pillar-badge{display:inline-block;font-family:'Bebas Neue';font-size:11px;letter-spacing:1px;padding:3px 10px;border-radius:5px;color:white;margin-bottom:6px;}
+.ex-name{font-family:'Bebas Neue';font-size:32px;letter-spacing:1.5px;line-height:1.05;color:var(--text);}
+.ex-code{font-size:10px;color:var(--gray);margin-top:2px;}
+.ex-body{flex:1;overflow-y:auto;padding:0 20px 24px;}
+.ex-img{width:100%;border-radius:12px;border:1.5px solid var(--border);background:white;margin-bottom:12px;overflow:hidden;max-height:360px;}
+.ex-img img{width:100%;height:360px;object-fit:contain;object-position:center center;display:block;background:white;}
+.ex-no-img{width:100%;height:100px;display:flex;align-items:center;justify-content:center;font-size:32px;background:var(--off);border-radius:12px;border:1.5px solid var(--border);margin-bottom:12px;}
+.meta-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.meta-pill{font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;background:white;border:1.5px solid var(--border);color:var(--gray2);}
+.cues-box{font-size:13px;color:var(--gray2);font-style:italic;background:white;border-radius:10px;padding:12px 14px;border:1.5px solid var(--border);margin-bottom:12px;line-height:1.6;}
+.caution-box{font-size:12px;color:var(--red);background:#fdf0f0;border-radius:8px;padding:10px 14px;border:1.5px solid #f0c8c6;margin-bottom:12px;}
+.sets-label{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--gray2);text-transform:uppercase;margin-bottom:10px;}
+.set-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;background:white;border-radius:10px;padding:10px 12px;border:1.5px solid var(--border);transition:all 0.2s;}
+.set-row.done{border-color:#1A56DB;background:#EFF6FF;}
+.set-num{font-family:'Bebas Neue';font-size:18px;color:var(--gray);width:28px;flex-shrink:0;}
+.set-row.done .set-num{color:#1A56DB;}
+.set-inputs{flex:1;display:flex;gap:8px;}
+.set-input{font-family:'DM Sans';font-size:14px;background:var(--off);border:1.5px solid var(--border);border-radius:8px;padding:8px 10px;width:100%;text-align:center;color:var(--text);}
+.set-input:focus{outline:none;border-color:var(--red);}
+.set-input-lbl{font-size:9px;text-align:center;color:var(--gray);margin-top:2px;font-weight:600;letter-spacing:0.5px;}
+.tick-btn{width:44px;height:44px;border-radius:10px;border:2px solid var(--border);background:var(--off);font-size:20px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
+.tick-btn.on{background:#1A56DB;border-color:#1A56DB;color:white;}
+.rpe-row{display:flex;gap:6px;margin-bottom:12px;}
+.rpe-btn{flex:1;padding:8px 2px;border-radius:7px;border:1.5px solid var(--border);background:var(--off);font-size:13px;font-weight:700;cursor:pointer;color:var(--gray2);transition:all 0.15s;text-align:center;}
+.rpe-btn.on{background:var(--red);border-color:var(--red);color:white;}
+.notes-ta{width:100%;font-family:'DM Sans';font-size:13px;background:white;border:1.5px solid var(--border);border-radius:10px;padding:12px;resize:none;color:var(--text);margin-bottom:16px;}
+.notes-ta:focus{outline:none;border-color:var(--red);}
+.next-btn{width:100%;background:var(--red);color:white;border:none;border-radius:14px;padding:18px;font-family:'Bebas Neue';font-size:22px;letter-spacing:2px;cursor:pointer;margin-bottom:8px;}
+.next-btn:active{transform:scale(0.98);}
+.skip-btn{width:100%;background:transparent;border:none;color:var(--gray);font-family:'DM Sans';font-size:13px;padding:8px;cursor:pointer;}
+.back-btn{width:100%;background:transparent;border:none;color:var(--gray);font-family:'DM Sans';font-size:13px;padding:4px;cursor:pointer;opacity:0.7;}
+.complete-header{width:100%;background:var(--red);padding:32px 24px 28px;text-align:center;flex-shrink:0;}
+.complete-icon{font-size:52px;margin-bottom:10px;}
+.complete-title{font-family:'Bebas Neue';font-size:36px;letter-spacing:3px;color:white;margin-bottom:4px;}
+.complete-sub{font-size:14px;color:rgba(255,255,255,0.8);}
+.complete-body{width:100%;padding:22px 20px;overflow-y:auto;flex:1;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+.stat-card{background:white;border-radius:12px;padding:16px;text-align:center;border:1.5px solid var(--border);}
+.stat-num{font-family:'Bebas Neue';font-size:32px;color:var(--red);}
+.stat-label{font-size:11px;color:var(--gray);font-weight:600;letter-spacing:0.5px;text-transform:uppercase;}
+.session-list{background:white;border-radius:12px;border:1.5px solid var(--border);overflow:hidden;margin-bottom:18px;}
+.sess-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--off);}
+.sess-row:last-child{border-bottom:none;}
+.sess-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.sess-name{flex:1;font-size:13px;font-weight:600;}
+.sess-detail{font-size:11px;color:var(--gray2);}
+.checkin-btn{width:100%;background:var(--red);color:white;border:none;border-radius:14px;padding:16px;font-family:'Bebas Neue';font-size:20px;letter-spacing:2px;cursor:pointer;margin-bottom:10px;text-decoration:none;display:block;text-align:center;}
+.reset-btn{width:100%;background:var(--off);color:var(--gray2);border:1.5px solid var(--border);border-radius:14px;padding:13px;font-family:'DM Sans';font-size:14px;font-weight:600;cursor:pointer;}
+.submit-status{font-size:12px;text-align:center;padding:8px;color:var(--gray);margin-bottom:8px;}
+.tpm-footer{padding:18px;text-align:center;font-size:11px;color:var(--gray);line-height:1.9;}`;
+
+  const innerJS = [
+    'const EXERCISES=JSON.parse(document.getElementById("tpm_ex_data").textContent);',
+    'const SESSION_META=' + JSON.stringify({client,coach,date,title,phase}) + ';',
+    'const SHEETS_URL=' + JSON.stringify(sheetsUrl) + ';',
+    'const CHECKIN=' + JSON.stringify(checkin) + ';',
+    'const PL={A:"Mobility",B:"Strength+Mob",C:"Performance",WU:"Warm-Up",ST:"Seated"};',
+    'let curEx=0,sessData=[],setStates=[],startTime=null,exStart=null,timerInt=null,sessRPE="";',
+    'let sessCount=parseInt(localStorage.getItem("tpm_sc_"+SESSION_META.client.replace(/\\s/g,"_"))||"0");',
+    'document.getElementById("exCount").textContent=EXERCISES.length+" exercises";',
+    'function showScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");}',
+    'function startWorkout(){showScreen("scrEx");startTime=Date.now();exStart=Date.now();timerInt=setInterval(updateTimer,1000);loadEx(0);}',
+    'function updateTimer(){var e=Math.floor((Date.now()-startTime)/1000),m=Math.floor(e/60),s=e%60;document.getElementById("timerLbl").textContent=m+":"+(s<10?"0":"")+s;}',
+    'function loadEx(idx){',
+    '  curEx=idx;exStart=Date.now();',
+    '  var ex=EXERCISES[idx],total=EXERCISES.length;',
+    '  document.getElementById("progLbl").textContent="Exercise "+(idx+1)+" of "+total;',
+    '  document.getElementById("progFill").style.width=((idx/total)*100)+"%";',
+    '  document.getElementById("exHdr").innerHTML=',
+    '    \'<span class="pillar-badge" style="background:\'+ex.pillarColor+\'">\'+( PL[ex.pillar]||ex.pillar)+\'</span>\'',
+    '    +\'<div class="ex-name">\'+ex.name+\'</div>\'',
+    '    +(ex.code?\'<div class="ex-code">\'+ex.code+\'</div>\':"");',
+    '  var ns=parseInt(ex.sets)||3;',
+    '  setStates=Array(ns).fill(null).map(function(){return{weight:"",reps:"",done:false};});',
+    '  var sHtml="";',
+    '  for(var i=0;i<ns;i++){',
+    '    sHtml+=\'<div class="set-row" id="sr\'+i+\'">\'',
+    '      +\'<div class="set-num">S\'+(i+1)+\'</div>\'',
+    '      +\'<div class="set-inputs">\'',
+    '        +\'<div style="flex:1"><input class="set-input" type="number" inputmode="decimal" placeholder="lbs/kg" id="sw\'+i+\'" onchange="setStates[\'+i+\'].weight=this.value"><div class="set-input-lbl">WEIGHT</div></div>\'',
+    '        +\'<div style="flex:1"><input class="set-input" type="number" inputmode="numeric" placeholder="\'+( ex.reps||"reps")+\'" id="sr2\'+i+\'" onchange="setStates[\'+i+\'].reps=this.value"><div class="set-input-lbl">REPS DONE</div></div>\'',
+    '      +\'</div>\'',
+    '      +\'<button class="tick-btn" id="tb\'+i+\'" onclick="toggleSet(\'+i+\')">&#10003;</button>\'',
+    '    +\'</div>\';',
+    '  }',
+    '  var rHtml=\'<div class="sets-label" style="margin-top:4px">HOW HARD? (RPE)</div><div class="rpe-row">\';',
+    '  [6,7,8,9,10].forEach(function(r){rHtml+=\'<button class="rpe-btn" id="rpe\'+r+\'" onclick="pickRPE(\'+r+\')">\'+ r+\'</button>\';});',
+    '  rHtml+="</div>";',
+    '  document.getElementById("exBody").innerHTML=',
+    '    (ex.image?\'<div class="ex-img"><img src="\'+ex.image+\'" alt="\'+ex.name+\'"></div>\':\'<div class="ex-no-img">&#x1F4AA;</div>\')',
+    '    +\'<div class="meta-row">\'',
+    '    +(ex.sets?\'<span class="meta-pill">\'+ex.sets+\' sets</span>\':\'\')',
+    '    +(ex.reps?\'<span class="meta-pill">\'+ex.reps+\'</span>\':\'\')',
+    '    +(ex.rpe?\'<span class="meta-pill">RPE \'+ex.rpe+\'</span>\':\'\')',
+    '    +(ex.equipment&&ex.equipment!=="None / Bodyweight"?\'<span class="meta-pill">&#x1F3CB; \'+ex.equipment+\'</span>\':\'\')',
+    '    +"</div>"',
+    '    +(ex.cues?\'<div class="cues-box">&#8220;\'+ex.cues+\'&#8221;</div>\':\'\')',
+    '    +(ex.contraindications?\'<div class="caution-box">&#9888; \'+ex.contraindications+\'</div>\':\'\')',
+    '    +\'<div class="sets-label">TRACK YOUR SETS</div>\'',
+    '    +sHtml+rHtml',
+    '    +\'<textarea class="notes-ta" id="exNotes" rows="2" placeholder="Notes for this exercise..."></textarea>\'',
+    '    +\'<button class="next-btn" onclick="nextEx()">\'+( idx<total-1?"NEXT EXERCISE &rarr;":"FINISH WORKOUT &#10003;")+\'</button>\'',
+    '    +\'<button class="skip-btn" onclick="skipEx()">Skip this exercise</button>\'',
+    '    +(idx>0?\'<button class="back-btn" onclick="prevEx()">&#8592; Previous exercise</button>\':\'\')+\';\';',
+    '}',
+    'function prevEx(){if(curEx>0){curEx--;loadEx(curEx);document.getElementById("exBody").scrollTop=0;}}',
+    'function toggleSet(i){setStates[i].done=!setStates[i].done;setStates[i].weight=document.getElementById("sw"+i)?document.getElementById("sw"+i).value:"";setStates[i].reps=document.getElementById("sr2"+i)?document.getElementById("sr2"+i).value:"";document.getElementById("sr"+i).classList.toggle("done",setStates[i].done);document.getElementById("tb"+i).classList.toggle("on",setStates[i].done);}',
+    'function pickRPE(v){sessRPE=v;document.querySelectorAll(".rpe-btn").forEach(function(b){b.classList.remove("on");});var el=document.getElementById("rpe"+v);if(el)el.classList.add("on");}',
+    'function saveEx(skipped){var ex=EXERCISES[curEx],dur=Math.round((Date.now()-exStart)/1000),notes=document.getElementById("exNotes")?document.getElementById("exNotes").value:"";sessData.push({exerciseName:ex.name,cardId:ex.code||ex.id,pillar:ex.pillar,pillarColor:ex.pillarColor,setsTarget:ex.sets||"3",setsCompleted:setStates.filter(function(s){return s.done;}).length,setDetails:JSON.stringify(setStates),rpe:sessRPE,notes:notes,durationSec:dur,skipped:skipped?"Yes":"No"});sessRPE="";}',
+    'function nextEx(){saveEx(false);if(curEx<EXERCISES.length-1){loadEx(curEx+1);document.getElementById("exBody").scrollTop=0;}else{finishWorkout();}}',
+    'function skipEx(){saveEx(true);if(curEx<EXERCISES.length-1){loadEx(curEx+1);document.getElementById("exBody").scrollTop=0;}else{finishWorkout();}}',
+    'function finishWorkout(){clearInterval(timerInt);var totalSec=Math.round((Date.now()-startTime)/1000),totalMin=Math.round(totalSec/60);var totalSets=sessData.reduce(function(a,e){return a+e.setsCompleted;},0);sessCount++;localStorage.setItem("tpm_sc_"+SESSION_META.client.replace(/\\s/g,"_"),sessCount);document.getElementById("statEx").textContent=sessData.filter(function(e){return e.skipped==="No";}).length;document.getElementById("statSets").textContent=totalSets;document.getElementById("statMin").textContent=totalMin;document.getElementById("statNum").textContent=sessCount;document.getElementById("completeSub").textContent="Great work, "+SESSION_META.client+"!";var lHtml=sessData.map(function(e){return \'<div class="sess-row"><div class="sess-dot" style="background:\'+e.pillarColor+\'"></div><div class="sess-name">\'+e.exerciseName+\'</div><div class="sess-detail">\'+e.setsCompleted+"/"+e.setsTarget+\' sets\'+(e.rpe?\' \xB7 RPE \'+e.rpe:"")+\'</div></div>\';}).join("");document.getElementById("sessList").innerHTML=lHtml;showScreen("scrComplete");postSheets(totalSec,totalSets);}',
+    'function postSheets(totalSec,totalSets){if(!SHEETS_URL){document.getElementById("submitStatus").textContent="Session saved locally.";return;}document.getElementById("submitStatus").textContent="Saving to Google Sheets...";var ts=new Date().toISOString();var rows=sessData.map(function(e){return{timestamp:ts,client:SESSION_META.client,coach:SESSION_META.coach,date:SESSION_META.date,programTitle:SESSION_META.title,phase:SESSION_META.phase,exerciseName:e.exerciseName,cardId:e.cardId,pillar:e.pillar,setsTarget:e.setsTarget,setsCompleted:e.setsCompleted,setDetails:e.setDetails,sessionRPE:e.rpe,notes:e.notes,durationSec:e.durationSec,skipped:e.skipped,totalSessionMin:Math.round(totalSec/60),totalSets:totalSets,sessionNumber:sessCount,type:"workout_session"};});fetch(SHEETS_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({workoutSession:rows})}).then(function(){document.getElementById("submitStatus").textContent="Session saved to your Google Sheet!";}).catch(function(){document.getElementById("submitStatus").textContent="Could not reach Sheets - check connection.";});}',
+    'function resetWorkout(){sessData=[];setStates=[];curEx=0;showScreen("scrWelcome");}',
+  ].join('\n');
+
+  const checkinBtn = checkin
+    ? '<a href="' + checkin + '" class="checkin-btn">&#10003; CHECK IN NOW</a>'
+    : '';
+
+  const notesBlock = notes
+    ? '<div class="wnotes"><strong>Coach Note:</strong><br>' + notes + '</div>'
+    : '';
+
+  const phaseBlock = phase
+    ? '<div class="wlabel">Phase</div><div class="wval">' + phase + '</div>'
+    : '';
+
+  const html = '<!DOCTYPE html>\n<html lang="en">\n<head>\n'
+    + '<meta charset="UTF-8">\n'
+    + '<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">\n'
+    + '<meta name="apple-mobile-web-app-capable" content="yes">\n'
+    + '<title>' + title + ' \u2014 ' + client + '</title>\n'
+    + '<link rel="preconnect" href="https://fonts.googleapis.com">\n'
+    + '<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">\n'
+    + '<style>' + css + '</style>\n'
+    + '</head>\n<body>\n'
+    + '<div class="screen" id="scrWelcome">\n'
+    + '  <div class="welcome-wrap">\n'
+    + '    <div class="welcome-logo"><img src="01_TPM_master_icon.png" alt="TPM"></div>\n'
+    + '    <div class="welcome-eyebrow">The Preston Method\u2122</div>\n'
+    + '    <div class="wt">' + client.toUpperCase() + '</div>\n'
+    + '    <div class="welcome-motivation">Your workout is ready.\u2003Let\u2019s move today.</div>\n'
+    + '    <div class="wcard">\n'
+    + '      <div class="wlabel">Program</div><div class="wval">' + title + '</div>\n'
+    + phaseBlock
+    + '      <div class="wlabel">Date</div><div class="wval">' + date + '</div>\n'
+    + '      <div class="wlabel">Exercises</div><div class="wval" id="exCount">Loading\u2026</div>\n'
+    + '    </div>\n'
+    + notesBlock
+    + '    <button class="start-btn" onclick="startWorkout()">&#9654;\u2002START WORKOUT</button>\n'
+    + '  </div>\n'
+    + '</div>\n'
+    + '<div class="screen hidden" id="scrEx" style="display:flex;">\n'
+    + '  <div class="ex-top-bar">\n'
+    + '    <div class="ex-prog-label"><span id="progLbl">Exercise 1 of 1</span><span id="timerLbl">0:00</span></div>\n'
+    + '    <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>\n'
+    + '  </div>\n'
+    + '  <div class="ex-header" id="exHdr"></div>\n'
+    + '  <div class="ex-body" id="exBody"></div>\n'
+    + '</div>\n'
+    + '<div class="screen hidden" id="scrComplete" style="display:flex;flex-direction:column;">\n'
+    + '  <div class="complete-header">\n'
+    + '    <div class="complete-icon">&#127881;</div>\n'
+    + '    <div class="complete-title">WORKOUT COMPLETE!</div>\n'
+    + '    <div class="complete-sub" id="completeSub"></div>\n'
+    + '  </div>\n'
+    + '  <div class="complete-body">\n'
+    + '    <div class="stat-grid">\n'
+    + '      <div class="stat-card"><div class="stat-num" id="statEx">0</div><div class="stat-label">Exercises</div></div>\n'
+    + '      <div class="stat-card"><div class="stat-num" id="statSets">0</div><div class="stat-label">Sets Done</div></div>\n'
+    + '      <div class="stat-card"><div class="stat-num" id="statMin">0</div><div class="stat-label">Minutes</div></div>\n'
+    + '      <div class="stat-card"><div class="stat-num" id="statNum">1</div><div class="stat-label">Session #</div></div>\n'
+    + '    </div>\n'
+    + '    <div class="session-list" id="sessList"></div>\n'
+    + '    <div class="submit-status" id="submitStatus"></div>\n'
+    + checkinBtn + '\n'
+    + '    <button class="reset-btn" onclick="resetWorkout()">&#8617; Back to Start</button>\n'
+    + '  </div>\n'
+    + '  <div class="tpm-footer"><strong>THE PRESTON METHOD\u2122</strong><br>604.993.1888 &middot; info@oasistraining.ca<br>www.theprestonmethod.com &middot; Trademark #2460203</div>\n'
+    + '</div>\n'
+    + '<script type="application/json" id="tpm_ex_data">' + exData.replace(/<\/script>/gi, '<\\/script>') + '<\/script>\n'
+    + '<script>\n' + innerJS + '\n<\/script>\n'
+    + '</body>\n</html>';
+
+  const slug     = client.replace(/[^a-zA-Z0-9]/g, '-');
+  const filename = 'TPM-Workout-' + slug + '-' + date + '.html';
+  const blob = new Blob([html], { type: 'text/html' });
+  const a = document.createElement('a');
+  const dlUrl = URL.createObjectURL(blob);
+  a.href = dlUrl;
+  a.download = filename;
+  a.style.display = 'none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(dlUrl); }, 1500);
+
+  document.getElementById('qrSection').style.display = 'block';
+  document.getElementById('qrClientLabel').textContent = client + ' \xB7 ' + title;
+  document.getElementById('qrSection').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('uploadStatusMsg').textContent = '\u23F3 Uploading workout to GitHub\u2026';
+
+  uploadWorkoutToGitHub(filename, html)
+    .then(githubUrl => shortenWithBitly(githubUrl))
+    .then(shortUrl  => showWorkoutLink(shortUrl))
+    .then(finalUrl  => generateQR(finalUrl))
+    .catch(err => {
+      console.warn('Auto-upload error:', err);
+      document.getElementById('uploadStatusMsg').textContent = '\u26A0 Auto-upload failed \u2014 paste a link manually.';
+    });
+}
+
+// ── AUTO-UPLOAD WORKOUT TO GITHUB ──
+async function uploadWorkoutToGitHub(filename, htmlContent) {
+  const token = localStorage.getItem('tpm_github_token') || GITHUB_TOKEN;
+  if (!token) throw new Error('No GitHub token');
+
+  const path    = 'workouts/' + filename;
+  const content = btoa(unescape(encodeURIComponent(htmlContent)));
+
+  // Check for existing file SHA (needed for updates)
+  let sha = null;
+  try {
+    const check = await fetch(
+      'https://api.github.com/repos/' + GITHUB_OWNER + '/' + GITHUB_REPO + '/contents/' + path,
+      { headers: { 'Authorization': 'token ' + token, 'Accept': 'application/vnd.github+json' } }
+    );
+    if (check.ok) { const ex = await check.json(); sha = ex.sha; }
+  } catch {}
+
+  const body = { message: 'Add workout: ' + filename, content };
+  if (sha) body.sha = sha;
+
+  const res = await fetch(
+    'https://api.github.com/repos/' + GITHUB_OWNER + '/' + GITHUB_REPO + '/contents/' + path,
+    {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'token ' + token,
+        'Accept': 'application/vnd.github+json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    }
+  );
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error('GitHub upload failed: ' + (err.message || res.status));
+  }
+
+  document.getElementById('uploadStatusMsg').textContent = '\u2713 Uploaded to GitHub!';
+  return 'https://' + GITHUB_OWNER + '.github.io/' + GITHUB_REPO + '/workouts/' + filename;
+}
+
+// ── SHORTEN URL WITH BIT.LY ──
+async function shortenWithBitly(longUrl) {
+  const token = localStorage.getItem('tpm_bitly_token') || BITLY_TOKEN;
+  if (!token) return longUrl;  // skip shortening if no token
+
+  try {
+    const res = await fetch('https://api-ssl.bitly.com/v4/shorten', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ long_url: longUrl }),
+    });
+    if (!res.ok) { console.warn('Bit.ly error:', res.status); return longUrl; }
+    const data = await res.json();
+    return data.link || longUrl;
+  } catch (e) {
+    console.warn('Bit.ly exception:', e);
+    return longUrl;
+  }
+}
+
+// ── SHOW SHAREABLE LINK IN QR SECTION ──
+function showWorkoutLink(url) {
+  const box = document.getElementById('shareableLinkBox');
+  box.style.display = 'block';
+  box.innerHTML = '\uD83D\uDD17 <a href="' + url + '" target="_blank" style="color:var(--red);">' + url + '</a>';
+  document.getElementById('qrUrl').value = url;
+  document.getElementById('uploadStatusMsg').textContent = '\u2713 Link ready — QR code generated below.';
+  showToast('\u2713 Workout uploaded and link ready!');
+  return url;
+}
+
+// ── QR CODE ──
+function generateQR(passedUrl) {
+  const url = passedUrl || document.getElementById('qrUrl').value.trim();
+  if (!url || url.length < 10) { document.getElementById('qrOutput').style.display='none'; return; }
+  const encoded = encodeURIComponent(url);
+  document.getElementById('qrImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=10&data=${encoded}`;
+  document.getElementById('qrOutput').style.display = 'block';
+}
+
+function downloadQR() {
+  const client = document.getElementById('prog_client').value || 'Client';
+  const img = document.getElementById('qrImg');
+  const a = document.createElement('a');
+  a.href = img.src;
+  a.download = `TPM-QR-${client.replace(/[^a-zA-Z0-9]/g,'-')}.png`;
+  a.click();
+  showToast('✓ QR code downloaded');
+}
+
+function printQR() {
+  const img = document.getElementById('qrImg').src;
+  const client = document.getElementById('prog_client').value || 'Client';
+  const title  = document.getElementById('prog_title').value || 'Workout';
+  const win = window.open('','_blank');
+  win.document.write(`<!DOCTYPE html><html><head>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>body{margin:0;display:flex;align-items:center;justify-content:center;min-height:100vh;background:white;}
+    .card{text-align:center;padding:32px;border:2px solid #1B3A5C;border-radius:16px;max-width:280px;}
+    h1{font-family:'Bebas Neue';font-size:28px;color:#1B3A5C;letter-spacing:2px;margin-bottom:4px;}
+    p{font-family:'DM Sans';font-size:13px;color:#696767;margin-bottom:16px;}
+    img{width:200px;height:200px;}
+    .footer{font-family:'DM Sans';font-size:11px;color:#909090;margin-top:14px;}
+    @media print{@page{margin:10mm;}}</style></head>
+    <body><div class="card">
+      <h1>YOUR WORKOUT</h1>
+      <p>${client} · ${title}</p>
+      <img src="${img}">
+      <p style="font-size:12px;margin-top:12px;color:#1C1C1C;"><strong>Scan to open on your phone</strong></p>
+      <div class="footer">THE PRESTON METHOD™<br>Oasis Training &amp; Education</div>
+    </div>
+    <script>window.onload=()=>window.print()<\/script></body></html>`);
+  win.document.close();
+}
+init();
+</script>
+</body>
+</html>
