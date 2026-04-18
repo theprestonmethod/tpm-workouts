@@ -1918,7 +1918,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);}
 .tpm-footer{padding:18px;text-align:center;font-size:11px;color:var(--gray);line-height:1.9;}`;
 
   const innerJS = [
-    'const EXERCISES=' + exData.replace(/<\/script>/gi, '<\\/script>') + ';',
+    'const EXERCISES=' + exData.replace(/</g, '\\u003c').replace(/>/g, '\\u003e') + ';',
     'const SESSION_META=' + JSON.stringify({client,coach,date,title,phase}) + ';',
     'const SHEETS_URL=' + JSON.stringify(sheetsUrl) + ';',
     'const CHECKIN=' + JSON.stringify(checkin) + ';',
