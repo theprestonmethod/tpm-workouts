@@ -163,7 +163,12 @@
     "id": "a-1",
     "name": "Breathing + Posture Reset",
     "pillar": "A",
+    "status": "Active",
     "category": "Mobility",
+    "movementFamily": "",
+    "movementPattern": "",
+    "bodyRegion": "",
+    "loadStyle": "",
     "sets": "1",
     "reps": "1–2 min",
     "rpe": "",
@@ -171,9 +176,11 @@
     "difficulty": "Foundational",
     "code": "MO-PH1-V1",
     "cues": "Sit tall. Inhale through nose. Exhale through mouth. Feel tall, shoulders soft.",
+    "coachingFocus": "",
+    "contraindications": "",
     "progression": "Eyes closed may help",
     "video": "",
-    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-1.jpg"
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/breathing-posture-reset-81776.jpg"
   },
   {
     "id": "a-2",
