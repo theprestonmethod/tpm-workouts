@@ -1233,5 +1233,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/heel-taps-26001.jpg"
+  },
+  {
+    "id": "ex-1776835985889",
+    "name": "Penguins",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Rotation",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Endurance",
+    "sets": "3",
+    "reps": "10 each side",
+    "rpe": "7-8",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "M-CORE-02-penguins",
+    "cues": "Cues\nShoulders off: Lift blades; keep lower back glued.\nLook straight up; keep neck neutral.\nSide-to-side: Pendulum motion; bend waist, don’t rotate.\nExhale on tap: Breathe out at every heel touch.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/penguins-77492.jpg"
   }
 ]
