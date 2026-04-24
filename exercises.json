@@ -1371,5 +1371,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/candlestick-28242.jpg"
+  },
+  {
+    "id": "ex-1777065627240",
+    "name": "Hollow Body Hold",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Anti-Rotation",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Stability",
+    "sets": "3",
+    "reps": "30s",
+    "rpe": "",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Advanced",
+    "code": "M-CORE-09-hbdyhold",
+    "cues": "Press lower back into the floor; tuck tailbone to round.\nReach arms overhead and hover legs just off the floor.\nShape like a Banana: Keep your shoulder blades and heels lifted; back stays glued.\nBreathe shallow and keep everything braced like a rock.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/hollow-body-hold-24822.jpg"
   }
 ]
