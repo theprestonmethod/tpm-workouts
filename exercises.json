@@ -1601,5 +1601,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/superman-97055.jpg"
+  },
+  {
+    "id": "ex-1777066868594",
+    "name": "Plank Jacks",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Anti-Rotation",
+    "bodyRegion": "Upper Body",
+    "loadStyle": "Endurance",
+    "sets": "3",
+    "reps": "30s",
+    "rpe": "",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Intermediate",
+    "code": "M-CORE-19-plankj",
+    "cues": "Plank Base: Start in a forearm or high plank with a tucked tailbone.\nLight Jump: Jump your feet out wide and then back together like a jumping jack.\nSteady Hips: Keep your hips at the same height; don't let them bounce up and down.\nStay Rigid: Maintain your \"ribs to hips\" connection to keep your spine stable.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/plank-jacks-67151.jpg"
   }
 ]
