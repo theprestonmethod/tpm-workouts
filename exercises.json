@@ -1509,5 +1509,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/spiderman-plank-84694.jpg"
+  },
+  {
+    "id": "ex-1777066473277",
+    "name": "Flutter Kicks",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Anti-Rotation",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Endurance",
+    "sets": "3",
+    "reps": "30s",
+    "rpe": "",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Intermediate",
+    "code": "M-CORE-15-flttrkicks",
+    "cues": "Lower back must stay glued to the floor at all times.\nShoulders Up: Lift your head and blades to help keep the back flat. Eyes to ceiling\nSmall Kicks: Rapidly flutter your legs up and down just above the floor.\nToes Pointed: Keep legs straight and core tight to avoid hip flexor strain.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/flutter-kicks-71576.jpg"
   }
 ]
