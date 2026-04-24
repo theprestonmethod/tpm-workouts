@@ -1417,5 +1417,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/side-plank-10037.jpg"
+  },
+  {
+    "id": "ex-1777065954456",
+    "name": "Mountain Climbers",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Anti-Rotation",
+    "bodyRegion": "Upper Body",
+    "loadStyle": "Control",
+    "sets": "3",
+    "reps": "30s",
+    "rpe": "",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Intermediate",
+    "code": "M-CORE-11-mntnclimber",
+    "cues": "Hands under shoulders; body like a board.\nKnee to Chest: Pull one knee toward your chest without lifting your hips.\nFlat Back: Keep your tailbone tucked; don't let your lower back arch.\nLight Feet: Switch legs quickly but keep your core steady and quiet.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/mountain-climbers-52943.jpg"
   }
 ]
