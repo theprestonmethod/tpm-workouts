@@ -1578,5 +1578,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/windshield-wipers-99322.jpg"
+  },
+  {
+    "id": "ex-1777066798809",
+    "name": "Superman",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Spine Mobility",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Stability",
+    "sets": "3",
+    "reps": "30s",
+    "rpe": "",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "M-CORE-18-superman",
+    "cues": "Face Down: Lie on your belly with arms and legs extended.\nThe Lift: Exhale and lift your chest, arms, and legs simultaneously off the floor.\nGlute Squeeze: Squeeze your glutes to protect your lower back as you lift.\nLong Neck: Keep your gaze down at the mat to avoid neck strain.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/superman-97055.jpg"
   }
 ]
