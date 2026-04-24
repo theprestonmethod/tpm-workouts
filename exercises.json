@@ -1394,5 +1394,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/hollow-body-hold-24822.jpg"
+  },
+  {
+    "id": "ex-1777065711690",
+    "name": "Side Plank",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Anti-Rotation",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Stability",
+    "sets": "3",
+    "reps": "30s",
+    "rpe": "",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "M-CORE-10-splank",
+    "cues": "Elbow directly under shoulder; body in a straight line.\nHip Lift: Push hips high toward the ceiling; don't let them sag.\nShoulders Back: Keep chest open and eyes forward; don't rotate downward.\nTighten the obliques closest to the floor throughout the hold.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/side-plank-10037.jpg"
   }
 ]
