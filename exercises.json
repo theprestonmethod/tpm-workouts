@@ -1302,5 +1302,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/forearm-plank-83758.jpg"
+  },
+  {
+    "id": "ex-1777064328737",
+    "name": "Crunch",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Spine Mobility",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Endurance",
+    "sets": "",
+    "reps": "",
+    "rpe": "",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "M-CORE-06-crunch",
+    "cues": "Press your lower back firmly into the floor.\nReach your hands toward your knees while keeping your eyes on the ceiling for a neutral neck.\nExhale as you lift your shoulder blades, sliding your hands toward your knees to shorten the gap between ribs and hips.\nPause at the top for a peak contraction, then slowly lower without letting your shoulders touch the mat.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/crunch-25680.jpg"
   }
 ]
