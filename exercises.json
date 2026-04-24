@@ -1532,5 +1532,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/flutter-kicks-71576.jpg"
+  },
+  {
+    "id": "ex-1777066550460",
+    "name": "Bear Crawl Hold",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "",
+    "movementPattern": "Anti-Rotation",
+    "bodyRegion": "Upper Body",
+    "loadStyle": "Stability",
+    "sets": "3",
+    "reps": "30s",
+    "rpe": "",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Intermediate",
+    "code": "M-CORE-16-brcrwlhld",
+    "cues": "All Fours: Start on hands and knees, hands under shoulders.\nLift your knees just 2 inches off the floor.\nFlat Tabletop: Keep your back perfectly flat; don't let the \"table\" tilt.\nPull your navel in hard and breathe into the tension.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bear-crawl-hold-48958.jpg"
   }
 ]
