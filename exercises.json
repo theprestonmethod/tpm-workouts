@@ -1624,5 +1624,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/plank-jacks-67151.jpg"
+  },
+  {
+    "id": "ex-1777066939808",
+    "name": "Reverse Plank Marches",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Anti-Rotation",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Control",
+    "sets": "3",
+    "reps": "30s",
+    "rpe": "",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "M-CORE-20-rplankm",
+    "cues": "Palm Support: Sit with legs long; place hands behind you, fingers pointing toward your feet.\nHips to Sky: Press through heels and palms to lift your hips into a straight line.\nThe March: Slowly lift one knee toward your chest while keeping your hips level and high.\nNo Sagging: Exhale on the lift; don't let your butt drop toward the floor as you switch legs.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/reverse-plank-marches-38417.jpg"
   }
 ]
