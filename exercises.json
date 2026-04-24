@@ -1440,5 +1440,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/mountain-climbers-52943.jpg"
+  },
+  {
+    "id": "ex-1777066077856",
+    "name": "Bird-Dog",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Anti-Rotation",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Control",
+    "sets": "3",
+    "reps": "10 each side",
+    "rpe": "",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "M-CORE-12-birddog",
+    "cues": "Quadruped Position: Start on hands and knees with a neutral, flat back.\nDiagonal Reach: Extend opposite arm and leg simultaneously until level with torso.\nHip Square: Don't let your hips tilt; keep your navel pulled toward your spine.\nStable Core: Avoid arching your back at the top; focus on length, not height",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bird-dog-76148.jpg"
   }
 ]
