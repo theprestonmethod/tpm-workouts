@@ -1258,7 +1258,7 @@
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/penguins-89440.jpg"
   },
   {
-    "id": "ex-1777063845910",
+    "id": "ex-1777064001524",
     "name": "Bicycle Crunch",
     "pillar": "B",
     "status": "Active",
@@ -1268,8 +1268,8 @@
     "bodyRegion": "Core / Spine",
     "loadStyle": "Control",
     "sets": "3",
-    "reps": "30 sec",
-    "rpe": "20 sec",
+    "reps": "30s",
+    "rpe": "",
     "equipment": "None / Bodyweight",
     "difficulty": "Foundational",
     "code": "M-CORE-04-byccrunch",
@@ -1278,6 +1278,6 @@
     "contraindications": "",
     "progression": "",
     "video": "",
-    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bicycle-crunch-43099.jpg"
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/exercise-47755.jpg"
   }
 ]
