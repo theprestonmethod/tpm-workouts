@@ -1555,5 +1555,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bear-crawl-hold-48958.jpg"
+  },
+  {
+    "id": "ex-1777066700743",
+    "name": "Windshield Wipers",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Rotation",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Control",
+    "sets": "3",
+    "reps": "30s",
+    "rpe": "",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Intermediate",
+    "code": "M-CORE-17-wndshldwprs",
+    "cues": "T-Position: Lie on your back, arms out wide for support, legs straight up.\nSide Sweep: Lower your legs to one side while keeping both shoulders down.\nCore Pull: Use your obliques to pull the legs back to the center.\nControlled Arc: Move slowly; don't let gravity take over at the bottom.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/windshield-wipers-99322.jpg"
   }
 ]
