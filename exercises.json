@@ -1463,5 +1463,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bird-dog-76148.jpg"
+  },
+  {
+    "id": "ex-1777066287478",
+    "name": "Commando Plank (Plank Up-Downs)",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Anti-Rotation",
+    "bodyRegion": "Upper Body",
+    "loadStyle": "Control",
+    "sets": "3",
+    "reps": "30s",
+    "rpe": "",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Intermediate",
+    "code": "M-CORE-13-cmmndplank",
+    "cues": "Active Transition: Move from forearm plank to high plank one hand at a time.\nHips Quiet: Keep your hips as still as possible; no swaying or rocking.\nCore Braced: Maintain the \"tuck\" and \"ribs to hips\" throughout the move.\nHand Position: Place your hand exactly where your elbow was for stability.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/commando-plank-plank-up-downs-80763.jpg"
   }
 ]
