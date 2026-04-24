@@ -1279,5 +1279,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/exercise-47755.jpg"
+  },
+  {
+    "id": "ex-1777064186371",
+    "name": "Forearm Plank",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Anti-Rotation",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Stability",
+    "sets": "3",
+    "reps": "30s",
+    "rpe": "",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "M-CORE-05-fplank",
+    "cues": "Cues: \nPlace elbows under shoulders and actively push the floor away to spread your shoulder blades.\nTuck your tailbone and pull your ribs toward your hips to slightly round your lower back.\nTighten your glutes and core as if someone is about to punch your stomach.\nKeep your gaze on the floor for a long neck and maintain steady, deep breaths.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/forearm-plank-83758.jpg"
   }
 ]
