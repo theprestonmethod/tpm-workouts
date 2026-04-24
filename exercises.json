@@ -1325,5 +1325,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/crunch-25680.jpg"
+  },
+  {
+    "id": "ex-1777064923942",
+    "name": "Reverse Crunch",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Spine Mobility",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Control",
+    "sets": "3",
+    "reps": "30s",
+    "rpe": "",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Intermediate",
+    "code": "M-CORE-07-revcrunch",
+    "cues": "Knees bent at 90 degrees and press your lower back into the floor.\nPlace your arms flat by your sides for stability and keep your eyes on the ceiling.\nExhale as you curl your hips toward your chest, peeling your tailbone off the floor using only your abs.\nSlowly lower your hips back down without arching your back or using momentum.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/reverse-crunch-20570.jpg"
   }
 ]
