@@ -1486,5 +1486,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/commando-plank-plank-up-downs-80763.jpg"
+  },
+  {
+    "id": "ex-1777066387712",
+    "name": "Spiderman Plank",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Anti-Rotation",
+    "bodyRegion": "Upper Body",
+    "loadStyle": "Control",
+    "sets": "3",
+    "reps": "30s",
+    "rpe": "",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Intermediate",
+    "code": "M-CORE-14-spdrmnplank",
+    "cues": "High Plank Base: Start in a solid high plank with a flat back.\nKnee to Elbow: Pull your knee out to the side toward your elbow.\nSide Crunch: Squeeze your oblique as the knee moves forward.\nStay Low: Keep your hips level with your shoulders; don’t let them pop up.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/spiderman-plank-84694.jpg"
   }
 ]
