@@ -295,6 +295,14 @@ textarea.form-input { resize: vertical; min-height: 60px; }
   display: flex; align-items: center; justify-content: center; color: var(--red);
 }
 .slot-remove:hover { background: #fde8e8; }
+.slot-count-controls { display:flex; gap:4px; }
+.slot-count-btn {
+  width:22px; height:22px; border-radius:4px; border:1.5px solid var(--border);
+  background:var(--off); color:var(--gray2); font-size:15px; font-weight:700;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  line-height:1; transition:all 0.15s; padding:0;
+}
+.slot-count-btn:hover { border-color:var(--red); color:var(--red); }
 
 /* Mini exercise cards for picker */
 .picker-search {
@@ -519,26 +527,45 @@ textarea.form-input { resize: vertical; min-height: 60px; }
             <button onclick="clearProgram()" style="font-size:10px;background:transparent;border:none;color:var(--red);cursor:pointer;font-weight:600;">Clear All</button>
           </div>
           <div class="panel-body">
-            <div class="program-section">
-              <div class="program-section-label">Warm-Up (1–3 exercises)</div>
-              <div id="slot-warmup-1" class="program-slot" data-section="warmup" data-index="0"><span class="slot-empty-text">Click an exercise → Add to Program</span></div>
-              <div id="slot-warmup-2" class="program-slot" data-section="warmup" data-index="1"><span class="slot-empty-text">Optional</span></div>
-              <div id="slot-warmup-3" class="program-slot" data-section="warmup" data-index="2"><span class="slot-empty-text">Optional</span></div>
+            <div class="program-section" id="section-warmup">
+              <div class="program-section-label" style="display:flex;align-items:center;justify-content:space-between;">
+                <span>Warm-Up</span>
+                <div class="slot-count-controls">
+                  <button onclick="removeLastSlot('warmup')" class="slot-count-btn" title="Remove last slot">−</button>
+                  <button onclick="addSlot('warmup')" class="slot-count-btn" title="Add slot">+</button>
+                </div>
+              </div>
+              <div id="slots-warmup"></div>
             </div>
-            <div class="program-section">
-              <div class="program-section-label">Primary Exercises (3 Non-Negotiables)</div>
-              <div id="slot-primary-1" class="program-slot" data-section="primary" data-index="0"><span class="slot-empty-text">Non-negotiable #1</span></div>
-              <div id="slot-primary-2" class="program-slot" data-section="primary" data-index="1"><span class="slot-empty-text">Non-negotiable #2</span></div>
-              <div id="slot-primary-3" class="program-slot" data-section="primary" data-index="2"><span class="slot-empty-text">Non-negotiable #3</span></div>
+            <div class="program-section" id="section-primary">
+              <div class="program-section-label" style="display:flex;align-items:center;justify-content:space-between;">
+                <span>Primary (Non-Negotiable)</span>
+                <div class="slot-count-controls">
+                  <button onclick="removeLastSlot('primary')" class="slot-count-btn" title="Remove last slot">−</button>
+                  <button onclick="addSlot('primary')" class="slot-count-btn" title="Add slot">+</button>
+                </div>
+              </div>
+              <div id="slots-primary"></div>
             </div>
-            <div class="program-section">
-              <div class="program-section-label">Accessory / Secondary</div>
-              <div id="slot-accessory-1" class="program-slot" data-section="accessory" data-index="0"><span class="slot-empty-text">Accessory #1</span></div>
-              <div id="slot-accessory-2" class="program-slot" data-section="accessory" data-index="1"><span class="slot-empty-text">Accessory #2</span></div>
+            <div class="program-section" id="section-accessory">
+              <div class="program-section-label" style="display:flex;align-items:center;justify-content:space-between;">
+                <span>Accessory / Secondary</span>
+                <div class="slot-count-controls">
+                  <button onclick="removeLastSlot('accessory')" class="slot-count-btn" title="Remove last slot">−</button>
+                  <button onclick="addSlot('accessory')" class="slot-count-btn" title="Add slot">+</button>
+                </div>
+              </div>
+              <div id="slots-accessory"></div>
             </div>
-            <div class="program-section">
-              <div class="program-section-label">Conditioning / Core</div>
-              <div id="slot-conditioning-1" class="program-slot" data-section="conditioning" data-index="0"><span class="slot-empty-text">Conditioning or Core exercise</span></div>
+            <div class="program-section" id="section-conditioning">
+              <div class="program-section-label" style="display:flex;align-items:center;justify-content:space-between;">
+                <span>Conditioning / Core</span>
+                <div class="slot-count-controls">
+                  <button onclick="removeLastSlot('conditioning')" class="slot-count-btn" title="Remove last slot">−</button>
+                  <button onclick="addSlot('conditioning')" class="slot-count-btn" title="Add slot">+</button>
+                </div>
+              </div>
+              <div id="slots-conditioning"></div>
             </div>
           </div>
         </div>
@@ -1013,6 +1040,7 @@ function init() {
     localStorage.setItem('tpm_data_version', DATA_VERSION);
   }
   document.getElementById('prog_date').valueAsDate = new Date();
+  renderSlots();
   updateGhStatus();
   // Load from GitHub JSON first, fall back to localStorage then DEFAULT_EXERCISES
   fetch('https://theprestonmethod.github.io/tpm-workouts/exercises.json?v=' + Date.now())
@@ -1452,14 +1480,14 @@ function showSlotModal(id) {
   opts.innerHTML = '';
 
   const sections = [
-    { key: 'warmup',       label: 'Warm-Up',     count: 3 },
-    { key: 'primary',      label: 'Primary (Non-Negotiable)', count: 3 },
-    { key: 'accessory',    label: 'Accessory',   count: 2 },
-    { key: 'conditioning', label: 'Conditioning / Core', count: 1 },
+    { key: 'warmup',       label: 'Warm-Up' },
+    { key: 'primary',      label: 'Primary (Non-Negotiable)' },
+    { key: 'accessory',    label: 'Accessory' },
+    { key: 'conditioning', label: 'Conditioning / Core' },
   ];
 
   sections.forEach(sec => {
-    for (let i = 0; i < sec.count; i++) {
+    for (let i = 0; i < SLOTS[sec.key].length; i++) {
       const filled = SLOTS[sec.key][i];
       const btn = document.createElement('button');
       btn.style.cssText = 'width:100%;text-align:left;background:var(--off);border:1.5px solid var(--border);border-radius:7px;padding:8px 12px;cursor:pointer;font-family:"DM Sans";font-size:12px;font-weight:500;color:var(--gray2);transition:all 0.15s;';
@@ -1489,22 +1517,51 @@ function assignToSlot(section, index) {
 function renderSlots() {
   const sections = ['warmup','primary','accessory','conditioning'];
   sections.forEach(sec => {
+    const container = document.getElementById('slots-' + sec);
+    if (!container) return;
+    container.innerHTML = '';
     SLOTS[sec].forEach((ex, i) => {
-      const el = document.getElementById(`slot-${sec}-${i+1}`);
-      if (!el) return;
-      const color = ex ? (PILLAR_COLORS[ex.pillar] || '#808080') : null;
+      const el = document.createElement('div');
+      el.id = 'slot-' + sec + '-' + (i+1);
       el.className = 'program-slot' + (ex ? ' filled pil' + (ex.pillar || '') : '');
+      el.dataset.section = sec;
+      el.dataset.index = i;
+      const color = ex ? (PILLAR_COLORS[ex.pillar] || '#808080') : null;
       el.innerHTML = ex
         ? `<div class="slot-name" style="color:${color};">${ex.name}</div>
            <div class="slot-detail">${ex.sets ? ex.sets + ' × ' : ''}${ex.reps || ''}${ex.rpe ? ' · RPE ' + ex.rpe : ''}</div>
-           <button class="slot-remove" onclick="removeSlot('${sec}',${i})">✕</button>`
-        : `<span class="slot-empty-text">Empty — pick from Exercise List</span>`;
+           <button class="slot-remove" onclick="clearSlot('${sec}',${i})">✕</button>`
+        : `<span class="slot-empty-text">${getSlotPlaceholder(sec, i)}</span>`;
+      container.appendChild(el);
     });
   });
 }
 
-function removeSlot(section, index) {
+function getSlotPlaceholder(section, index) {
+  if (section === 'warmup')       return index === 0 ? 'Click an exercise → Add to Program' : 'Optional';
+  if (section === 'primary')      return 'Non-negotiable #' + (index + 1);
+  if (section === 'accessory')    return 'Accessory #' + (index + 1);
+  if (section === 'conditioning') return index === 0 ? 'Conditioning or Core exercise' : 'Conditioning #' + (index + 1);
+  return 'Slot #' + (index + 1);
+}
+
+function clearSlot(section, index) {
   SLOTS[section][index] = null;
+  renderSlots();
+}
+
+const MAX_SLOTS = 8;
+const MIN_SLOTS = 1;
+
+function addSlot(section) {
+  if (SLOTS[section].length >= MAX_SLOTS) { showToast('Maximum ' + MAX_SLOTS + ' slots per section'); return; }
+  SLOTS[section].push(null);
+  renderSlots();
+}
+
+function removeLastSlot(section) {
+  if (SLOTS[section].length <= MIN_SLOTS) { showToast('Minimum 1 slot per section'); return; }
+  SLOTS[section].pop();
   renderSlots();
 }
 
