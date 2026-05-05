@@ -1739,5 +1739,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-fallout-75132.jpg"
+  },
+  {
+    "id": "ex-1778009707314",
+    "name": "TRX Hamstring Curls",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Hinge",
+    "movementFamily": "Hinge",
+    "movementPattern": "Hinge",
+    "bodyRegion": "Hips / Glutes",
+    "loadStyle": "Strength",
+    "sets": "3",
+    "reps": "30-45 sec",
+    "rpe": "",
+    "equipment": "",
+    "difficulty": "Intermediate",
+    "code": "SM-TRX-05-Hmstrng crl",
+    "cues": "Hips high: Keep your glutes squeezed and hips off the mat.\nHeels to glutes: Pull the straps toward you using your hamstrings.\nStable base: Keep your arms flat on the floor for balance.\nSlow return: Extend your legs slowly without dropping your hips.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-hamstring-curls-04584.jpg"
   }
 ]
