@@ -1693,5 +1693,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-plank-57058.jpg"
+  },
+  {
+    "id": "ex-1778009155050",
+    "name": "TRX Pike",
+    "pillar": "B",
+    "status": "Draft",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Anti-Rotation",
+    "bodyRegion": "Upper Body",
+    "loadStyle": "Control",
+    "sets": "3",
+    "reps": "30-45 sec",
+    "rpe": "",
+    "equipment": "",
+    "difficulty": "Intermediate",
+    "code": "SM-TRX-03-fpike",
+    "cues": "Straight legs: Keep knees locked; move only from the hips.\nVertical drive: Use your abs to pull your tailbone to the sky.\nLook back: Tuck your head between your arms at the top.\nTotal control: Lower your hips slowly back to a flat plank.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-pike-50583.jpg"
   }
 ]
