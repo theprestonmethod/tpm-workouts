@@ -1762,5 +1762,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-hamstring-curls-04584.jpg"
+  },
+  {
+    "id": "ex-1778009941830",
+    "name": "TRX Suspended Lunge",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Squat",
+    "movementFamily": "Lunge",
+    "movementPattern": "Split Squat",
+    "bodyRegion": "Legs",
+    "loadStyle": "Strength",
+    "sets": "3",
+    "reps": "8-10 reps per leg",
+    "rpe": "",
+    "equipment": "",
+    "difficulty": "Intermediate",
+    "code": "SM-TRX-06-sspnddlunge",
+    "cues": "Stay upright: Keep your chest up and gaze forward for balance.\n90-degree front: Lower until your front thigh is parallel to the floor.\nDrive through heel: Use your standing (barefoot) foot to push up.\nControlled drop: Sink slowly into the lunge to protect your knee.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-suspended-lunge-37083.jpg"
   }
 ]
