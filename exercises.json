@@ -1854,5 +1854,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-chest-press-38661.jpg"
+  },
+  {
+    "id": "ex-1778010536394",
+    "name": "TRX Atomic Push-Up",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Push",
+    "movementFamily": "Push",
+    "movementPattern": "Horizontal Push",
+    "bodyRegion": "Full Body",
+    "loadStyle": "Strength",
+    "sets": "3",
+    "reps": "6-8",
+    "rpe": "",
+    "equipment": "",
+    "difficulty": "Intermediate",
+    "code": "SM-TRX-10-Atmc push-up",
+    "cues": "Deep push-up: Keep your core tight as you lower your chest.\nCrunch in: Pull both knees to your chest after the push-up.\nFlat back: Don't let your hips sag during the transition.\nFlowing move: Combine the push and the tuck into one fluid set.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-atomic-push-up-34641.jpg"
   }
 ]
