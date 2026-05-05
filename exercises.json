@@ -1647,5 +1647,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/reverse-plank-marches-38417.jpg"
+  },
+  {
+    "id": "ex-1778008838972",
+    "name": "TRX Knee Tucks",
+    "pillar": "B",
+    "status": "Draft",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Anti-Rotation",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Control",
+    "sets": "3",
+    "reps": "30-45 Sec",
+    "rpe": "",
+    "equipment": "",
+    "difficulty": "Intermediate",
+    "code": "M-TRX-02-Kntcks",
+    "cues": "High plank start: Hands under shoulders; feet suspended in loops.\nDrive knees: Pull both knees toward your chest together.\nHips up: Lift your hips slightly as you crunch in.\nSlow return: Extend back to plank without sagging your back.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-knee-tucks-33737.jpg"
   }
 ]
