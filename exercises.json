@@ -1831,5 +1831,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-rows-95579.jpg"
+  },
+  {
+    "id": "ex-1778010441192",
+    "name": "TRX Chest Press",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Push",
+    "movementFamily": "Push",
+    "movementPattern": "Horizontal Push",
+    "bodyRegion": "Chest / Shoulder",
+    "loadStyle": "Strength",
+    "sets": "3",
+    "reps": "10-12",
+    "rpe": "",
+    "equipment": "",
+    "difficulty": "Foundational",
+    "code": "SM-TRX-09-Chstprss",
+    "cues": "Strong plank: Keep your body rigid; don't let the lower back arch.\nHollow body: Tuck your tailbone and brace your core throughout.\nNo strap rub: Keep the straps slightly away from your arms.\nPress away: Push through your palms to return to the start.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-chest-press-38661.jpg"
   }
 ]
