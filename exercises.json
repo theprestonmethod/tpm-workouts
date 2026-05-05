@@ -1716,5 +1716,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-pike-50583.jpg"
+  },
+  {
+    "id": "ex-1778009378083",
+    "name": "TRX Fallout",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Anti-Rotation",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Strength",
+    "sets": "3",
+    "reps": "30-45 sec",
+    "rpe": "",
+    "equipment": "",
+    "difficulty": "Intermediate",
+    "code": "SM-TRX-04-Fllout",
+    "cues": "Hollow body: Keep your tailbone tucked and ribs down throughout.\nLean & reach: Roll your hands forward until arms are overhead.\nBrace hard: Don't let your lower back arch as you lean.\nPull back: Use your core and arms to return to standing.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-fallout-75132.jpg"
   }
 ]
