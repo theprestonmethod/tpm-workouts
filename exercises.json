@@ -1670,5 +1670,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-knee-tucks-33737.jpg"
+  },
+  {
+    "id": "ex-1778008959654",
+    "name": "TRX Plank",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Anti-Rotation",
+    "bodyRegion": "Upper Body",
+    "loadStyle": "Stability",
+    "sets": "3",
+    "reps": "30-45 sec",
+    "rpe": "",
+    "equipment": "",
+    "difficulty": "Intermediate",
+    "code": "SM-TRX-01-fplank",
+    "cues": "Imprint core: Tuck your tailbone and pull ribs toward your hips.\nActive push: Drive your forearms into the floor; don't sag.\nNo sawing: Keep your feet perfectly still in the suspended loops.\nLong neck: Look at the floor to keep your spine neutral.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-plank-57058.jpg"
   }
 ]
