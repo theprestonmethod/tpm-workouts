@@ -1785,5 +1785,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-suspended-lunge-37083.jpg"
+  },
+  {
+    "id": "ex-1778010181362",
+    "name": "TRX Y-Fly",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Pull",
+    "movementFamily": "Pull",
+    "movementPattern": "Horizontal Pull",
+    "bodyRegion": "Back / Shoulder",
+    "loadStyle": "Control",
+    "sets": "3",
+    "reps": "8-10 reps",
+    "rpe": "",
+    "equipment": "",
+    "difficulty": "Intermediate",
+    "code": "SM-TRX-07-Yfly",
+    "cues": "Arms straight: Keep a slight bend but don't use your biceps to pull.\nLead with knuckles: Open your arms into a wide \"Y\" overhead.\nProud chest: Keep your chest up; don't lean your head forward.\nTension always: Don't let the straps go slack at the bottom.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-y-fly-69863.jpg"
   }
 ]
