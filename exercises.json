@@ -1808,5 +1808,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-y-fly-69863.jpg"
+  },
+  {
+    "id": "ex-1778010298495",
+    "name": "TRX Rows",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Pull",
+    "movementFamily": "Pull",
+    "movementPattern": "Horizontal Pull",
+    "bodyRegion": "Back / Shoulder",
+    "loadStyle": "Strength",
+    "sets": "3",
+    "reps": "10-12",
+    "rpe": "",
+    "equipment": "",
+    "difficulty": "Foundational",
+    "code": "SM-TRX-08-Rows",
+    "cues": "Body like a board: Keep a straight line from head to heels.\nSqueeze blades: Pull your chest up and pinch your shoulder blades.\nElbows in: Keep elbows close to your ribs as you pull.\nControl the lean: Move slowly; don't let your hips sag.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-rows-95579.jpg"
   }
 ]
