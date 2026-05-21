@@ -2015,5 +2015,28 @@
     "progression": "If you have difficulty or pain, try a wall pushup instead.",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/knee-pushups-60557.jpg"
+  },
+  {
+    "id": "ex-1779395088302",
+    "name": "Lunge with Hammer Curls",
+    "pillar": "B",
+    "status": "Active",
+    "category": "",
+    "movementFamily": "Lunge",
+    "movementPattern": "Split Squat",
+    "bodyRegion": "Full Body",
+    "loadStyle": "Strength",
+    "sets": "2",
+    "reps": "10",
+    "rpe": "8",
+    "equipment": "Dumbbells",
+    "difficulty": "Intermediate",
+    "code": "SM-33-LungeHammer",
+    "cues": "Tip: when your knees are bent, so are your elbows. Use the back leg to push you up and down, while keeping your weight on the front heel as well.",
+    "coachingFocus": "Strength, Complex movements",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/lunge-with-hammer-curls-85943.jpg"
   }
 ]
