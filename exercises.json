@@ -1946,5 +1946,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/golf-single-leg-balance-31987.jpg"
+  },
+  {
+    "id": "ex-1779391786419",
+    "name": "Squat to Knee Up",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Mobility",
+    "movementFamily": "Squat",
+    "movementPattern": "Single-Leg",
+    "bodyRegion": "Legs",
+    "loadStyle": "Stability",
+    "sets": "2",
+    "reps": "20",
+    "rpe": "6-7",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "WU-22-SquatKneeUp",
+    "cues": "",
+    "coachingFocus": "Balance, Endurance, Strength",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/squat-to-knee-up-79726.jpg"
   }
 ]
