@@ -1992,5 +1992,28 @@
     "progression": "if it is too difficult, try doing a wall sit instead.",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/air-squats-98104.jpg"
+  },
+  {
+    "id": "ex-1779394874434",
+    "name": "Knee Pushups",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Push",
+    "movementFamily": "Push",
+    "movementPattern": "Horizontal Push",
+    "bodyRegion": "Upper Body",
+    "loadStyle": "Strength",
+    "sets": "3",
+    "reps": "10",
+    "rpe": "6-7",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Intermediate",
+    "code": "SM-32-KneePU",
+    "cues": "Make sure your hands are stacked below your shoulders and not in front. Keep your core engaged so your lower back doesn't dip.",
+    "coachingFocus": "Strength, Core, Upper body",
+    "contraindications": "",
+    "progression": "If you have difficulty or pain, try a wall pushup instead.",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/knee-pushups-60557.jpg"
   }
 ]
