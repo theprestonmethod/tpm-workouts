@@ -2052,5 +2052,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/lunge-with-hammer-curls-85943.jpg"
+  },
+  {
+    "id": "ex-1779396198318",
+    "name": "Pendulums",
+    "pillar": "SS",
+    "status": "Active",
+    "category": "Golf",
+    "movementFamily": "Rotate",
+    "movementPattern": "Rotation",
+    "bodyRegion": "Full Body",
+    "loadStyle": "Control",
+    "sets": "4",
+    "reps": "20",
+    "rpe": "4-5",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "PL-Golf-04-Pendulums",
+    "cues": "Keep your eyes on the ground below your hands - visualize a ball.",
+    "coachingFocus": "Mobility, Focus, Rotation",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/pendulums-95804.jpg"
   }
 ]
