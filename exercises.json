@@ -1900,5 +1900,28 @@
     "progression": "If you lose balance, try to use a lighter medicine ball.",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/golf-lunge-twist-69522.jpg"
+  },
+  {
+    "id": "ex-1779390835319",
+    "name": "Golf - Standing Band Twists",
+    "pillar": "SS",
+    "status": "Active",
+    "category": "Golf",
+    "movementFamily": "Rotate",
+    "movementPattern": "Rotation",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Stability",
+    "sets": "",
+    "reps": "",
+    "rpe": "",
+    "equipment": "Band",
+    "difficulty": "Foundational",
+    "code": "PL-Golf-02-BandTwists",
+    "cues": "Keep your arms straight, think of spinal rotation to keep your form.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "Reduce band tension if too difficult.",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/golf-standing-band-twists-25749.jpg"
   }
 ]
