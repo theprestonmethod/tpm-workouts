@@ -1969,5 +1969,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/squat-to-knee-up-79726.jpg"
+  },
+  {
+    "id": "ex-1779393935376",
+    "name": "Air Squats",
+    "pillar": "WU",
+    "status": "Active",
+    "category": "Squat",
+    "movementFamily": "Squat",
+    "movementPattern": "Hip Mobility",
+    "bodyRegion": "Lower Body",
+    "loadStyle": "Mobility",
+    "sets": "2",
+    "reps": "20",
+    "rpe": "5-6",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "WU-30-AirSquats",
+    "cues": "Keep your weight on your heels and your chin and chest up looking straight ahead to keep your posture.",
+    "coachingFocus": "Mobility, flexibility, control",
+    "contraindications": "If you feel pain in your knees, try not to go as low.",
+    "progression": "if it is too difficult, try doing a wall sit instead.",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/air-squats-31736.jpg"
   }
 ]
