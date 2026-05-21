@@ -1877,5 +1877,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/trx-atomic-push-up-34641.jpg"
+  },
+  {
+    "id": "ex-1779389574893",
+    "name": "Golf - Lunge Twist",
+    "pillar": "SS",
+    "status": "Active",
+    "category": "Golf",
+    "movementFamily": "Rotate",
+    "movementPattern": "Split Squat",
+    "bodyRegion": "Full Body",
+    "loadStyle": "Strength",
+    "sets": "2",
+    "reps": "15",
+    "rpe": "8",
+    "equipment": "Medicine Ball",
+    "difficulty": "Intermediate",
+    "code": "PL-Golf-01-LungeTwist",
+    "cues": "When you are in a lunge, only twist the ball from the centre of your body and the direction over the leg that is in front.",
+    "coachingFocus": "Balance, Obliques, Strength",
+    "contraindications": "",
+    "progression": "If you lose balance, try to use a lighter medicine ball.",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/golf-lunge-twist-69522.jpg"
   }
 ]
