@@ -1950,9 +1950,9 @@
   {
     "id": "ex-1779391786419",
     "name": "Squat to Knee Up",
-    "pillar": "B",
+    "pillar": "WU",
     "status": "Active",
-    "category": "Mobility",
+    "category": "Squat",
     "movementFamily": "Squat",
     "movementPattern": "Single-Leg",
     "bodyRegion": "Legs",
