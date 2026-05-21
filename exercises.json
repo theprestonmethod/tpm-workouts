@@ -1923,5 +1923,28 @@
     "progression": "Reduce band tension if too difficult.",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/golf-standing-band-twists-25749.jpg"
+  },
+  {
+    "id": "ex-1779391037501",
+    "name": "Golf - Single Leg Balance",
+    "pillar": "SS",
+    "status": "Active",
+    "category": "Golf",
+    "movementFamily": "Balance",
+    "movementPattern": "Hinge",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Mobility",
+    "sets": "2",
+    "reps": "20",
+    "rpe": "4",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "PL-Golf-03-SingleLegBalance",
+    "cues": "Use the club with very little tension - just light fingertip to balance.",
+    "coachingFocus": "Focus on core, glutes and keep eyes forward.",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/golf-single-leg-balance-31987.jpg"
   }
 ]
