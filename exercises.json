@@ -2112,5 +2112,28 @@
     "progression": "Reduce weight",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bicep-hammer-curls-30141.jpg"
+  },
+  {
+    "id": "ex-1779740907975",
+    "name": "Seated Rows",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Pull",
+    "movementFamily": "Pull",
+    "movementPattern": "Horizontal Pull",
+    "bodyRegion": "Back / Shoulder",
+    "loadStyle": "Strength",
+    "sets": "3",
+    "reps": "8-10",
+    "rpe": "7-8",
+    "equipment": "Cable Machine",
+    "difficulty": "Foundational",
+    "code": "SM-36-seatedrows",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/seated-rows-05155.jpg"
   }
 ]
