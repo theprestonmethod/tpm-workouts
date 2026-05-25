@@ -2089,5 +2089,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/pendulums-95804.jpg"
+  },
+  {
+    "id": "ex-1779739832030",
+    "name": "Bicep Hammer Curls",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Grip / Hand",
+    "movementFamily": "",
+    "movementPattern": "",
+    "bodyRegion": "Arms",
+    "loadStyle": "Strength",
+    "sets": "3",
+    "reps": "8-10",
+    "rpe": "7-8",
+    "equipment": "Dumbbells",
+    "difficulty": "Foundational",
+    "code": "SM-35-dbhammercurls",
+    "cues": "Keep your elbows tight to your body.",
+    "coachingFocus": "",
+    "contraindications": "Avoid pain in elbows",
+    "progression": "Reduce weight",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bicep-hammer-curls-26908.jpg"
   }
 ]
