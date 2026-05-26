@@ -2158,5 +2158,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/recumbent-bike-18242.jpg"
+  },
+  {
+    "id": "ex-1779812588208",
+    "name": "Leg Press",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Push",
+    "movementFamily": "Push",
+    "movementPattern": "Horizontal Push",
+    "bodyRegion": "Legs",
+    "loadStyle": "Strength",
+    "sets": "3",
+    "reps": "10",
+    "rpe": "8",
+    "equipment": "",
+    "difficulty": "Intermediate",
+    "code": "SM-37-Legpress",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/leg-press-86166.jpg"
   }
 ]
