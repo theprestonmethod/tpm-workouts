@@ -2135,5 +2135,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/seated-rows-05155.jpg"
+  },
+  {
+    "id": "ex-1779812123635",
+    "name": "Recumbent Bike",
+    "pillar": "WU",
+    "status": "Active",
+    "category": "Cardio",
+    "movementFamily": "Locomotion",
+    "movementPattern": "",
+    "bodyRegion": "",
+    "loadStyle": "",
+    "sets": "",
+    "reps": "5 mins",
+    "rpe": "6-7",
+    "equipment": "",
+    "difficulty": "Foundational",
+    "code": "WU-10-Recumbentbike",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/recumbent-bike-18242.jpg"
   }
 ]
