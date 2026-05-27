@@ -636,7 +636,7 @@
 
     <script>
         const SHEET_ID = '1howbk_3WTzJ2gEobsdQs5yZZwP8RaJYKxhxqIKTbdv4';
-        const APPS_SCRIPT_URL = ''; // Will be set after Apps Script deployment
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyVx6u6UK6jJ6vb2Wnt-hAn369OSz_mIjCM0d01POOWlPMmmNx4QKIFNUqtL6MxeIBk/exec'; // Will be set after Apps Script deployment
 
         const exercises = [
             { name: 'Squat', reps: '2 sets x 10', muscle: 'Legs' },
