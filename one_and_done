@@ -1,1 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One and Done - The Preston Method</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --navy: #1B3A5C;
+            --brick-red: #C73B30;
+            --shell: #F5F8FC;
+            --text-dark: #1B3A5C;
+            --text-light: #FFFFFF;
+            --accent-blue: #1A56DB;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--navy) 0%, #2d5a7b 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--shell);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(27, 58, 92, 0.3);
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--navy) 0%, #2d5a7b 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .screen {
+            display: none;
+            padding: 40px 30px;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* SIGN UP SCREEN */
+        .signup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .form-group input {
+            padding: 14px 16px;
+            border: 2px solid #E0E0E0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--brick-red);
+            box-shadow: 0 0 0 4px rgba(199, 59, 48, 0.1);
+        }
+
+        .btn {
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--brick-red) 0%, #a92b22 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(199, 59, 48, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: var(--shell);
+            color: var(--navy);
+            border: 2px solid var(--navy);
+        }
+
+        .btn-secondary:hover {
+            background: var(--navy);
+            color: white;
+        }
+
+        .welcome-message {
+            background: linear-gradient(135deg, rgba(27, 58, 92, 0.05) 0%, rgba(199, 59, 48, 0.05) 100%);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            text-align: center;
+            border-left: 4px solid var(--brick-red);
+        }
+
+        .welcome-message h2 {
+            color: var(--brick-red);
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .welcome-message p {
+            font-size: 14px;
+            color: var(--navy);
+            opacity: 0.8;
+        }
+
+        /* SPIN WHEEL */
+        .spin-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 25px solid var(--brick-red);
+            z-index: 10;
+        }
+
+        #spinWheel {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 10px 30px rgba(27, 58, 92, 0.2));
+            transition: transform 0.1s;
+        }
+
+        .spin-button {
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--brick-red) 0%, #a92b22 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(199, 59, 48, 0.3);
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .spin-button:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(199, 59, 48, 0.4);
+        }
+
+        .spin-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* EXERCISE DISPLAY */
+        .exercise-display {
+            background: linear-gradient(135deg, var(--navy) 0%, #2d5a7b 100%);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            margin: 30px 0;
+            box-shadow: 0 12px 30px rgba(27, 58, 92, 0.2);
+        }
+
+        .exercise-display h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .exercise-display p {
+            font-size: 20px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* MUSCLE & MOOD SELECTION */
+        .selection-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .muscle-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .option-btn {
+            padding: 12px 16px;
+            border: 2px solid #E0E0E0;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover {
+            border-color: var(--brick-red);
+            background: rgba(199, 59, 48, 0.05);
+        }
+
+        .option-btn.selected {
+            background: var(--brick-red);
+            color: white;
+            border-color: var(--brick-red);
+        }
+
+        /* COUNTDOWN */
+        .countdown {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(27, 58, 92, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .countdown.active {
+            display: flex;
+        }
+
+        .countdown-number {
+            font-size: 200px;
+            font-weight: 700;
+            color: var(--brick-red);
+            animation: countdownPop 1s ease-out;
+            line-height: 1;
+        }
+
+        @keyframes countdownPop {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .countdown-done {
+            font-size: 80px;
+            color: var(--brick-red);
+            font-weight: 700;
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CALENDAR */
+        .calendar {
+            margin: 30px 0;
+        }
+
+        .calendar-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            border-radius: 8px;
+            background: #E8EEF5;
+            color: var(--navy);
+            font-weight: 600;
+        }
+
+        .calendar-day.completed {
+            background: linear-gradient(135deg, var(--brick-red) 0%, #a92b22 100%);
+            color: white;
+        }
+
+        /* MODE BUTTONS */
+        .mode-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #E0E0E0;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .mode-btn.active {
+            background: var(--navy);
+            color: white;
+            border-color: var(--navy);
+        }
+
+        .mode-btn:hover {
+            border-color: var(--navy);
+        }
+
+        /* LINEAR MODE */
+        .exercise-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .exercise-item {
+            padding: 16px;
+            background: #F0F4F8;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
+        }
+
+        .exercise-item:hover {
+            background: #E0E8F0;
+            border-left-color: var(--brick-red);
+        }
+
+        .exercise-item h4 {
+            font-size: 16px;
+            color: var(--navy);
+            margin-bottom: 4px;
+        }
+
+        .exercise-item p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .tip-of-day {
+            background: linear-gradient(135deg, rgba(26, 86, 219, 0.1) 0%, rgba(199, 59, 48, 0.1) 100%);
+            padding: 16px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .tip-of-day p {
+            font-size: 14px;
+            color: var(--navy);
+            font-weight: 500;
+        }
+
+        .spinner {
+            border: 4px solid #E0E0E0;
+            border-top: 4px solid var(--brick-red);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 20px 0;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        .streak-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--brick-red) 0%, #a92b22 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        .mobile-responsive {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <svg class="logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="gradLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1B3A5C;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#2d5a7b;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <path d="M100,20 Q140,40 140,100 Q140,160 100,180 Q60,160 60,100 Q60,40 100,20" fill="url(#gradLeft)"/>
+                <path d="M100,50 Q120,60 120,100 Q120,140 100,160 Q80,140 80,100 Q80,60 100,50" fill="#C73B30"/>
+            </svg>
+            <h1>ONE & DONE</h1>
+            <p>One Exercise. Daily. Done.</p>
+        </div>
+
+        <!-- SIGN UP SCREEN -->
+        <div class="screen active" id="signupScreen">
+            <div class="welcome-message">
+                <h2>Welcome!</h2>
+                <p>Join thousands doing one exercise per day.</p>
+            </div>
+
+            <form class="signup-form" id="signupForm">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="First & Last" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Let's Get Started 🚀</button>
+            </form>
+
+            <div class="tip-of-day" style="margin-top: 30px;">
+                <p><strong>Why One and Done?</strong> Consistency beats intensity. One exercise daily builds the habit. You've got this!</p>
+            </div>
+        </div>
+
+        <!-- MAIN SCREEN -->
+        <div class="screen" id="mainScreen">
+            <div id="welcomeBack" style="display:none;">
+                <!-- Welcome back message inserted here -->
+            </div>
+
+            <div class="mode-buttons">
+                <button class="mode-btn active" id="spinMode" onclick="switchMode('spin')">🎡 Spin</button>
+                <button class="mode-btn" id="linearMode" onclick="switchMode('linear')">📋 Tell Me</button>
+            </div>
+
+            <!-- SPIN MODE -->
+            <div id="spinContainer">
+                <div class="spin-section">
+                    <div class="wheel-container">
+                        <div class="wheel-pointer"></div>
+                        <canvas id="spinWheel" width="300" height="300"></canvas>
+                    </div>
+                    <button class="spin-button" id="spinBtn" onclick="spinWheel()">SPIN! 🎯</button>
+                </div>
+
+                <div id="exerciseCard" style="display:none;">
+                    <div class="exercise-display">
+                        <h2 id="exerciseName"></h2>
+                        <p id="exerciseReps"></p>
+                    </div>
+
+                    <div style="margin: 20px 0;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 12px;">Which muscle did you work?</label>
+                        <div class="muscle-grid" id="muscleGrid"></div>
+                    </div>
+
+                    <div style="margin: 20px 0;">
+                        <label style="font-weight: 700; display: block; margin-bottom: 12px;">How are you feeling?</label>
+                        <div class="selection-grid">
+                            <button class="option-btn" onclick="selectMood(this, 'Great')">😄 Great</button>
+                            <button class="option-btn" onclick="selectMood(this, 'Good')">👍 Good</button>
+                            <button class="option-btn" onclick="selectMood(this, 'Okay')">😐 Okay</button>
+                            <button class="option-btn" onclick="selectMood(this, 'Tired')">😴 Tired</button>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="logExercise()" style="width: 100%; margin-top: 20px;">Logged! Ready for Countdown 💪</button>
+                </div>
+            </div>
+
+            <!-- LINEAR MODE -->
+            <div id="linearContainer" style="display:none;">
+                <div class="exercise-list" id="exerciseListLinear"></div>
+            </div>
+
+            <!-- CALENDAR -->
+            <div class="calendar">
+                <div class="calendar-title">Your May 2026</div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+                <div class="streak-badge" id="streakBadge" style="display:none;"></div>
+            </div>
+
+            <div class="tip-of-day">
+                <p id="tipContent">Stay consistent. One exercise daily builds momentum.</p>
+            </div>
+
+            <button class="btn btn-secondary" onclick="logout()" style="width: 100%; margin-top: 20px;">Logout</button>
+        </div>
+    </div>
+
+    <!-- COUNTDOWN OVERLAY -->
+    <div class="countdown" id="countdown">
+        <div class="countdown-number" id="countdownNumber">3</div>
+    </div>
+
+    <script>
+        const SHEET_ID = '1howbk_3WTzJ2gEobsdQs5yZZwP8RaJYKxhxqIKTbdv4';
+        const APPS_SCRIPT_URL = ''; // Will be set after Apps Script deployment
+
+        const exercises = [
+            { name: 'Squat', reps: '2 sets x 10', muscle: 'Legs' },
+            { name: 'Lunge', reps: '2 sets x 10', muscle: 'Legs' },
+            { name: 'Reverse Lunge', reps: '2 sets x 10', muscle: 'Legs' },
+            { name: 'Side Lunge', reps: '2 sets x 10', muscle: 'Legs' },
+            { name: 'Jump Squat', reps: '2 sets x 10', muscle: 'Legs' },
+            { name: 'Step Up', reps: '2 sets x 10', muscle: 'Legs' },
+            { name: 'Calf Raises', reps: '2 sets x 10', muscle: 'Legs' },
+            { name: 'Mountain Climber', reps: '2 sets x 10', muscle: 'Core' },
+            { name: 'Russian Twists', reps: '2 sets x 10', muscle: 'Core' },
+            { name: 'Pushup', reps: '2 sets x 10', muscle: 'Chest' },
+            { name: 'Wall Pushup', reps: '2 sets x 10', muscle: 'Chest' },
+            { name: 'Tricep Dips', reps: '2 sets x 10', muscle: 'Triceps' },
+            { name: 'Superman', reps: '2 sets x 10', muscle: 'Back' },
+            { name: 'Bird Dog', reps: '2 sets x 10', muscle: 'Core' },
+            { name: 'Burpee', reps: '2 sets x 10', muscle: 'Full Body' },
+            { name: 'Jumping Lunges', reps: '2 sets x 10', muscle: 'Legs' },
+            { name: 'Plank', reps: '30 sec x 2', muscle: 'Core' },
+            { name: 'Dead Bug', reps: '30 sec x 2', muscle: 'Core' },
+            { name: 'Leg Raises', reps: '30 sec x 2', muscle: 'Core' },
+            { name: 'Inchworm', reps: '30 sec x 2', muscle: 'Full Body' },
+            { name: 'Plank Shoulder Taps', reps: '30 sec x 2', muscle: 'Core' },
+            { name: 'High Knees', reps: '30 sec x 2', muscle: 'Legs' },
+            { name: 'Jumping Jacks', reps: '30 sec x 2', muscle: 'Full Body' },
+            { name: 'Wall Sit', reps: '1 min', muscle: 'Legs' },
+            { name: 'Single Leg Stance', reps: '1 min', muscle: 'Balance' },
+            { name: 'Glute Bridge', reps: '1 min', muscle: 'Glutes' },
+            { name: 'Lateral Walks', reps: '1 min', muscle: 'Legs' },
+            { name: 'Glute Kickbacks', reps: '1 min', muscle: 'Glutes' }
+        ];
+
+        const muscles = ['Chest', 'Back', 'Shoulders', 'Biceps', 'Triceps', 'Forearms', 'Core', 'Legs', 'Glutes', 'Balance', 'Full Body'];
+        const tips = [
+            '💪 Consistency beats intensity. You\'re building a daily habit!',
+            '🎯 Focus on form over speed. Quality over quantity.',
+            '🔥 One exercise daily = 365 workouts per year. That\'s powerful!',
+            '⚡ Your body adapts. Challenge yourself as you get stronger.',
+            '🎉 You\'re part of a community doing One and Done daily!',
+            '🚀 The hardest part is starting. You\'ve already done it!',
+            '🏆 Every workout counts. Never skip a day.',
+            '😤 Feeling sore? That\'s progress. Keep going!'
+        ];
+
+        let currentUser = null;
+        let selectedMuscle = null;
+        let selectedMood = null;
+        let currentExercise = null;
+        let wheelRotation = 0;
+
+        // Initialize
+        function init() {
+            const savedUser = localStorage.getItem('oneAndDoneUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                showMainScreen();
+            } else {
+                showSignupScreen();
+            }
+        }
+
+        function showSignupScreen() {
+            document.getElementById('signupScreen').classList.add('active');
+            document.getElementById('mainScreen').classList.remove('active');
+        }
+
+        function showMainScreen() {
+            document.getElementById('signupScreen').classList.remove('active');
+            document.getElementById('mainScreen').classList.add('active');
+            
+            // Check welcome back
+            checkWelcomeBack();
+            
+            // Build muscle grid
+            buildMuscleGrid();
+            
+            // Build calendar
+            buildCalendar();
+            
+            // Build exercise list
+            buildExerciseList();
+            
+            // Draw wheel
+            drawWheel();
+            
+            // Random tip
+            showRandomTip();
+        }
+
+        function checkWelcomeBack() {
+            const lastVisit = localStorage.getItem('lastVisit');
+            const today = new Date().toDateString();
+            
+            if (lastVisit !== today) {
+                const welcomeDiv = document.getElementById('welcomeBack');
+                welcomeDiv.innerHTML = `
+                    <div class="welcome-message">
+                        <h2>Welcome back, ${currentUser.name.split(' ')[0]}! 🎉</h2>
+                        <p>Let's do your daily exercise!</p>
+                    </div>
+                `;
+                welcomeDiv.style.display = 'block';
+                localStorage.setItem('lastVisit', today);
+            }
+        }
+
+        function buildMuscleGrid() {
+            const grid = document.getElementById('muscleGrid');
+            grid.innerHTML = muscles.map(m => `
+                <button class="option-btn" onclick="selectMuscle(this, '${m}')">${m}</button>
+            `).join('');
+        }
+
+        function buildExerciseList() {
+            const list = document.getElementById('exerciseListLinear');
+            list.innerHTML = exercises.map((ex, idx) => `
+                <div class="exercise-item" onclick="selectExerciseLinear(${idx})">
+                    <h4>${ex.name}</h4>
+                    <p>${ex.reps} • ${ex.muscle}</p>
+                </div>
+            `).join('');
+        }
+
+        function buildCalendar() {
+            const grid = document.getElementById('calendarGrid');
+            const today = new Date();
+            const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+            
+            let completed = JSON.parse(localStorage.getItem('completedDays') || '[]');
+            
+            let html = '';
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const isCompleted = completed.includes(dateStr);
+                html += `<div class="calendar-day ${isCompleted ? 'completed' : ''}">${day}</div>`;
+            }
+            grid.innerHTML = html;
+            
+            // Streak
+            let streak = 0;
+            for (let i = 0; i < 365; i++) {
+                const d = new Date(today);
+                d.setDate(d.getDate() - i);
+                const dateStr = d.toISOString().split('T')[0];
+                if (completed.includes(dateStr)) {
+                    streak++;
+                } else if (i > 0) {
+                    break;
+                }
+            }
+            
+            if (streak > 0) {
+                document.getElementById('streakBadge').textContent = `🔥 ${streak} Day Streak!`;
+                document.getElementById('streakBadge').style.display = 'inline-block';
+            }
+        }
+
+        function drawWheel() {
+            const canvas = document.getElementById('spinWheel');
+            const ctx = canvas.getContext('2d');
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 140;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const colors = ['#C73B30', '#1B3A5C', '#1A56DB', '#E85D04', '#D32374', '#2B957A'];
+            const sliceAngle = (Math.PI * 2) / exercises.length;
+            
+            exercises.forEach((ex, idx) => {
+                const startAngle = idx * sliceAngle + (wheelRotation * Math.PI / 180);
+                const endAngle = startAngle + sliceAngle;
+                
+                // Draw slice
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+                ctx.closePath();
+                ctx.fillStyle = colors[idx % colors.length];
+                ctx.fill();
+                
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = 3;
+                ctx.stroke();
+            });
+        }
+
+        function spinWheel() {
+            const spinBtn = document.getElementById('spinBtn');
+            spinBtn.disabled = true;
+            
+            const spins = Math.floor(Math.random() * 5) + 12;
+            const targetRotation = spins * 360 + Math.random() * 360;
+            const duration = 4000;
+            const startTime = Date.now();
+            
+            function animate() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                wheelRotation = targetRotation * easeOut(progress);
+                drawWheel();
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    const selectedIdx = Math.floor((exercises.length - (wheelRotation % 360) / (360 / exercises.length)) % exercises.length);
+                    currentExercise = exercises[selectedIdx];
+                    
+                    document.getElementById('exerciseName').textContent = currentExercise.name;
+                    document.getElementById('exerciseReps').textContent = currentExercise.reps;
+                    document.getElementById('exerciseCard').style.display = 'block';
+                    
+                    spinBtn.disabled = false;
+                }
+            }
+            
+            animate();
+        }
+
+        function easeOut(t) {
+            return 1 - Math.pow(1 - t, 3);
+        }
+
+        function selectExerciseLinear(idx) {
+            currentExercise = exercises[idx];
+            document.getElementById('exerciseName').textContent = currentExercise.name;
+            document.getElementById('exerciseReps').textContent = currentExercise.reps;
+            document.getElementById('exerciseCard').style.display = 'block';
+        }
+
+        function selectMuscle(btn, muscle) {
+            document.querySelectorAll('#muscleGrid .option-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedMuscle = muscle;
+        }
+
+        function selectMood(btn, mood) {
+            document.querySelectorAll('#exerciseCard .selection-grid .option-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedMood = mood;
+        }
+
+        function logExercise() {
+            if (!selectedMuscle || !selectedMood) {
+                alert('Please select muscle and mood!');
+                return;
+            }
+            
+            // Add to completed days
+            const today = new Date().toISOString().split('T')[0];
+            let completed = JSON.parse(localStorage.getItem('completedDays') || '[]');
+            if (!completed.includes(today)) {
+                completed.push(today);
+                localStorage.setItem('completedDays', JSON.stringify(completed));
+            }
+            
+            // Send to Google Sheets (when Apps Script is set up)
+            // For now, just log locally
+            let logs = JSON.parse(localStorage.getItem('exerciseLogs') || '[]');
+            logs.push({
+                date: new Date().toISOString(),
+                exercise: currentExercise.name,
+                muscle: selectedMuscle,
+                mood: selectedMood,
+                reps: currentExercise.reps
+            });
+            localStorage.setItem('exerciseLogs', JSON.stringify(logs));
+            
+            // Show countdown
+            showCountdown();
+            
+            // Reset
+            document.getElementById('exerciseCard').style.display = 'none';
+            selectedMuscle = null;
+            selectedMood = null;
+            document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            
+            // Refresh calendar
+            buildCalendar();
+        }
+
+        function showCountdown() {
+            const countdown = document.getElementById('countdown');
+            countdown.classList.add('active');
+            
+            let count = 3;
+            const countdownNumber = document.getElementById('countdownNumber');
+            
+            const interval = setInterval(() => {
+                if (count > 0) {
+                    countdownNumber.textContent = count;
+                    count--;
+                } else {
+                    countdownNumber.textContent = 'DONE! 🎉';
+                    countdownNumber.className = 'countdown-done';
+                    setTimeout(() => {
+                        countdown.classList.remove('active');
+                        countdownNumber.className = 'countdown-number';
+                        countdownNumber.textContent = '3';
+                    }, 2000);
+                    clearInterval(interval);
+                }
+            }, 1000);
+        }
+
+        function switchMode(mode) {
+            document.getElementById('spinContainer').style.display = mode === 'spin' ? 'block' : 'none';
+            document.getElementById('linearContainer').style.display = mode === 'linear' ? 'block' : 'none';
+            
+            document.getElementById('spinMode').classList.toggle('active', mode === 'spin');
+            document.getElementById('linearMode').classList.toggle('active', mode === 'linear');
+        }
+
+        function showRandomTip() {
+            const tip = tips[Math.floor(Math.random() * tips.length)];
+            document.getElementById('tipContent').textContent = tip;
+        }
+
+        function logout() {
+            localStorage.removeItem('oneAndDoneUser');
+            currentUser = null;
+            document.getElementById('signupForm').reset();
+            showSignupScreen();
+        }
+
+        // Signup form
+        document.getElementById('signupForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            
+            if (name && email) {
+                currentUser = { name, email, signupDate: new Date().toISOString() };
+                localStorage.setItem('oneAndDoneUser', JSON.stringify(currentUser));
+                
+                // TODO: Send to Google Sheets
+                console.log('New user:', currentUser);
+                
+                showMainScreen();
+            }
+        });
+
+        // Load on start
+        init();
+    </script>
+</body>
+</html>
