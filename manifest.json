@@ -1,0 +1,23 @@
+{
+  "name": "ONE & DONE — The Preston Method",
+  "short_name": "One & Done",
+  "description": "One exercise a day. That's it.",
+  "start_url": "/tpm-workouts/one_and_done.html",
+  "scope": "/tpm-workouts/",
+  "display": "standalone",
+  "background_color": "#1B3A5C",
+  "theme_color": "#1B3A5C",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://theprestonmethod.github.io/tpm-workouts/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "https://theprestonmethod.github.io/tpm-workouts/01_TPM_master_icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
