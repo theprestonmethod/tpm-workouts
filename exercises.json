@@ -2,8 +2,13 @@
   {
     "id": "wu-1",
     "name": "Arm Swings",
-    "pillar": "WU",
+    "pillar": "A",
+    "status": "Active",
     "category": "Warm-Up",
+    "movementFamily": "",
+    "movementPattern": "",
+    "bodyRegion": "Upper Body",
+    "loadStyle": "Control",
     "sets": "1",
     "reps": "20–30 sec",
     "rpe": "",
@@ -11,6 +16,8 @@
     "difficulty": "Foundational",
     "code": "WU-UNI-01",
     "cues": "Relax shoulders, ribs down, tall spine",
+    "coachingFocus": "",
+    "contraindications": "",
     "progression": "Increase range gradually",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-1.jpg"
