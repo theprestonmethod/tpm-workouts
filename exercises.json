@@ -129,7 +129,12 @@
     "id": "wu-8",
     "name": "High Knees",
     "pillar": "WU",
+    "status": "Active",
     "category": "Warm-Up",
+    "movementFamily": "",
+    "movementPattern": "",
+    "bodyRegion": "",
+    "loadStyle": "",
     "sets": "1",
     "reps": "20–30 sec",
     "rpe": "",
@@ -137,9 +142,11 @@
     "difficulty": "Foundational",
     "code": "WU-UNI-04",
     "cues": "Drive knee to hip height. Stay tall. Increase speed only if posture stays controlled.",
+    "coachingFocus": "",
+    "contraindications": "",
     "progression": "",
     "video": "",
-    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-8.jpg"
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/high-knees-54457.jpg"
   },
   {
     "id": "wu-9",
