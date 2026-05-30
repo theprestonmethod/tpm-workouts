@@ -2632,5 +2632,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/russian-twists-no-weight-17817.jpg"
+  },
+  {
+    "id": "ex-1780172328738",
+    "name": "Olympic Bar Squat",
+    "pillar": "C",
+    "status": "Active",
+    "category": "Squat",
+    "movementFamily": "Squat",
+    "movementPattern": "Hinge",
+    "bodyRegion": "Lower Body",
+    "loadStyle": "Strength",
+    "sets": "4",
+    "reps": "8",
+    "rpe": "8-9",
+    "equipment": "Olympic Bar",
+    "difficulty": "Advanced",
+    "code": "PL-40-BarSquat",
+    "cues": "Make sure your body weight is on your heels, keep pelvis tucked to keep back strong, proper form and breathing is extremely important.",
+    "coachingFocus": "Spinal core strength, gluts, quads",
+    "contraindications": "stop immediately if you feel back pain",
+    "progression": "reduce weight if you have pain.",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/olympic-bar-squat-25436.jpg"
   }
 ]
