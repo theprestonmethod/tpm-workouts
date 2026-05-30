@@ -667,7 +667,12 @@
     "id": "c-9",
     "name": "Seated Shoulder Press",
     "pillar": "C",
+    "status": "Active",
     "category": "Push",
+    "movementFamily": "",
+    "movementPattern": "",
+    "bodyRegion": "",
+    "loadStyle": "",
     "sets": "3",
     "reps": "6–8 reps",
     "rpe": "7–8",
@@ -675,9 +680,11 @@
     "difficulty": "Intermediate",
     "code": "PM-P1-09-SSPS",
     "cues": "Start at ear height. Press overhead. Don't arch lower back.",
+    "coachingFocus": "",
+    "contraindications": "",
     "progression": "Rest 30 sec",
     "video": "",
-    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-9.jpg"
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/seated-shoulder-press-10246.jpg"
   },
   {
     "id": "c-10",
