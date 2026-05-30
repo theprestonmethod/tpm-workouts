@@ -2451,5 +2451,28 @@
     "progression": "Go slowly if you are not ready for plyometrics",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/burpees-48218.jpg"
+  },
+  {
+    "id": "ex-1780107343299",
+    "name": "Seated Ball Toss & Talk",
+    "pillar": "A",
+    "status": "Active",
+    "category": "",
+    "movementFamily": "",
+    "movementPattern": "",
+    "bodyRegion": "",
+    "loadStyle": "",
+    "sets": "2",
+    "reps": "30s",
+    "rpe": "4",
+    "equipment": "Tennis Ball",
+    "difficulty": "Foundational",
+    "code": "CIM-04-WalkBallTossTalk",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/seated-ball-toss-talk-38034.jpg"
   }
 ]
