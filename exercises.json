@@ -2816,5 +2816,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/turkish-getup-56944.jpg"
+  },
+  {
+    "id": "ex-1780182468594",
+    "name": "Kettlebell Turkish Get Up",
+    "pillar": "C",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "",
+    "movementPattern": "Loaded Carry",
+    "bodyRegion": "Full Body",
+    "loadStyle": "Strength",
+    "sets": "5-8",
+    "reps": "",
+    "rpe": "8-9",
+    "equipment": "Kettlebell",
+    "difficulty": "Advanced",
+    "code": "PL-61-KBTurkishGU",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/kettlebell-turkish-get-up-65813.jpg"
   }
 ]
