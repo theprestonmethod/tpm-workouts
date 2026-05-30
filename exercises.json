@@ -2839,5 +2839,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/kettlebell-turkish-get-up-65813.jpg"
+  },
+  {
+    "id": "ex-1780183041803",
+    "name": "Dumbell Front Punches",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Cardio",
+    "movementFamily": "Breath/Core",
+    "movementPattern": "Rotation",
+    "bodyRegion": "Full Body",
+    "loadStyle": "Power",
+    "sets": "2",
+    "reps": "30s",
+    "rpe": "7-8",
+    "equipment": "Dumbbells",
+    "difficulty": "Intermediate",
+    "code": "SM-62-DBFrontPunch",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/dumbell-front-punches-38393.jpg"
   }
 ]
