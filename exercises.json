@@ -2793,5 +2793,28 @@
     "progression": "Reduce weight if you cannot keep good form",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/db-turkish-getup-90225.jpg"
+  },
+  {
+    "id": "ex-1780180959827",
+    "name": "Turkish Getup",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "",
+    "movementPattern": "",
+    "bodyRegion": "Full Body",
+    "loadStyle": "Strength",
+    "sets": "3-5",
+    "reps": "",
+    "rpe": "6-8",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Intermediate",
+    "code": "SM-58-TurkishGU",
+    "cues": "Be sure to stack your elbow directly below your shoulder, the bent knee should be almost 90 degrees, and not have the heel too close to glutes, leaving space to finish the moves.",
+    "coachingFocus": "Strength, whole body, core",
+    "contraindications": "Wait until your form is good before adding weight.",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/turkish-getup-56944.jpg"
   }
 ]
