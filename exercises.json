@@ -90,7 +90,12 @@
     "id": "wu-6",
     "name": "Butt Kicks",
     "pillar": "WU",
+    "status": "Active",
     "category": "Warm-Up",
+    "movementFamily": "",
+    "movementPattern": "",
+    "bodyRegion": "",
+    "loadStyle": "",
     "sets": "1",
     "reps": "20–30 sec",
     "rpe": "",
@@ -98,9 +103,11 @@
     "difficulty": "Foundational",
     "code": "WU-UNI-03",
     "cues": "Relax shoulders, keep posture tall, try to reach heel to butt",
+    "coachingFocus": "",
+    "contraindications": "",
     "progression": "",
     "video": "",
-    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-6.jpg"
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/butt-kicks-35442.jpg"
   },
   {
     "id": "wu-7",
