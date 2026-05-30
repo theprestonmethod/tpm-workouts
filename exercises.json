@@ -2474,5 +2474,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/seated-ball-toss-talk-38034.jpg"
+  },
+  {
+    "id": "ex-1780107456923",
+    "name": "Seated Ball Toss & Talk",
+    "pillar": "A",
+    "status": "Active",
+    "category": "",
+    "movementFamily": "",
+    "movementPattern": "",
+    "bodyRegion": "Upper Body",
+    "loadStyle": "Mobility",
+    "sets": "3",
+    "reps": "30s",
+    "rpe": "4",
+    "equipment": "Tennis Ball",
+    "difficulty": "Foundational",
+    "code": "CIM-05-SeatedBallTossTalk",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/seated-ball-toss-talk-55178.jpg"
   }
 ]
