@@ -2770,5 +2770,28 @@
     "progression": "Do not work through any pain with shoulders.",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/tricep-pushups-knees-18746.jpg"
+  },
+  {
+    "id": "ex-1780180394439",
+    "name": "DB Turkish Getup",
+    "pillar": "C",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "",
+    "movementPattern": "Loaded Carry",
+    "bodyRegion": "Full Body",
+    "loadStyle": "Strength",
+    "sets": "3-5",
+    "reps": "",
+    "rpe": "7-8",
+    "equipment": "Dumbbells",
+    "difficulty": "Advanced",
+    "code": "PL-58-DBTurkishGU",
+    "cues": "Make sure your elbow is directly below your shoulder joint, make sure the bent knee has enough space that it is more at a 90 degree angle so you have room later to move.",
+    "coachingFocus": "This is an amazing whole body exercise but form is of utmost concern.",
+    "contraindications": "Make sure you stack your shoulders properly and focus on form.",
+    "progression": "Reduce weight if you cannot keep good form",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/db-turkish-getup-90225.jpg"
   }
 ]
