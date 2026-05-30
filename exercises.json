@@ -649,7 +649,12 @@
     "id": "c-7",
     "name": "Hamstring Curls on Ball",
     "pillar": "C",
+    "status": "Active",
     "category": "Hinge",
+    "movementFamily": "",
+    "movementPattern": "",
+    "bodyRegion": "",
+    "loadStyle": "",
     "sets": "3",
     "reps": "6–8 reps",
     "rpe": "7–8",
@@ -657,9 +662,11 @@
     "difficulty": "Advanced",
     "code": "PM-P1-09-HSCBall",
     "cues": "Bridge first then curl. Control the extension.",
+    "coachingFocus": "",
+    "contraindications": "",
     "progression": "Rest 30 sec",
     "video": "",
-    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-7.jpg"
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/hamstring-curls-on-ball-09261.jpg"
   },
   {
     "id": "c-8",
