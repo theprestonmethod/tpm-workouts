@@ -580,7 +580,12 @@
     "id": "c-4",
     "name": "Lat Pullovers",
     "pillar": "C",
+    "status": "Active",
     "category": "Pull",
+    "movementFamily": "",
+    "movementPattern": "",
+    "bodyRegion": "",
+    "loadStyle": "",
     "sets": "3",
     "reps": "6–8 reps",
     "rpe": "7–8",
@@ -588,9 +593,11 @@
     "difficulty": "Intermediate",
     "code": "PM-P1-07-LPOvs",
     "cues": "Keep slight elbow bend. Feel lat stretch at top.",
+    "coachingFocus": "",
+    "contraindications": "",
     "progression": "Rest 30 sec",
     "video": "",
-    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-4.jpg"
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/lat-pullovers-06832.jpg"
   },
   {
     "id": "c-5",
