@@ -699,7 +699,12 @@
     "id": "c-11",
     "name": "Standing Long Jumps",
     "pillar": "C",
+    "status": "Active",
     "category": "Plyo",
+    "movementFamily": "",
+    "movementPattern": "",
+    "bodyRegion": "",
+    "loadStyle": "",
     "sets": "2",
     "reps": "10 reps",
     "rpe": "",
@@ -707,9 +712,11 @@
     "difficulty": "Advanced",
     "code": "PL-Plyo-V1-LJumps",
     "cues": "Light bounce to prepare. Land on whole foot. Knees soft.",
+    "coachingFocus": "",
+    "contraindications": "",
     "progression": "",
     "video": "",
-    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-11.jpg"
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/standing-long-jumps-04250.jpg"
   },
   {
     "id": "c-12",
