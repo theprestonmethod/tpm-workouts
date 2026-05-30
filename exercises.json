@@ -324,7 +324,12 @@
     "id": "st-1",
     "name": "Grip + Hand Health",
     "pillar": "ST",
+    "status": "Active",
     "category": "Grip / Hand",
+    "movementFamily": "",
+    "movementPattern": "",
+    "bodyRegion": "",
+    "loadStyle": "",
     "sets": "1",
     "reps": "1–3 min total",
     "rpe": "",
@@ -332,9 +337,11 @@
     "difficulty": "Foundational",
     "code": "AT-HOME-01",
     "cues": "Squeeze: firm grip, no pain. Pinch & Roll. Palm Massage. Wrist Circles. Keep what feels good.",
+    "coachingFocus": "",
+    "contraindications": "",
     "progression": "",
     "video": "",
-    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-1.jpg"
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/grip-hand-health-50932.jpg"
   },
   {
     "id": "st-2",
