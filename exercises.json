@@ -1097,7 +1097,7 @@
   {
     "id": "st-11",
     "name": "Robots",
-    "pillar": "A",
+    "pillar": "B",
     "status": "Active",
     "category": "Mobility",
     "movementFamily": "Rotate",
@@ -1106,16 +1106,16 @@
     "loadStyle": "Mobility",
     "sets": "2",
     "reps": "10 slow",
-    "rpe": "",
-    "equipment": "None / Bodyweight",
+    "rpe": "7",
+    "equipment": "Dumbbells",
     "difficulty": "Foundational",
-    "code": "MF-SH-03",
+    "code": "SM-43-Robots",
     "cues": "Keep arms low to start. Palms facing outward. Keep elbows at comfortable level as you turn palms down. NO pain. Stay low and work slow.",
     "coachingFocus": "",
     "contraindications": "",
     "progression": "Goal image is the end point — not the starting point. Progress gradually",
     "video": "",
-    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-11.jpg"
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/robots-27783.jpg"
   },
   {
     "id": "st-12",
