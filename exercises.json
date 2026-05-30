@@ -2655,5 +2655,28 @@
     "progression": "reduce weight if you have pain.",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/olympic-bar-squat-25436.jpg"
+  },
+  {
+    "id": "ex-1780174208820",
+    "name": "2Tier Step-ups",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Cardio",
+    "movementFamily": "Locomotion",
+    "movementPattern": "",
+    "bodyRegion": "Lower Body",
+    "loadStyle": "Strength",
+    "sets": "2",
+    "reps": "30s-60s",
+    "rpe": "7-9",
+    "equipment": "Bench",
+    "difficulty": "Intermediate",
+    "code": "SM-50-StepUps",
+    "cues": "This is a great exercise for agility, speed, coordination - and Anaerobic energy system. Try to work in your 80% + training zone",
+    "coachingFocus": "Cardio, coordination, agility, speed",
+    "contraindications": "Slow down if you feel light headed.",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/2tier-step-ups-06338.jpg"
   }
 ]
