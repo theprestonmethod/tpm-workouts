@@ -2678,5 +2678,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/2tier-step-ups-06338.jpg"
+  },
+  {
+    "id": "ex-1780174358819",
+    "name": "High Knee Step-Ups",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Cardio",
+    "movementFamily": "Locomotion",
+    "movementPattern": "",
+    "bodyRegion": "Lower Body",
+    "loadStyle": "Strength",
+    "sets": "2",
+    "reps": "30s-60s",
+    "rpe": "7-9",
+    "equipment": "Bench",
+    "difficulty": "Intermediate",
+    "code": "SM-51-HighKneeStepUps",
+    "cues": "This works balance, core, cardio, adductors.",
+    "coachingFocus": "Make sure you have your whole foot on the bench, bring opposite knee into your chest.",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/high-knee-step-ups-57118.jpg"
   }
 ]
