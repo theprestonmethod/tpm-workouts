@@ -2701,5 +2701,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/high-knee-step-ups-57118.jpg"
+  },
+  {
+    "id": "ex-1780174868821",
+    "name": "Single Leg Wall Sit",
+    "pillar": "A",
+    "status": "Active",
+    "category": "Balance",
+    "movementFamily": "Squat",
+    "movementPattern": "Single-Leg",
+    "bodyRegion": "Legs",
+    "loadStyle": "Stability",
+    "sets": "4",
+    "reps": "10-30s each",
+    "rpe": "5-7",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "MF-35-SingleLegWallSit",
+    "cues": "Make sure you place your foot so that your knee is bent without your foot behind the knee. Press your back into the wall and weight on your heels.",
+    "coachingFocus": "Working on adductor strength, balance, core.",
+    "contraindications": "Don't go lower than 90 degrees",
+    "progression": "Move up higher if knees bother you.",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/single-leg-wall-sit-65220.jpg"
   }
 ]
