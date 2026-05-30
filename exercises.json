@@ -2724,5 +2724,28 @@
     "progression": "Move up higher if knees bother you.",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/single-leg-wall-sit-65220.jpg"
+  },
+  {
+    "id": "ex-1780175728721",
+    "name": "Dumbell Upright Rows",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Pull",
+    "movementFamily": "Pull",
+    "movementPattern": "Shoulder Mobility",
+    "bodyRegion": "Back / Shoulder",
+    "loadStyle": "Strength",
+    "sets": "2",
+    "reps": "10-12",
+    "rpe": "7",
+    "equipment": "Dumbbells",
+    "difficulty": "Intermediate",
+    "code": "SM-51-DBURRows",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/dumbell-upright-rows-22956.jpg"
   }
 ]
