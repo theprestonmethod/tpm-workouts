@@ -1281,18 +1281,25 @@
   {
     "id": "a-10",
     "name": "Russian Twists",
-    "pillar": "CORE",
+    "pillar": "B",
+    "status": "Active",
     "category": "Core",
+    "movementFamily": "Rotate",
+    "movementPattern": "Rotation",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Strength",
     "sets": "2",
     "reps": "20 total",
     "rpe": "",
     "equipment": "Medicine Ball",
     "difficulty": "Intermediate",
-    "code": "CORE-UNI-04",
+    "code": "SM-CORE-49-RussianTwistsWt",
     "cues": "Use a medicine ball or kettlebell. Keep heels on ground to protect your back. Rotate slowly through full range of motion. Keep core braced throughout.",
+    "coachingFocus": "",
+    "contraindications": "",
     "progression": "Lift feet off floor for added challenge when back is fully protected",
     "video": "",
-    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-10.jpg"
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/russian-twists-92412.jpg"
   },
   {
     "id": "a-11",
