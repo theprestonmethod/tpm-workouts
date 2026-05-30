@@ -2581,5 +2581,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/seated-ball-toss-talk-55178.jpg"
+  },
+  {
+    "id": "ex-1780118520534",
+    "name": "Russian Twists - No Weight",
+    "pillar": "A",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Rotate",
+    "movementPattern": "Rotation",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Strength",
+    "sets": "2",
+    "reps": "30s",
+    "rpe": "7",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "MF-Core-22-RussianTwists",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/russian-twists-no-weight-17817.jpg"
   }
 ]
