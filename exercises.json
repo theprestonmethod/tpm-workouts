@@ -2747,5 +2747,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/dumbell-upright-rows-22956.jpg"
+  },
+  {
+    "id": "ex-1780178022450",
+    "name": "Tricep Pushups - Knees",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Push",
+    "movementFamily": "Push",
+    "movementPattern": "Horizontal Push",
+    "bodyRegion": "Chest / Shoulder",
+    "loadStyle": "Strength",
+    "sets": "3",
+    "reps": "5",
+    "rpe": "7",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Intermediate",
+    "code": "SM-57-TriPUKnees",
+    "cues": "Keep your elbows tucked close to your body. Keep your pelvis tilted so your low back doesn't sink",
+    "coachingFocus": "Triceps, chest, core",
+    "contraindications": "This is a difficult exercise. Try not to go too low if you are not ready.",
+    "progression": "Do not work through any pain with shoulders.",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/tricep-pushups-knees-18746.jpg"
   }
 ]
