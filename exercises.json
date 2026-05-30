@@ -722,7 +722,12 @@
     "id": "c-12",
     "name": "Oblique Med Ball Throw",
     "pillar": "C",
+    "status": "Active",
     "category": "Core",
+    "movementFamily": "",
+    "movementPattern": "",
+    "bodyRegion": "",
+    "loadStyle": "",
     "sets": "2",
     "reps": "10 each side",
     "rpe": "",
@@ -730,9 +735,11 @@
     "difficulty": "Advanced",
     "code": "PL-Plyo-V1-LJumps",
     "cues": "Core fully engaged — especially obliques. Shoulders braced. Swing from middle, throw on angle upward at wall.",
+    "coachingFocus": "",
+    "contraindications": "",
     "progression": "Start light — med balls don't bounce",
     "video": "",
-    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-12.jpg"
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/oblique-med-ball-throw-42250.jpg"
   },
   {
     "id": "cim-1",
