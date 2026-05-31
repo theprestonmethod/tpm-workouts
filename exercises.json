@@ -2862,5 +2862,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/dumbell-front-punches-38393.jpg"
+  },
+  {
+    "id": "ex-1780249706292",
+    "name": "Air Front Punches",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Cardio",
+    "movementFamily": "",
+    "movementPattern": "Shoulder Mobility",
+    "bodyRegion": "Arms",
+    "loadStyle": "Mobility",
+    "sets": "4",
+    "reps": "30s",
+    "rpe": "7",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "SM-62-AirFrontPunches",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/air-front-punches-03861.jpg"
   }
 ]
