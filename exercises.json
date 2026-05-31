@@ -2908,5 +2908,28 @@
     "progression": "Lighten the weight or use no weights",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/dumbell-stationary-lunges-11922.jpg"
+  },
+  {
+    "id": "ex-1780253908038",
+    "name": "Jen - OB Deadlift",
+    "pillar": "C",
+    "status": "Active",
+    "category": "Hinge",
+    "movementFamily": "Hinge",
+    "movementPattern": "Hinge",
+    "bodyRegion": "Full Body",
+    "loadStyle": "Power",
+    "sets": "4",
+    "reps": "6",
+    "rpe": "8-9",
+    "equipment": "Olympic Bar",
+    "difficulty": "Advanced",
+    "code": "PL-65-Jen-OlympicBarDL",
+    "cues": "Tuck pelvis so you engage your core, keep a neutral spine, hinge at hips and use your heels.",
+    "coachingFocus": "Strength, hamstrings, gluts, back/core",
+    "contraindications": "form is extremely important to avoid back pain or injury.",
+    "progression": "Lighten the load if you have pain. Use chalk or the hooks.",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/jen-ob-deadlift-05673.jpg"
   }
 ]
