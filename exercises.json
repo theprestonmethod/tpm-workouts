@@ -2931,5 +2931,28 @@
     "progression": "Lighten the load if you have pain. Use chalk or the hooks.",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/jen-ob-deadlift-05673.jpg"
+  },
+  {
+    "id": "ex-1780254094074",
+    "name": "Hex Bar Squat",
+    "pillar": "C",
+    "status": "Active",
+    "category": "Squat",
+    "movementFamily": "Squat",
+    "movementPattern": "Loaded Carry",
+    "bodyRegion": "Legs",
+    "loadStyle": "Power",
+    "sets": "4",
+    "reps": "6",
+    "rpe": "8",
+    "equipment": "",
+    "difficulty": "Advanced",
+    "code": "PL-66-Jen-HexBarSquat",
+    "cues": "keep feet straight, legs wider than hip-width, drive with your heels, use hooks if grip slows you down.",
+    "coachingFocus": "Strength, gluts, quads, spine/core",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/hex-bar-squat-90914.jpg"
   }
 ]
