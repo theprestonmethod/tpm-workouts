@@ -2885,5 +2885,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/air-front-punches-03861.jpg"
+  },
+  {
+    "id": "ex-1780250514144",
+    "name": "Dumbell Stationary Lunges",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Balance",
+    "movementFamily": "Lunge",
+    "movementPattern": "Split Squat",
+    "bodyRegion": "Lower Body",
+    "loadStyle": "Strength",
+    "sets": "2",
+    "reps": "10-15",
+    "rpe": "7-8",
+    "equipment": "Dumbbells",
+    "difficulty": "Intermediate",
+    "code": "SM-64-DBStatLunges",
+    "cues": "Use the back leg as your \"kickstand\" and use the heel on the front leg to press into the ground, bend the back knee to allow the front knee to bend, make sure you check your form before starting.",
+    "coachingFocus": "Stability, core, split squat/lunge control",
+    "contraindications": "If you have knee pain, reduce your Range of Motion",
+    "progression": "Lighten the weight or use no weights",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/dumbell-stationary-lunges-11922.jpg"
   }
 ]
