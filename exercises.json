@@ -2954,5 +2954,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/hex-bar-squat-90914.jpg"
+  },
+  {
+    "id": "ex-1780257899579",
+    "name": "KB Single Leg RDL",
+    "pillar": "C",
+    "status": "Active",
+    "category": "Balance",
+    "movementFamily": "Hinge",
+    "movementPattern": "Single-Leg",
+    "bodyRegion": "Hips / Glutes",
+    "loadStyle": "Stability",
+    "sets": "4",
+    "reps": "6-8",
+    "rpe": "7",
+    "equipment": "Kettlebell",
+    "difficulty": "Advanced",
+    "code": "PL-67-Jen-SLRDL",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/kb-single-leg-rdl-95562.jpg"
   }
 ]
