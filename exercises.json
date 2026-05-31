@@ -268,8 +268,13 @@
   {
     "id": "a-5",
     "name": "Lying Leg Lifts",
-    "pillar": "CORE",
+    "pillar": "B",
+    "status": "Active",
     "category": "Core",
+    "movementFamily": "",
+    "movementPattern": "",
+    "bodyRegion": "",
+    "loadStyle": "",
     "sets": "2",
     "reps": "10 reps",
     "rpe": "",
@@ -277,6 +282,8 @@
     "difficulty": "Foundational",
     "code": "MO-PH1-13-LLifts",
     "cues": "Start with legs at 90°. Only lower where you can control core with no lower back pain.",
+    "coachingFocus": "",
+    "contraindications": "",
     "progression": "Increase range as strength improves",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-5.jpg"
