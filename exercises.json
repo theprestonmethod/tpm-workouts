@@ -2991,5 +2991,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/kb-single-leg-rdl-95562.jpg"
+  },
+  {
+    "id": "ex-1780281660882",
+    "name": "Bosu Step Ups",
+    "pillar": "A",
+    "status": "Active",
+    "category": "Cardio",
+    "movementFamily": "Mobility",
+    "movementPattern": "",
+    "bodyRegion": "Legs",
+    "loadStyle": "Mobility",
+    "sets": "2",
+    "reps": "30seconds",
+    "rpe": "4-6",
+    "equipment": "BOSU",
+    "difficulty": "Foundational",
+    "code": "MF-70-BosuStUp",
+    "cues": "Stand tall, with good posture.\nStep to the very top of the Bosu - with your whole foot.",
+    "coachingFocus": "Balance, core",
+    "contraindications": "If you are recovering from injury, start slowly and use a counter/bar if needed.",
+    "progression": "If you feel knee, ankle or foot pain, move off the Bosu. If you want to increase intensity, run up and down instead of step-ups.",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bosu-step-ups-58099.jpg"
   }
 ]
