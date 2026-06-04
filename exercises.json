@@ -3037,5 +3037,28 @@
     "progression": "Reduce weight",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/weighted-single-leg-torso-twists-50281.jpg"
+  },
+  {
+    "id": "ex-1780610971627",
+    "name": "Weighted Woodchoppers",
+    "pillar": "C",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Rotate",
+    "movementPattern": "Rotation",
+    "bodyRegion": "Full Body",
+    "loadStyle": "Control",
+    "sets": "2",
+    "reps": "10-15",
+    "rpe": "7-8",
+    "equipment": "Dumbbells",
+    "difficulty": "Intermediate",
+    "code": "PL-Golf-WtdWoodchoppers",
+    "cues": "You can increase Range of Motion by lifting the weight up with straight arms and bending one knee to have more movement. Otherwise, concentrate on spinal rotation.",
+    "coachingFocus": "Control, spinal rotation",
+    "contraindications": "",
+    "progression": "reduce weight or progress with heavier weights and wider ROM",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/weighted-woodchoppers-68753.jpg"
   }
 ]
