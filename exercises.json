@@ -3014,5 +3014,28 @@
     "progression": "If you feel knee, ankle or foot pain, move off the Bosu. If you want to increase intensity, run up and down instead of step-ups.",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bosu-step-ups-58099.jpg"
+  },
+  {
+    "id": "ex-1780610652923",
+    "name": "Weighted Single-Leg Torso Twists",
+    "pillar": "C",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Rotate",
+    "movementPattern": "Rotation",
+    "bodyRegion": "Full Body",
+    "loadStyle": "Control",
+    "sets": "2",
+    "reps": "10-15",
+    "rpe": "7-8",
+    "equipment": "Kettlebell",
+    "difficulty": "Intermediate",
+    "code": "SM-75-Wtd1LegTwist",
+    "cues": "Always turn toward the knee that is up. If you cannot keep form without touching the floor, just tap the floor between reps.",
+    "coachingFocus": "Stability, balance, Core, Spinal rotation",
+    "contraindications": "",
+    "progression": "Reduce weight",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/weighted-single-leg-torso-twists-50281.jpg"
   }
 ]
