@@ -3060,5 +3060,28 @@
     "progression": "reduce weight or progress with heavier weights and wider ROM",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/weighted-woodchoppers-68753.jpg"
+  },
+  {
+    "id": "ex-1780611082566",
+    "name": "Seated Windshield Wipers",
+    "pillar": "A",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Rotate",
+    "movementPattern": "Rotation",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Mobility",
+    "sets": "2",
+    "reps": "10",
+    "rpe": "5-7",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "MF-77-SeatedWWipers",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/seated-windshield-wipers-80688.jpg"
   }
 ]
