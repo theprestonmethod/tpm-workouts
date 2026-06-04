@@ -3083,5 +3083,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/seated-windshield-wipers-80688.jpg"
+  },
+  {
+    "id": "ex-1780611169581",
+    "name": "Windshield Wipers - Bent Knee",
+    "pillar": "A",
+    "status": "Active",
+    "category": "Core",
+    "movementFamily": "Rotate",
+    "movementPattern": "Rotation",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Mobility",
+    "sets": "2",
+    "reps": "10-20",
+    "rpe": "6-7",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "MF-77-WWipers",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/windshield-wipers-bent-knee-67037.jpg"
   }
 ]
