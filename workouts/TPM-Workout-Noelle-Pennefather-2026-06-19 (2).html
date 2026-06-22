@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>3x/week at Anytime Fitness — Noelle Pennefather</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--red:#1B3A5C;--sage:#b1cbb4;--sage-lt:#d8e9da;--cyan:#20cbd6;--cyan-dk:#17a8b2;--off:#F8F6F3;--cream:#F4F1ED;--border:#D4CFC8;--text:#1C1C1C;--gray:#808080;--gray2:#696767;}
+html,body{height:100%;background:#2a2a2a;}
+body{font-family:'DM Sans',sans-serif;color:var(--text);display:flex;justify-content:center;align-items:stretch;}
+.app-shell{width:100%;max-width:480px;height:100vh;position:relative;background:var(--cream);overflow:hidden;box-shadow:0 0 40px rgba(0,0,0,0.4);}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--cream);transition:opacity 0.3s;overflow:hidden;}
+.screen.hidden{opacity:0;pointer-events:none;}
+.welcome-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow-y:auto;padding:36px 24px 40px;background:linear-gradient(160deg,#1B3A5C 0%,#142d47 100%);}
+.welcome-logo{width:72px;height:72px;background:white;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;box-shadow:0 6px 28px rgba(0,0,0,0.3);}
+.welcome-logo img{width:60px;height:60px;border-radius:10px;object-fit:cover;}
+.welcome-eyebrow{font-size:10px;font-weight:700;letter-spacing:2.5px;color:rgba(255,255,255,0.45);text-transform:uppercase;margin-bottom:10px;text-align:center;}
+.wt{font-family:'Bebas Neue';font-size:36px;letter-spacing:3px;color:white;line-height:1.05;margin-bottom:4px;text-align:center;}
+.welcome-motivation{font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:24px;text-align:center;font-style:italic;line-height:1.5;}
+.wcard{background:rgba(255,255,255,0.08);border-radius:14px;padding:18px 20px;margin-bottom:18px;text-align:left;border:1px solid rgba(255,255,255,0.15);width:100%;}
+.wlabel{font-size:10px;font-weight:700;letter-spacing:1.5px;color:rgba(255,255,255,0.45);text-transform:uppercase;margin-bottom:3px;}
+.wval{font-size:15px;color:white;font-weight:500;margin-bottom:12px;}
+.wval:last-child{margin-bottom:0;}
+.wnotes{font-size:13px;color:rgba(255,255,255,0.85);background:rgba(255,255,255,0.08);border-radius:10px;padding:14px;margin-bottom:20px;width:100%;border:1px solid rgba(255,255,255,0.15);}
+.start-btn{width:100%;background:#C73B30;color:white;border:none;border-radius:14px;padding:20px;font-family:'Bebas Neue';font-size:26px;letter-spacing:3px;cursor:pointer;box-shadow:0 6px 24px rgba(199,59,48,0.4);transition:all 0.2s;}
+.start-btn:hover{background:#a0302a;transform:translateY(-1px);box-shadow:0 8px 28px rgba(199,59,48,0.5);}
+.start-btn:active{transform:translateY(0);}
+.day-choices{width:100%;display:flex;flex-direction:column;gap:12px;}
+.day-choice{width:100%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);color:white;border-radius:14px;padding:18px 20px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;transition:all 0.2s;text-align:left;}
+.day-choice:hover{background:rgba(255,255,255,0.15);transform:translateY(-1px);}
+.day-choice:active{transform:translateY(0);}
+.day-choice-name{font-family:'Bebas Neue';font-size:24px;letter-spacing:2px;line-height:1;}
+.day-choice-meta{font-size:13px;color:rgba(255,255,255,0.7);font-weight:500;white-space:nowrap;}
+.day-choice-meta::after{content:'  →';}
+.ex-top-bar{background:var(--red);padding:12px 20px 10px;flex-shrink:0;}
+.ex-prog-label{font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:6px;display:flex;justify-content:space-between;}
+.prog-track{background:rgba(255,255,255,0.2);border-radius:4px;height:5px;}
+.prog-fill{background:white;border-radius:4px;height:5px;transition:width 0.4s ease;}
+.ex-header{padding:14px 20px 8px;flex-shrink:0;}
+.pillar-badge{display:inline-block;font-family:'Bebas Neue';font-size:11px;letter-spacing:1px;padding:3px 10px;border-radius:5px;color:white;margin-bottom:6px;}
+.ex-name{font-family:'Bebas Neue';font-size:32px;letter-spacing:1.5px;line-height:1.05;color:var(--text);}
+.ex-code{font-size:10px;color:var(--gray);margin-top:2px;}
+.ex-body{flex:1;overflow-y:auto;padding:0 20px 24px;}
+.ex-img{width:100%;border-radius:12px;border:1.5px solid var(--border);background:white;margin-bottom:12px;overflow:hidden;max-height:340px;}
+.ex-img img{width:100%;height:340px;object-fit:contain;object-position:center center;display:block;background:white;}
+.ex-no-img{width:100%;height:100px;display:flex;align-items:center;justify-content:center;font-size:32px;background:var(--off);border-radius:12px;border:1.5px solid var(--border);margin-bottom:12px;}
+.meta-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.meta-pill{font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;background:white;border:1.5px solid var(--border);color:var(--gray2);}
+.cues-box{font-size:13px;color:var(--gray2);font-style:italic;background:white;border-radius:10px;padding:12px 14px;border:1.5px solid var(--border);margin-bottom:12px;line-height:1.6;}
+.caution-box{font-size:12px;color:var(--red);background:#fdf0f0;border-radius:8px;padding:10px 14px;border:1.5px solid #f0c8c6;margin-bottom:12px;}
+.sets-label{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--gray2);text-transform:uppercase;margin-bottom:10px;}
+.start-weight-box{font-size:14px;color:#1B3A5C;background:#EAF1F8;border:1.5px solid #c5d8ec;border-radius:10px;padding:11px 14px;margin-bottom:12px;font-weight:500;}
+.start-weight-box strong{font-weight:700;}
+.set-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;background:white;border-radius:10px;padding:10px 12px;border:1.5px solid var(--border);transition:all 0.2s;}
+.set-row.done{border-color:#1A56DB;background:#EFF6FF;}
+.set-num{font-family:'Bebas Neue';font-size:18px;color:var(--gray);width:28px;flex-shrink:0;}
+.set-row.done .set-num{color:#1A56DB;}
+.set-inputs{flex:1;display:flex;gap:8px;}
+.set-input{font-family:'DM Sans';font-size:14px;background:var(--off);border:1.5px solid var(--border);border-radius:8px;padding:8px 10px;width:100%;text-align:center;color:var(--text);}
+.set-input:focus{outline:none;border-color:var(--red);}
+.set-input-lbl{font-size:9px;text-align:center;color:var(--gray);margin-top:2px;font-weight:600;letter-spacing:0.5px;}
+.tick-btn{width:44px;height:44px;border-radius:10px;border:2px solid var(--border);background:var(--off);font-size:20px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
+.tick-btn.on{background:#1A56DB;border-color:#1A56DB;color:white;}
+.rpe-row{display:flex;gap:6px;margin-bottom:12px;}
+.rpe-btn{flex:1;padding:8px 2px;border-radius:7px;border:1.5px solid var(--border);background:var(--off);font-size:13px;font-weight:700;cursor:pointer;color:var(--gray2);transition:all 0.15s;text-align:center;}
+.rpe-btn.on{background:var(--red);border-color:var(--red);color:white;}
+.notes-ta{width:100%;font-family:'DM Sans';font-size:13px;background:white;border:1.5px solid var(--border);border-radius:10px;padding:12px;resize:none;color:var(--text);margin-bottom:16px;}
+.notes-ta:focus{outline:none;border-color:var(--red);}
+.next-btn{width:100%;background:var(--red);color:white;border:none;border-radius:14px;padding:18px;font-family:'Bebas Neue';font-size:22px;letter-spacing:2px;cursor:pointer;margin-bottom:8px;}
+.next-btn:active{transform:scale(0.98);}
+.skip-btn{width:100%;background:transparent;border:none;color:var(--gray);font-family:'DM Sans';font-size:13px;padding:8px;cursor:pointer;}
+.back-btn{width:100%;background:transparent;border:none;color:var(--red);font-family:'DM Sans';font-size:13px;padding:4px;cursor:pointer;font-weight:600;}
+.complete-header{width:100%;background:var(--red);padding:32px 24px 28px;text-align:center;flex-shrink:0;}
+.complete-icon{font-size:52px;margin-bottom:10px;}
+.complete-title{font-family:'Bebas Neue';font-size:36px;letter-spacing:3px;color:white;margin-bottom:4px;}
+.complete-sub{font-size:14px;color:rgba(255,255,255,0.8);}
+.complete-body{width:100%;padding:22px 20px;overflow-y:auto;flex:1;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px;}
+.stat-card{background:white;border-radius:12px;padding:16px;text-align:center;border:1.5px solid var(--border);}
+.stat-num{font-family:'Bebas Neue';font-size:32px;color:var(--red);}
+.stat-label{font-size:11px;color:var(--gray);font-weight:600;letter-spacing:0.5px;text-transform:uppercase;}
+.session-list{background:white;border-radius:12px;border:1.5px solid var(--border);overflow:hidden;margin-bottom:18px;}
+.sess-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--off);}
+.sess-row:last-child{border-bottom:none;}
+.sess-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.sess-name{flex:1;font-size:13px;font-weight:600;}
+.sess-detail{font-size:11px;color:var(--gray2);}
+.checkin-btn{width:100%;background:var(--red);color:white;border:none;border-radius:14px;padding:16px;font-family:'Bebas Neue';font-size:20px;letter-spacing:2px;cursor:pointer;margin-bottom:10px;text-decoration:none;display:block;text-align:center;}
+.reset-btn{width:100%;background:var(--off);color:var(--gray2);border:1.5px solid var(--border);border-radius:14px;padding:13px;font-family:'DM Sans';font-size:14px;font-weight:600;cursor:pointer;}
+.submit-status{font-size:12px;text-align:center;padding:8px;color:var(--gray);margin-bottom:8px;}
+.tpm-footer{padding:18px;text-align:center;font-size:11px;color:var(--gray);line-height:1.9;}</style>
+</head>
+<body>
+<div class="app-shell">
+<div class="screen" id="scrWelcome">
+  <div class="welcome-wrap">
+    <div class="welcome-logo"><img src="01_TPM_master_icon.png" alt="TPM"></div>
+    <div class="welcome-eyebrow">The Preston Method™</div>
+    <div class="wt">NOELLE PENNEFATHER</div>
+    <div class="welcome-motivation">Your workout is ready. Let’s move today.</div>
+    <div class="wcard">
+      <div class="wlabel">Program</div><div class="wval">3x/week at Anytime Fitness</div>
+      <div class="wlabel">Date</div><div class="wval">2026-06-19</div>
+    </div>
+<div class="wnotes"><strong>Coach Note:</strong><br>We can work on this for 4 weeks, then come in for an update! :) </div>    <div class="welcome-eyebrow" style="margin-top:6px;margin-bottom:14px;align-self:flex-start;">Choose today’s workout</div>
+    <div class="day-choices" id="dayChoices"></div>
+  </div>
+</div>
+<div class="screen hidden" id="scrEx" style="display:flex;">
+  <div class="ex-top-bar">
+    <div class="ex-prog-label"><span id="progLbl">Exercise 1 of 1</span><span id="timerLbl">0:00</span></div>
+    <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  </div>
+  <div class="ex-header" id="exHdr"></div>
+  <div class="ex-body" id="exBody"></div>
+</div>
+<div class="screen hidden" id="scrComplete" style="display:flex;flex-direction:column;">
+  <div class="complete-header">
+    <div class="complete-icon">&#127881;</div>
+    <div class="complete-title">WORKOUT COMPLETE!</div>
+    <div class="complete-sub" id="completeSub"></div>
+  </div>
+  <div class="complete-body">
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num" id="statEx">0</div><div class="stat-label">Exercises</div></div>
+      <div class="stat-card"><div class="stat-num" id="statSets">0</div><div class="stat-label">Sets Done</div></div>
+      <div class="stat-card"><div class="stat-num" id="statMin">0</div><div class="stat-label">Minutes</div></div>
+      <div class="stat-card"><div class="stat-num" id="statNum">1</div><div class="stat-label">Session #</div></div>
+    </div>
+    <div class="session-list" id="sessList"></div>
+    <div class="submit-status" id="submitStatus"></div>
+<a href="https://theprestonmethod.github.io/tpm-workouts/tpm-weekly-checkin.html" class="checkin-btn">&#10003; CHECK IN NOW</a>
+    <button class="reset-btn" onclick="resetWorkout()">&#8617; Choose another day</button>
+  </div>
+  <div class="tpm-footer"><strong>THE PRESTON METHOD™</strong><br>604.993.1888 &middot; info@oasistraining.ca<br>www.theprestonmethod.com &middot; Trademark #2460203</div>
+</div>
+<script type="application/json" id="tpm_ex_data">{"Day 1":[{"id":"ex-1779812123635","name":"Recumbent Bike","pillar":"WU","sets":"3","reps":"5 mins","rpe":"6-7","equipment":"","cues":"","coachingFocus":"","contraindications":"","progression":"","code":"WU-10-Recumbentbike","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/recumbent-bike-18242.jpg","pillarColor":"#7B61FF"},{"id":"wu-1","name":"Arm Swings","pillar":"WU","sets":"1","reps":"20–30 sec","rpe":"","equipment":"None / Bodyweight","cues":"Relax shoulders, ribs down, tall spine","coachingFocus":"","contraindications":"","progression":"Increase range gradually","code":"WU-UNI-01","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-1.jpg","pillarColor":"#7B61FF"},{"id":"wu-2","name":"Torso Twists","pillar":"WU","sets":"1","reps":"10–12 each side","rpe":"","equipment":"None / Bodyweight","cues":"Rotate through upper back, hips mostly forward","coachingFocus":"","contraindications":"","progression":"","code":"WU-UNI-01","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-2.jpg","pillarColor":"#7B61FF"},{"id":"wu-9","name":"T-Spine Windmills","pillar":"WU","sets":"1","reps":"10 each side","rpe":"","equipment":"None / Bodyweight","cues":"Obliques, shoulders, spinal rotation","coachingFocus":"","contraindications":"","progression":"","code":"WU-UNI-05","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-9.jpg","pillarColor":"#7B61FF"},{"id":"ex-1779393935376","name":"Air Squats","pillar":"WU","sets":"2","reps":"20","rpe":"5-6","equipment":"None / Bodyweight","cues":"Keep your weight on your heels and your chin and chest up looking straight ahead to keep your posture.","coachingFocus":"Mobility, flexibility, control","contraindications":"If you feel pain in your knees, try not to go as low.","progression":"if it is too difficult, try doing a wall sit instead.","code":"WU-30-AirSquats","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/air-squats-98104.jpg","pillarColor":"#7B61FF"},{"id":"wu-5","name":"Inchworms","pillar":"WU","sets":"1","reps":"5+ reps","rpe":"","equipment":"None / Bodyweight","cues":"Slow and controlled. Hinge at hips, crawl out to straight-arm plank and back.","coachingFocus":"","contraindications":"","progression":"","code":"WU-UNI-03","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-5.jpg","pillarColor":"#7B61FF"},{"id":"a-6","name":"Wall Angels","pillar":"A","sets":"2","reps":"10 reps","rpe":"","equipment":"None / Bodyweight","cues":"Stand with back flat against wall. Slide arms up and down in Y-T-W pattern.","coachingFocus":"","contraindications":"","progression":"","code":"PL-Plyo-V1","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-6.jpg","pillarColor":"#1A56DB"},{"id":"ex-1779394874434","name":"Knee Pushups","pillar":"B","sets":"3","reps":"10","rpe":"6-7","equipment":"None / Bodyweight","cues":"Make sure your hands are stacked below your shoulders and not in front. Keep your core engaged so your lower back doesn't dip.","coachingFocus":"Strength, Core, Upper body","contraindications":"","progression":"If you have difficulty or pain, try a wall pushup instead.","code":"SM-32-KneePU","startWeight":"Try a few reps on your toes :) ","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/knee-pushups-60557.jpg","pillarColor":"#E85D04"},{"id":"c-1","name":"DB Chest Press","pillar":"C","sets":"3","reps":"6–8 reps","rpe":"7–8","equipment":"Dumbbells","cues":"Control descent. Pause at chest. Drive up.","coachingFocus":"","contraindications":"","progression":"Rest 30 sec","code":"PM-P1-06-CPress","startWeight":"1 set 20lb x 6 reps - then 15 lbs x 8 reps  x 2 sets","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-1.jpg","pillarColor":"#D32374"},{"id":"ex-1779740907975","name":"Seated Rows","pillar":"B","sets":"3","reps":"8-10","rpe":"7-8","equipment":"Cable Machine","cues":"","coachingFocus":"","contraindications":"","progression":"","code":"SM-36-seatedrows","startWeight":"1 set 70lb x 6 reps 2 sets of 60lbs","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/seated-rows-05155.jpg","pillarColor":"#E85D04"},{"id":"c-3","name":"DB Flys — Flat Bench","pillar":"C","sets":"3","reps":"6–8 reps","rpe":"7–8","equipment":"Bench","cues":"Wide arc with slight elbow bend. Feel chest stretch at bottom.","coachingFocus":"","contraindications":"","progression":"Rest 30 sec","code":"PM-P1-07-DBflys","startWeight":"15lb x 8 reps x 3 sets","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-3.jpg","pillarColor":"#D32374"},{"id":"b-5","name":"Lat Pulldowns","pillar":"B","sets":"3","reps":"8 reps","rpe":"","equipment":"Cable Machine","cues":"Pull bar to chin. Squeeze lats. Control return.","coachingFocus":"","contraindications":"","progression":"Increase load when form is solid","code":"PL-B-01","startWeight":"1 set 75lb x 6 reps then 2 sets of 65 x 8 reps","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-5.jpg","pillarColor":"#E85D04"},{"id":"c-4","name":"Lat Pullovers","pillar":"C","sets":"3","reps":"6–8 reps","rpe":"7–8","equipment":"Bench","cues":"Keep slight elbow bend. Feel lat stretch at top.","coachingFocus":"","contraindications":"","progression":"Rest 30 sec","code":"PM-P1-07-LPOvs","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-4.jpg","pillarColor":"#D32374"},{"id":"ex-1777064186371","name":"Forearm Plank","pillar":"B","sets":"3","reps":"30s","rpe":"","equipment":"None / Bodyweight","cues":"Cues: \nPlace elbows under shoulders and actively push the floor away to spread your shoulder blades.\nTuck your tailbone and pull your ribs toward your hips to slightly round your lower back.\nTighten your glutes and core as if someone is about to punch your stomach.\nKeep your gaze on the floor for a long neck and maintain steady, deep breaths.","coachingFocus":"","contraindications":"","progression":"","code":"SM-CORE-05-fplank","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/forearm-plank-83758.jpg","pillarColor":"#E85D04"}],"Day 2":[{"id":"ex-1779812123635","name":"Recumbent Bike","pillar":"WU","sets":"3","reps":"5 mins","rpe":"6-7","equipment":"","cues":"","coachingFocus":"","contraindications":"","progression":"","code":"WU-10-Recumbentbike","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/recumbent-bike-18242.jpg","pillarColor":"#7B61FF"},{"id":"ex-1779393935376","name":"Air Squats","pillar":"WU","sets":"2","reps":"20","rpe":"5-6","equipment":"None / Bodyweight","cues":"Keep your weight on your heels and your chin and chest up looking straight ahead to keep your posture.","coachingFocus":"Mobility, flexibility, control","contraindications":"If you feel pain in your knees, try not to go as low.","progression":"if it is too difficult, try doing a wall sit instead.","code":"WU-30-AirSquats","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/air-squats-98104.jpg","pillarColor":"#7B61FF"},{"id":"wu-4","name":"Step Back Lunges","pillar":"WU","sets":"1","reps":"10 each side","rpe":"","equipment":"None / Bodyweight","cues":"Step back softly. Front heel grounded. Torso tall. Control the return.","coachingFocus":"","contraindications":"","progression":"","code":"WU-UNI-02","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-4.jpg","pillarColor":"#7B61FF"},{"id":"wu-7","name":"Lateral Lunges","pillar":"WU","sets":"1","reps":"10 each side","rpe":"","equipment":"None / Bodyweight","cues":"Drive from heel of bent knee","coachingFocus":"","contraindications":"","progression":"","code":"WU-UNI-04","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-7.jpg","pillarColor":"#7B61FF"},{"id":"wu-3","name":"Hip Openers","pillar":"WU","sets":"1","reps":"20–30 sec","rpe":"","equipment":"None / Bodyweight","cues":"Relax shoulders, ribs down, tall spine","coachingFocus":"","contraindications":"","progression":"","code":"WU-UNI-02","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-3.jpg","pillarColor":"#7B61FF"},{"id":"ex-1780250514144","name":"Dumbell Stationary Lunges","pillar":"B","sets":"2","reps":"10-15","rpe":"7-8","equipment":"Dumbbells","cues":"Use the back leg as your \"kickstand\" and use the heel on the front leg to press into the ground, bend the back knee to allow the front knee to bend, make sure you check your form before starting.","coachingFocus":"Stability, core, split squat/lunge control","contraindications":"If you have knee pain, reduce your Range of Motion","progression":"Lighten the weight or use no weights","code":"SM-64-DBStatLunges","startWeight":"15lb 2 sets 15 reps each leg","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/dumbell-stationary-lunges-11922.jpg","pillarColor":"#E85D04"},{"id":"c-16","name":"Medicine Ball Smash","pillar":"C","sets":"2","reps":"20 (or 4x10)","rpe":"","equipment":"Medicine Ball","cues":"Both feet parallel, slight bend in knees. Hold ball with palms, elbows bent. Stand close to wall. Push and smash ball at wall quickly — grab it immediately on rebound.","coachingFocus":"","contraindications":"","progression":"4 sets of 10 with heavier medicine ball","code":"PL-16","startWeight":"20lb ball 2 sets of 20 reps","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-16.jpg","pillarColor":"#D32374"},{"id":"ex-1779812123635","name":"Recumbent Bike","pillar":"WU","sets":"3","reps":"5 mins","rpe":"6-7","equipment":"","cues":"","coachingFocus":"","contraindications":"","progression":"","code":"WU-10-Recumbentbike","startWeight":"fast 1 minute","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/recumbent-bike-18242.jpg","pillarColor":"#7B61FF"},{"id":"c-5","name":"Plié Squats","pillar":"C","sets":"3","reps":"6–8 reps","rpe":"7–8","equipment":"Kettlebell","cues":"Toes out. Knees tracking over toes. Chest up.","coachingFocus":"","contraindications":"","progression":"Rest 30 sec","code":"PM-P1-08-PSqt","startWeight":"Kettlebell 40lbs - 2 sets of 15 reps","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-5.jpg","pillarColor":"#D32374"},{"id":"ex-1779812588208","name":"Leg Press","pillar":"B","sets":"3","reps":"10","rpe":"8","equipment":"","cues":"","coachingFocus":"","contraindications":"","progression":"","code":"SM-37-Legpress","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/leg-press-86166.jpg","pillarColor":"#E85D04"},{"id":"ex-1780174868821","name":"Single Leg Wall Sit","pillar":"A","sets":"4","reps":"10-30s each","rpe":"5-7","equipment":"None / Bodyweight","cues":"Make sure you place your foot so that your knee is bent without your foot behind the knee. Press your back into the wall and weight on your heels.","coachingFocus":"Working on adductor strength, balance, core.","contraindications":"Don't go lower than 90 degrees","progression":"Move up higher if knees bother you.","code":"MF-35-SingleLegWallSit","startWeight":"try this for 10 seconds each leg and add time if you can","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/single-leg-wall-sit-65220.jpg","pillarColor":"#1A56DB"},{"id":"ex-1777064001524","name":"Bicycle Crunch","pillar":"B","sets":"3","reps":"30s","rpe":"","equipment":"None / Bodyweight","cues":"Lower back glued to the floor.\nLift blades; don't pull your neck.\nEyes to the ceiling\nArmpit to knee: Focus on rotation, not just elbows.\nExtend long: Reach the opposite leg out straight.\nExhale on twist: Breathe out as you rotate.","coachingFocus":"","contraindications":"","progression":"","code":"SM-CORE-04-byccrunch","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/exercise-47755.jpg","pillarColor":"#E85D04"},{"id":"a-5","name":"Lying Leg Lifts","pillar":"CORE","sets":"2","reps":"10 reps","rpe":"","equipment":"None / Bodyweight","cues":"Start with legs at 90°. Only lower where you can control core with no lower back pain.","coachingFocus":"","contraindications":"","progression":"Increase range as strength improves","code":"MO-PH1-13-LLifts","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-5.jpg","pillarColor":"#059669"}],"Day 3":[{"id":"ex-1779920009849","name":"Rowing Machine","pillar":"C","sets":"3","reps":"500-1000m","rpe":"6-8","equipment":"","cues":"Use it as a warmup or for performance! A very versatile exercise!","coachingFocus":"Be very aware of your form.","contraindications":"","progression":"","code":"SM-36-seatedrows","startWeight":"1000 metres","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/rowing-machine-06975.jpg","pillarColor":"#D32374"},{"id":"wu-5","name":"Inchworms","pillar":"WU","sets":"1","reps":"5+ reps","rpe":"","equipment":"None / Bodyweight","cues":"Slow and controlled. Hinge at hips, crawl out to straight-arm plank and back.","coachingFocus":"","contraindications":"","progression":"","code":"WU-UNI-03","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-5.jpg","pillarColor":"#7B61FF"},{"id":"wu-9","name":"T-Spine Windmills","pillar":"WU","sets":"1","reps":"10 each side","rpe":"","equipment":"None / Bodyweight","cues":"Obliques, shoulders, spinal rotation","coachingFocus":"","contraindications":"","progression":"","code":"WU-UNI-05","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-9.jpg","pillarColor":"#7B61FF"},{"id":"a-6","name":"Wall Angels","pillar":"A","sets":"2","reps":"10 reps","rpe":"","equipment":"None / Bodyweight","cues":"Stand with back flat against wall. Slide arms up and down in Y-T-W pattern.","coachingFocus":"","contraindications":"","progression":"","code":"PL-Plyo-V1","startWeight":"","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-6.jpg","pillarColor":"#1A56DB"},{"id":"ex-1780178022450","name":"Tricep Pushups - Knees","pillar":"B","sets":"3","reps":"5","rpe":"7","equipment":"None / Bodyweight","cues":"Keep your elbows tucked close to your body. Keep your pelvis tilted so your low back doesn't sink","coachingFocus":"Triceps, chest, core","contraindications":"This is a difficult exercise. Try not to go too low if you are not ready.","progression":"Do not work through any pain with shoulders.","code":"SM-57-TriPUKnees","startWeight":"5 x 5 sets","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/tricep-pushups-knees-18746.jpg","pillarColor":"#E85D04"},{"id":"c-13","name":"DB Bicep Curl","pillar":"C","sets":"3","reps":"10-12 each","rpe":"","equipment":"Dumbbells","cues":"Elbows stay at sides. Full range of motion — extend fully at bottom. Control the descent.","coachingFocus":"","contraindications":"","progression":"Add weight when 12 reps feel fully controlled","code":"PL-11","startWeight":"17.5 or 20lbs","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-13.jpg","pillarColor":"#D32374"},{"id":"b-3","name":"DB Tricep Kickbacks","pillar":"B","sets":"2","reps":"10 each side","rpe":"","equipment":"Dumbbells","cues":"Elbows locked to side. Elbows above body height. Neutral spine — look 45° down.","coachingFocus":"","contraindications":"","progression":"Stay in deep lunge for additional challenge","code":"SM-PH1-03-TriKickB","startWeight":"10lbs","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-3.jpg","pillarColor":"#E85D04"},{"id":"c-9","name":"Seated Shoulder Press","pillar":"C","sets":"3","reps":"6–8 reps","rpe":"7–8","equipment":"Dumbbells","cues":"Start at ear height. Press overhead. Don't arch lower back.","coachingFocus":"","contraindications":"","progression":"Rest 30 sec","code":"PM-P1-09-SSPS","startWeight":"20lbs x 6 reps, then 2 sets of 8 x 15lbs","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-9.jpg","pillarColor":"#D32374"},{"id":"st-9","name":"Lateral Arm Raises","pillar":"MF","sets":"2","reps":"10-12","rpe":"","equipment":"Light Dumbbells","cues":"Stand tall, ribs down. Soft bend in elbows. Lift arms out to the side toward shoulder height. Lower slowly with control.","coachingFocus":"","contraindications":"","progression":"Add very light weight only when fully pain-free at shoulder height","code":"MF-SH-01","startWeight":"8lbs","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-9.jpg","pillarColor":"#1A56DB"},{"id":"st-10","name":"Front Raises","pillar":"MF","sets":"2","reps":"10-12","rpe":"","equipment":"Light Dumbbells","cues":"Stand tall, ribs down. Soft bend in elbows. Raise arms straight in front. Stop before shoulder height. Lower slowly.","coachingFocus":"","contraindications":"","progression":"Increase range only when pain-free. Stay below your pain threshold","code":"MF-SH-02","startWeight":"5 - 8lbs","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-10.jpg","pillarColor":"#1A56DB"},{"id":"st-11","name":"Robots","pillar":"MF","sets":"2","reps":"10 slow","rpe":"","equipment":"None","cues":"Keep arms low to start. Palms facing outward. Keep elbows at comfortable level as you turn palms down. NO pain. Stay low and work slow.","coachingFocus":"","contraindications":"","progression":"Goal image is the end point — not the starting point. Progress gradually","code":"MF-SH-03","startWeight":"5-8lbs ","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-11.jpg","pillarColor":"#1A56DB"},{"id":"ex-1777064328737","name":"Crunch","pillar":"B","sets":"3","reps":"","rpe":"","equipment":"None / Bodyweight","cues":"Press your lower back firmly into the floor.\nReach your hands toward your knees while keeping your eyes on the ceiling for a neutral neck.\nExhale as you lift your shoulder blades, sliding your hands toward your knees to shorten the gap between ribs and hips.\nPause at the top for a peak contraction, then slowly lower without letting your shoulders touch the mat.","coachingFocus":"","contraindications":"","progression":"","code":"SM-CORE-06-crunch","startWeight":"20 reps x 2 sets","image":"https://theprestonmethod.github.io/tpm-workouts/images/exercises/crunch-25680.jpg","pillarColor":"#E85D04"}]}</script>
+<script>
+const PROGRAM=JSON.parse(document.getElementById("tpm_ex_data").textContent);
+let EXERCISES=[],currentDay="";
+const SESSION_META={"client":"Noelle Pennefather","coach":"Coach Colleen","date":"2026-06-19","title":"3x/week at Anytime Fitness","phase":""};
+const SHEETS_URL="";
+const CHECKIN="https://theprestonmethod.github.io/tpm-workouts/tpm-weekly-checkin.html";
+const PL={A:"Mobility",B:"Strength+Mob",C:"Performance",WU:"Warm-Up",ST:"Seated"};
+let curEx=0,sessData=[],setStates=[],startTime=null,exStart=null,timerInt=null,sessRPE="";
+let sessCount=parseInt(localStorage.getItem("tpm_sc_"+SESSION_META.client.replace(/\s/g,"_"))||"0");
+function renderDayChoices(){var box=document.getElementById("dayChoices");box.innerHTML="";Object.keys(PROGRAM).forEach(function(k){var n=PROGRAM[k].length;var b=document.createElement("button");b.className="day-choice";b.onclick=function(){startWorkout(k);};var nm=document.createElement("span");nm.className="day-choice-name";nm.textContent=k;var mt=document.createElement("span");mt.className="day-choice-meta";mt.textContent=n+" exercise"+(n!==1?"s":"");b.appendChild(nm);b.appendChild(mt);box.appendChild(b);});}
+renderDayChoices();
+function showScreen(id){document.querySelectorAll(".screen").forEach(s=>s.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");}
+function startWorkout(dayKey){currentDay=dayKey;EXERCISES=PROGRAM[dayKey]||[];if(!EXERCISES.length)return;curEx=0;sessData=[];showScreen("scrEx");startTime=Date.now();exStart=Date.now();clearInterval(timerInt);timerInt=setInterval(updateTimer,1000);loadEx(0);}
+function updateTimer(){var e=Math.floor((Date.now()-startTime)/1000),m=Math.floor(e/60),s=e%60;document.getElementById("timerLbl").textContent=m+":"+(s<10?"0":"")+s;}
+function loadEx(idx){
+  curEx=idx;exStart=Date.now();
+  var ex=EXERCISES[idx],total=EXERCISES.length;
+  document.getElementById("progLbl").textContent="Exercise "+(idx+1)+" of "+total;
+  document.getElementById("progFill").style.width=((idx/total)*100)+"%";
+  document.getElementById("exHdr").innerHTML=
+    '<span class="pillar-badge" style="background:'+ex.pillarColor+'">'+( PL[ex.pillar]||ex.pillar)+'</span>'
+    +'<div class="ex-name">'+ex.name+'</div>'
+    +(ex.code?'<div class="ex-code">'+ex.code+'</div>':"");
+  var ns=parseInt(ex.sets)||3;
+  setStates=Array(ns).fill(null).map(function(){return{weight:(ex.startWeight||""),reps:"",done:false};});
+  var sHtml="";
+  for(var i=0;i<ns;i++){
+    sHtml+='<div class="set-row" id="sr'+i+'">'
+      +'<div class="set-num">S'+(i+1)+'</div>'
+      +'<div class="set-inputs">'
+        +'<div style="flex:1"><input class="set-input" type="number" inputmode="decimal" placeholder="lbs/kg" value="'+(ex.startWeight||"")+'" id="sw'+i+'" onchange="setStates['+i+'].weight=this.value"><div class="set-input-lbl">WEIGHT</div></div>'
+        +'<div style="flex:1"><input class="set-input" type="number" inputmode="numeric" placeholder="'+( ex.reps||"reps")+'" id="sr2'+i+'" onchange="setStates['+i+'].reps=this.value"><div class="set-input-lbl">REPS DONE</div></div>'
+      +'</div>'
+      +'<button class="tick-btn" id="tb'+i+'" onclick="toggleSet('+i+')">&#10003;</button>'
+    +'</div>';
+  }
+  var rHtml='<div class="sets-label" style="margin-top:4px">HOW HARD? (RPE)</div><div class="rpe-row">';
+  [6,7,8,9,10].forEach(function(r){rHtml+='<button class="rpe-btn" id="rpe'+r+'" onclick="pickRPE('+r+')">'+ r+'</button>';});
+  rHtml+="</div>";
+  document.getElementById("exBody").innerHTML=
+    (ex.image?'<div class="ex-img"><img src="'+ex.image+'" alt="'+ex.name+'"></div>':'<div class="ex-no-img">&#x1F4AA;</div>')
+    +'<div class="meta-row">'
+    +(ex.sets?'<span class="meta-pill">'+ex.sets+' sets</span>':'')
+    +(ex.reps?'<span class="meta-pill">'+ex.reps+'</span>':'')
+    +(ex.rpe?'<span class="meta-pill">RPE '+ex.rpe+'</span>':'')
+    +(ex.equipment&&ex.equipment!=="None / Bodyweight"?'<span class="meta-pill">&#x1F3CB; '+ex.equipment+'</span>':'')
+    +"</div>"
+    +(ex.cues?'<div class="cues-box">&#8220;'+ex.cues+'&#8221;</div>':'')
+    +(ex.contraindications?'<div class="caution-box">&#9888; '+ex.contraindications+'</div>':'')
+    +(ex.startWeight?'<div class="start-weight-box">&#127919; Start weight: <strong>'+ex.startWeight+'</strong></div>':'')
+    +'<div class="sets-label">TRACK YOUR SETS</div>'
+    +sHtml+rHtml
+    +'<textarea class="notes-ta" id="exNotes" rows="2" placeholder="Notes for this exercise..."></textarea>'
+    +'<button class="next-btn" onclick="nextEx()">'+( idx<total-1?"NEXT EXERCISE &rarr;":"FINISH WORKOUT &#10003;")+'</button>'
+    +'<button class="skip-btn" onclick="skipEx()">Skip this exercise</button>';
+  if(idx>0){var bb=document.createElement("button");bb.className="back-btn";bb.innerHTML="&#8592; Previous exercise";bb.onclick=prevEx;document.getElementById("exBody").appendChild(bb);}
+}
+function prevEx(){if(curEx>0){curEx--;loadEx(curEx);document.getElementById("exBody").scrollTop=0;}}
+function toggleSet(i){setStates[i].done=!setStates[i].done;setStates[i].weight=document.getElementById("sw"+i)?document.getElementById("sw"+i).value:"";setStates[i].reps=document.getElementById("sr2"+i)?document.getElementById("sr2"+i).value:"";document.getElementById("sr"+i).classList.toggle("done",setStates[i].done);document.getElementById("tb"+i).classList.toggle("on",setStates[i].done);}
+function pickRPE(v){sessRPE=v;document.querySelectorAll(".rpe-btn").forEach(function(b){b.classList.remove("on");});var el=document.getElementById("rpe"+v);if(el)el.classList.add("on");}
+function saveEx(skipped){var ex=EXERCISES[curEx],dur=Math.round((Date.now()-exStart)/1000),notes=document.getElementById("exNotes")?document.getElementById("exNotes").value:"";sessData.push({exerciseName:ex.name,cardId:ex.code||ex.id,pillar:ex.pillar,pillarColor:ex.pillarColor,setsTarget:ex.sets||"3",setsCompleted:setStates.filter(function(s){return s.done;}).length,setDetails:JSON.stringify(setStates),rpe:sessRPE,notes:notes,durationSec:dur,skipped:skipped?"Yes":"No"});sessRPE="";}
+function nextEx(){saveEx(false);if(curEx<EXERCISES.length-1){loadEx(curEx+1);document.getElementById("exBody").scrollTop=0;}else{finishWorkout();}}
+function skipEx(){saveEx(true);if(curEx<EXERCISES.length-1){loadEx(curEx+1);document.getElementById("exBody").scrollTop=0;}else{finishWorkout();}}
+function finishWorkout(){clearInterval(timerInt);var totalSec=Math.round((Date.now()-startTime)/1000),totalMin=Math.round(totalSec/60);var totalSets=sessData.reduce(function(a,e){return a+e.setsCompleted;},0);sessCount++;localStorage.setItem("tpm_sc_"+SESSION_META.client.replace(/\s/g,"_"),sessCount);document.getElementById("statEx").textContent=sessData.filter(function(e){return e.skipped==="No";}).length;document.getElementById("statSets").textContent=totalSets;document.getElementById("statMin").textContent=totalMin;document.getElementById("statNum").textContent=sessCount;document.getElementById("completeSub").textContent="Great work, "+SESSION_META.client+"! ("+currentDay+")";var lHtml=sessData.map(function(e){return '<div class="sess-row"><div class="sess-dot" style="background:'+e.pillarColor+'"></div><div class="sess-name">'+e.exerciseName+'</div><div class="sess-detail">'+e.setsCompleted+"/"+e.setsTarget+' sets'+(e.rpe?' · RPE '+e.rpe:"")+'</div></div>';}).join("");document.getElementById("sessList").innerHTML=lHtml;showScreen("scrComplete");postSheets(totalSec,totalSets);}
+function postSheets(totalSec,totalSets){if(!SHEETS_URL){document.getElementById("submitStatus").textContent="Session saved locally.";return;}document.getElementById("submitStatus").textContent="Saving to Google Sheets...";var ts=new Date().toISOString();var rows=sessData.map(function(e){return{timestamp:ts,client:SESSION_META.client,coach:SESSION_META.coach,date:SESSION_META.date,programTitle:SESSION_META.title,phase:SESSION_META.phase,day:currentDay,exerciseName:e.exerciseName,cardId:e.cardId,pillar:e.pillar,setsTarget:e.setsTarget,setsCompleted:e.setsCompleted,setDetails:e.setDetails,sessionRPE:e.rpe,notes:e.notes,durationSec:e.durationSec,skipped:e.skipped,totalSessionMin:Math.round(totalSec/60),totalSets:totalSets,sessionNumber:sessCount,type:"workout_session"};});fetch(SHEETS_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify({workoutSession:rows})}).then(function(){document.getElementById("submitStatus").textContent="Session saved to your Google Sheet!";}).catch(function(){document.getElementById("submitStatus").textContent="Could not reach Sheets - check connection.";});}
+function resetWorkout(){sessData=[];setStates=[];curEx=0;showScreen("scrWelcome");}
+</script>
+</div>
+</body>
+</html>
