@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>RPE Treadmill Test — The Preston Method</title>
+<style>
+  :root{
+    --navy:#1B3A5C;--brick:#C73B30;--shell:#F5F8FC;--line:#d7e0ea;
+    --ink:#1B3A5C;--muted:#5a6e85;--white:#ffffff;--good:#2B957A;--radius:14px;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--shell);color:var(--ink);line-height:1.45;
+    padding:16px 14px 48px;max-width:560px;margin:0 auto;
+  }
+  header{margin-bottom:18px;}
+  .eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:11px;font-weight:700;color:var(--brick);margin:0 0 4px;}
+  h1{font-size:24px;line-height:1.15;margin:0 0 6px;color:var(--navy);font-weight:800;}
+  .lede{font-size:14px;color:var(--muted);margin:0;}
+
+  .card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:14px;margin-bottom:14px;}
+  .card h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--navy);margin:0 0 12px;font-weight:700;}
+
+  label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:5px;}
+  input{
+    width:100%;font-size:16px;padding:11px 10px;border:1.5px solid var(--line);
+    border-radius:10px;background:var(--white);color:var(--ink);font-weight:600;text-align:center;
+  }
+  input[type="text"]{text-align:left;}
+  input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(27,58,92,.12);}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end;}
+  .hint{font-size:12px;color:var(--muted);margin:10px 0 0;}
+
+  .safety{background:#fff4f2;border:1px solid #f0c4bd;border-radius:10px;padding:10px 12px;margin:0 0 14px;font-size:13px;color:#7a2820;line-height:1.45;}
+  .safety b{color:var(--brick);}
+
+  .stage{border:1px solid var(--line);border-radius:12px;padding:11px 11px 12px;margin-bottom:10px;background:var(--white);}
+  .stage:last-child{margin-bottom:0;}
+  .stage-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+  .stage-num{background:var(--navy);color:#fff;font-size:12px;font-weight:800;border-radius:7px;padding:4px 9px;letter-spacing:.02em;}
+  .stage-sub{font-size:11px;color:var(--muted);}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .grid4 label{margin-bottom:4px;text-align:center;font-size:11px;}
+  .grid4 input{padding:10px 4px;}
+  .stage-note{margin-top:8px;font-size:14px;font-weight:500;padding:9px 10px;}
+
+  /* Sticky compact RPE bar */
+  .rpe-bar{
+    position:sticky;top:0;z-index:10;background:var(--white);border:1px solid var(--line);
+    border-radius:12px;padding:9px 12px;margin-bottom:10px;box-shadow:0 3px 12px rgba(27,58,92,.10);
+  }
+  .rpe-bar-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy);margin-bottom:6px;}
+  .rpe-nums{display:flex;justify-content:space-between;font-size:11px;font-weight:800;color:var(--navy);padding:0 1px;margin-bottom:3px;}
+  .rpe-gradient{height:14px;border-radius:7px;background:linear-gradient(to right,#2E9E5B,#7CB02E,#E8A400,#E8740C,#D6452B,#B5281C);}
+  .rpe-anchors{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.04em;}
+
+  /* Native (no-JS) expander for cues */
+  .rpe-details{margin:0 0 14px;}
+  .rpe-details summary{
+    list-style:none;cursor:pointer;display:inline-block;font-size:12px;font-weight:700;
+    color:var(--brick);background:#fff;border:1.5px solid var(--line);border-radius:9px;padding:8px 12px;
+  }
+  .rpe-details summary::-webkit-details-marker{display:none;}
+  .rpe-details summary::before{content:"\203A  ";}
+  .rpe-details[open] summary::before{content:"\2304  ";}
+  .rpe-details[open] summary{margin-bottom:8px;}
+  .rpe-detail-body{display:flex;flex-direction:column;gap:5px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;}
+  .rpe-mini{font-size:12px;color:var(--ink);border-left:5px solid var(--c);padding:4px 8px;background:var(--shell);border-radius:5px;}
+  .rpe-mini b{color:var(--navy);margin-right:3px;}
+
+  /* Yes/No (native radios, no JS needed) */
+  .seg{display:flex;gap:8px;margin-top:5px;}
+  .seg-opt{flex:1;position:relative;}
+  .seg-opt input{position:absolute;opacity:0;width:0;height:0;}
+  .seg-opt span{display:block;text-align:center;font-size:14px;font-weight:700;padding:11px;border-radius:10px;border:1.5px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;}
+  .seg-opt input:checked + span{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+  .result{background:var(--navy);color:#fff;border:none;text-align:center;}
+  .result h2{color:#fff;opacity:.85;}
+  .diff-num{font-size:52px;font-weight:800;line-height:1;margin:4px 0 2px;}
+  .diff-unit{font-size:13px;opacity:.8;text-transform:uppercase;letter-spacing:.1em;}
+  .diff-read{font-size:14px;margin:14px auto 0;max-width:360px;background:rgba(255,255,255,.1);padding:10px 12px;border-radius:10px;}
+  .diff-read.is-good{background:rgba(43,149,122,.28);}
+  .diff-formula{font-size:12px;opacity:.7;margin-top:10px;}
+
+  .actions{display:flex;flex-direction:column;gap:10px;margin-top:2px;}
+  .btn{width:100%;font-size:15px;font-weight:700;padding:14px 12px;border-radius:12px;border:none;cursor:pointer;font-family:inherit;}
+  .btn-primary{background:var(--brick);color:#fff;}
+  .btn-primary:active{background:#a82c22;}
+  .btn-ghost{background:#eef3f9;color:var(--navy);border:1.5px solid #c3d2e2;}
+  .btn-ghost:active{background:#e1e9f3;}
+  .toast{text-align:center;font-size:13px;font-weight:600;color:var(--good);height:18px;margin-top:10px;opacity:0;transition:opacity .2s;}
+  .toast.show{opacity:1;}
+  .linkbtn{display:block;margin:10px auto 0;background:none;border:none;color:var(--muted);font-family:inherit;font-size:13px;font-weight:600;text-decoration:underline;cursor:pointer;}
+  footer{text-align:center;font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5;}
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">The Preston Method™</p>
+  <h1>RPE Treadmill Test</h1>
+  <p class="lede">Track how your heart rate responds as the treadmill gets harder, then how quickly it recovers. Fill it in as you go and send the results back when you're done.</p>
+</header>
+
+<div class="card">
+  <h2>Your details</h2>
+  <div class="row2">
+    <div>
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Your name" autocomplete="name">
+    </div>
+    <div>
+      <label for="date">Date</label>
+      <input type="text" id="date" placeholder="today's date">
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Before you start</h2>
+  <label for="resting">Resting heart rate (bpm)</label>
+  <input type="number" id="resting" inputmode="numeric" placeholder="e.g. 72" min="30" max="220">
+  <p class="hint">Take this while standing still on the treadmill, before you begin. This is your starting point for recovery.</p>
+  <div style="margin-top:12px">
+    <label for="pretest">Pre-test notes (optional)</label>
+    <input type="text" id="pretest" placeholder="caffeine, meds, food, or feeling off today?">
+  </div>
+</div>
+
+<!-- Sticky compact RPE bar -->
+<div class="rpe-bar">
+  <div class="rpe-bar-title">RPE · effort 0–10</div>
+  <div class="rpe-nums"><span>0</span><span>2</span><span>4</span><span>6</span><span>8</span><span>10</span></div>
+  <div class="rpe-gradient"></div>
+  <div class="rpe-anchors"><span>Easy</span><span>Moderate</span><span>Hard</span><span>Max</span></div>
+</div>
+
+<!-- Native expander: works with no JavaScript -->
+<details class="rpe-details">
+  <summary>what do these mean?</summary>
+  <div class="rpe-detail-body">
+    <div class="rpe-mini" style="--c:#2E9E5B"><b>1–2</b>Very easy · can sing</div>
+    <div class="rpe-mini" style="--c:#7CB02E"><b>3–4</b>Easy · full conversation</div>
+    <div class="rpe-mini" style="--c:#E8A400"><b>5–6</b>Moderate · short sentences</div>
+    <div class="rpe-mini" style="--c:#E8740C"><b>7–8</b>Hard · a few words only · aim here by the end</div>
+    <div class="rpe-mini" style="--c:#D6452B"><b>9</b>Very hard · can't talk</div>
+    <div class="rpe-mini" style="--c:#B5281C"><b>10</b>Maximum · all-out</div>
+  </div>
+</details>
+
+<div class="card">
+  <h2>The test — every 2 minutes</h2>
+  <p class="hint" style="margin:0 0 12px">Every 2 minutes, increase the <b>speed</b> or the <b>elevation</b>, then record your settings, your effort (RPE), and your heart rate.</p>
+  <div class="safety"><b>Stop right away</b> if you feel chest pain, dizziness, faintness, unusual shortness of breath, or any sharp pain.</div>
+
+  <div class="stage">
+    <div class="stage-head"><span class="stage-num">0–2 min</span><span class="stage-sub">warm-up / baseline</span></div>
+    <div class="grid4">
+      <div><label>Speed</label><input type="number" inputmode="decimal" data-k="sp" data-i="0" placeholder="mph"></div>
+      <div><label>Elev %</label><input type="number" inputmode="decimal" data-k="elev" data-i="0" placeholder="incl"></div>
+      <div><label>RPE</label><input type="number" inputmode="numeric" data-k="rpe" data-i="0" min="0" max="10" placeholder="0-10"></div>
+      <div><label>HR</label><input type="number" inputmode="numeric" data-k="hr" data-i="0" placeholder="bpm"></div>
+    </div>
+    <input type="text" class="stage-note" data-k="note" data-i="0" placeholder="notes / symptoms (optional)">
+  </div>
+
+  <div class="stage">
+    <div class="stage-head"><span class="stage-num">2–4 min</span></div>
+    <div class="grid4">
+      <div><label>Speed</label><input type="number" inputmode="decimal" data-k="sp" data-i="1" placeholder="mph"></div>
+      <div><label>Elev %</label><input type="number" inputmode="decimal" data-k="elev" data-i="1" placeholder="incl"></div>
+      <div><label>RPE</label><input type="number" inputmode="numeric" data-k="rpe" data-i="1" min="0" max="10" placeholder="0-10"></div>
+      <div><label>HR</label><input type="number" inputmode="numeric" data-k="hr" data-i="1" placeholder="bpm"></div>
+    </div>
+    <input type="text" class="stage-note" data-k="note" data-i="1" placeholder="notes / symptoms (optional)">
+  </div>
+
+  <div class="stage">
+    <div class="stage-head"><span class="stage-num">4–6 min</span></div>
+    <div class="grid4">
+      <div><label>Speed</label><input type="number" inputmode="decimal" data-k="sp" data-i="2" placeholder="mph"></div>
+      <div><label>Elev %</label><input type="number" inputmode="decimal" data-k="elev" data-i="2" placeholder="incl"></div>
+      <div><label>RPE</label><input type="number" inputmode="numeric" data-k="rpe" data-i="2" min="0" max="10" placeholder="0-10"></div>
+      <div><label>HR</label><input type="number" inputmode="numeric" data-k="hr" data-i="2" placeholder="bpm"></div>
+    </div>
+    <input type="text" class="stage-note" data-k="note" data-i="2" placeholder="notes / symptoms (optional)">
+  </div>
+
+  <div class="stage">
+    <div class="stage-head"><span class="stage-num">6–8 min</span></div>
+    <div class="grid4">
+      <div><label>Speed</label><input type="number" inputmode="decimal" data-k="sp" data-i="3" placeholder="mph"></div>
+      <div><label>Elev %</label><input type="number" inputmode="decimal" data-k="elev" data-i="3" placeholder="incl"></div>
+      <div><label>RPE</label><input type="number" inputmode="numeric" data-k="rpe" data-i="3" min="0" max="10" placeholder="0-10"></div>
+      <div><label>HR</label><input type="number" inputmode="numeric" data-k="hr" data-i="3" placeholder="bpm"></div>
+    </div>
+    <input type="text" class="stage-note" data-k="note" data-i="3" placeholder="notes / symptoms (optional)">
+  </div>
+
+  <div class="stage">
+    <div class="stage-head"><span class="stage-num">8–10 min</span><span class="stage-sub">push toward 85%</span></div>
+    <div class="grid4">
+      <div><label>Speed</label><input type="number" inputmode="decimal" data-k="sp" data-i="4" placeholder="mph"></div>
+      <div><label>Elev %</label><input type="number" inputmode="decimal" data-k="elev" data-i="4" placeholder="incl"></div>
+      <div><label>RPE</label><input type="number" inputmode="numeric" data-k="rpe" data-i="4" min="0" max="10" placeholder="0-10"></div>
+      <div><label>HR</label><input type="number" inputmode="numeric" data-k="hr" data-i="4" placeholder="bpm"></div>
+    </div>
+    <input type="text" class="stage-note" data-k="note" data-i="4" placeholder="notes / symptoms (optional)">
+  </div>
+</div>
+
+<div class="card">
+  <h2>Finish &amp; recovery</h2>
+  <div class="row2">
+    <div>
+      <label for="finalhr">Final HR · 85% (bpm)</label>
+      <input type="number" id="finalhr" inputmode="numeric" placeholder="peak" min="30" max="220">
+    </div>
+    <div>
+      <label for="finalrpe">Final RPE (0–10)</label>
+      <input type="number" id="finalrpe" inputmode="numeric" placeholder="effort" min="0" max="10">
+    </div>
+  </div>
+  <div style="margin-top:10px">
+    <label for="recovery">Recovery HR · after 2 min rest (bpm)</label>
+    <input type="number" id="recovery" inputmode="numeric" placeholder="recovered" min="30" max="220">
+  </div>
+  <div style="margin-top:14px">
+    <label>Reached a hard-but-controlled effort?</label>
+    <div class="seg">
+      <label class="seg-opt"><input type="radio" name="effort" value="Yes"><span>Yes</span></label>
+      <label class="seg-opt"><input type="radio" name="effort" value="No"><span>No</span></label>
+    </div>
+  </div>
+  <div style="margin-top:12px">
+    <label for="reason">Reason stopped / notes</label>
+    <input type="text" id="reason" placeholder="e.g. hit target effort, legs tired, time up">
+  </div>
+  <p class="hint">Hit your peak at 85% effort, record your Final HR and RPE, then rest for 2 minutes and record your Recovery HR.</p>
+</div>
+
+<div class="card result">
+  <h2>Recovery difference</h2>
+  <div class="diff-num" id="diffNum">—</div>
+  <div class="diff-unit">beats above starting HR</div>
+  <div class="diff-read" id="diffRead">Fill in your Resting HR and Recovery HR to see your recovery.</div>
+  <div class="diff-formula">Recovery HR − Resting HR · closer to 0 means a stronger return to baseline</div>
+</div>
+
+<div class="actions">
+  <button class="btn btn-primary" id="sendBtn">Send results to Colleen</button>
+  <button class="btn btn-ghost" id="resetBtn" type="button">Reset form</button>
+</div>
+<button class="linkbtn" id="copyBtn" type="button">or copy results as a backup</button>
+<div class="toast" id="toast"></div>
+
+<footer>The Preston Method™ · A submaximal fitness check-in, not a medical test.</footer>
+
+<script>
+(function(){
+  // ─── PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BETWEEN THE QUOTES ───
+  // It ends in /exec. Until you add it, the Send button uses the copy backup.
+  var SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbyVzZA_eHP7-5DJxKTAiFztqKWMHIkBjlBskE8n7C64Sym7QMkgmRo7W-OsP2UuB9URmw/exec";
+  // ────────────────────────────────────────────────────────────────────
+
+  var STAGES = [
+    {label:"0–2"},{label:"2–4"},{label:"4–6"},{label:"6–8"},{label:"8–10"}
+  ];
+
+  var d = new Date();
+  document.getElementById("date").value =
+    d.toLocaleDateString("en-CA", {year:"numeric", month:"short", day:"numeric"});
+
+  var resting = document.getElementById("resting");
+  var recovery = document.getElementById("recovery");
+  var diffNum = document.getElementById("diffNum");
+  var diffRead = document.getElementById("diffRead");
+
+  function num(v){ var n = parseInt(v,10); return isNaN(n) ? null : n; }
+
+  function updateDiff(){
+    var r = num(resting.value), rec = num(recovery.value);
+    if(r === null || rec === null){
+      diffNum.textContent = "—";
+      diffRead.classList.remove("is-good");
+      diffRead.textContent = "Fill in your Resting HR and Recovery HR to see your recovery.";
+      return;
+    }
+    var diff = rec - r;
+    diffNum.textContent = diff;
+    var msg, good = false;
+    if(diff <= 5){ msg = "Strong recovery — you're back near your starting heart rate."; good = true; }
+    else if(diff <= 15){ msg = "Good recovery — your heart rate settled well within 2 minutes."; good = true; }
+    else if(diff <= 25){ msg = "Moderate — still a little elevated after 2 minutes of rest."; }
+    else { msg = "Slow recovery — heart rate is still well above your starting point."; }
+    if(diff < 0){ msg = "Recovery HR is below your starting HR — double-check both numbers."; good = false; }
+    diffRead.textContent = msg;
+    diffRead.classList.toggle("is-good", good);
+  }
+  resting.addEventListener("input", updateDiff);
+  recovery.addEventListener("input", updateDiff);
+
+  function val(sel){ var e = document.querySelector(sel); return e ? e.value.trim() : ""; }
+  function stageVal(k,i){
+    var e = document.querySelector('input[data-k="'+k+'"][data-i="'+i+'"]');
+    return e && e.value.trim() !== "" ? e.value.trim() : "—";
+  }
+  function stageNote(i){
+    var e = document.querySelector('input[data-k="note"][data-i="'+i+'"]');
+    return e && e.value.trim() !== "" ? e.value.trim() : "";
+  }
+
+  function buildSummary(){
+    var L = [];
+    L.push("TPM RPE TREADMILL TEST");
+    L.push("Client: " + (val("#name") || "—"));
+    L.push("Date: " + val("#date"));
+    if(val("#pretest")) L.push("Pre-test notes: " + val("#pretest"));
+    L.push("Resting HR: " + (val("#resting") || "—") + " bpm");
+    L.push("");
+    STAGES.forEach(function(s,i){
+      var line = s.label + " min — Speed " + stageVal("sp",i) +
+        ", Elev " + stageVal("elev",i) + "%, RPE " + stageVal("rpe",i) +
+        ", HR " + stageVal("hr",i);
+      var n = stageNote(i);
+      if(n) line += "  | note: " + n;
+      L.push(line);
+    });
+    L.push("");
+    L.push("Final HR (85% effort): " + (val("#finalhr") || "—") + " bpm");
+    L.push("Final RPE: " + (val("#finalrpe") || "—"));
+    L.push("Recovery HR (after 2 min): " + (val("#recovery") || "—") + " bpm");
+    var r = num(resting.value), rec = num(recovery.value);
+    L.push("Recovery difference (Recovery − Resting): " + ((r!==null&&rec!==null) ? (rec-r) + " beats" : "—"));
+    var er = document.querySelector('input[name="effort"]:checked');
+    L.push("Hard-but-controlled effort reached: " + (er ? er.value : "—"));
+    if(val("#reason")) L.push("Reason stopped / notes: " + val("#reason"));
+    return L.join("\n");
+  }
+
+  var toast = document.getElementById("toast");
+  function showToast(text){
+    toast.textContent = text;
+    toast.classList.add("show");
+    setTimeout(function(){ toast.classList.remove("show"); }, 2600);
+  }
+
+  document.getElementById("copyBtn").addEventListener("click", function(){
+    var text = buildSummary();
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(
+        function(){ showToast("Copied — paste it into a text or email"); },
+        function(){ fallbackCopy(text); }
+      );
+    } else { fallbackCopy(text); }
+  });
+
+  function stageRaw(k,i){
+    var e = document.querySelector('input[data-k="'+k+'"][data-i="'+i+'"]');
+    return e ? e.value.trim() : "";
+  }
+  function gather(){
+    var r = num(resting.value), rec = num(recovery.value);
+    var er = document.querySelector('input[name="effort"]:checked');
+    return {
+      name:val("#name"), date:val("#date"), pretest:val("#pretest"), resting:val("#resting"),
+      stages: STAGES.map(function(s,i){
+        return { sp:stageRaw("sp",i), elev:stageRaw("elev",i), rpe:stageRaw("rpe",i),
+                 hr:stageRaw("hr",i), note:stageRaw("note",i) };
+      }),
+      finalhr:val("#finalhr"), finalrpe:val("#finalrpe"), recovery:val("#recovery"),
+      diff:((r!==null&&rec!==null) ? (rec-r) : ""),
+      effort:(er ? er.value : ""), reason:val("#reason")
+    };
+  }
+
+  var sendBtn = document.getElementById("sendBtn");
+  sendBtn.addEventListener("click", function(){
+    if(!SHEET_ENDPOINT){
+      showToast("Sending isn't set up yet — using copy backup");
+      document.getElementById("copyBtn").click();
+      return;
+    }
+    var original = sendBtn.textContent;
+    sendBtn.textContent = "Sending…";
+    sendBtn.disabled = true;
+    fetch(SHEET_ENDPOINT, {
+      method:"POST", mode:"no-cors",
+      headers:{ "Content-Type":"text/plain;charset=utf-8" },
+      body: JSON.stringify(gather())
+    }).then(function(){
+      sendBtn.textContent = "Sent ✓ — Colleen has your results";
+      showToast("Sent to Colleen");
+    }).catch(function(){
+      sendBtn.textContent = original;
+      sendBtn.disabled = false;
+      showToast("No connection — use the copy backup below");
+    });
+  });
+
+  function fallbackCopy(text){
+    var ta = document.createElement("textarea");
+    ta.value = text; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try{ document.execCommand("copy"); showToast("Copied — paste it into a text or email"); }
+    catch(e){ showToast("Couldn't copy — select the text manually"); }
+    document.body.removeChild(ta);
+  }
+
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    if(!confirm("Clear all entries and start over?")) return;
+    document.querySelectorAll("input").forEach(function(inp){
+      if(inp.type === "radio"){ inp.checked = false; }
+      else if(inp.id !== "date"){ inp.value = ""; }
+    });
+    sendBtn.textContent = "Send results to Colleen";
+    sendBtn.disabled = false;
+    updateDiff();
+    window.scrollTo({top:0, behavior:"smooth"});
+  });
+
+  updateDiff();
+})();
+</script>
+</body>
+</html>
