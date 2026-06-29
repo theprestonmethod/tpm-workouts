@@ -3152,5 +3152,28 @@
     "progression": "Add weight for progression, remove ball for regression",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wall-sit-with-pilates-ball-88511.jpg"
+  },
+  {
+    "id": "ex-1782763329487",
+    "name": "Single Leg Balance",
+    "pillar": "A",
+    "status": "Active",
+    "category": "Balance",
+    "movementFamily": "Mobility",
+    "movementPattern": "",
+    "bodyRegion": "",
+    "loadStyle": "Stability",
+    "sets": "2",
+    "reps": "goal - 45 seconds each",
+    "rpe": "4",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "MF-40-SLBalance",
+    "cues": "stand in front of a mirror if you can - stare at your nose and keep your posture as tall as you can.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/single-leg-balance-27119.jpg"
   }
 ]
