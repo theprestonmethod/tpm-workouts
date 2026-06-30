@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="TPM Command" />
+<meta name="theme-color" content="#1B3A5C" />
+<title>TPM Client Command Centre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy:#1B3A5C;
+    --brick:#C73B30;
+    --shell:#F5F8FC;
+    --ink:#16263a;
+    --muted:#5e7184;
+    --line:#dbe4ee;
+    --card:#ffffff;
+    --warmup:#7B61FF;   /* Assessment */
+    --mobility:#1A56DB; /* Report */
+    --strength:#E85D04; /* Workout */
+    --performance:#D32374; /* PDF */
+    --cim:#2B957A;      /* Cards */
+    --ok:#2B957A;
+    --warn:#E8A200;
+    --over:#C73B30;
+    --shadow:0 1px 2px rgba(27,58,92,.06), 0 8px 24px rgba(27,58,92,.07);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:var(--shell);color:var(--ink);-webkit-font-smoothing:antialiased;
+    line-height:1.5;padding-bottom:96px;
+  }
+  h1,h2,h3,.display{font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.01em;margin:0}
+  button{font-family:inherit;cursor:pointer}
+  input,textarea,select{font-family:inherit}
+
+  header{
+    background:var(--navy);color:#fff;padding:calc(env(safe-area-inset-top) + 18px) 20px 18px;
+    position:sticky;top:0;z-index:30;box-shadow:0 2px 14px rgba(27,58,92,.18);
+  }
+  .head-row{display:flex;align-items:center;gap:12px;max-width:920px;margin:0 auto}
+  .mark{
+    width:38px;height:38px;border-radius:10px;flex:0 0 auto;
+    background:linear-gradient(135deg,var(--brick),#e0524a);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Bricolage Grotesque';font-weight:700;font-size:18px;color:#fff;
+  }
+  .head-titles{flex:1;min-width:0}
+  header h1{font-size:19px;font-weight:700;line-height:1.1}
+  header .sub{font-size:12.5px;color:#a9c4dd;font-weight:500;margin-top:2px}
+  .head-tools{display:flex;gap:8px}
+  .icon-btn{
+    background:rgba(255,255,255,.12);border:none;color:#fff;border-radius:9px;
+    width:38px;height:38px;font-size:16px;display:flex;align-items:center;justify-content:center;
+  }
+  .icon-btn:active{background:rgba(255,255,255,.24)}
+
+  .wrap{max-width:920px;margin:0 auto;padding:18px 16px 0}
+
+  .stats{display:flex;gap:10px;margin-bottom:16px}
+  .stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;box-shadow:var(--shadow)}
+  .stat .n{font-family:'Bricolage Grotesque';font-weight:700;font-size:24px;line-height:1}
+  .stat .l{font-size:11.5px;color:var(--muted);font-weight:600;margin-top:5px;text-transform:uppercase;letter-spacing:.04em}
+  .stat.alert .n{color:var(--brick)}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden}
+  .panel-head{padding:14px 16px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--line)}
+  .panel-head h2{font-size:15px;font-weight:600}
+  .badge{background:var(--brick);color:#fff;border-radius:20px;font-size:12px;font-weight:700;padding:1px 9px;min-width:22px;text-align:center}
+  .badge.zero{background:var(--ok)}
+  .guardrail{background:#fdecea;color:var(--over);font-size:12.5px;font-weight:600;padding:9px 16px;border-bottom:1px solid #f6d6d2}
+  .attn-list{list-style:none;margin:0;padding:0}
+  .attn-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--shell)}
+  .attn-item:last-child{border-bottom:none}
+  .attn-dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+  .attn-main{flex:1;min-width:0}
+  .attn-name{font-weight:600;font-size:14.5px}
+  .attn-why{font-size:12.5px;color:var(--muted);margin-top:1px}
+  .attn-go{background:var(--shell);border:1px solid var(--line);color:var(--navy);border-radius:8px;font-size:12.5px;font-weight:600;padding:7px 11px;white-space:nowrap}
+  .attn-empty{padding:18px 16px;color:var(--muted);font-size:14px}
+
+  .toolbar{display:flex;gap:10px;align-items:center;margin-bottom:14px}
+  .search{flex:1;position:relative}
+  .search input{width:100%;padding:11px 12px 11px 38px;border:1px solid var(--line);border-radius:11px;font-size:15px;background:var(--card);color:var(--ink)}
+  .search::before{content:"⌕";position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:18px}
+  .filter-btn{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:11px 14px;font-size:13.5px;font-weight:600;color:var(--muted);white-space:nowrap}
+  .filter-btn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+  .client{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);margin-bottom:14px;overflow:hidden}
+  .client.archived{opacity:.62}
+  .c-top{padding:15px 16px 13px;display:flex;align-items:flex-start;gap:12px}
+  .c-id{flex:1;min-width:0}
+  .c-namerow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .c-name{font-family:'Bricolage Grotesque';font-weight:700;font-size:18px;line-height:1.15}
+  .ptag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;border-radius:5px;padding:2px 6px}
+  .ptag.high{background:#fff2d6;color:#a87600}
+  .ptag.urgent{background:#fdecea;color:var(--brick)}
+  .c-contact{font-size:12.5px;color:var(--muted);margin-top:3px;display:flex;flex-wrap:wrap;gap:4px 12px}
+  .c-contact a{color:var(--mobility);text-decoration:none}
+  .c-checkin{flex:0 0 auto;text-align:right;font-size:11.5px;font-weight:600;border-radius:9px;padding:6px 9px;line-height:1.25}
+  .ci-over{background:#fdecea;color:var(--over)}
+  .ci-soon{background:#fff6e0;color:#a87600}
+  .ci-ok{background:#e8f5f0;color:var(--ok)}
+  .ci-none{background:var(--shell);color:var(--muted)}
+
+  .track{display:flex;gap:6px;padding:0 16px 14px}
+  .step{flex:1;text-align:center}
+  .step .dot{width:100%;height:6px;border-radius:6px;background:var(--line);transition:background .15s}
+  .step.done .dot{background:var(--c)}
+  .step.na .dot{background:repeating-linear-gradient(45deg,var(--line),var(--line) 3px,#eef3f9 3px,#eef3f9 6px)}
+  .step .lbl{font-size:9.5px;font-weight:600;color:var(--muted);margin-top:6px;line-height:1.2;display:block}
+  .step.done .lbl{color:var(--ink)}
+  .step .chk{font-size:9px;font-weight:700;display:block;height:11px;color:var(--c)}
+  .step.na .chk{color:var(--muted)}
+
+  .c-foot{display:flex;border-top:1px solid var(--shell)}
+  .c-foot button{flex:1;background:none;border:none;padding:12px 6px;font-size:12.5px;font-weight:600;color:var(--navy);border-right:1px solid var(--shell);display:flex;align-items:center;justify-content:center;gap:5px}
+  .c-foot button:last-child{border-right:none}
+  .c-foot button:active{background:var(--shell)}
+
+  .empty{text-align:center;padding:46px 24px;color:var(--muted);background:var(--card);border:1px dashed var(--line);border-radius:14px}
+  .empty h3{font-size:18px;color:var(--ink);margin-bottom:6px}
+  .empty p{font-size:14px;margin:0 auto;max-width:300px}
+
+  .fab{
+    position:fixed;right:18px;bottom:calc(env(safe-area-inset-bottom) + 18px);z-index:40;
+    background:var(--brick);color:#fff;border:none;border-radius:30px;padding:15px 22px;
+    font-size:15px;font-weight:700;font-family:'Bricolage Grotesque';
+    box-shadow:0 6px 20px rgba(199,59,48,.4);display:flex;align-items:center;gap:8px;
+  }
+  .fab:active{transform:scale(.97)}
+
+  .overlay{position:fixed;inset:0;background:rgba(22,38,58,.5);z-index:50;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(2px)}
+  .overlay.show{display:flex}
+  .sheet{background:var(--shell);width:100%;max-width:560px;max-height:92vh;overflow-y:auto;border-radius:18px 18px 0 0;padding:0 0 calc(env(safe-area-inset-bottom) + 20px);animation:slideUp .22s ease}
+  @media(min-width:600px){.overlay{align-items:center}.sheet{border-radius:18px;max-height:88vh}}
+  @keyframes slideUp{from{transform:translateY(28px);opacity:.4}to{transform:translateY(0);opacity:1}}
+  .sheet-head{position:sticky;top:0;background:var(--shell);padding:18px 20px 12px;z-index:2;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+  .sheet-head h2{font-size:19px;font-weight:700}
+  .sheet-close{background:var(--line);border:none;border-radius:50%;width:32px;height:32px;font-size:17px;color:var(--navy)}
+  .sheet-body{padding:18px 20px 0}
+
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.04em}
+  .field input,.field textarea,.field select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font-size:16px;background:var(--card);color:var(--ink)}
+  .field textarea{min-height:70px;resize:vertical}
+  .field-row{display:flex;gap:12px}
+  .field-row .field{flex:1}
+
+  .check-grid{display:grid;gap:9px;margin-bottom:6px}
+  .check{display:flex;align-items:center;gap:11px;padding:12px 13px;background:var(--card);border:1px solid var(--line);border-radius:11px;cursor:pointer}
+  .check.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 8%,#fff)}
+  .check.na{border-color:var(--line);background:var(--shell)}
+  .check .box{width:24px;height:24px;border-radius:6px;border:2px solid var(--line);flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;font-weight:700}
+  .check.on .box{background:var(--c);border-color:var(--c)}
+  .check.na .box{background:var(--muted);border-color:var(--muted)}
+  .check .ctext{flex:1}
+  .check .ctitle{font-weight:600;font-size:14.5px}
+  .check .csub{font-size:11.5px;color:var(--muted);margin-top:1px}
+  .check .cstate{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+  .check.on .cstate{color:var(--c)}
+
+  .section-label{font-size:12.5px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.05em;margin:18px 0 10px}
+  .hint{font-size:11.5px;color:var(--muted);margin:-4px 0 10px}
+
+  .btn{width:100%;padding:14px;border:none;border-radius:12px;font-size:16px;font-weight:700;font-family:'Bricolage Grotesque';margin-top:6px}
+  .btn-primary{background:var(--navy);color:#fff}
+  .btn-primary:active{background:#14304d}
+  .btn-ghost{background:var(--card);color:var(--navy);border:1px solid var(--line)}
+  .btn-danger{background:var(--card);color:var(--brick);border:1px solid #f1c9c5}
+  .btn-row{display:flex;gap:10px}
+  .btn-row .btn{flex:1}
+
+  .tmpl-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .tmpl-btn{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 10px;font-size:13px;font-weight:600;color:var(--navy);text-align:left;line-height:1.25}
+  .tmpl-btn:active{background:var(--shell)}
+  .tmpl-btn .tt{display:block;font-size:10.5px;color:var(--muted);font-weight:600;margin-bottom:2px}
+
+  .note-add{display:flex;gap:8px;margin-bottom:12px}
+  .note-add input{flex:1;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font-size:15px;background:var(--card)}
+  .note-add button{background:var(--navy);color:#fff;border:none;border-radius:10px;padding:0 16px;font-weight:700}
+  .note-list{list-style:none;margin:0;padding:0}
+  .note{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;position:relative}
+  .note .nt{font-size:11px;color:var(--muted);font-weight:600;margin-bottom:3px}
+  .note .nx{font-size:14px;white-space:pre-wrap;word-break:break-word}
+  .note .ndel{position:absolute;top:8px;right:9px;background:none;border:none;color:var(--muted);font-size:15px;line-height:1}
+  .notes-empty{font-size:13px;color:var(--muted);padding:6px 2px}
+
+  .review{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--cim);border-radius:10px;padding:11px 12px;margin-bottom:8px}
+  .review .rt{font-size:11px;color:var(--cim);font-weight:700;margin-bottom:4px}
+  .review .rl{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.03em;margin-top:6px}
+  .review .rx{font-size:13.5px;white-space:pre-wrap;word-break:break-word}
+
+  .msgbox{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px;font-size:14px;color:var(--ink);margin-bottom:10px;line-height:1.55}
+  .kv{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px}
+  .kv .msgbox{margin:0}
+  .kv .kl{font-size:11px;color:var(--muted);font-weight:600}
+
+  .assume{font-size:11.5px;color:var(--muted);background:var(--shell);border:1px solid var(--line);border-radius:9px;padding:9px 11px;margin-top:4px;line-height:1.45}
+
+  .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 90px);transform:translateX(-50%);background:var(--navy);color:#fff;padding:11px 18px;border-radius:24px;font-size:13.5px;font-weight:600;z-index:80;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:var(--shadow)}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
+  .hide{display:none !important}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-row">
+    <div class="mark">TPM</div>
+    <div class="head-titles">
+      <h1>Client Command Centre</h1>
+      <div class="sub">The Preston Method™ · keep every client on track</div>
+    </div>
+    <div class="head-tools">
+      <button class="icon-btn" id="btnExport" title="Back up data">⭳</button>
+      <button class="icon-btn" id="btnImport" title="Restore data">⭱</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stats" id="stats"></div>
+
+  <div class="panel">
+    <div class="panel-head"><h2>Needs attention</h2><span class="badge" id="attnBadge">0</span></div>
+    <div class="guardrail hide" id="guardrail">Handle overdue before new ideas — finish these first.</div>
+    <ul class="attn-list" id="attnList"></ul>
+  </div>
+
+  <div class="toolbar">
+    <div class="search"><input type="search" id="search" placeholder="Search clients" autocomplete="off" /></div>
+    <button class="filter-btn" id="filterArchived">Show archived</button>
+  </div>
+
+  <div id="clientList"></div>
+</div>
+
+<button class="fab" id="btnAdd">＋ New client</button>
+<div class="toast" id="toast"></div>
+
+<!-- Add / edit client -->
+<div class="overlay" id="editOverlay">
+  <div class="sheet">
+    <div class="sheet-head">
+      <h2 id="editTitle">New client</h2>
+      <button class="sheet-close" data-close>✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="field"><label>Name</label><input type="text" id="f_name" placeholder="Client name" /></div>
+      <div class="field-row">
+        <div class="field"><label>Phone</label><input type="tel" id="f_phone" placeholder="Phone" /></div>
+        <div class="field"><label>Email</label><input type="email" id="f_email" placeholder="Email" /></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Priority</label>
+          <select id="f_priority"><option>Normal</option><option>High</option><option>Urgent</option><option>Low</option></select>
+        </div>
+        <div class="field"><label>Assessment type</label>
+          <select id="f_assesstype"><option value="">—</option><option>Detailed</option><option>In-Person</option><option>Online</option><option>Hybrid</option><option>Basic</option></select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Start date</label><input type="date" id="f_start" /></div>
+        <div class="field"><label>Assessment date</label><input type="date" id="f_assess" /></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Workout date</label><input type="date" id="f_workout" /></div>
+        <div class="field"><label>Check-in (override)</label><input type="date" id="f_checkin" /></div>
+      </div>
+      <div class="assume" id="assumeNote"></div>
+
+      <div class="section-label">Where are they in the plan?</div>
+      <div class="hint">Tap a step to cycle: To do → Done → Not needed.</div>
+      <div class="check-grid" id="stageGrid"></div>
+
+      <div class="btn-row">
+        <button class="btn btn-ghost" data-close>Cancel</button>
+        <button class="btn btn-primary" id="saveClient">Save client</button>
+      </div>
+      <button class="btn btn-danger hide" id="archiveBtn" style="margin-top:10px">Archive client</button>
+    </div>
+  </div>
+</div>
+
+<!-- Client detail -->
+<div class="overlay" id="detailOverlay">
+  <div class="sheet">
+    <div class="sheet-head">
+      <h2 id="detailName">Client</h2>
+      <button class="sheet-close" data-close-detail>✕</button>
+    </div>
+    <div class="sheet-body" id="detailBody"></div>
+  </div>
+</div>
+
+<input type="file" id="importFile" accept="application/json" class="hide" />
+
+<script>
+/* ============================================================
+   TPM Client Command Centre
+   Data lives in this browser (localStorage). Back up with ⭳ —
+   that JSON is your safety net and how you move between devices.
+   ============================================================ */
+
+const STORE_KEY = 'tpm_command_centre_v1';
+const CHECKIN_WEEKS = 4;
+
+const STAGES = [
+  {key:'assessment', label:'Assessment', sub:'Assessment completed', color:'var(--warmup)'},
+  {key:'report',     label:'Report',     sub:'Report sent to client', color:'var(--mobility)'},
+  {key:'workout',    label:'Workout',    sub:'Online workout built (generator)', color:'var(--strength)'},
+  {key:'pdf',        label:'PDF',        sub:'PDF sent', color:'var(--performance)'},
+  {key:'cards',      label:'Cards',      sub:'Laminated cards done', color:'var(--cim)'},
+];
+
+/* Message templates (your wording, personalised with first name). */
+const TEMPLATES = [
+  {id:'report', name:'Report sent', body:"your TPM assessment report is ready. It gives us your starting point, what we observed, and what we'll focus on first. The goal isn't random exercise — it's the right exercise at the right time."},
+  {id:'workout', name:'Workout sent', body:"your TPM workout plan is ready. Follow it as written and use your check-ins so I can see what your body is telling us — that's how we keep the work specific instead of guessing."},
+  {id:'nudge', name:'Check-in nudge', body:"a quick reminder to fill out your check-in after your workouts. It helps me see what's working, what's too easy, what needs changing, and whether we're ready to progress."},
+  {id:'invite', name:'4-week invitation', body:"thank you for filling out your check-in — you're ready for the next step. Progressive training is what creates results, so I'm going to review your exercises and see what needs to be progressed, simplified, or swapped so your plan keeps working for you."},
+];
+
+let state = load();
+let filterArchived = false;
+let editingId = null;
+let searchTerm = '';
+let detailId = null;
+
+/* ---------- storage + migration ---------- */
+function load(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(!raw) return {clients:[]};
+    const d = JSON.parse(raw);
+    if(!Array.isArray(d.clients)) d.clients = [];
+    d.clients.forEach(normalizeClient);
+    return d;
+  }catch(e){ return {clients:[]}; }
+}
+function normalizeClient(c){
+  // stages: upgrade old booleans -> 'done'/'pending'; keep 'na'
+  const st = {};
+  STAGES.forEach(s=>{
+    const v = c.stages ? c.stages[s.key] : undefined;
+    if(v === true || v === 'done') st[s.key]='done';
+    else if(v === 'na') st[s.key]='na';
+    else st[s.key]='pending';
+  });
+  c.stages = st;
+  if(!c.priority) c.priority = 'Normal';
+  if(c.assessType === undefined) c.assessType = '';
+  if(!Array.isArray(c.notes)) c.notes = [];
+  if(!Array.isArray(c.reviews)) c.reviews = [];
+  if(typeof c.checkinDone !== 'boolean') c.checkinDone = false;
+  if(typeof c.archived !== 'boolean') c.archived = false;
+  return c;
+}
+function save(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }
+  catch(e){ toast('Could not save — storage may be full'); }
+}
+function uid(){ return 'c'+Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
+
+/* ---------- dates ---------- */
+function today(){ const d=new Date(); d.setHours(0,0,0,0); return d; }
+function parseD(s){ if(!s) return null; const d=new Date(s+'T00:00:00'); return isNaN(d)?null:d; }
+function fmtD(s){ const d=parseD(s); if(!d) return '—'; return d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}); }
+function addDays(d,n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
+function toISO(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function daysBetween(a,b){ return Math.round((a-b)/86400000); }
+
+/* check-in due: override -> workout -> assessment -> start, + 4 weeks */
+function checkinDue(c){
+  if(c.checkinOverride) return parseD(c.checkinOverride);
+  const base = parseD(c.workoutDate) || parseD(c.assessDate) || parseD(c.startDate);
+  if(!base) return null;
+  return addDays(base, CHECKIN_WEEKS*7);
+}
+function checkinStatus(c){
+  if(c.checkinDone) return {cls:'ci-ok', short:'Checked in', diff:null};
+  const due = checkinDue(c);
+  if(!due) return {cls:'ci-none', short:'No date yet', diff:null};
+  const diff = daysBetween(due, today());
+  if(diff < 0) return {cls:'ci-over', short:`${Math.abs(diff)}d overdue`, diff};
+  if(diff <= 7) return {cls:'ci-soon', short: diff===0?'Due today':`Due in ${diff}d`, diff};
+  return {cls:'ci-ok', short:`Due ${fmtD(toISO(due))}`, diff};
+}
+function stageSatisfied(c, key){ const v=c.stages?.[key]; return v==='done'||v==='na'; }
+function planInProgress(c){ return STAGES.some(s=>!stageSatisfied(c,s.key)); }
+const PRIORITY_RANK = {Urgent:0, High:1, Normal:2, Low:3};
+
+/* ---------- rendering ---------- */
+function visibleClients(){
+  let list = state.clients.filter(c => filterArchived ? c.archived : !c.archived);
+  if(searchTerm){
+    const t = searchTerm.toLowerCase();
+    list = list.filter(c => (c.name||'').toLowerCase().includes(t) || (c.email||'').toLowerCase().includes(t) || (c.phone||'').toLowerCase().includes(t));
+  }
+  return list.sort((a,b)=>{
+    const sa=checkinStatus(a), sb=checkinStatus(b);
+    const va = sa.diff===null?9999:sa.diff, vb = sb.diff===null?9999:sb.diff;
+    if(va!==vb) return va-vb;
+    const pa=PRIORITY_RANK[a.priority]??2, pb=PRIORITY_RANK[b.priority]??2;
+    if(pa!==pb) return pa-pb;
+    return (a.name||'').localeCompare(b.name||'');
+  });
+}
+
+function renderStats(){
+  const active = state.clients.filter(c=>!c.archived);
+  let needCheckin=0, incomplete=0;
+  active.forEach(c=>{
+    const s=checkinStatus(c);
+    if(s.diff!==null && s.diff<=7 && !c.checkinDone) needCheckin++;
+    if(planInProgress(c)) incomplete++;
+  });
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><div class="n">${active.length}</div><div class="l">Active clients</div></div>
+    <div class="stat ${needCheckin?'alert':''}"><div class="n">${needCheckin}</div><div class="l">Check-ins due</div></div>
+    <div class="stat ${incomplete?'alert':''}"><div class="n">${incomplete}</div><div class="l">Plans in progress</div></div>`;
+}
+
+function renderAttention(){
+  const active = state.clients.filter(c=>!c.archived);
+  const items = [];
+  let anyOverdue = false;
+  active.forEach(c=>{
+    const s=checkinStatus(c);
+    if(!c.checkinDone && s.diff!==null && s.diff<=7){
+      if(s.diff<0) anyOverdue = true;
+      items.push({c, why: s.diff<0?`Check-in ${Math.abs(s.diff)} day${Math.abs(s.diff)===1?'':'s'} overdue`:(s.diff===0?'Check-in due today':`Check-in due in ${s.diff} days`),
+                  color:s.diff<0?'var(--over)':'var(--warn)', sort:s.diff});
+    }
+  });
+  active.forEach(c=>{
+    if(!STAGES.some(s=>c.stages?.[s.key]==='done') && !c.assessDate)
+      items.push({c, why:'No assessment booked yet', color:'var(--muted)', sort:5000});
+  });
+  items.sort((a,b)=>a.sort-b.sort);
+
+  document.getElementById('guardrail').classList.toggle('hide', !anyOverdue);
+  const badge=document.getElementById('attnBadge');
+  badge.textContent=items.length; badge.className='badge'+(items.length?'':' zero');
+
+  const ul=document.getElementById('attnList');
+  if(!items.length){ ul.innerHTML=`<li class="attn-empty">All clear — nothing needs you right now. 🌿</li>`; return; }
+  ul.innerHTML = items.map(it=>`
+    <li class="attn-item">
+      <span class="attn-dot" style="background:${it.color}"></span>
+      <div class="attn-main"><div class="attn-name">${esc(it.c.name)}</div><div class="attn-why">${it.why}</div></div>
+      <button class="attn-go" data-detail="${it.c.id}">Open</button>
+    </li>`).join('');
+}
+
+function trackerHTML(c){
+  return `<div class="track">${STAGES.map(st=>{
+    const v=c.stages?.[st.key];
+    const cls = v==='done'?'done':(v==='na'?'na':'');
+    const mark = v==='done'?'✓':(v==='na'?'–':'');
+    return `<div class="step ${cls}" style="--c:${st.color}"><span class="chk">${mark}</span><span class="dot"></span><span class="lbl">${st.label}</span></div>`;
+  }).join('')}</div>`;
+}
+
+function priorityTag(p){
+  if(p==='Urgent') return `<span class="ptag urgent">Urgent</span>`;
+  if(p==='High') return `<span class="ptag high">High</span>`;
+  return '';
+}
+
+function clientCardHTML(c){
+  const s=checkinStatus(c);
+  const phone=c.phone?`<a href="tel:${esc(c.phone)}">${esc(c.phone)}</a>`:'';
+  const email=c.email?`<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>`:'';
+  return `<div class="client ${c.archived?'archived':''}">
+    <div class="c-top">
+      <div class="c-id">
+        <div class="c-namerow"><span class="c-name">${esc(c.name)}</span>${priorityTag(c.priority)}</div>
+        <div class="c-contact">${phone}${email}</div>
+      </div>
+      <div class="c-checkin ${s.cls}">${s.short}</div>
+    </div>
+    ${trackerHTML(c)}
+    <div class="c-foot">
+      <button data-detail="${c.id}">▸ Open</button>
+      <button data-edit="${c.id}">✎ Edit</button>
+      <button data-msg="${c.id}">✉ Message</button>
+    </div>
+  </div>`;
+}
+
+function renderList(){
+  const wrap=document.getElementById('clientList');
+  const list=visibleClients();
+  if(!list.length){
+    wrap.innerHTML = state.clients.length===0
+      ? `<div class="empty"><h3>No clients yet</h3><p>Tap “New client” to add your first one and start tracking their TPM journey.</p></div>`
+      : `<div class="empty"><h3>Nothing here</h3><p>No ${filterArchived?'archived':'active'} clients match your search.</p></div>`;
+    return;
+  }
+  wrap.innerHTML = list.map(clientCardHTML).join('');
+}
+function renderAll(){ renderStats(); renderAttention(); renderList(); }
+
+/* ---------- add / edit ---------- */
+function openEdit(id){
+  editingId=id;
+  const c = id ? state.clients.find(x=>x.id===id) : null;
+  document.getElementById('editTitle').textContent = c?'Edit client':'New client';
+  document.getElementById('f_name').value=c?.name||'';
+  document.getElementById('f_phone').value=c?.phone||'';
+  document.getElementById('f_email').value=c?.email||'';
+  document.getElementById('f_priority').value=c?.priority||'Normal';
+  document.getElementById('f_assesstype').value=c?.assessType||'';
+  document.getElementById('f_start').value=c?.startDate||'';
+  document.getElementById('f_assess').value=c?.assessDate||'';
+  document.getElementById('f_workout').value=c?.workoutDate||'';
+  document.getElementById('f_checkin').value=c?.checkinOverride||'';
+
+  document.getElementById('stageGrid').innerHTML = STAGES.map(st=>{
+    const v=c?.stages?.[st.key]||'pending';
+    return stageRowHTML(st, v);
+  }).join('');
+
+  const ab=document.getElementById('archiveBtn');
+  ab.classList.toggle('hide', !c);
+  ab.textContent = c?.archived?'Restore client':'Archive client';
+  document.getElementById('assumeNote').innerHTML =
+    `<strong>Auto check-in:</strong> ${CHECKIN_WEEKS} weeks after the workout date (or assessment, then start date if those are blank). Set “Check-in (override)” to change it for one client.`;
+  document.getElementById('editOverlay').classList.add('show');
+}
+function stageRowHTML(st, v){
+  const cls = v==='done'?'on':(v==='na'?'na':'');
+  const mark = v==='done'?'✓':(v==='na'?'–':'');
+  const stateLbl = v==='done'?'Done':(v==='na'?'Not needed':'To do');
+  return `<div class="check ${cls}" data-stage="${st.key}" data-state="${v}" style="--c:${st.color}">
+    <span class="box">${mark}</span>
+    <span class="ctext"><span class="ctitle">${st.label}</span><span class="csub">${st.sub}</span></span>
+    <span class="cstate">${stateLbl}</span>
+  </div>`;
+}
+document.getElementById('stageGrid').addEventListener('click', e=>{
+  const row=e.target.closest('.check'); if(!row) return;
+  const order=['pending','done','na'];
+  const next=order[(order.indexOf(row.dataset.state)+1)%3];
+  const st=STAGES.find(s=>s.key===row.dataset.stage);
+  row.outerHTML = stageRowHTML(st, next);
+});
+document.getElementById('saveClient').addEventListener('click', ()=>{
+  const name=document.getElementById('f_name').value.trim();
+  if(!name){ toast('Add a name first'); document.getElementById('f_name').focus(); return; }
+  const stages={};
+  document.querySelectorAll('#stageGrid .check').forEach(el=>{ stages[el.dataset.stage]=el.dataset.state; });
+  const data={
+    name,
+    phone:document.getElementById('f_phone').value.trim(),
+    email:document.getElementById('f_email').value.trim(),
+    priority:document.getElementById('f_priority').value,
+    assessType:document.getElementById('f_assesstype').value,
+    startDate:document.getElementById('f_start').value,
+    assessDate:document.getElementById('f_assess').value,
+    workoutDate:document.getElementById('f_workout').value,
+    checkinOverride:document.getElementById('f_checkin').value,
+    stages
+  };
+  if(editingId){ Object.assign(state.clients.find(x=>x.id===editingId), data); }
+  else { state.clients.push(normalizeClient(Object.assign({id:uid(), createdAt:Date.now()}, data))); }
+  save(); renderAll(); closeEdit();
+  toast(editingId?'Client updated':'Client added');
+});
+document.getElementById('archiveBtn').addEventListener('click', ()=>{
+  const c=state.clients.find(x=>x.id===editingId); if(!c) return;
+  c.archived=!c.archived; save(); renderAll(); closeEdit();
+  toast(c.archived?'Client archived':'Client restored');
+});
+function closeEdit(){ document.getElementById('editOverlay').classList.remove('show'); editingId=null; }
+
+/* ---------- detail ---------- */
+function openDetail(id){
+  const c=state.clients.find(x=>x.id===id); if(!c) return;
+  detailId=id;
+  document.getElementById('detailName').textContent=c.name;
+  const s=checkinStatus(c), due=checkinDue(c);
+  document.getElementById('detailBody').innerHTML = `
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
+      <span class="c-checkin ${s.cls}">${s.short}${due?` · ${fmtD(toISO(due))}`:''}</span>
+      ${priorityTag(c.priority)}
+      ${c.assessType?`<span class="ptag" style="background:var(--shell);color:var(--muted)">${esc(c.assessType)}</span>`:''}
+    </div>
+    ${trackerHTML(c)}
+
+    <div class="section-label">Key dates</div>
+    <div class="kv">
+      <div class="msgbox"><div class="kl">Start</div>${fmtD(c.startDate)}</div>
+      <div class="msgbox"><div class="kl">Assessment</div>${fmtD(c.assessDate)}</div>
+      <div class="msgbox"><div class="kl">Workout</div>${fmtD(c.workoutDate)}</div>
+      <div class="msgbox"><div class="kl">Check-in</div>${due?fmtD(toISO(due)):'—'}</div>
+    </div>
+    <div class="btn-row" style="margin-top:8px">
+      <button class="btn btn-ghost" id="d_ics">＋ Add to Calendar</button>
+      <button class="btn btn-ghost" id="d_edit">✎ Edit details</button>
+    </div>
+
+    <div class="section-label">Send a message</div>
+    <div class="tmpl-row" id="tmplRow">
+      ${TEMPLATES.map(t=>`<button class="tmpl-btn" data-tmpl="${t.id}"><span class="tt">Template</span>${t.name}</button>`).join('')}
+    </div>
+    <div id="msgArea"></div>
+
+    <div class="section-label">4-week review</div>
+    <button class="btn btn-primary" id="d_review">✦ Log a 4-week review</button>
+    <div id="reviewForm"></div>
+    <ul class="note-list" id="reviewList" style="margin-top:10px"></ul>
+
+    <div class="section-label">Notes &amp; messages</div>
+    <div class="note-add">
+      <input type="text" id="d_note" placeholder="Add a note, comment or their message…" />
+      <button id="d_noteAdd">Add</button>
+    </div>
+    <ul class="note-list" id="d_noteList"></ul>
+  `;
+  renderReviews(c); renderNotes(c);
+  document.getElementById('detailOverlay').classList.add('show');
+
+  document.getElementById('d_edit').onclick=()=>{ closeDetail(); openEdit(id); };
+  document.getElementById('d_ics').onclick=()=>exportICS(c);
+  document.getElementById('tmplRow').onclick=(e)=>{ const b=e.target.closest('[data-tmpl]'); if(b) showTemplate(c, b.dataset.tmpl); };
+  document.getElementById('d_review').onclick=()=>openReviewForm(c);
+  document.getElementById('d_noteAdd').onclick=()=>{
+    const inp=document.getElementById('d_note'); const v=inp.value.trim(); if(!v) return;
+    c.notes.unshift({ts:Date.now(), text:v}); save(); inp.value=''; renderNotes(c);
+  };
+  document.getElementById('d_note').addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('d_noteAdd').click(); });
+}
+function closeDetail(){ document.getElementById('detailOverlay').classList.remove('show'); detailId=null; }
+
+/* ---------- templates ---------- */
+function firstName(c){ return (c.name||'there').trim().split(/\s+/)[0]; }
+function fillTemplate(c, id){ const t=TEMPLATES.find(x=>x.id===id); return `Hi ${firstName(c)}, ${t.body}`; }
+function showTemplate(c, id){
+  const text=fillTemplate(c, id);
+  const area=document.getElementById('msgArea');
+  area.innerHTML = `
+    <div class="msgbox" style="margin-top:10px">${esc(text)}</div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="msgCopy">Copy message</button>
+      ${c.email?`<button class="btn btn-ghost" id="msgMail">Email it</button>`:''}
+    </div>`;
+  document.getElementById('msgCopy').onclick=()=>copyText(text);
+  if(c.email) document.getElementById('msgMail').onclick=()=>{
+    const subj=encodeURIComponent('A note from The Preston Method');
+    window.location.href=`mailto:${c.email}?subject=${subj}&body=${encodeURIComponent(text)}`;
+  };
+  area.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+/* ---------- reviews (plan update log) ---------- */
+function openReviewForm(c){
+  const wrap=document.getElementById('reviewForm');
+  if(document.getElementById('rf_summary')){ wrap.innerHTML=''; return; }
+  wrap.innerHTML = `
+    <div class="field" style="margin-top:10px"><label>Check-in summary</label><textarea id="rf_summary" placeholder="What did their check-ins show?"></textarea></div>
+    <div class="field"><label>Exercise changes</label><textarea id="rf_changes" placeholder="Progressed / simplified / swapped…"></textarea></div>
+    <button class="btn btn-primary" id="rf_save">Save review &amp; start next 4 weeks</button>`;
+  document.getElementById('rf_save').onclick=()=>{
+    const summary=document.getElementById('rf_summary').value.trim();
+    const changes=document.getElementById('rf_changes').value.trim();
+    const next=addDays(today(), CHECKIN_WEEKS*7);
+    c.reviews.unshift({ts:Date.now(), date:toISO(today()), summary, changes, nextDue:toISO(next)});
+    c.checkinOverride=toISO(next); c.checkinDone=false;
+    save(); renderAll(); openDetail(c.id);
+    toast('Review logged · next check-in in 4 weeks');
+  };
+}
+function renderReviews(c){
+  const ul=document.getElementById('reviewList');
+  if(!c.reviews.length){ ul.innerHTML=`<li class="notes-empty">No reviews logged yet. Each one builds the progressive-training record.</li>`; return; }
+  ul.innerHTML = c.reviews.map((r,i)=>`
+    <li class="review">
+      <div class="rt">${fmtD(r.date)} · review #${c.reviews.length-i}</div>
+      ${r.summary?`<div class="rl">Summary</div><div class="rx">${esc(r.summary)}</div>`:''}
+      ${r.changes?`<div class="rl">Changes</div><div class="rx">${esc(r.changes)}</div>`:''}
+      ${!r.summary&&!r.changes?`<div class="rx" style="color:var(--muted)">Logged — next check-in ${fmtD(r.nextDue)}.</div>`:''}
+    </li>`).join('');
+}
+function renderNotes(c){
+  const ul=document.getElementById('d_noteList');
+  if(!c.notes.length){ ul.innerHTML=`<li class="notes-empty">No notes yet. Anything you jot here stays with this client.</li>`; return; }
+  ul.innerHTML = c.notes.map((n,i)=>`
+    <li class="note">
+      <button class="ndel" data-notedel="${i}">✕</button>
+      <div class="nt">${new Date(n.ts).toLocaleString(undefined,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}</div>
+      <div class="nx">${esc(n.text)}</div>
+    </li>`).join('');
+  ul.querySelectorAll('[data-notedel]').forEach(b=>{ b.onclick=()=>{ c.notes.splice(+b.dataset.notedel,1); save(); renderNotes(c); }; });
+}
+
+/* ---------- calendar export ---------- */
+function exportICS(c){
+  const due=checkinDue(c);
+  if(!due){ toast('Add a date first'); return; }
+  const dt=toISO(due).replace(/-/g,'');
+  const stamp=new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//The Preston Method//Command Centre//EN',
+    'BEGIN:VEVENT',`UID:${c.id}@tpm-command-centre`,`DTSTAMP:${stamp}`,`DTSTART;VALUE=DATE:${dt}`,
+    `SUMMARY:TPM check-in — ${c.name}`,`DESCRIPTION:4-week progressive check-in for ${c.name}. Review their plan and send the 4-week invitation.`,
+    'BEGIN:VALARM','TRIGGER:-PT0M','ACTION:DISPLAY',`DESCRIPTION:TPM check-in — ${c.name}`,'END:VALARM',
+    'END:VEVENT','END:VCALENDAR'].join('\r\n');
+  downloadBlob(new Blob([ics],{type:'text/calendar'}), `tpm-checkin-${slug(c.name)}.ics`);
+  toast('Opening calendar event…');
+}
+
+/* ---------- backup / restore ---------- */
+document.getElementById('btnExport').onclick=()=>{
+  downloadBlob(new Blob([JSON.stringify(state,null,2)],{type:'application/json'}), `tpm-command-centre-backup-${toISO(today())}.json`);
+  toast('Backup downloaded');
+};
+document.getElementById('btnImport').onclick=()=>document.getElementById('importFile').click();
+document.getElementById('importFile').onchange=(e)=>{
+  const file=e.target.files[0]; if(!file) return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const d=JSON.parse(r.result);
+      if(!d.clients||!Array.isArray(d.clients)) throw new Error('bad');
+      if(!confirm(`Restore ${d.clients.length} client(s)? This replaces what's currently on this device.`)) return;
+      d.clients.forEach(normalizeClient); state=d; save(); renderAll(); toast('Backup restored');
+    }catch(err){ toast('That file could not be read'); }
+    e.target.value='';
+  };
+  r.readAsText(file);
+};
+
+/* ---------- utilities ---------- */
+function esc(s){ return (s==null?'':String(s)).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+function slug(s){ return (s||'client').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
+function downloadBlob(blob,name){ const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=name; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); },400); }
+function copyText(t){ if(navigator.clipboard?.writeText){ navigator.clipboard.writeText(t).then(()=>toast('Copied to clipboard'),()=>fallbackCopy(t)); } else fallbackCopy(t); }
+function fallbackCopy(t){ const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); toast('Copied to clipboard'); }catch(e){ toast('Copy not supported here'); } ta.remove(); }
+let toastTimer;
+function toast(msg){ const el=document.getElementById('toast'); el.textContent=msg; el.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove('show'),1900); }
+
+/* ---------- global events ---------- */
+document.getElementById('btnAdd').onclick=()=>openEdit(null);
+document.getElementById('search').addEventListener('input', e=>{ searchTerm=e.target.value; renderList(); });
+document.getElementById('filterArchived').onclick=(e)=>{
+  filterArchived=!filterArchived; e.target.classList.toggle('on',filterArchived);
+  e.target.textContent=filterArchived?'Show active':'Show archived'; renderList();
+};
+document.querySelectorAll('[data-close]').forEach(b=>b.onclick=closeEdit);
+document.querySelectorAll('[data-close-detail]').forEach(b=>b.onclick=closeDetail);
+document.getElementById('editOverlay').addEventListener('click', e=>{ if(e.target.id==='editOverlay') closeEdit(); });
+document.getElementById('detailOverlay').addEventListener('click', e=>{ if(e.target.id==='detailOverlay') closeDetail(); });
+
+document.body.addEventListener('click', e=>{
+  const d=e.target.closest('[data-detail]'); if(d){ openDetail(d.dataset.detail); return; }
+  const ed=e.target.closest('[data-edit]'); if(ed){ openEdit(ed.dataset.edit); return; }
+  const mg=e.target.closest('[data-msg]'); if(mg){ openDetail(mg.dataset.msg); setTimeout(()=>{ const a=document.getElementById('msgArea'); if(a) a.scrollIntoView({behavior:'smooth',block:'center'}); },150); return; }
+});
+
+renderAll();
+</script>
+</body>
+</html>
