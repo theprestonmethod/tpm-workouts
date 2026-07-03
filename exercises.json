@@ -3198,5 +3198,28 @@
     "progression": "Reduce weight if you feel any pain.",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/machine-chest-press-77940.jpg"
+  },
+  {
+    "id": "ex-1783046970095",
+    "name": "Ankle Circles",
+    "pillar": "A",
+    "status": "Active",
+    "category": "Mobility",
+    "movementFamily": "Mobility",
+    "movementPattern": "Rotation",
+    "bodyRegion": "Legs",
+    "loadStyle": "Mobility",
+    "sets": "2",
+    "reps": "20 circles",
+    "rpe": "4",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "MF-44-AnkleCircles",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/ankle-circles-66429.jpg"
   }
 ]
