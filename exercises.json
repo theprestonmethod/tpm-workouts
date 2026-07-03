@@ -3344,5 +3344,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/machine-seated-rows-92638.jpg"
+  },
+  {
+    "id": "ex-1783054491976",
+    "name": "Band Deadlift Introduction",
+    "pillar": "A",
+    "status": "Active",
+    "category": "Hinge",
+    "movementFamily": "Hinge",
+    "movementPattern": "Hinge",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Mobility",
+    "sets": "2",
+    "reps": "15",
+    "rpe": "4",
+    "equipment": "Band",
+    "difficulty": "Foundational",
+    "code": "MF-49-Band-DLIntro",
+    "cues": "Make sure you have the band very tight so you can feel the tension when you lift, keep your back as \"flat\"/straight as you can, lift your tailbone to the ceiling, and think of feeling your hamstrings and lower back but only mildly.",
+    "coachingFocus": "To work on hamstring flexibility and lower back tension.",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/band-deadlift-introduction-88271.jpg"
   }
 ]
