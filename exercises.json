@@ -3298,5 +3298,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/band-lateral-leg-lifts-69897.jpg"
+  },
+  {
+    "id": "ex-1783053573351",
+    "name": "Band Leg Lifts",
+    "pillar": "A",
+    "status": "Active",
+    "category": "Pull",
+    "movementFamily": "Pull",
+    "movementPattern": "Single-Leg",
+    "bodyRegion": "Hips / Glutes",
+    "loadStyle": "Mobility",
+    "sets": "2",
+    "reps": "15-20",
+    "rpe": "6",
+    "equipment": "Band",
+    "difficulty": "Foundational",
+    "code": "MF-46-Band-LegLifts",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/band-leg-lifts-69385.jpg"
   }
 ]
