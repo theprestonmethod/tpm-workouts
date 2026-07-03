@@ -406,7 +406,12 @@
     "id": "st-5",
     "name": "Band Leg Extensions",
     "pillar": "ST",
+    "status": "Active",
     "category": "Squat",
+    "movementFamily": "",
+    "movementPattern": "",
+    "bodyRegion": "",
+    "loadStyle": "",
     "sets": "1",
     "reps": "6–10 each leg",
     "rpe": "",
@@ -414,8 +419,11 @@
     "difficulty": "Foundational",
     "code": "AT-HOME-05",
     "cues": "Smooth. Don't snap the band. Band around ankle, anchor to chair leg, extend knee forward slowly.",
+    "coachingFocus": "Focus on the extension, feeling the upper thigh muscles working.",
+    "contraindications": "",
     "progression": "Lighter band or smaller range if too hard",
-    "video": ""
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/band-leg-extensions-73427.jpg"
   },
   {
     "id": "st-6",
