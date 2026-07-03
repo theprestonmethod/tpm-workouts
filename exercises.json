@@ -3175,5 +3175,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/single-leg-balance-27119.jpg"
+  },
+  {
+    "id": "ex-1783046885302",
+    "name": "Machine Chest Press",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Push",
+    "movementFamily": "Push",
+    "movementPattern": "Vertical Push",
+    "bodyRegion": "Chest / Shoulder",
+    "loadStyle": "Strength",
+    "sets": "2",
+    "reps": "12",
+    "rpe": "7",
+    "equipment": "Machine at Gym",
+    "difficulty": "Foundational",
+    "code": "SM-40-Machine-ChestPress",
+    "cues": "Sit tall with your core engaged before you press forward. Pay attention to feeling your chest working and the front of your shoulders assisting.",
+    "coachingFocus": "Strengthening chest muscles",
+    "contraindications": "stop if you feel shoulder pain",
+    "progression": "Reduce weight if you feel any pain.",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/machine-chest-press-77940.jpg"
   }
 ]
