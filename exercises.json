@@ -3221,5 +3221,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/ankle-circles-66429.jpg"
+  },
+  {
+    "id": "ex-1783047161676",
+    "name": "Band - Fire Hydrants",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Hinge",
+    "movementFamily": "Mobility",
+    "movementPattern": "Single-Leg",
+    "bodyRegion": "Hips / Glutes",
+    "loadStyle": "Mobility",
+    "sets": "2",
+    "reps": "10",
+    "rpe": "7",
+    "equipment": "Band",
+    "difficulty": "Intermediate",
+    "code": "SM-44-Band-FireHydrant",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/band-fire-hydrants-59050.jpg"
   }
 ]
