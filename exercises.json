@@ -3321,5 +3321,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/band-leg-lifts-69385.jpg"
+  },
+  {
+    "id": "ex-1783053895582",
+    "name": "Machine Seated Rows",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Pull",
+    "movementFamily": "Pull",
+    "movementPattern": "Vertical Pull",
+    "bodyRegion": "Back / Shoulder",
+    "loadStyle": "Strength",
+    "sets": "2",
+    "reps": "10-12",
+    "rpe": "7",
+    "equipment": "Machine at Gym",
+    "difficulty": "Intermediate",
+    "code": "SM-42-Machine-SeatedRow",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/machine-seated-rows-92638.jpg"
   }
 ]
