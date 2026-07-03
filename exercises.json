@@ -3244,5 +3244,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/band-fire-hydrants-59050.jpg"
+  },
+  {
+    "id": "ex-1783047461420",
+    "name": "Machine - Pec Dec",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Pull",
+    "movementFamily": "Rotate",
+    "movementPattern": "Rotation",
+    "bodyRegion": "Chest / Shoulder",
+    "loadStyle": "Strength",
+    "sets": "2",
+    "reps": "12",
+    "rpe": "7",
+    "equipment": "Machine at Gym",
+    "difficulty": "Foundational",
+    "code": "SM-41-Machine-PecDec",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/machine-pec-dec-54933.jpg"
   }
 ]
