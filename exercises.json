@@ -3367,5 +3367,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/band-deadlift-introduction-88271.jpg"
+  },
+  {
+    "id": "ex-1783056974206",
+    "name": "Elliptical",
+    "pillar": "WU",
+    "status": "Active",
+    "category": "Cardio",
+    "movementFamily": "Locomotion",
+    "movementPattern": "",
+    "bodyRegion": "Lower Body",
+    "loadStyle": "Endurance",
+    "sets": "",
+    "reps": "5 minutes",
+    "rpe": "7-8",
+    "equipment": "Elliptical",
+    "difficulty": "Intermediate",
+    "code": "SM-49-EllipticalFM",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/elliptical-68149.jpg"
   }
 ]
