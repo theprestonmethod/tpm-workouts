@@ -3275,5 +3275,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/machine-pec-dec-10254.jpg"
+  },
+  {
+    "id": "ex-1783053472208",
+    "name": "Band Lateral Leg Lifts",
+    "pillar": "A",
+    "status": "Active",
+    "category": "Pull",
+    "movementFamily": "Pull",
+    "movementPattern": "Single-Leg",
+    "bodyRegion": "Hips / Glutes",
+    "loadStyle": "Mobility",
+    "sets": "2",
+    "reps": "10-15",
+    "rpe": "5",
+    "equipment": "Band",
+    "difficulty": "Foundational",
+    "code": "SM-47-Band-LatLegLift",
+    "cues": "Make sure you pay attention to your posture and stand stall and straight and allow your hips and glutes to work.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/band-lateral-leg-lifts-69897.jpg"
   }
 ]
