@@ -3390,5 +3390,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/elliptical-68149.jpg"
+  },
+  {
+    "id": "ex-1783193983992",
+    "name": "DB Pec Dec",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Pull",
+    "movementFamily": "Pull",
+    "movementPattern": "Horizontal Pull",
+    "bodyRegion": "Chest / Shoulder",
+    "loadStyle": "Stability",
+    "sets": "2",
+    "reps": "10-12",
+    "rpe": "6",
+    "equipment": "Dumbbells",
+    "difficulty": "Foundational",
+    "code": "SM-51-DBPecDec",
+    "cues": "Keep your elbows the same height as your shoulders. Try to press your elbows together in front of you.",
+    "coachingFocus": "Stabilizer muscles, shoulder and chest",
+    "contraindications": "Do not work through shoulder pain",
+    "progression": "Use less weight or no weight.",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/db-pec-dec-80803.jpg"
   }
 ]
