@@ -3436,5 +3436,28 @@
     "progression": "Try without weights and if you need to hold onto something to keep your posture, it is better than leaning to one side.",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/db-calf-raises-56323.jpg"
+  },
+  {
+    "id": "ex-1783195488154",
+    "name": "Cable Machine Tricep Pressdowns - Flat Bar",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Pull",
+    "movementFamily": "Pull",
+    "movementPattern": "Vertical Pull",
+    "bodyRegion": "Arms",
+    "loadStyle": "Strength",
+    "sets": "2",
+    "reps": "10",
+    "rpe": "7",
+    "equipment": "Machine at Gym",
+    "difficulty": "Intermediate",
+    "code": "SM-53-MTricepPD",
+    "cues": "Keep your elbows tight to your body and right at your side. Don't move the upper part of your arm when you press or release the bar.",
+    "coachingFocus": "Triceps - back of your arms, bracing your core.",
+    "contraindications": "If you lose form it is too heavy - if you move your upper arm it is not correct.",
+    "progression": "Reduce weight if you cannot keep form.",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/cable-machine-tricep-pressdowns-flat-bar-85723.jpg"
   }
 ]
