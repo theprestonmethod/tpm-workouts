@@ -3459,5 +3459,28 @@
     "progression": "Reduce weight if you cannot keep form.",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/cable-machine-tricep-pressdowns-flat-bar-85723.jpg"
+  },
+  {
+    "id": "ex-1783199060622",
+    "name": "Machine Hamstring Curl",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Pull",
+    "movementFamily": "Pull",
+    "movementPattern": "Horizontal Pull",
+    "bodyRegion": "Legs",
+    "loadStyle": "Strength",
+    "sets": "3",
+    "reps": "10",
+    "rpe": "7",
+    "equipment": "Machine at Gym",
+    "difficulty": "Intermediate",
+    "code": "SM-54-MHamCurl",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "If you feel your lower back or a cramp in your hamstring, please reduce the weight - or stop if your back hurts.",
+    "video": "",
+    "image": null
   }
 ]
