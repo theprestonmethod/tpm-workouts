@@ -1,0 +1,8 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256' width='256' height='256' fill='none'>
+  <!-- weight plate with gold anchor star -->
+  <circle cx='128' cy='140' r='76' fill='#1B3A5C'/>
+  <circle cx='128' cy='140' r='54' fill='#F5F8FC'/>
+  <circle cx='128' cy='140' r='38' fill='#1B3A5C'/>
+  <circle cx='128' cy='140' r='13' fill='#F5F8FC'/>
+  <polygon points='128,14 138,40 166,42 144,60 152,88 128,72 104,88 112,60 90,42 118,40' fill='#d6a12a'/>
+</svg>
