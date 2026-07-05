@@ -1,1 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="apple-touch-icon" href="../01_TPM_master_icon.png">
+<meta name="apple-mobile-web-app-title" content="TPM Weights">
+<title>TPM Client Weights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--navy:#1B3A5C;--brick:#C73B30;--cream:#F4F1ED;--off:#F8F6F3;--border:#D4CFC8;--text:#1C1C1C;--gray:#808080;--gold:#a07a3a;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+header{background:var(--navy);padding:28px 24px;text-align:center;}
+.logo{width:48px;height:48px;background:white;border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;box-shadow:0 4px 16px rgba(0,0,0,0.2);}
+h1{font-family:'Bebas Neue';font-size:26px;letter-spacing:3px;color:white;margin-bottom:4px;}
+.sub{font-size:12px;color:rgba(255,255,255,0.75);}
+.back{display:inline-block;margin-top:12px;font-size:12px;color:rgba(255,255,255,0.8);text-decoration:none;}
+.back:hover{color:white;}
+
+main{flex:1;padding:24px 20px;max-width:480px;margin:0 auto;width:100%;}
+
+.new-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px 16px;background:var(--navy);color:white;border:none;border-radius:10px;font-family:'DM Sans';font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;margin-bottom:16px;transition:all 0.15s;box-shadow:0 2px 8px rgba(27,58,92,0.2);}
+.new-btn:hover{background:#254a72;transform:translateY(-1px);}
+
+.search-box{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans';font-size:14px;background:white;color:var(--text);margin-bottom:20px;}
+.search-box:focus{outline:none;border-color:var(--navy);}
+
+.section-label{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--gray);text-transform:uppercase;margin-bottom:10px;}
+
+.weight-card{display:flex;align-items:center;gap:14px;background:white;border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px;text-decoration:none;color:var(--text);transition:all 0.15s;box-shadow:0 2px 6px rgba(0,0,0,0.04);}
+.weight-card:hover{border-color:var(--navy);transform:translateY(-1px);box-shadow:0 4px 12px rgba(27,58,92,0.1);}
+.weight-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.weight-info{flex:1;}
+.weight-name{font-size:14px;font-weight:700;margin-bottom:2px;}
+.weight-meta{font-size:11px;color:var(--gray);}
+.weight-arrow{font-size:16px;color:var(--border);}
+
+.empty{text-align:center;padding:40px 20px;color:var(--gray);font-size:14px;line-height:1.7;}
+.retry-btn{display:inline-block;margin-top:14px;padding:10px 22px;background:var(--navy);color:white;border:none;border-radius:8px;font-family:'DM Sans';font-size:13px;font-weight:600;cursor:pointer;}
+.retry-btn:hover{background:#254a72;}
+
+footer{padding:20px;text-align:center;font-size:11px;color:var(--gray);line-height:1.8;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><img src="../01_TPM_master_icon.png" style="width:44px;height:44px;border-radius:8px;object-fit:cover;"></div>
+  <h1>CLIENT WEIGHTS</h1>
+  <div class="sub">DAY 1 — WEIGHTS &amp; FORM DISCOVERY &middot; THE PRESTON METHOD™</div>
+  <a href="https://theprestonmethod.github.io/tpm-workouts/" class="back">← Back to Tools</a>
+</header>
+
+<main>
+  <a href="../tpm-day1-weights-v2.html" class="new-btn">＋ New Day 1 Session</a>
+
+  <input type="text" class="search-box" placeholder="🔍 Search by client name..." oninput="filterClients(this.value)">
+
+  <div class="section-label">Clients</div>
+  <div id="clientList"><div class="empty">Loading client weight logs…</div></div>
+</main>
+
+<footer>
+  THE PRESTON METHOD™ &middot; 604.993.1888 &middot; www.theprestonmethod.com
+</footer>
+
+<script>
+// ─────────────────────────────────────────────────────────────
+//  AUTOMATIC CLIENT WEIGHTS MENU
+//  Lists every TPM-Weights-*.json file in this folder, live from
+//  GitHub. One file per client, updated in place by the Day 1
+//  tool — save a client, they appear here. Nothing to maintain.
+// ─────────────────────────────────────────────────────────────
+const GITHUB_API = 'https://api.github.com/repos/theprestonmethod/tpm-workouts/contents/weights';
+
+// TPM palette — each client gets a consistent colour based on their name
+const DOT_COLORS = ['#3d6b52', '#c97a1a', '#17a8b2', '#a0443e', '#1A56DB', '#7B61FF', '#D32374'];
+
+let CLIENTS = [];
+let currentFilter = '';
+
+// Parse "TPM-Weights-Jane-Smith.json" → client: "Jane Smith"
+function parseFilename(filename) {
+  const m = filename.match(/^TPM-Weights-(.+)\.json$/i);
+  if (!m) return null;
+  return { file: filename, client: m[1].replace(/-/g, ' ').trim() };
+}
+
+function colorFor(name) {
+  let hash = 0;
+  const s = name.toLowerCase();
+  for (let i = 0; i < s.length; i++) hash = (hash * 31 + s.charCodeAt(i)) >>> 0;
+  return DOT_COLORS[hash % DOT_COLORS.length];
+}
+
+async function loadClients() {
+  const list = document.getElementById('clientList');
+  try {
+    const headers = { 'Accept': 'application/vnd.github+json' };
+    const token = localStorage.getItem('tpm_github_token');
+    if (token) headers['Authorization'] = 'token ' + token;
+    const resp = await fetch(GITHUB_API, { headers });
+    if (!resp.ok) throw new Error('GitHub responded ' + resp.status);
+    const files = await resp.json();
+
+    CLIENTS = files
+      .filter(f => f.type === 'file')
+      .map(f => parseFilename(f.name))
+      .filter(Boolean)
+      .map(c => ({ ...c, color: colorFor(c.client) }))
+      .sort((a, b) => a.client.localeCompare(b.client));
+
+    renderClients(currentFilter);
+  } catch (err) {
+    list.innerHTML =
+      '<div class="empty">Couldn\u2019t load the client list right now.<br>' +
+      'Check your internet connection and try again.<br>' +
+      '<button class="retry-btn" onclick="loadClients()">Try Again</button></div>';
+  }
+}
+
+function filterClients(query) {
+  currentFilter = query.toLowerCase();
+  renderClients(currentFilter);
+}
+
+function renderClients(filter) {
+  const list = document.getElementById('clientList');
+  const filtered = CLIENTS.filter(c => !filter || c.client.toLowerCase().includes(filter));
+
+  if (!filtered.length) {
+    list.innerHTML = CLIENTS.length
+      ? '<div class="empty">No clients match that search</div>'
+      : '<div class="empty">No weight logs yet.<br>Run a Day 1 session and tap <strong>☁ Save to GitHub</strong> — the client will appear here.</div>';
+    return;
+  }
+
+  let html = '';
+  filtered.forEach(c => {
+    html += `
+    <a href="../tpm-day1-weights-v2.html?client=${encodeURIComponent(c.file)}" class="weight-card">
+      <div class="weight-dot" style="background:${c.color}"></div>
+      <div class="weight-info">
+        <div class="weight-name">${c.client}</div>
+        <div class="weight-meta">Day 1 Weights &middot; <span style="color:${c.color};font-weight:600;">tap to open &amp; update</span></div>
+      </div>
+      <div class="weight-arrow">›</div>
+    </a>`;
+  });
+
+  list.innerHTML = html;
+}
+
+loadClients();
+</script>
+</body>
+</html>
 
