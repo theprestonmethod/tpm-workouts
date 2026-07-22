@@ -3482,5 +3482,28 @@
     "progression": "If you feel your lower back or a cramp in your hamstring, please reduce the weight - or stop if your back hurts.",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/machine-hamstring-curl-06156.jpg"
+  },
+  {
+    "id": "ex-1784757456726",
+    "name": "Front Kicks",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Balance",
+    "movementFamily": "Balance",
+    "movementPattern": "Single-Leg",
+    "bodyRegion": "Hips / Glutes",
+    "loadStyle": "Stability",
+    "sets": "2",
+    "reps": "20 each leg",
+    "rpe": "7",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Intermediate",
+    "code": "SM-70-FrontKicks",
+    "cues": "Make sure you engage your core and glutes to stabilize your standing leg as you kick. Keep your hands up by your face and stare at something that is not moving to keep focused.",
+    "coachingFocus": "Stability, Balance, Core, Cardio",
+    "contraindications": "If you feel pain in your knees or you cannot keep your posture, hold on to support or work on your stabilizer muscles before working on this exercise.",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/front-kicks-53572.jpg"
   }
 ]
