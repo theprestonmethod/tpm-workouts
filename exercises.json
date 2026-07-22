@@ -3551,5 +3551,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/skipping-96426.jpg"
+  },
+  {
+    "id": "ex-1784758742784",
+    "name": "Side Kicks",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Balance",
+    "movementFamily": "Balance",
+    "movementPattern": "Hip Mobility",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Stability",
+    "sets": "2",
+    "reps": "20 each leg",
+    "rpe": "7-8",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Intermediate",
+    "code": "SM-75-SideKicks",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/side-kicks-40821.jpg"
   }
 ]
