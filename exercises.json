@@ -3574,5 +3574,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/side-kicks-40821.jpg"
+  },
+  {
+    "id": "ex-1784758803861",
+    "name": "Donkey Kicks",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Balance",
+    "movementFamily": "Balance",
+    "movementPattern": "Hip Mobility",
+    "bodyRegion": "Hips / Glutes",
+    "loadStyle": "Stability",
+    "sets": "2",
+    "reps": "20 each leg",
+    "rpe": "7",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "SM-75-SideKicks",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/donkey-kicks-01770.jpg"
   }
 ]
