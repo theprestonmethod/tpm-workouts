@@ -3505,5 +3505,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/front-kicks-53572.jpg"
+  },
+  {
+    "id": "ex-1784758483821",
+    "name": "Air Skips",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Plyo",
+    "movementFamily": "Locomotion",
+    "movementPattern": "",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Control",
+    "sets": "2",
+    "reps": "50",
+    "rpe": "7",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "MF-60-AirSkips",
+    "cues": "Jumping lightly while engaging your core is great for building bone-density. I is important to challenge our joints without over working them.",
+    "coachingFocus": "Core, Plyometrics",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/air-skips-80616.jpg"
   }
 ]
