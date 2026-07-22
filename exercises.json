@@ -3528,5 +3528,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/air-skips-80616.jpg"
+  },
+  {
+    "id": "ex-1784758599547",
+    "name": "Skipping",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Plyo",
+    "movementFamily": "Locomotion",
+    "movementPattern": "",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Power",
+    "sets": "3",
+    "reps": "50 turns",
+    "rpe": "8",
+    "equipment": "Skipping Rope",
+    "difficulty": "Intermediate",
+    "code": "SM-80-Skipping",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/skipping-96426.jpg"
   }
 ]
