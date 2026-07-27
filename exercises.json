@@ -3227,5 +3227,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/spin-bike-32936.jpg"
+  },
+  {
+    "id": "ex-1785117152161",
+    "name": "Tricep Dips",
+    "pillar": "A",
+    "status": "Active",
+    "category": "Mobility",
+    "movementFamily": "Mobility",
+    "movementPattern": "Vertical Push",
+    "bodyRegion": "Arms",
+    "loadStyle": "Mobility",
+    "sets": "2-3",
+    "reps": "10",
+    "rpe": "5",
+    "equipment": "None / Bodyweight",
+    "difficulty": "Foundational",
+    "code": "MF-88-TricepDips",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/tricep-dips-48658.jpg"
   }
 ]
