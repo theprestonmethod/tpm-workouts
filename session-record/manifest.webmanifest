@@ -1,9 +1,0 @@
-{
-  "name": "TPM Session Record",
-  "short_name": "TPM Sessions",
-  "start_url": "./",
-  "display": "standalone",
-  "background_color": "#f4f1ed",
-  "theme_color": "#1f446a",
-  "description": "Live client workout and session records for The Preston Method."
-}
