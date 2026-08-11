@@ -259,7 +259,12 @@
     "id": "a-7",
     "name": "Hip Hinges",
     "pillar": "A",
+    "status": "Active",
     "category": "Hinge",
+    "movementFamily": "Hinge",
+    "movementPattern": "Hip Mobility",
+    "bodyRegion": "Full Body",
+    "loadStyle": "Mobility",
     "sets": "3",
     "reps": "20 reps",
     "rpe": "",
@@ -267,9 +272,11 @@
     "difficulty": "Foundational",
     "code": "PL-Plyo-V1",
     "cues": "Drive hips back. Neutral spine. Squeeze glutes at top.",
+    "coachingFocus": "",
+    "contraindications": "",
     "progression": "Add load when pattern is solid",
     "video": "",
-    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-7.jpg"
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/hip-hinges-79900.jpg"
   },
   {
     "id": "st-1",
