@@ -3273,5 +3273,28 @@
     "progression": "Use a dowel or a bar to help balance or move to the floor to practice first.",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bosu-squats-28188.jpg"
+  },
+  {
+    "id": "ex-1786488015659",
+    "name": "BOSU Squats M",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Squat",
+    "movementFamily": "Squat",
+    "movementPattern": "",
+    "bodyRegion": "Legs",
+    "loadStyle": "Stability",
+    "sets": "2",
+    "reps": "10-15",
+    "rpe": "7-8",
+    "equipment": "BOSU",
+    "difficulty": "Intermediate",
+    "code": "SM-89M-BOSU-Squat",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bosu-squats-m-11273.jpg"
   }
 ]
