@@ -3250,5 +3250,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/tricep-dips-48658.jpg"
+  },
+  {
+    "id": "ex-1786487932118",
+    "name": "BOSU - Squats",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Squat",
+    "movementFamily": "Squat",
+    "movementPattern": "Hinge",
+    "bodyRegion": "Legs",
+    "loadStyle": "Stability",
+    "sets": "2",
+    "reps": "10-15",
+    "rpe": "7-8",
+    "equipment": "BOSU",
+    "difficulty": "Intermediate",
+    "code": "SM-89-BOSU-Squat",
+    "cues": "Keep weight evenly distributed on your feet, with slightly more on the heels. Eyes straight ahead, not looking down at the BOSU. Use a bar or dowel to keep it stable if balance is a challenge.",
+    "coachingFocus": "Balance, Stability",
+    "contraindications": "don't try to go too low and don't lean forward.",
+    "progression": "Use a dowel or a bar to help balance or move to the floor to practice first.",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bosu-squats-28188.jpg"
   }
 ]
