@@ -1,6 +1,6 @@
 {
   "v": 1,
-  "savedAt": "2026-08-11T22:03:00.075Z",
+  "savedAt": "2026-08-11T22:29:17.428Z",
   "client": "Rick Griffin",
   "date": "2026-08-11",
   "coach": "Coach Colleen",
@@ -373,7 +373,8 @@
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/db-calf-raises-56323.jpg",
           "startWeight": "You do not have to use weight here. Also, try single-leg calf raises but keep posture tall with fingertips on a counter."
-        }
+        },
+        null
       ],
       "accessory": [
         null,
