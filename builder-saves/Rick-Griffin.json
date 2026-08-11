@@ -1,6 +1,6 @@
 {
   "v": 1,
-  "savedAt": "2026-08-11T19:58:07.493Z",
+  "savedAt": "2026-08-11T19:59:03.546Z",
   "client": "Rick Griffin",
   "date": "2026-08-11",
   "coach": "Coach Colleen",
@@ -25,7 +25,8 @@
           "cues": "Relax shoulders, ribs down, tall spine",
           "progression": "Increase range gradually",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-1.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-1.jpg",
+          "startWeight": ""
         },
         {
           "id": "wu-2",
@@ -41,7 +42,8 @@
           "cues": "Rotate through upper back, hips mostly forward",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-2.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-2.jpg",
+          "startWeight": ""
         },
         {
           "id": "wu-5",
@@ -57,7 +59,8 @@
           "cues": "Slow and controlled. Hinge at hips, crawl out to straight-arm plank and back.",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-5.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-5.jpg",
+          "startWeight": ""
         },
         {
           "id": "a-6",
@@ -73,7 +76,8 @@
           "cues": "Stand with back flat against wall. Slide arms up and down in Y-T-W pattern.",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-6.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-6.jpg",
+          "startWeight": ""
         }
       ],
       "primary": [
@@ -91,7 +95,8 @@
           "cues": "Engage core before beginning. Hands below shoulder height. Bend elbows and let body weight move toward wall — even one inch at a time. No pain only.",
           "progression": "Move closer to wall to make easier. Move feet back as you improve",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-15.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-15.jpg",
+          "startWeight": ""
         },
         {
           "id": "st-18",
@@ -107,7 +112,8 @@
           "cues": "Hold a straight-arm plank. Press shoulders away from ears — spread shoulder blades apart (protraction). Then let go and squeeze shoulder blades together (retraction). Repeat with control.",
           "progression": "Progress to full push-up range when scapular control is strong",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-18.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-18.jpg",
+          "startWeight": ""
         },
         {
           "id": "ex-1780249706292",
@@ -130,7 +136,8 @@
           "contraindications": "",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/air-front-punches-03861.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/air-front-punches-03861.jpg",
+          "startWeight": ""
         },
         {
           "id": "st-10",
@@ -146,7 +153,8 @@
           "cues": "Stand tall, ribs down. Soft bend in elbows. Raise arms straight in front. Stop before shoulder height. Lower slowly.",
           "progression": "Increase range only when pain-free. Stay below your pain threshold",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-10.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-10.jpg",
+          "startWeight": ""
         },
         {
           "id": "st-9",
@@ -162,7 +170,8 @@
           "cues": "Stand tall, ribs down. Soft bend in elbows. Lift arms out to the side toward shoulder height. Lower slowly with control.",
           "progression": "Add very light weight only when fully pain-free at shoulder height",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-9.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-9.jpg",
+          "startWeight": ""
         }
       ],
       "accessory": [
@@ -189,7 +198,8 @@
           "cues": "Relax shoulders, ribs down, tall spine",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-3.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-3.jpg",
+          "startWeight": ""
         },
         {
           "id": "wu-8",
@@ -205,7 +215,8 @@
           "cues": "Drive knee to hip height. Stay tall. Increase speed only if posture stays controlled.",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-8.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-8.jpg",
+          "startWeight": ""
         },
         {
           "id": "ex-1779393935376",
@@ -228,7 +239,8 @@
           "contraindications": "If you feel pain in your knees, try not to go as low.",
           "progression": "if it is too difficult, try doing a wall sit instead.",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/air-squats-98104.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/air-squats-98104.jpg",
+          "startWeight": ""
         },
         {
           "id": "wu-4",
@@ -244,7 +256,8 @@
           "cues": "Step back softly. Front heel grounded. Torso tall. Control the return.",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-4.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-4.jpg",
+          "startWeight": ""
         }
       ],
       "primary": [
@@ -269,7 +282,8 @@
           "contraindications": "If you are recovering from injury, start slowly and use a counter/bar if needed.",
           "progression": "If you feel knee, ankle or foot pain, move off the Bosu. If you want to increase intensity, run up and down instead of step-ups.",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bosu-step-ups-58099.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bosu-step-ups-58099.jpg",
+          "startWeight": ""
         },
         {
           "id": "c-6",
@@ -285,7 +299,8 @@
           "cues": "Hinge from hip. Maintain long spine. Working leg soft.",
           "progression": "Rest 30 sec",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-6.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-6.jpg",
+          "startWeight": ""
         },
         {
           "id": "ex-1780610652923",
@@ -308,7 +323,8 @@
           "contraindications": "",
           "progression": "Reduce weight",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/weighted-single-leg-torso-twists-50281.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/weighted-single-leg-torso-twists-50281.jpg",
+          "startWeight": ""
         },
         {
           "id": "ex-1781734893595",
@@ -331,7 +347,8 @@
           "contraindications": "If you have knee pain, try not to bend as far down, or get a larger ball to avoid inner knee pain.",
           "progression": "Add weight for progression, remove ball for regression",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wall-sit-with-pilates-ball-88511.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wall-sit-with-pilates-ball-88511.jpg",
+          "startWeight": ""
         },
         {
           "id": "ex-1783194858654",
@@ -382,7 +399,8 @@
           "cues": "Rotate through upper back, hips mostly forward",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-2.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-2.jpg",
+          "startWeight": ""
         },
         {
           "id": "wu-9",
@@ -398,7 +416,8 @@
           "cues": "Obliques, shoulders, spinal rotation",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-9.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-9.jpg",
+          "startWeight": ""
         },
         {
           "id": "c-19",
