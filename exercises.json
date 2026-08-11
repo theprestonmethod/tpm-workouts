@@ -3296,5 +3296,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bosu-squats-m-11273.jpg"
+  },
+  {
+    "id": "ex-1786488101099",
+    "name": "BOSU - Pencil Squat",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Squat",
+    "movementFamily": "Squat",
+    "movementPattern": "",
+    "bodyRegion": "Legs",
+    "loadStyle": "Stability",
+    "sets": "2",
+    "reps": "10-15",
+    "rpe": "7-8",
+    "equipment": "BOSU",
+    "difficulty": "Intermediate",
+    "code": "SM-88-BOSU-PencilSquat",
+    "cues": "Keep eyes up, not looking at the BOSU, use a bar or something for stability if concerned.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bosu-pencil-squat-99047.jpg"
   }
 ]
