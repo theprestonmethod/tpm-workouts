@@ -3365,5 +3365,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/back-bend-to-forward-fold-03170.jpg"
+  },
+  {
+    "id": "ex-1786489068637",
+    "name": "Back-Bend to Forward Fold",
+    "pillar": "WU",
+    "status": "Active",
+    "category": "Hinge",
+    "movementFamily": "Hinge",
+    "movementPattern": "Spine Mobility",
+    "bodyRegion": "Core / Spine",
+    "loadStyle": "Mobility",
+    "sets": "2",
+    "reps": "10",
+    "rpe": "4-5",
+    "equipment": "None",
+    "difficulty": "Foundational",
+    "code": "WU-BackBendFFM",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/back-bend-to-forward-fold-65668.jpg"
   }
 ]
