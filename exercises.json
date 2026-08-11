@@ -3388,5 +3388,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/back-bend-to-forward-fold-65668.jpg"
+  },
+  {
+    "id": "ex-1786489913220",
+    "name": "Recumbent Bike",
+    "pillar": "WU",
+    "status": "Active",
+    "category": "Cardio",
+    "movementFamily": "Locomotion",
+    "movementPattern": "",
+    "bodyRegion": "Legs",
+    "loadStyle": "Mobility",
+    "sets": "",
+    "reps": "5-10 minutes",
+    "rpe": "6-7",
+    "equipment": "Recumbent Bike",
+    "difficulty": "Foundational",
+    "code": "WU-RecumbentBike",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/recumbent-bike-10999.jpg"
   }
 ]
