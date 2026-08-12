@@ -424,22 +424,6 @@
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-1.jpg"
   },
   {
-    "id": "b-2",
-    "name": "Bicep Curls",
-    "pillar": "B",
-    "category": "Pull",
-    "sets": "3",
-    "reps": "6–8 reps",
-    "rpe": "7–8",
-    "equipment": "Dumbbells",
-    "difficulty": "Intermediate",
-    "code": "SM-PH1-V1-02-DBCurls",
-    "cues": "Smooth and controlled",
-    "progression": "Add reps before adding weight",
-    "video": "",
-    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-2.jpg"
-  },
-  {
     "id": "b-3",
     "name": "DB Tricep Kickbacks",
     "pillar": "B",
