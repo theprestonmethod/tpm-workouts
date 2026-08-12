@@ -3432,5 +3432,28 @@
     "progression": "",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/recumbent-bike-10999.jpg"
+  },
+  {
+    "id": "ex-1786496746646",
+    "name": "Wall Pushups-M",
+    "pillar": "A",
+    "status": "Active",
+    "category": "Push",
+    "movementFamily": "Push",
+    "movementPattern": "Vertical Push",
+    "bodyRegion": "Chest / Shoulder",
+    "loadStyle": "Control",
+    "sets": "2-3",
+    "reps": "10-15",
+    "rpe": "6-7",
+    "equipment": "None",
+    "difficulty": "Foundational",
+    "code": "MF-85-WallPUM",
+    "cues": "",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wall-pushups-m-42478.jpg"
   }
 ]
