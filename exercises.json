@@ -426,7 +426,12 @@
     "id": "b-2",
     "name": "Bicep Curls",
     "pillar": "B",
+    "status": "Active",
     "category": "Pull",
+    "movementFamily": "",
+    "movementPattern": "",
+    "bodyRegion": "",
+    "loadStyle": "",
     "sets": "3",
     "reps": "6–8 reps",
     "rpe": "7–8",
@@ -434,9 +439,11 @@
     "difficulty": "Intermediate",
     "code": "SM-PH1-V1-02-DBCurls",
     "cues": "Smooth and controlled",
+    "coachingFocus": "",
+    "contraindications": "",
     "progression": "Add reps before adding weight",
     "video": "",
-    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-2.jpg"
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bicep-curls-33184.jpg"
   },
   {
     "id": "b-3",
