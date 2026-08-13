@@ -1,0 +1,3900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Steph's Adventure">
+<link rel="apple-touch-icon" href="cdd-icon.png">
+<link rel="icon" type="image/png" href="cdd-icon.png">
+<title>Steph's Life Adventure — Personal Flight Operations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   STEPH'S LIFE ADVENTURE — v1.0.0 · based on Captain Dan's Dashboard v2.2.1
+   B1: Cockpit Shell · B2: Backup + Data Model
+   B3: Today's Flight Plan — manual entry + calendar feed
+   B4: Tarmac · Carousel · Hangar
+   B5: Client Flight Cards + Debrief · notes/logbook · Square import
+   B6: Sky Link · B7: Revenue · B8: Personal · B9: Maint · B10: CCE
+   B11: The Reorganization — five destinations · glance · review
+   Steph palette: Deep Teal #0F5257 · Sunset Coral #D9532C · Mint Shell #F4F9F8
+   Navy #0F5257 · Brick Red #D9532C · Shell #F4F9F8
+   Bebas Neue (headlines) · DM Sans (body)
+   ============================================================ */
+:root{
+  --navy:#0F5257;
+  --navy-deep:#0A3D41;
+  --navy-soft:#1E6E74;
+  --brick:#D9532C;
+  --shell:#F4F9F8;
+  --panel:#FFFFFF;
+  --line:#D7E5E2;
+  --ink:#22303F;
+  --ink-soft:#5A6B7D;
+  --ok:#2B957A;
+  --amber:#E8A104;
+  --radius:14px;
+  --shadow:0 2px 10px rgba(27,58,92,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'DM Sans',system-ui,sans-serif;
+  background:var(--shell);
+  color:var(--ink);
+  min-height:100vh;
+  padding-bottom:60px;
+}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:15px;color:var(--ink)}
+:focus-visible{outline:3px solid var(--brick);outline-offset:2px;border-radius:4px}
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+
+/* ---------- HEADER: the instrument panel ---------- */
+header{
+  background:linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%);
+  color:#fff;
+  padding:calc(env(safe-area-inset-top,0px) + 22px) 22px 0;
+}
+.masthead{max-width:1060px;margin:0 auto;}
+.eyebrow{
+  font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+  color:#9FB6CD;font-weight:500;
+}
+h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(40px,7vw,64px);
+  letter-spacing:.03em;line-height:1;
+  margin-top:6px;
+}
+h1 .accent{color:#F0B7B2}
+.wisdom{
+  display:flex;align-items:center;gap:10px;
+  margin:14px 0 18px;
+  font-style:italic;color:#C8D6E4;font-size:15px;
+  min-height:22px;
+}
+.wisdom .wing{flex:0 0 26px;height:1px;background:#5E8783}
+.horizon{
+  height:5px;background:var(--brick);
+  max-width:none;margin:0 -22px;
+}
+
+/* ---------- FLIGHT STRIP ---------- */
+.flightstrip{
+  background:var(--navy-deep);
+  color:#E6F1EF;
+  padding:10px 22px;
+  border-bottom:1px solid #0D2036;
+}
+.flightstrip .inner{
+  max-width:1060px;margin:0 auto;
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px 26px;
+  font-size:14px;font-weight:500;letter-spacing:.08em;
+}
+.flightstrip .lamp{
+  display:inline-block;width:9px;height:9px;border-radius:50%;
+  background:var(--ok);margin-right:7px;vertical-align:1px;
+  box-shadow:0 0 6px rgba(43,149,122,.9);
+}
+.flightstrip .dim{color:#8FA8BF}
+
+/* ---------- BACKUP REMINDER BANNER ---------- */
+.reminder{
+  display:none;
+  background:#FBEFD8;border-bottom:1px solid #EAD7A8;
+  padding:10px 22px;
+}
+.reminder.show{display:block}
+.reminder .inner{
+  max-width:1060px;margin:0 auto;
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;
+  font-size:14px;color:#7A5500;font-weight:500;
+}
+.reminder .inner strong{font-weight:700}
+.reminder button{
+  border:1.5px solid #C79A2E;background:#fff;color:#7A5500;
+  font-weight:700;font-size:13px;border-radius:999px;padding:6px 14px;
+}
+.reminder .primary{background:#7A5500;border-color:#7A5500;color:#fff}
+
+/* ---------- MAIN LAYOUT ---------- */
+main{max-width:1060px;margin:0 auto;padding:26px 18px 0}
+section{margin-bottom:26px}
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.card-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:16px 20px 12px;
+}
+.card-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:26px;letter-spacing:.05em;color:var(--navy);
+  display:flex;align-items:center;gap:10px;
+}
+.card-title svg{flex:0 0 22px}
+.card-body{padding:0 20px 20px}
+
+.chip{
+  font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 10px;border-radius:999px;white-space:nowrap;
+}
+.chip-live{background:#E4F3EE;color:var(--ok)}
+.chip-next{background:#FBEFD8;color:#9A6B00}
+.chip-sched{background:#E7F1EF;color:var(--ink-soft)}
+
+/* ---------- PRE-FLIGHT CHECKLIST ---------- */
+.checklist{list-style:none}
+.checklist li{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 2px;
+  border-top:1px solid var(--line);
+}
+.checklist li:first-child{border-top:none}
+.ck-toggle{
+  flex:0 0 54px;height:32px;border-radius:999px;border:2px solid var(--line);
+  background:#EDF2F8;position:relative;transition:background .2s,border-color .2s;
+}
+.ck-toggle::after{
+  content:"";position:absolute;top:2px;left:2px;width:24px;height:24px;
+  border-radius:50%;background:#fff;border:1px solid var(--line);
+  transition:transform .2s;
+}
+.ck-toggle[aria-pressed="true"]{background:var(--ok);border-color:var(--ok)}
+.ck-toggle[aria-pressed="true"]::after{transform:translateX(22px)}
+@media (prefers-reduced-motion:reduce){
+  .ck-toggle,.ck-toggle::after{transition:none}
+}
+.ck-text{flex:1}
+.ck-text .t{font-weight:700;font-size:16px}
+.ck-text .s{font-size:13.5px;color:var(--ink-soft);margin-top:1px}
+.ck-done .t{color:var(--ink-soft);text-decoration:line-through;text-decoration-color:#B7CDCB}
+.preflight-complete{
+  margin-top:14px;padding:12px 16px;border-radius:10px;
+  background:#E4F3EE;color:#1D6B57;font-weight:700;font-size:15px;
+  display:none;align-items:center;gap:10px;
+}
+.preflight-complete.show{display:flex}
+
+/* ---------- ENERGY GAUGE ---------- */
+.gauge-row{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px 30px;
+  padding-top:6px;
+}
+.gauge-wrap{flex:0 0 240px;max-width:240px;margin:0 auto}
+.gauge-wrap svg{width:100%;height:auto;display:block}
+.gauge-needle{transition:transform .5s cubic-bezier(.34,1.4,.5,1);transform-origin:120px 118px}
+@media (prefers-reduced-motion:reduce){.gauge-needle{transition:none}}
+.gauge-buttons{flex:1;min-width:230px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gbtn{
+  border:2px solid var(--line);background:#fff;border-radius:12px;
+  padding:14px 10px;font-size:15px;font-weight:700;color:var(--ink-soft);
+  min-height:52px;
+  transition:border-color .15s,color .15s,background .15s;
+}
+.gbtn[aria-pressed="true"]{border-color:var(--navy);color:var(--navy);background:#EBF4F2}
+.gbtn .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:0}
+.g1 .dot{background:var(--brick)}
+.g2 .dot{background:var(--amber)}
+.g3 .dot{background:#7FD0C8}
+.g4 .dot{background:var(--ok)}
+.gauge-note{font-size:13.5px;color:var(--ink-soft);margin-top:10px}
+
+/* ---------- TODAY'S FLIGHT PLAN (Build 3a) ---------- */
+.fp-empty{
+  text-align:center;padding:26px 14px;color:var(--ink-soft);font-size:15px;
+  border:2px dashed var(--line);border-radius:12px;
+}
+.fp-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.fp-item{
+  border:2px solid var(--line);border-radius:12px;background:#fff;
+  overflow:hidden;transition:border-color .15s;
+}
+.fp-item.landed{background:#F4F8F6;border-color:#CBE4DC}
+.fp-item.noshow{background:#FDF6E7;border-color:#EAD7A8}
+.fp-item.cancelled{background:#F3F5F8}
+.fp-item.cancelled .fp-title,.fp-item.noshow .fp-time,.fp-item.cancelled .fp-time{color:var(--ink-soft)}
+.fp-item.cancelled .fp-title{text-decoration:line-through;text-decoration-color:#B7CDCB}
+.abtn.on{color:#fff}
+.abtn-land.on{background:var(--ok);border-color:var(--ok)}
+.abtn-ns{border-color:#D9B44A;color:#8A6100}
+.abtn-ns.on{background:#C79A2E;border-color:#C79A2E;color:#fff}
+.abtn-cx{border-color:#B7CDCB;color:var(--ink-soft)}
+.abtn-cx.on{background:#7A8A9B;border-color:#7A8A9B;color:#fff}
+.fp-row{
+  width:100%;display:flex;align-items:center;gap:14px;
+  padding:13px 14px;background:none;border:none;text-align:left;
+}
+.fp-time{
+  font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.04em;
+  color:var(--navy);flex:0 0 84px;line-height:1;
+}
+.fp-item.landed .fp-time{color:var(--ink-soft)}
+.fp-main{flex:1;min-width:0}
+.fp-title{font-weight:700;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fp-item.landed .fp-title{color:var(--ink-soft);text-decoration:line-through;text-decoration-color:#B7CDCB}
+.fp-sub{font-size:12.5px;color:var(--ink-soft);margin-top:2px}
+.fp-caret{flex:0 0 18px;color:var(--ink-soft);transition:transform .2s}
+.fp-item.open .fp-caret{transform:rotate(180deg)}
+@media (prefers-reduced-motion:reduce){.fp-caret{transition:none}}
+.badge{
+  font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 9px;border-radius:999px;flex:0 0 auto;
+}
+.b-pt{background:#F7E2E0;color:#A32A21}
+.b-class{background:#E2F0EC;color:#3448A6}
+.b-og{background:#E4F3EE;color:#1D6B57}
+.b-zoom{background:#EAE4F7;color:#5B3AA6}
+.b-admin{background:#FBEFD8;color:#8A6100}
+.b-personal{background:#FCE7F1;color:#A62366}
+.b-other{background:#E7F1EF;color:var(--ink-soft)}
+.fp-detail{
+  display:none;
+  border-top:1px solid var(--line);
+  padding:14px;background:#FAFCFE;
+}
+.fp-item.open .fp-detail{display:block}
+.fp-notes{font-size:14.5px;line-height:1.5;margin-bottom:12px;white-space:pre-wrap}
+.fp-notes.none{color:var(--ink-soft);font-style:italic}
+.fp-actions{display:flex;flex-wrap:wrap;gap:8px}
+.abtn{
+  border:1.5px solid var(--line);background:#fff;border-radius:999px;
+  padding:9px 16px;font-size:13.5px;font-weight:700;color:var(--navy);
+  min-height:40px;
+}
+.abtn-land{border-color:var(--ok);color:var(--ok)}
+.abtn-danger{border-color:#E3B7B3;color:var(--brick)}
+/* add/edit form */
+.fp-form{
+  margin-top:16px;border-top:1px solid var(--line);padding-top:16px;
+}
+.fp-form-title{
+  font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:.06em;
+  color:var(--navy);margin-bottom:10px;
+}
+.fp-grid{
+  display:grid;grid-template-columns:110px 110px 1fr 150px;gap:10px;
+}
+.fp-hint{font-size:12px;color:var(--ink-soft);margin:-4px 0 8px}
+.fp-grid input,.fp-grid select,.fp-form textarea{
+  border:2px solid var(--line);border-radius:10px;padding:11px 12px;
+  background:#fff;width:100%;min-height:46px;
+}
+.fp-form textarea{margin-top:10px;resize:vertical;min-height:56px}
+.fp-form-actions{display:flex;gap:10px;margin-top:12px;align-items:center}
+.pbtn{
+  background:var(--navy);color:#fff;border:none;border-radius:999px;
+  padding:12px 26px;font-size:15px;font-weight:700;min-height:46px;
+}
+.pbtn-quiet{background:none;border:none;color:var(--ink-soft);font-weight:700;font-size:14px}
+@media (max-width:640px){
+  .fp-grid{grid-template-columns:1fr 1fr}
+  .fp-grid .fp-field-title{grid-column:1 / -1}
+  .fp-time{flex-basis:70px;font-size:20px}
+}
+
+/* ---------- PAYMENT CAPTURE (Build 3c) ---------- */
+.fp-pay{margin-bottom:12px}
+.fp-pay-row{display:flex;flex-wrap:wrap;gap:8px}
+.fp-pay-row select,.fp-pay-row input{
+  border:2px solid var(--line);border-radius:10px;padding:10px 12px;
+  background:#fff;min-height:44px;
+}
+.fp-pay-row select{flex:1;min-width:150px}
+.fp-pay-row input{flex:0 0 130px}
+.fp-att{
+  width:100%;margin-top:8px;border:2px solid var(--line);border-radius:10px;
+  padding:10px 12px;background:#fff;resize:vertical;min-height:52px;
+}
+.fp-total{
+  margin-top:12px;padding:10px 14px;border-radius:10px;
+  background:#EBF4F2;color:var(--navy);font-weight:700;font-size:15px;
+}
+
+/* ---------- DEBRIEF + CLIENT FLIGHT CARDS (Build 5) ---------- */
+.db-panel{margin-top:12px;border:2px solid var(--line);border-radius:12px;padding:12px;background:#FBFCFE}
+.db-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;color:var(--navy);margin-bottom:8px}
+.db-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.db-row select,.db-row input,.db-panel textarea{
+  border:2px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;min-height:44px;
+}
+.db-row select{flex:1;min-width:170px}
+.db-panel textarea{width:100%;resize:vertical;min-height:52px;margin-bottom:8px}
+.db-rate{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.db-rate .abtn.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.db-follow input[type="text"]{flex:1;min-width:170px}
+.db-follow input[type="date"]{flex:0 0 150px}
+.cfc-search{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+.cfc-search input{flex:1;border:2px solid var(--line);border-radius:10px;padding:11px 12px;background:#fff;min-height:46px}
+.fp-form .cfc-input{width:100%;border:2px solid var(--line);border-radius:10px;padding:11px 12px;background:#fff;min-height:46px}
+.cfc-block{margin-bottom:10px;font-size:14px}
+.cfc-label{font-size:11px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:2px}
+.cfc-log{list-style:none;margin:0 0 10px}
+.cfc-log li{border-top:1px dashed var(--line);padding:8px 0;font-size:13.5px}
+.cfc-log .d{font-weight:700;color:var(--navy)}
+.cfc-log .n{color:var(--ink-soft)}
+
+/* ---------- REVENUE · SALES TRENDS · RUNWAY (Build 7) ---------- */
+.rv-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.rv-stat{border:1px solid var(--line);border-radius:12px;padding:12px;background:#FBFCFE;text-align:center}
+.rv-lbl{font-size:11px;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em}
+.rv-big{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--navy);line-height:1.1;margin-top:2px}
+.rv-big.neg{color:#D9532C}
+.rv-sub{font-size:12px;color:var(--ink-soft)}
+.rv-up{color:#2B957A;font-weight:700}
+.rv-dn{color:#D9532C;font-weight:700}
+.rv-bars{display:flex;align-items:flex-end;gap:10px;height:96px;margin:6px 0 4px}
+.rv-bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px}
+.rv-bar .b{width:100%;background:var(--navy);border-radius:6px 6px 0 0;min-height:3px}
+.rv-bar .v{font-size:11px;color:var(--ink-soft)}
+.rv-bar .w{font-size:10px;color:var(--ink-soft)}
+.rv-line{font-size:14px;margin-bottom:6px}
+#fpDayPick{border:2px solid var(--line);border-radius:10px;padding:8px 10px;background:#fff;min-height:44px}
+.mt-grid{grid-template-columns:1fr 120px 120px 150px 110px}
+.sq-badge{display:inline-block;border-radius:8px;padding:2px 8px;font-size:11px;font-weight:700;letter-spacing:.04em}
+.sq-minor{background:#E6F0EE;color:var(--navy)}
+.sq-caution{background:#FDEBD7;color:#B34700}
+.sq-ground{background:#F9DEDC;color:#D9532C}
+.tab-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tab-btn{border:2px solid var(--line);background:#fff;border-radius:10px;padding:9px 14px;font-weight:700;cursor:pointer;min-height:44px}
+.tab-btn.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.co-badge{display:inline-block;border-radius:8px;padding:2px 8px;font-size:11px;font-weight:700;letter-spacing:.04em}
+.co-idea{background:#E6F0EE;color:var(--navy)}
+.co-drafted{background:#FDEBD7;color:#B34700}
+.co-ready{background:#DCF2EA;color:#1F7A62}
+.co-counter{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px}
+
+/* ---------- FIVE DESTINATIONS NAV + GLANCE (Build 11) ---------- */
+.glance{display:flex;gap:14px;flex-wrap:wrap;font-weight:700;color:var(--navy);font-size:15px}
+.dest-nav{
+  position:fixed;bottom:0;left:0;right:0;display:flex;gap:6px;z-index:60;
+  background:#fff;border-top:2px solid var(--line);
+  padding:6px 8px calc(6px + env(safe-area-inset-bottom));
+}
+.dest-nav button{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;
+  background:none;border:none;border-radius:10px;padding:6px 2px;
+  font-size:20px;cursor:pointer;color:var(--ink-soft);min-height:52px;
+}
+.dest-nav button span{font-size:11px;font-weight:700;letter-spacing:.03em}
+.dest-nav button.on{background:#E6F0EE;color:var(--navy)}
+body{padding-bottom:96px}
+@media (min-width:960px){
+  .dest-nav{
+    top:0;bottom:0;left:0;right:auto;width:96px;flex-direction:column;
+    justify-content:flex-start;border-top:none;border-right:2px solid var(--line);
+    padding:18px 8px;gap:10px;
+  }
+  .dest-nav button{flex:0 0 auto;width:100%}
+  body{padding-bottom:24px;padding-left:104px}
+  .hangar-fab{bottom:18px}
+  .toast{bottom:26px}
+}
+.fab-overlay{
+  position:fixed;inset:0;background:rgba(19,43,69,.45);z-index:75;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.fab-overlay[hidden]{display:none}
+.fab-overlay .db-panel{background:#fff;max-width:480px;width:100%;margin-top:0}
+.ex-grid{grid-template-columns:1fr 100px 120px 130px 150px}
+.ex-status-due{color:var(--navy);font-weight:700}
+.ex-status-over{color:#D9532C;font-weight:700}
+.ex-status-paid{color:#2B957A;font-weight:700}
+@media (max-width:560px){
+  .rv-stats{grid-template-columns:1fr 1fr}
+  .rv-runway{grid-column:1/-1}
+}
+
+/* ---------- CALENDAR FEED (Build 3b) ---------- */
+.fp-feed{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+.fp-feed-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.fp-feed-status{font-size:13px;color:var(--ink-soft)}
+.fp-feed-settings{margin-top:10px;display:none;flex-wrap:wrap;gap:8px}
+.fp-feed-settings.show{display:flex}
+.fp-feed-settings input{
+  flex:1;min-width:220px;border:2px solid var(--line);border-radius:10px;
+  padding:11px 12px;background:#fff;min-height:46px;
+}
+
+/* ---------- TARMAC · CAROUSEL · HANGAR (Build 4) ---------- */
+.mini-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.mini-item{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  border:2px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;
+}
+.mini-check{
+  flex:0 0 30px;height:30px;border-radius:50%;border:2px solid var(--line);
+  background:#fff;position:relative;
+}
+.mini-check[aria-pressed="true"]{background:var(--ok);border-color:var(--ok)}
+.mini-check[aria-pressed="true"]::after{
+  content:"✓";color:#fff;font-weight:700;position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;font-size:15px;
+}
+.mini-text{flex:1;min-width:140px;font-size:15px;line-height:1.4;word-break:break-word}
+.mini-item.done-item .mini-text{color:var(--ink-soft);text-decoration:line-through;text-decoration-color:#B7CDCB}
+.mini-sub{flex-basis:100%;font-size:12.5px;color:var(--ink-soft);margin-left:40px}
+.mini-x{
+  flex:0 0 auto;border:none;background:none;color:var(--ink-soft);
+  font-size:18px;line-height:1;padding:6px 8px;
+}
+.mini-x:hover{color:var(--brick)}
+.mini-edit{flex:1;min-width:140px;border:2px solid var(--line);border-radius:8px;padding:8px 10px;font-size:15px;min-height:42px}
+.sbtn{
+  border:1.5px solid var(--line);background:#fff;border-radius:999px;
+  padding:7px 13px;font-size:12.5px;font-weight:700;color:var(--navy);min-height:36px;
+}
+.sbtn-ok{border-color:var(--ok);color:var(--ok)}
+.sbtn-amber{border-color:#D9B44A;color:#8A6100}
+.sbtn-danger{border-color:#E3B7B3;color:var(--brick)}
+.addrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.addrow input[type="text"]{
+  flex:1;min-width:170px;border:2px solid var(--line);border-radius:10px;
+  padding:11px 12px;background:#fff;min-height:46px;
+}
+.addrow input[type="date"]{
+  flex:0 0 160px;border:2px solid var(--line);border-radius:10px;
+  padding:11px 12px;background:#fff;min-height:46px;
+}
+.empty-note{
+  text-align:center;padding:18px 12px;color:var(--ink-soft);font-size:14.5px;
+  border:2px dashed var(--line);border-radius:12px;
+}
+/* carryover review rows */
+.tm-carry{border-left:5px solid var(--amber);background:#FFFDF6}
+.tm-carry-badge{
+  font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 9px;border-radius:999px;background:#FBEFD8;color:#8A6100;flex:0 0 auto;
+}
+.tm-carry-actions{
+  flex-basis:100%;display:flex;flex-wrap:wrap;gap:7px;margin-left:0;margin-top:4px;
+}
+.tm-park-date{
+  display:none;border:2px solid var(--line);border-radius:10px;
+  padding:7px 10px;background:#fff;min-height:36px;
+}
+.tm-park-date.show{display:inline-block}
+/* carousel due chip */
+.cr-due{
+  font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 9px;border-radius:999px;background:#E2F0EC;color:#3448A6;flex:0 0 auto;
+}
+/* floating hangar quick-capture button */
+.hangar-fab{
+  position:fixed;right:18px;bottom:112px;z-index:65;
+  width:58px;height:58px;border-radius:50%;border:none;
+  background:var(--navy);color:#fff;font-size:24px;
+  box-shadow:0 6px 18px rgba(19,43,69,.4);
+}
+.hangar-fab:active{transform:scale(.95)}
+
+/* ---------- FLIGHT DATA & BACKUP ---------- */
+.backup-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;
+  padding-top:4px;
+}
+.bbtn{
+  border:2px solid var(--line);background:#fff;border-radius:12px;
+  padding:14px 12px;min-height:64px;text-align:left;
+  display:flex;align-items:center;gap:12px;
+  transition:border-color .15s,background .15s;
+}
+.bbtn:hover{border-color:var(--navy-soft)}
+.bbtn svg{flex:0 0 24px}
+.bbtn .bt{font-weight:700;font-size:15px;color:var(--navy)}
+.bbtn .bs{font-size:12.5px;color:var(--ink-soft);margin-top:1px}
+.backup-meta{
+  margin-top:14px;font-size:13.5px;color:var(--ink-soft);
+  display:flex;flex-wrap:wrap;gap:6px 22px;
+}
+.backup-meta strong{color:var(--ink)}
+.toast{
+  position:fixed;left:50%;bottom:120px;transform:translateX(-50%);
+  background:var(--navy);color:#fff;font-weight:600;font-size:14.5px;
+  padding:12px 22px;border-radius:999px;box-shadow:0 6px 22px rgba(19,43,69,.35);
+  opacity:0;pointer-events:none;transition:opacity .25s;z-index:80;
+  max-width:92vw;text-align:center;
+}
+.toast.show{opacity:1}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+
+/* ---------- SECTION GRID (taxiway) ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.panel{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:18px 18px 16px;
+  display:flex;flex-direction:column;gap:8px;min-height:132px;
+}
+.panel-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.panel h3{
+  font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.05em;
+  color:var(--navy);display:flex;align-items:center;gap:9px;
+}
+.panel h3 svg{flex:0 0 20px}
+.panel p{font-size:14px;color:var(--ink-soft);line-height:1.45}
+.section-label{
+  font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.08em;
+  color:var(--ink-soft);margin:4px 2px 12px;
+}
+
+/* ---------- FOOTER ---------- */
+footer{
+  max-width:1060px;margin:30px auto 0;padding:22px 18px 0;
+  border-top:1px solid var(--line);
+  text-align:center;color:var(--ink-soft);font-size:13.5px;line-height:1.6;
+}
+footer .dedication{font-style:italic;max-width:560px;margin:0 auto 8px}
+footer .ver{letter-spacing:.12em;text-transform:uppercase;font-size:11px;font-weight:700}
+
+@media (max-width:640px){
+  .card-head{flex-wrap:wrap}
+  .gauge-buttons{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="masthead">
+    <div class="eyebrow">Personal Flight Operations</div>
+    <h1>Steph's <span class="accent">Life Adventure</span></h1>
+    <div class="wisdom">
+      <span class="wing" aria-hidden="true"></span>
+      <span id="wisdomLine">Plan the flight. Fly the plan.</span>
+      <span class="wing" aria-hidden="true"></span>
+    </div>
+  </div>
+  <div class="horizon" aria-hidden="true"></div>
+</header>
+
+<div class="flightstrip">
+  <div class="inner">
+    <span><span class="lamp" aria-hidden="true"></span><strong id="stripDate">—</strong></span>
+    <span class="dim">LOCAL TIME <strong id="stripTime" style="color:#E6F1EF">—</strong></span>
+    <span class="dim">STATION <strong style="color:#E6F1EF">HOME BASE · SUNSHINE COAST BC</strong></span>
+  </div>
+</div>
+
+<!-- Weekly backup reminder -->
+<div class="reminder" id="backupReminder">
+  <div class="inner">
+    <span>🧳 <strong>Backup check:</strong> <span id="reminderText">it has been over a week since your last export.</span></span>
+    <button class="primary" id="reminderExport">Export now</button>
+    <button id="reminderSnooze">Remind me tomorrow</button>
+  </div>
+</div>
+
+<main>
+
+  <!-- ================= TODAY AT A GLANCE (Build 11) ================= -->
+  <section data-dest="cockpit" aria-label="Today at a glance">
+    <div class="card">
+      <div class="card-body">
+        <div class="glance" id="glanceRow"></div>
+        <div class="db-row" style="margin:10px 0 0">
+          <input type="text" id="oneMission" placeholder="🎯 Today's ONE strategic mission…" maxlength="140" aria-label="Today's one strategic mission" style="flex:1;min-width:170px">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRE-FLIGHT CHECKLIST ================= -->
+  <section data-dest="cockpit" aria-labelledby="pfTitle">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title" id="pfTitle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F5257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 13 2 2 4-4"/></svg>
+          Pre-Flight Checklist
+        </div>
+        <span class="chip chip-live">Live — resets daily</span>
+      </div>
+      <div class="card-body">
+        <ul class="checklist" id="checklist">
+          <li data-ck="wx">
+            <button class="ck-toggle" aria-pressed="false" aria-label="Weather check complete"></button>
+            <div class="ck-text">
+              <div class="t">1 · Weather check</div>
+              <div class="s">Set today's energy on the gauge below.</div>
+            </div>
+          </li>
+          <li data-ck="fp">
+            <button class="ck-toggle" aria-pressed="false" aria-label="Flight plan reviewed"></button>
+            <div class="ck-text">
+              <div class="t">2 · Review the Flight Plan</div>
+              <div class="s">Scan today's schedule. Know who you're serving.</div>
+            </div>
+          </li>
+          <li data-ck="tm">
+            <button class="ck-toggle" aria-pressed="false" aria-label="Tarmac scanned"></button>
+            <div class="ck-text">
+              <div class="t">3 · Scan the Tarmac</div>
+              <div class="s">Check carryover items and today's follow-ups.</div>
+            </div>
+          </li>
+          <li data-ck="sm">
+            <button class="ck-toggle" aria-pressed="false" aria-label="Strategic mission confirmed"></button>
+            <div class="ck-text">
+              <div class="t">4 · Confirm today's ONE strategic mission</div>
+              <div class="s">One priority beyond client hours. Just one.</div>
+            </div>
+          </li>
+        </ul>
+        <div class="preflight-complete" id="pfDone">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D6B57" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Pre-flight complete. You are cleared for departure, Captain.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ENERGY GAUGE ================= -->
+  <section data-dest="cockpit" aria-labelledby="egTitle">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title" id="egTitle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F5257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21a9 9 0 1 1 9-9"/><path d="m12 12 4-4"/><circle cx="12" cy="12" r="1.5" fill="#0F5257"/></svg>
+          Today's Energy — Weather Report
+        </div>
+        <span class="chip chip-live">Live</span>
+      </div>
+      <div class="card-body">
+        <div class="gauge-row">
+          <div class="gauge-wrap" aria-hidden="true">
+            <svg viewBox="0 0 240 140">
+              <path d="M 20 118 A 100 100 0 0 1 220 118" fill="none" stroke="#E7F1EF" stroke-width="18" stroke-linecap="round"/>
+              <path d="M 20 118 A 100 100 0 0 1 49.3 47.3" fill="none" stroke="#D9532C" stroke-width="18" stroke-linecap="round"/>
+              <path d="M 49.3 47.3 A 100 100 0 0 1 120 18" fill="none" stroke="#E8A104" stroke-width="18"/>
+              <path d="M 120 18 A 100 100 0 0 1 190.7 47.3" fill="none" stroke="#7FD0C8" stroke-width="18"/>
+              <path d="M 190.7 47.3 A 100 100 0 0 1 220 118" fill="none" stroke="#2B957A" stroke-width="18" stroke-linecap="round"/>
+              <text x="34" y="136" font-family="DM Sans" font-size="11" fill="#5A6B7D" text-anchor="middle">MIN</text>
+              <text x="206" y="136" font-family="DM Sans" font-size="11" fill="#5A6B7D" text-anchor="middle">EXC</text>
+              <g class="gauge-needle" id="needle" transform="rotate(-90 120 118)">
+                <line x1="120" y1="118" x2="120" y2="34" stroke="#0F5257" stroke-width="5" stroke-linecap="round"/>
+                <circle cx="120" cy="118" r="10" fill="#0F5257"/>
+                <circle cx="120" cy="118" r="4" fill="#F4F9F8"/>
+              </g>
+              <text x="120" y="112" font-family="Bebas Neue" font-size="22" fill="#0F5257" text-anchor="middle" id="gaugeReadout"> </text>
+            </svg>
+          </div>
+          <div class="gauge-buttons" role="group" aria-label="Set today's energy level">
+            <button class="gbtn g1" data-energy="1" aria-pressed="false"><span class="dot" aria-hidden="true"></span>Minimal</button>
+            <button class="gbtn g2" data-energy="2" aria-pressed="false"><span class="dot" aria-hidden="true"></span>Moderate</button>
+            <button class="gbtn g3" data-energy="3" aria-pressed="false"><span class="dot" aria-hidden="true"></span>Good</button>
+            <button class="gbtn g4" data-energy="4" aria-pressed="false"><span class="dot" aria-hidden="true"></span>Excellent</button>
+          </div>
+        </div>
+        <p class="gauge-note" id="gaugeNote" aria-live="polite">Tap a reading to log today's conditions — your energy sets today's realistic flying capacity.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TODAY'S FLIGHT PLAN (Build 3a) ================= -->
+  <section data-dest="cockpit" aria-labelledby="fpTitle">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title" id="fpTitle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F5257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          Today's Flight Plan
+        </div>
+        <span class="chip chip-live">Live</span>
+      </div>
+      <div class="card-body">
+        <div class="fp-feed-row" style="margin-bottom:10px">
+          <input type="date" id="fpDayPick" aria-label="Pick a day to view or edit">
+          <button class="pbtn-quiet" id="fpBackToday" hidden>↩ Back to today</button>
+          <span class="fp-feed-status" id="fpDayStatus"></span>
+        </div>
+        <div class="fp-empty" id="fpEmpty">
+          No flights scheduled yet. Add one below — <br>or tap 📡 Sync Today's Calendar to pull them from the tower.
+        </div>
+        <ul class="fp-list" id="fpList"></ul>
+        <div class="fp-total" id="fpTotal" hidden></div>
+
+        <button class="pbtn-quiet" id="fpFormToggle" style="margin-top:4px">＋ Add a flight manually</button>
+        <div class="fp-form" id="fpForm" hidden>
+          <div class="fp-form-title" id="fpFormTitle">Add a flight</div>
+          <div class="fp-hint">Start time · end time (optional — for longer or personal flights) · who · type</div>
+          <div class="fp-grid">
+            <input type="time" id="fpTime" aria-label="Start time" title="Start time">
+            <input type="time" id="fpEnd" aria-label="End time (optional)" title="End time (optional)">
+            <datalist id="clientNames"></datalist>
+            <input type="text" id="fpName" list="clientNames" class="fp-field-title" placeholder="Client or activity (e.g. Joanne — PT)" aria-label="Appointment title" maxlength="80">
+            <select id="fpType" aria-label="Appointment type">
+              <option value="pt">PT Session</option>
+              <option value="class">Class</option>
+              <option value="og">Open Gym</option>
+              <option value="zoom">Zoom PT</option>
+              <option value="admin">Admin</option>
+              <option value="personal">Personal</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <textarea id="fpNotes" placeholder="Notes for this flight (optional)" aria-label="Appointment notes" maxlength="500"></textarea>
+          <div class="fp-form-actions">
+            <button class="pbtn" id="fpSave">Add to Flight Plan</button>
+            <button class="pbtn-quiet" id="fpCancel" hidden>Cancel edit</button>
+          </div>
+        </div>
+
+        <div class="fp-feed">
+          <div class="fp-feed-row">
+            <button class="pbtn" id="feedSync">📡 Sync Today's Calendar</button>
+            <span class="fp-feed-status" id="feedStatus">Not connected yet</span>
+            <button class="pbtn-quiet" id="feedToggle">Feed settings</button>
+          </div>
+          <div class="fp-feed-settings" id="feedSettings">
+            <input type="url" id="feedUrl" placeholder="Paste your Apps Script web app URL (https://script.google.com/…)" aria-label="Calendar feed URL">
+            <button class="abtn" id="feedSaveUrl">Save URL</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CLIENT FLIGHT CARDS (Build 5) ================= -->
+  <section data-dest="clients" aria-labelledby="cfcTitle">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title" id="cfcTitle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F5257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          Client Flight Cards
+        </div>
+        <span class="chip chip-live" id="cfcChip">Live</span>
+      </div>
+      <div class="card-body">
+        <div class="cfc-search">
+          <input type="search" id="cfcSearch" placeholder="Search clients…" aria-label="Search client flight cards">
+          <button class="pbtn" id="cfcNewBtn">＋ New card</button>
+          <button class="pbtn-quiet" id="cfcShowAllBtn">Show all</button>
+          <button class="pbtn-quiet" id="cfcImportBtn">⬆ Import Square CSV</button>
+          <input type="file" id="cfcImportFile" accept=".csv,text/csv" hidden>
+        </div>
+        <div class="fp-empty" id="cfcCollapsedHint" style="display:none"></div>
+        <div class="fp-empty" id="cfcEmpty">
+          No flight cards yet. Add your first client — or land a flight above,<br>tap <strong>Debrief</strong>, and the card creates itself.
+        </div>
+        <ul class="fp-list" id="cfcList"></ul>
+
+        <div class="fp-form" id="cfcForm" hidden>
+          <div class="fp-form-title" id="cfcFormTitle">New Client Flight Card</div>
+          <input type="text" id="cfcName" class="cfc-input" placeholder="Client name (e.g. Joanne)" maxlength="60" aria-label="Client name">
+          <textarea id="cfcMission" placeholder="Mission — what are they training for? Why does it matter to them?" maxlength="400" aria-label="Client mission"></textarea>
+          <textarea id="cfcWatch" placeholder="Watch items — injuries, conditions, cautions (optional)" maxlength="400" aria-label="Watch items"></textarea>
+          <textarea id="cfcToolbox" placeholder="Toolbox pointers — workout link, last assessment, program notes (optional)" maxlength="400" aria-label="Toolbox pointers"></textarea>
+          <div class="fp-form-actions">
+            <button class="pbtn" id="cfcSave">Save card</button>
+            <button class="pbtn-quiet" id="cfcCancel">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TARMAC (Build 4) ================= -->
+  <section data-dest="cockpit" aria-labelledby="tmTitle">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title" id="tmTitle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F5257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17h16M6 17l2-9h8l2 9M10 8V5h4v3"/></svg>
+          Tarmac
+        </div>
+        <span class="chip chip-live" id="tmChip">Live</span>
+      </div>
+      <div class="card-body">
+        <div class="empty-note" id="tmEmpty">Tarmac is clear. Add today's action items below — anything that must move today.</div>
+        <ul class="mini-list" id="tmList"></ul>
+        <div class="addrow">
+          <input type="text" id="tmInput" placeholder="New action item (e.g. Email Joanne her program)" maxlength="200" aria-label="New Tarmac item">
+          <button class="pbtn" id="tmAdd">Add</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BAGGAGE CAROUSEL (Build 4) ================= -->
+  <section data-dest="ops" aria-labelledby="crTitle">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title" id="crTitle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F5257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          Baggage Carousel
+        </div>
+        <span class="chip chip-live" id="crChip">Live</span>
+      </div>
+      <div class="card-body">
+        <div class="empty-note" id="crEmpty">Nothing on the belt. Park a reminder with a date — it stays hidden until that morning, then arrives on your Tarmac automatically. 🧳</div>
+        <ul class="mini-list" id="crList"></ul>
+        <div class="addrow">
+          <input type="text" id="crInput" placeholder="Future reminder (e.g. Renew CanFitPro insurance)" maxlength="200" aria-label="New Carousel reminder">
+          <input type="date" id="crDate" aria-label="Arrival date">
+          <button class="pbtn" id="crAdd">Park it</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= THE HANGAR (Build 4) ================= -->
+  <section data-dest="ops" aria-labelledby="hgTitle">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title" id="hgTitle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F5257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-8h6v8"/></svg>
+          The Hangar
+        </div>
+        <span class="chip chip-live" id="hgChip">Live</span>
+      </div>
+      <div class="card-body">
+        <div class="empty-note" id="hgEmpty">Empty hangar. Every idea is welcome here — parked safely, derailing nothing. Use the 💡 button any time.</div>
+        <ul class="mini-list" id="hgList"></ul>
+        <div class="addrow">
+          <input type="text" id="hgInput" placeholder="Park an idea (e.g. BC Ferries edition for ferry crews ⛴️)" maxlength="300" aria-label="New Hangar idea">
+          <button class="pbtn" id="hgAdd">Park it</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CAPTAIN'S PERSONAL FLIGHT CARD (Build 8) ================= -->
+  <section data-dest="captain" aria-labelledby="pcTitle">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title" id="pcTitle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F5257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-9-9a5.2 5.2 0 0 1 9-4 5.2 5.2 0 0 1 9 4c-2 4.5-9 9-9 9z"/></svg>
+          Captain's Personal Flight Card
+        </div>
+        <span class="chip chip-live">Live</span>
+      </div>
+      <div class="card-body">
+        <div class="cfc-block">
+          <span class="cfc-label">My mission</span>
+          <span id="pcMissionText"></span>
+          <button class="abtn" id="pcMissionEdit" style="margin-left:8px">Edit</button>
+        </div>
+        <div class="db-panel" id="pcMissionForm" hidden>
+          <textarea id="pcMissionInput" placeholder="Why do you train? What kind of pilot are you becoming?" maxlength="400"></textarea>
+          <div class="fp-form-actions">
+            <button class="pbtn" id="pcMissionSave">Save mission</button>
+            <button class="pbtn-quiet" id="pcMissionCancel">Cancel</button>
+          </div>
+        </div>
+
+        <div class="cfc-block" style="margin-top:10px"><span class="cfc-label">Goals on the horizon</span></div>
+        <div class="fp-empty" id="pcGoalEmpty">No goals yet — where are you flying to?</div>
+        <ul class="fp-list" id="pcGoalList"></ul>
+        <div class="db-row" style="margin-top:6px">
+          <input type="text" id="pcGoalText" placeholder="e.g. Deadlift 200 lb · Hike the Chief · 10 push-ups strict" maxlength="120" aria-label="New goal" style="flex:1;min-width:170px">
+          <button class="pbtn" id="pcGoalAdd">Add goal</button>
+        </div>
+
+        <div class="cfc-block" style="margin-top:12px"><span class="cfc-label">Captain's log — workouts · wins · notes</span></div>
+        <div class="fp-empty" id="pcLogEmpty">Empty logbook. Log today's workout, a win, or a note below.</div>
+        <ul class="cfc-log" id="pcLogList"></ul>
+        <button class="abtn" id="pcLogAllBtn" style="display:none;margin-bottom:8px">Full logbook</button>
+        <div class="db-panel">
+          <div class="db-title">New log entry</div>
+          <div class="db-row">
+            <select id="pcKind" aria-label="Entry type">
+              <option value="workout">💪 Workout</option>
+              <option value="win">🏆 Win</option>
+              <option value="note">📝 Note</option>
+            </select>
+            <input type="date" id="pcDate" aria-label="Entry date">
+          </div>
+          <textarea id="pcNote" placeholder="e.g. Day 1 weights — squats felt strong, shoulder happy. Or: first pull-up!!" maxlength="500"></textarea>
+          <div class="fp-form-actions">
+            <button class="pbtn" id="pcLogAdd">Log it</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= REVENUE · SALES TRENDS · RUNWAY (Build 7) ================= -->
+  <section data-dest="business" aria-labelledby="rvTitle">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title" id="rvTitle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F5257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 15 4-6 4 3 5-8"/></svg>
+          Revenue · Sales Trends · Financial Runway
+        </div>
+        <span class="chip chip-live">Live</span>
+      </div>
+      <div class="card-body">
+        <div class="db-row" style="margin-bottom:10px">
+          <input type="month" id="rvMonthPick" aria-label="Which month to report on">
+          <button class="pbtn-quiet" id="rvMonthNow" hidden>↩ Back to current month</button>
+        </div>
+        <div class="rv-stats">
+          <div class="rv-stat">
+            <div class="rv-lbl">This week</div>
+            <div class="rv-big" id="rvWeek">$0</div>
+            <div class="rv-sub" id="rvWeekSub"></div>
+          </div>
+          <div class="rv-stat">
+            <div class="rv-lbl" id="rvMonthLbl">This month</div>
+            <div class="rv-big" id="rvMonth">$0</div>
+            <div class="rv-sub" id="rvMonthSub"></div>
+          </div>
+          <div class="rv-stat rv-runway">
+            <div class="rv-lbl" id="rvPosLbl">Month position (so far)</div>
+            <div class="rv-big" id="rvRunway">$0</div>
+            <div class="rv-sub" id="rvRunwaySub"></div>
+          </div>
+        </div>
+
+        <div class="cfc-block"><span class="cfc-label">Last 4 weeks — revenue (this week in red)</span></div>
+        <div class="rv-bars" id="rvBars"></div>
+        <div class="rv-line" id="rvTypeLine"></div>
+        <div class="rv-line" id="rvBusyLine"></div>
+
+        <div class="cfc-block" style="margin-top:10px"><span class="cfc-label">Payments due — next 14 days</span></div>
+        <div class="fp-empty" id="exDueEmpty">Nothing due in the next two weeks. Clear skies. ☀️</div>
+        <ul class="fp-list" id="exDueList"></ul>
+
+        <div class="cfc-block" style="margin-top:10px"><span class="cfc-label">All expenses</span></div>
+        <div class="fp-empty" id="exEmpty">No expenses yet — add hydro, rent, insurance… or hair. 💇‍♀️</div>
+        <ul class="fp-list" id="exList"></ul>
+
+        <div class="fp-form">
+          <div class="fp-form-title">Add an expense</div>
+          <div class="fp-hint">What · amount · repeats? · due day · starting month (optional — for bills that begin later)</div>
+          <div class="fp-grid ex-grid">
+            <input type="text" id="exName" placeholder="e.g. BC Hydro" maxlength="60" aria-label="Expense name">
+            <input type="number" id="exAmount" min="0" step="0.01" inputmode="decimal" placeholder="Amount $" aria-label="Amount">
+            <select id="exRepeat" aria-label="Repeats">
+              <option value="monthly">Monthly</option>
+              <option value="once">One-time</option>
+            </select>
+            <input type="number" id="exDay" min="1" max="31" inputmode="numeric" placeholder="Due day (1–31)" aria-label="Due day of month">
+            <input type="month" id="exStart" aria-label="Starting month (optional — leave blank if it already applies)" title="Starting month">
+            <input type="date" id="exDate" aria-label="Due date" hidden>
+          </div>
+          <div class="fp-form-actions">
+            <button class="pbtn" id="exAdd">Add expense</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WEEKLY REVIEW (Build 11) ================= -->
+  <section data-dest="business" aria-labelledby="wrTitle">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title" id="wrTitle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F5257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Weekly Review
+        </div>
+        <span class="chip chip-live">Live</span>
+      </div>
+      <div class="card-body">
+        <ul class="cfc-log" id="wrList"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MAINTENANCE · SQUAWK LIST (Build 9) ================= -->
+  <section data-dest="ops" aria-labelledby="mtTitle">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title" id="mtTitle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F5257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.7-2.7 2.1-2.7z"/></svg>
+          Maintenance · Squawk List
+        </div>
+        <span class="chip chip-live">Live</span>
+      </div>
+      <div class="card-body">
+        <div class="cfc-block"><span class="cfc-label">Scheduled maintenance — Home Base &amp; Captain</span></div>
+        <div class="fp-empty" id="mtEmpty">No maintenance scheduled. Equipment inspections, deep cleans, website renewals, your own tune-ups — it all goes here.</div>
+        <ul class="fp-list" id="mtList"></ul>
+        <div class="fp-form">
+          <div class="fp-form-title">Schedule maintenance</div>
+          <div class="fp-hint">What · Home Base or Captain · repeats? · next due · cost (optional)</div>
+          <div class="fp-grid mt-grid">
+            <input type="text" id="mtName" placeholder="e.g. Treadmill belt inspection" maxlength="80" aria-label="Maintenance task">
+            <select id="mtScope" aria-label="Home Base or Captain">
+              <option value="oasis">🏠 Home Base</option>
+              <option value="captain">👩‍✈️ Captain</option>
+            </select>
+            <select id="mtRepeat" aria-label="Recurrence">
+              <option value="none">One-time</option>
+              <option value="monthly">Monthly</option>
+              <option value="quarterly">Quarterly</option>
+              <option value="yearly">Yearly</option>
+            </select>
+            <input type="date" id="mtDue" aria-label="Next due date">
+            <input type="number" id="mtCost" min="0" step="0.01" inputmode="decimal" placeholder="Cost $ (opt.)" aria-label="Estimated cost, optional">
+          </div>
+          <div class="fp-form-actions">
+            <button class="pbtn" id="mtAdd">Schedule it</button>
+          </div>
+        </div>
+
+        <div class="cfc-block" style="margin-top:14px"><span class="cfc-label">Squawk list — known problems awaiting a mechanic</span></div>
+        <div class="fp-empty" id="sqEmpty">No squawks. Everything airworthy. 🛩️</div>
+        <ul class="fp-list" id="sqList"></ul>
+        <div class="db-row" style="margin-top:6px">
+          <input type="text" id="sqText" placeholder="e.g. Cable machine pulley squeaks on row 3" maxlength="140" aria-label="New squawk" style="flex:1;min-width:170px">
+          <select id="sqSev" aria-label="Severity">
+            <option value="minor">Minor</option>
+            <option value="caution">⚠️ Caution</option>
+            <option value="ground">⛔ Grounded</option>
+          </select>
+          <button class="pbtn" id="sqAdd">Log squawk</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CHALLENGES · CONTENT · EDUCATION (Build 10) ================= -->
+  <section data-dest="ops" aria-labelledby="cceTitle">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title" id="cceTitle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F5257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 4.8 5.3.8-3.8 3.7.9 5.3-4.8-2.5-4.8 2.5.9-5.3L4.3 7.6l5.3-.8z"/></svg>
+          Challenges · Content · Education
+        </div>
+        <span class="chip chip-live">Live</span>
+      </div>
+      <div class="card-body">
+        <div class="tab-row" role="tablist" aria-label="Challenges, Content, Education">
+          <button class="tab-btn on" id="tabCh" role="tab">🏅 Challenges</button>
+          <button class="tab-btn" id="tabCo" role="tab">📱 Content</button>
+          <button class="tab-btn" id="tabEd" role="tab">📚 Education</button>
+        </div>
+
+        <div id="chPanel">
+          <div class="fp-empty" id="chEmpty">No challenge running. What's this month's mission for the gym floor?</div>
+          <ul class="fp-list" id="chList"></ul>
+          <div class="db-row" style="margin-top:6px">
+            <input type="text" id="chName" placeholder="e.g. July Plank Challenge — 30 days" maxlength="100" aria-label="Challenge name" style="flex:1;min-width:170px">
+            <input type="month" id="chMonth" aria-label="Challenge month">
+            <button class="pbtn" id="chAdd">Launch challenge</button>
+          </div>
+        </div>
+
+        <div id="coPanel" hidden>
+          <div class="co-counter" id="coCounter"></div>
+          <div class="fp-empty" id="coEmpty">No posts in the pipeline. Capture an idea — Linda will thank you.</div>
+          <ul class="fp-list" id="coList"></ul>
+          <div class="db-row" style="margin-top:6px">
+            <input type="text" id="coIdea" placeholder="Post idea — e.g. Client win: Don's comeback story (with permission)" maxlength="140" aria-label="Post idea" style="flex:1;min-width:170px">
+            <button class="pbtn" id="coAdd">Add to pipeline</button>
+          </div>
+        </div>
+
+        <div id="edPanel" hidden>
+          <div class="fp-empty" id="edEmpty">Nothing on the syllabus. Courses you're taking, or offerings you're dreaming up — log them here.</div>
+          <ul class="fp-list" id="edList"></ul>
+          <div class="db-row" style="margin-top:6px">
+            <input type="text" id="edText" placeholder="e.g. Neuroscience Coach certification — final module" maxlength="120" aria-label="Learning or offering" style="flex:1;min-width:170px">
+            <select id="edKind" aria-label="Type">
+              <option value="learning">📚 My learning</option>
+              <option value="offering">💡 Future offering</option>
+            </select>
+            <input type="date" id="edDate" aria-label="Target date (optional)">
+            <button class="pbtn" id="edAdd">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FLIGHT DATA & BACKUP (Build 2) ================= -->
+  <section data-dest="ops" aria-labelledby="fdTitle">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title" id="fdTitle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0F5257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 21h16"/></svg>
+          Flight Data &amp; Backup
+        </div>
+        <span class="chip chip-live">Live</span>
+      </div>
+      <div class="card-body">
+        <div class="backup-grid">
+          <button class="bbtn" id="btnExportJson">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0F5257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+            <span><span class="bt">Export All Data</span><br><span class="bs">Full backup as a JSON file</span></span>
+          </button>
+          <button class="bbtn" id="btnExportCsv">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0F5257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span><span class="bt">Download CSV Log</span><br><span class="bs">Daily energy &amp; pre-flight history</span></span>
+          </button>
+          <button class="bbtn" id="btnImport">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0F5257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 8 5-5 5 5"/><path d="M12 3v12"/></svg>
+            <span><span class="bt">Import / Restore</span><br><span class="bs">Load a previous JSON backup</span></span>
+          </button>
+        </div>
+        <input type="file" id="importFile" accept=".json,application/json" class="sr-only" aria-label="Choose a backup file to restore">
+        <div class="backup-meta">
+          <span>Last backup: <strong id="lastBackup">never</strong></span>
+          <span>Days logged: <strong id="daysLogged">0</strong></span>
+          <span>Weekly export reminder stays on — Sky Link is the belt, the export is the suspenders.</span>
+        </div>
+
+        <div class="fp-feed">
+          <div class="fp-feed-row">
+            <button class="pbtn" id="skySync">🛰️ Sync now</button>
+            <span class="fp-feed-status" id="skyStatus">Sky Link not configured</span>
+            <button class="pbtn-quiet" id="skyToggle">Sky Link settings</button>
+          </div>
+          <div class="fp-feed-settings" id="skySettings">
+            <input type="url" id="skyUrl" placeholder="Paste your Sky Link Apps Script URL (https://script.google.com/…)" aria-label="Sky Link URL">
+            <input type="text" id="skyDevice" placeholder="Name this device (e.g. iPad)" maxlength="20" aria-label="Device name">
+            <button class="abtn" id="skySaveUrl">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ON THE TAXIWAY ================= -->
+  <section data-dest="ops" class="grid" aria-label="Upcoming modules">
+    <div class="section-label" style="grid-column:1/-1">Flight Program Complete — Post-Reunion Queue</div>
+
+    <div class="panel">
+      <div class="panel-top">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="#0F5257" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Post-Reunion Hangar Queue</h3>
+        <span class="chip chip-sched">Build 12+ — After the demo</span>
+      </div>
+      <p>Client rates with payment prefill · tappable class rosters · expected-vs-actual revenue · structured workout fields · Sky Link hardening. All 11 builds delivered — this bird flies. ✈️</p>
+    </div>
+
+  </section>
+
+</main>
+
+<nav class="dest-nav" aria-label="Destinations">
+  <button data-dest-btn="cockpit" class="on">🛩️<span>Cockpit</span></button>
+  <button data-dest-btn="clients">🗂️<span>Clients</span></button>
+  <button data-dest-btn="captain">❤️<span>Captain</span></button>
+  <button data-dest-btn="business">📊<span>Business</span></button>
+  <button data-dest-btn="ops">🔧<span>Ops</span></button>
+</nav>
+
+<footer>
+  <p class="dedication">Built for Steph — a new captain on the family flight deck. Inspired by Captain Dan, whose love of flying, preparation, and calm course corrections started it all.</p>
+  <p class="ver">Steph's Life Adventure · v1.0.0 · based on Captain Dan's Dashboard v2.2.1 · Sky Shield</p>
+</footer>
+
+<button class="hangar-fab" id="hangarFab" aria-label="Park an idea in the Hangar" title="Park an idea in the Hangar">💡</button>
+<div class="fab-overlay" id="skyChoice" hidden>
+  <div class="db-panel">
+    <div class="db-title">🛰️ Sky Link decision needed</div>
+    <p id="skyChoiceMsg" style="margin-bottom:12px;font-size:14.5px"></p>
+    <div class="fp-form-actions" style="flex-direction:column;align-items:stretch;gap:8px">
+      <button class="pbtn" id="skyChoiceLoad">⬇ Load Sky Link's version (recommended)</button>
+      <button class="pbtn-quiet" id="skyChoiceKeep">⬆ Keep THIS device's version — overwrite Sky Link</button>
+      <button class="pbtn-quiet" id="skyChoiceCancel">Do nothing for now</button>
+    </div>
+  </div>
+</div>
+<div class="fab-overlay" id="fabOverlay" hidden>
+  <div class="db-panel">
+    <div class="db-title">💡 Park an idea in the Hangar</div>
+    <textarea id="fabText" placeholder="Capture it before it flies away — you'll stay right where you are." maxlength="300"></textarea>
+    <div class="fp-form-actions">
+      <button class="pbtn" id="fabPark">Park it</button>
+      <button class="pbtn-quiet" id="fabCancel">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+<span class="sr-only" id="srStatus" aria-live="polite"></span>
+
+<script>
+/* ============================================================
+   v1.2 — Build 3a logic
+   Everything from v1.1 (local date keys, history archive,
+   backup suite, accessibility) plus:
+   · Today's Flight Plan — manual appointments
+   · Tap-to-open appointment cards (expand/collapse)
+   · Edit / Delete / Mark Landed
+   · Chronological auto-sort · type badges
+   · Flight plan archived daily into history
+   Storage keys: sla_preflight · sla_energy · sla_flightplan ·
+                 sla_history · sla_meta
+   ============================================================ */
+(function(){
+  "use strict";
+
+  var APP_ID = "stephs-life-adventure";
+  var SCHEMA = 3;
+
+  function pad(n){return (n<10?"0":"")+n;}
+
+  /* Local date key — device timezone (BC time), never UTC */
+  function localDateKey(d){
+    d = d || new Date();
+    return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+  }
+  var todayKey = localDateKey();
+
+  function load(key, fallback){
+    try{
+      var raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    }catch(e){ return fallback; }
+  }
+  function save(key, value){
+    try{ localStorage.setItem(key, JSON.stringify(value)); }catch(e){}
+    if(typeof skyOnSave === "function") skyOnSave(key);
+  }
+  function escapeHtml(s){
+    return String(s == null ? "" : s)
+      .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+  }
+
+  /* ---------- Captain's Wisdom ---------- */
+  var WISDOM = [
+    "Plan the flight. Fly the plan.",
+    "Adventure is just good planning wearing hiking boots.",
+    "Small corrections early beat big corrections late.",
+    "You don't have to see the whole runway — just the next hundred feet.",
+    "Trust your instruments, not your assumptions.",
+    "The checklist exists because memory doesn't.",
+    "Every great story starts with a departure.",
+    "Calm hands. Clear eyes. Steady course."
+  ];
+  document.getElementById("wisdomLine").textContent =
+    WISDOM[Math.floor(Date.now()/86400000) % WISDOM.length];
+
+  /* ---------- Flight strip ---------- */
+  var DAYS=["SUN","MON","TUE","WED","THU","FRI","SAT"];
+  var MONTHS=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  function tick(){
+    var d=new Date();
+    document.getElementById("stripDate").textContent =
+      DAYS[d.getDay()]+" "+pad(d.getDate())+" "+MONTHS[d.getMonth()]+" "+d.getFullYear();
+    var h=d.getHours(), m=d.getMinutes();
+    var ampm = h>=12 ? "PM" : "AM";
+    var h12 = h%12; if(h12===0) h12=12;
+    document.getElementById("stripTime").textContent = h12+":"+pad(m)+" "+ampm;
+  }
+  tick();
+  setInterval(tick, 15000);
+
+  /* ---------- SR announcements + toast ---------- */
+  var srStatus = document.getElementById("srStatus");
+  function announce(msg){ srStatus.textContent = msg; }
+  var toastEl = document.getElementById("toast");
+  var toastTimer = null;
+  function toast(msg){
+    toastEl.textContent = msg;
+    toastEl.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toastEl.classList.remove("show"); }, 2800);
+  }
+
+  /* ---------- Daily history archive ---------- */
+  var history = load("sla_history", {});
+  var LEVELS = {1:"Minimal", 2:"Moderate", 3:"Good", 4:"Excellent"};
+
+  function archiveDay(dateKey, patch){
+    if(!dateKey) return;
+    if(!history[dateKey]) history[dateKey] = {};
+    var entry = history[dateKey];
+    if(patch.energy !== undefined) entry.energy = patch.energy;
+    if(patch.ck !== undefined) entry.ck = patch.ck;
+    if(patch.flights !== undefined) entry.flights = patch.flights;
+    if(patch.mission !== undefined) entry.mission = patch.mission;
+    save("sla_history", history);
+  }
+
+  /* ---------- Pre-Flight Checklist ---------- */
+  var pfState = load("sla_preflight", {});
+  if(pfState.date !== todayKey){
+    if(pfState.date){ archiveDay(pfState.date, {ck: pfState.items || {}}); }
+    pfState = {date: todayKey, items:{}};
+    save("sla_preflight", pfState);
+  }
+
+  var listItems = document.querySelectorAll("#checklist li");
+  var pfDone = document.getElementById("pfDone");
+
+  function renderChecklist(){
+    var allDone = true;
+    listItems.forEach(function(li){
+      var id = li.getAttribute("data-ck");
+      var on = !!pfState.items[id];
+      li.querySelector(".ck-toggle").setAttribute("aria-pressed", on ? "true" : "false");
+      li.querySelector(".ck-text").classList.toggle("ck-done", on);
+      if(!on) allDone = false;
+    });
+    pfDone.classList.toggle("show", allDone);
+  }
+
+  listItems.forEach(function(li){
+    li.querySelector(".ck-toggle").addEventListener("click", function(){
+      var id = li.getAttribute("data-ck");
+      pfState.items[id] = !pfState.items[id];
+      save("sla_preflight", pfState);
+      archiveDay(todayKey, {ck: pfState.items});
+      renderChecklist();
+    });
+  });
+  renderChecklist();
+
+  /* ---------- Energy Gauge ---------- */
+  var ANGLES = {1:-67, 2:-22, 3:22, 4:67};
+  var egState = load("sla_energy", {});
+  if(egState.date !== todayKey){
+    if(egState.date && egState.level){ archiveDay(egState.date, {energy: egState.level}); }
+    egState = {date: todayKey, level: 0};
+    save("sla_energy", egState);
+  }
+
+  var needle = document.getElementById("needle");
+  var readout = document.getElementById("gaugeReadout");
+  var note = document.getElementById("gaugeNote");
+  var gbtns = document.querySelectorAll(".gbtn");
+
+  function renderGauge(silent){
+    gbtns.forEach(function(b){
+      var isActive = Number(b.getAttribute("data-energy")) === egState.level;
+      b.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+    if(egState.level){
+      needle.setAttribute("transform", "rotate("+ANGLES[egState.level]+" 120 118)");
+      readout.textContent = LEVELS[egState.level].toUpperCase();
+      note.textContent = "Logged for today: "+LEVELS[egState.level]+". You can change it any time conditions shift.";
+      if(!silent){ announce("Energy set to "+LEVELS[egState.level]+"."); }
+      if(!pfState.items.wx){
+        pfState.items.wx = true;
+        save("sla_preflight", pfState);
+        archiveDay(todayKey, {ck: pfState.items});
+        renderChecklist();
+      }
+    }else{
+      needle.setAttribute("transform", "rotate(-90 120 118)");
+      readout.textContent = "";
+    }
+  }
+
+  gbtns.forEach(function(b){
+    b.addEventListener("click", function(){
+      egState.level = Number(b.getAttribute("data-energy"));
+      save("sla_energy", egState);
+      archiveDay(todayKey, {energy: egState.level});
+      renderGauge(false);
+    });
+  });
+  renderGauge(true);
+
+  /* ============================================================
+     BUILD 3a: TODAY'S FLIGHT PLAN
+     ============================================================ */
+  var TYPE_LABEL = {pt:"PT Session", "class":"Class", og:"Open Gym",
+                    zoom:"Zoom PT", admin:"Admin", personal:"Personal", other:"Other"};
+  var TYPE_CLASS = {pt:"b-pt", "class":"b-class", og:"b-og",
+                    zoom:"b-zoom", admin:"b-admin", personal:"b-personal", other:"b-other"};
+
+  var fpState = load("sla_flightplan", {});
+  if(fpState.date !== todayKey){
+    if(fpState.date && fpState.items && fpState.items.length){
+      archiveDay(fpState.date, {flights: fpState.items});
+    }
+    fpState = {date: todayKey, items: []};
+    /* 11.1: promote flights pre-entered for today via the time machine */
+    if(history[todayKey] && history[todayKey].flights && history[todayKey].flights.length){
+      fpState.items = history[todayKey].flights.slice();
+    }
+    save("sla_flightplan", fpState);
+  }
+  if(!fpState.items) fpState.items = [];
+  /* migrate legacy done-boolean to status */
+  fpState.items.forEach(function(x){ if(x.done && !x.status) x.status = "landed"; });
+
+  var fpList = document.getElementById("fpList");
+  var fpEmpty = document.getElementById("fpEmpty");
+  var fpTime = document.getElementById("fpTime");
+  var fpEnd = document.getElementById("fpEnd");
+  var fpName = document.getElementById("fpName");
+  var fpType = document.getElementById("fpType");
+  var fpNotes = document.getElementById("fpNotes");
+  var fpSave = document.getElementById("fpSave");
+  var fpCancel = document.getElementById("fpCancel");
+  var fpFormTitle = document.getElementById("fpFormTitle");
+  var editingId = null;
+  var openId = null;
+  var dbOpenId = null; /* which flight has its debrief panel open (Build 5) */
+
+  /* ---- 7.1 Time machine: view/edit any day's logbook ---- */
+  var viewKey = todayKey;
+  function vItems(){
+    if(viewKey === todayKey) return fpState.items;
+    if(!history[viewKey]) history[viewKey] = {};
+    if(!history[viewKey].flights) history[viewKey].flights = [];
+    return history[viewKey].flights;
+  }
+  function setVItems(arr){
+    if(viewKey === todayKey){ fpState.items = arr; }
+    else{ history[viewKey].flights = arr; }
+  }
+  function saveView(){
+    if(viewKey === todayKey){
+      save("sla_flightplan", fpState);
+      archiveDay(todayKey, {flights: fpState.items});
+    }else{
+      archiveDay(viewKey, {flights: history[viewKey].flights});
+    }
+  }
+  var fpDayPick = document.getElementById("fpDayPick");
+  var fpBackToday = document.getElementById("fpBackToday");
+  var fpDayStatus = document.getElementById("fpDayStatus");
+  fpDayPick.value = todayKey;
+  function setViewKey(k){
+    viewKey = k || todayKey;
+    openId = null; dbOpenId = null; editingId = null;
+    fpDayPick.value = viewKey;
+    fpBackToday.hidden = (viewKey === todayKey);
+    fpDayStatus.textContent = viewKey === todayKey
+      ? ""
+      : "📖 Editing the logbook for "+fmtDateShort(viewKey)+
+        (viewKey > todayKey ? " (future)" : "")+" — changes save automatically.";
+    renderFlightPlan();
+  }
+  fpDayPick.addEventListener("change", function(){ setViewKey(fpDayPick.value); });
+  document.getElementById("fpFormToggle").addEventListener("click", function(){
+    var f = document.getElementById("fpForm");
+    f.hidden = !f.hidden;
+    if(!f.hidden) fpTime.focus();
+  });
+  fpBackToday.addEventListener("click", function(){ setViewKey(todayKey); });
+
+  function fmt12(t){ /* "14:30" -> "2:30 PM" */
+    if(!t) return "—";
+    var parts = t.split(":");
+    var h = Number(parts[0]), m = parts[1] || "00";
+    var ampm = h >= 12 ? "PM" : "AM";
+    var h12 = h % 12; if(h12 === 0) h12 = 12;
+    return h12+":"+m+" "+ampm;
+  }
+
+  function saveFp(){
+    save("sla_flightplan", fpState);
+    archiveDay(todayKey, {flights: fpState.items});
+  }
+
+  function sortItems(){
+    vItems().sort(function(a,b){
+      return (a.time || "99:99") < (b.time || "99:99") ? -1 : 1;
+    });
+  }
+
+  function renderFlightPlan(){
+    sortItems();
+    fpEmpty.style.display = vItems().length ? "none" : "block";
+    fpList.innerHTML = "";
+    vItems().forEach(function(item){
+      var li = document.createElement("li");
+      var st = item.status || "";
+      li.className = "fp-item" +
+        (st === "landed" ? " landed" : st === "noshow" ? " noshow" : st === "cancelled" ? " cancelled" : "") +
+        (item.id === openId ? " open" : "");
+
+      var notesHtml = item.notes
+        ? '<div class="fp-notes">'+escapeHtml(item.notes)+'</div>'
+        : '<div class="fp-notes none">No notes for this flight.</div>';
+
+      /* collapsed-row summary: status + payment if logged */
+      var sub = st === "landed" ? "Landed ✓"
+              : st === "noshow" ? "No-show"
+              : st === "cancelled" ? "Cancelled"
+              : "Tap to open";
+      if(item.end){ sub += " · until " + fmt12(item.end); }
+      if(item.debriefed){ sub += " · Debriefed 📋"; }
+      if(item.payAmount > 0){
+        sub += " · $" + Number(item.payAmount).toFixed(2).replace(/\.00$/,"");
+        if(item.payMethod && PAY_LABEL[item.payMethod]) sub += " " + PAY_LABEL[item.payMethod];
+      }
+
+      /* payment capture block (Build 3c) */
+      var isClass = (item.type === "class" || item.type === "og");
+      var payHtml =
+        '<div class="fp-pay">'+
+          '<div class="fp-pay-row">'+
+            '<select class="fp-pay-method" aria-label="Payment method">'+payOptions(item.payMethod)+'</select>'+
+            '<input class="fp-pay-amount" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Amount $" value="'+(item.payAmount != null && item.payAmount !== "" ? item.payAmount : "")+'" aria-label="Amount received">'+
+          '</div>'+
+          (isClass
+            ? '<textarea class="fp-att" placeholder="Who showed? (names, comma-separated)" aria-label="Class attendance" maxlength="500">'+escapeHtml(item.attendance || "")+'</textarea>'
+            : '')+
+        '</div>';
+
+      li.innerHTML =
+        '<button class="fp-row" aria-expanded="'+(item.id === openId ? "true" : "false")+'">'+
+          '<span class="fp-time">'+escapeHtml(fmt12(item.time))+'</span>'+
+          '<span class="fp-main">'+
+            '<span class="fp-title">'+escapeHtml(item.title)+'</span>'+
+            '<span class="fp-sub">'+escapeHtml(sub)+'</span>'+
+          '</span>'+
+          '<span class="badge '+(TYPE_CLASS[item.type] || "b-other")+'">'+escapeHtml(TYPE_LABEL[item.type] || "Other")+'</span>'+
+          '<svg class="fp-caret" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'+
+        '</button>'+
+        '<div class="fp-detail">'+
+          notesHtml+
+          payHtml+
+          '<div class="fp-actions">'+
+            '<button class="abtn abtn-land'+(st === "landed" ? " on" : "")+'" data-act="st-landed">Landed ✓</button>'+
+            '<button class="abtn abtn-ns'+(st === "noshow" ? " on" : "")+'" data-act="st-noshow">No-show</button>'+
+            '<button class="abtn abtn-cx'+(st === "cancelled" ? " on" : "")+'" data-act="st-cancelled">Cancelled</button>'+
+            (item.type !== "admin" && item.type !== "personal"
+              ? '<button class="abtn'+(item.debriefed ? " on abtn-land" : "")+'" data-act="debrief">'+(item.debriefed ? "Debriefed ✓" : "Debrief")+'</button>'
+              : '')+
+            '<button class="abtn" data-act="edit">Edit</button>'+
+            '<button class="abtn abtn-danger" data-act="del">Delete</button>'+
+          '</div>'+
+          (item.id === dbOpenId ? debriefPanelHtml(item) : '')+
+        '</div>';
+
+      li.querySelector(".fp-row").addEventListener("click", function(){
+        openId = (openId === item.id) ? null : item.id;
+        renderFlightPlan();
+      });
+      /* payment capture handlers — save on change (fires when you leave the field) */
+      li.querySelector(".fp-pay-method").addEventListener("change", function(e){
+        item.payMethod = e.target.value;
+        saveView();
+        renderFlightPlan();
+      });
+      li.querySelector(".fp-pay-amount").addEventListener("change", function(e){
+        var v = parseFloat(e.target.value);
+        item.payAmount = (isNaN(v) || v < 0) ? null : v;
+        saveView();
+        renderFlightPlan();
+      });
+      var attEl = li.querySelector(".fp-att");
+      if(attEl){
+        attEl.addEventListener("change", function(e){
+          item.attendance = e.target.value.trim();
+          saveView();
+        });
+      }
+      function setStatus(s, label){
+        item.status = (item.status === s) ? "" : s;
+        item.done = (item.status === "landed"); /* legacy compat */
+        saveView();
+        if(item.status){
+          toast(label + ": " + item.title);
+          announce(item.title + " marked " + label.toLowerCase() + ".");
+        }else{
+          announce(item.title + " back to scheduled.");
+        }
+        renderFlightPlan();
+      }
+      li.querySelector('[data-act="st-landed"]').addEventListener("click", function(){
+        setStatus("landed", "Flight landed ✓");
+      });
+      li.querySelector('[data-act="st-noshow"]').addEventListener("click", function(){
+        setStatus("noshow", "No-show logged");
+      });
+      li.querySelector('[data-act="st-cancelled"]').addEventListener("click", function(){
+        setStatus("cancelled", "Cancellation logged");
+      });
+      var dbBtn = li.querySelector('[data-act="debrief"]');
+      if(dbBtn){
+        dbBtn.addEventListener("click", function(){
+          dbOpenId = (dbOpenId === item.id) ? null : item.id;
+          renderFlightPlan();
+        });
+      }
+      if(item.id === dbOpenId){ wireDebriefPanel(item, li); }
+      li.querySelector('[data-act="edit"]').addEventListener("click", function(){
+        editingId = item.id;
+        document.getElementById("fpForm").hidden = false;
+        fpTime.value = item.time || "";
+        fpEnd.value = item.end || "";
+        fpName.value = item.title || "";
+        fpType.value = item.type || "other";
+        fpNotes.value = item.notes || "";
+        fpFormTitle.textContent = "Edit flight";
+        fpSave.textContent = "Save changes";
+        fpCancel.hidden = false;
+        fpName.focus();
+      });
+      li.querySelector('[data-act="del"]').addEventListener("click", function(){
+        if(!cddConfirm("Delete \""+item.title+"\" from today's Flight Plan?")) return;
+        setVItems(vItems().filter(function(x){ return x.id !== item.id; }));
+        if(openId === item.id) openId = null;
+        if(editingId === item.id) resetForm();
+        saveView();
+        toast("Flight removed.");
+        announce("Appointment deleted.");
+        renderFlightPlan();
+      });
+
+      fpList.appendChild(li);
+    });
+    renderDayTotal();
+  }
+
+  var PAY_LABEL = {cash:"Cash", etransfer:"E-Transfer", square:"Square", pass:"Monthly Pass", comp:"Comp", invoice:"Invoiced", trade:"Trade", other:"Other"};
+  function payOptions(selected){
+    var opts = [["","— payment —"],["cash","Cash"],["etransfer","E-Transfer"],
+                ["square","Square"],["invoice","Invoiced (Square, month-end)"],
+                ["pass","Monthly Pass"],["trade","Trade / Barter"],
+                ["comp","Comp / No charge"],["other","Other (see notes)"]];
+    return opts.map(function(o){
+      return '<option value="'+o[0]+'"'+(selected === o[0] ? " selected" : "")+'>'+o[1]+'</option>';
+    }).join("");
+  }
+
+  var fpTotal = document.getElementById("fpTotal");
+  function dayRevenue(items){
+    return (items || []).reduce(function(sum, x){
+      return sum + (x.payAmount > 0 ? Number(x.payAmount) : 0);
+    }, 0);
+  }
+  function renderDayTotal(){
+    var total = dayRevenue(vItems());
+    if(total > 0){
+      fpTotal.hidden = false;
+      fpTotal.textContent = (viewKey === todayKey
+        ? "Revenue logged today: $"
+        : "Revenue logged "+fmtDateShort(viewKey)+": $") + total.toFixed(2);
+    }else{
+      fpTotal.hidden = true;
+    }
+  }
+
+  function resetForm(){
+    editingId = null;
+    var f = document.getElementById("fpForm");
+    if(f) f.hidden = true;
+    fpTime.value = "";
+    fpEnd.value = "";
+    fpName.value = "";
+    fpType.value = "pt";
+    fpNotes.value = "";
+    fpFormTitle.textContent = "Add a flight";
+    fpSave.textContent = "Add to Flight Plan";
+    fpCancel.hidden = true;
+  }
+
+  fpSave.addEventListener("click", function(){
+    var title = fpName.value.trim();
+    if(!title){
+      toast("Give this flight a name first.");
+      fpName.focus();
+      return;
+    }
+    if(editingId){
+      var item = vItems().find(function(x){ return x.id === editingId; });
+      if(item){
+        item.time = fpTime.value;
+        item.end = fpEnd.value;
+        item.title = title;
+        item.type = fpType.value;
+        item.notes = fpNotes.value.trim();
+      }
+      toast("Flight updated.");
+      announce("Appointment updated.");
+    }else{
+      vItems().push({
+        id: "f" + Date.now() + Math.floor(Math.random()*1000),
+        time: fpTime.value,
+        end: fpEnd.value,
+        title: title,
+        type: fpType.value,
+        notes: fpNotes.value.trim(),
+        done: false
+      });
+      toast("Added to the Flight Plan. 🛫");
+      announce("Appointment added.");
+    }
+    saveView();
+    resetForm();
+    renderFlightPlan();
+  });
+
+  fpCancel.addEventListener("click", function(){
+    resetForm();
+  });
+
+  renderFlightPlan();
+  resetForm();
+
+  /* ============================================================
+     BUILD 3b: CALENDAR FEED
+     Reads today's events from a Google Apps Script web app and
+     merges them into the Flight Plan. Dedupe by calendar event id
+     (item.gcal) so re-syncing never duplicates, and manual edits
+     to already-imported flights are never overwritten.
+     ============================================================ */
+  var settings = load("sla_settings", {});
+
+  var feedStatus = document.getElementById("feedStatus");
+  var feedSettings = document.getElementById("feedSettings");
+  var feedUrl = document.getElementById("feedUrl");
+
+  function guessType(title){
+    var t = (title || "").toLowerCase();
+    if(t.indexOf("class") > -1) return "class";
+    if(t.indexOf("group") > -1) return "class";
+    if(t.indexOf("open gym") > -1) return "og";
+    if(t.indexOf("zoom") > -1) return "zoom";
+    if(t.indexOf("admin") > -1) return "admin";
+    if(t.indexOf("personal") > -1) return "personal";
+    return "pt"; /* Square-fed calendars are mostly PT sessions */
+  }
+
+  function renderFeedStatus(){
+    if(!settings.calendarUrl){
+      feedStatus.textContent = "Not connected — open Feed settings and paste your feed URL.";
+    }else if(settings.lastSync){
+      var d = new Date(settings.lastSync);
+      var h = d.getHours(), m = d.getMinutes();
+      var ampm = h>=12 ? "PM" : "AM";
+      var h12 = h%12; if(h12===0) h12=12;
+      feedStatus.textContent = "Connected · last sync "+h12+":"+pad(m)+" "+ampm;
+    }else{
+      feedStatus.textContent = "Connected · not synced yet today.";
+    }
+  }
+
+  document.getElementById("feedToggle").addEventListener("click", function(){
+    feedSettings.classList.toggle("show");
+    feedUrl.value = settings.calendarUrl || "";
+    if(feedSettings.classList.contains("show")) feedUrl.focus();
+  });
+
+  document.getElementById("feedSaveUrl").addEventListener("click", function(){
+    var url = feedUrl.value.trim();
+    if(url && url.indexOf("https://script.google.com/") !== 0){
+      toast("That doesn't look like an Apps Script URL — it should start with https://script.google.com/");
+      return;
+    }
+    settings.calendarUrl = url;
+    save("sla_settings", settings);
+    feedSettings.classList.remove("show");
+    renderFeedStatus();
+    toast(url ? "Feed URL saved. Tower connection configured. 📡" : "Feed URL cleared.");
+  });
+
+  document.getElementById("feedSync").addEventListener("click", function(){
+    if(viewKey !== todayKey){
+      toast("Calendar sync fills today's plan — tap ↩ Back to today first.");
+      return;
+    }
+    if(!settings.calendarUrl){
+      feedSettings.classList.add("show");
+      feedUrl.focus();
+      toast("Paste your calendar feed URL first (see Feed settings).");
+      return;
+    }
+    feedStatus.textContent = "Contacting the tower…";
+    fetch(settings.calendarUrl)
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if(!data || !data.ok || !data.events){ throw new Error("bad payload"); }
+        var added = 0;
+        data.events.forEach(function(ev){
+          if(!ev || !ev.id) return;
+          var exists = fpState.items.some(function(x){
+            return x.gcal === ev.id ||
+                   (x.time === (ev.start || "") && x.title === (ev.title || ""));
+          });
+          if(exists) return;
+          fpState.items.push({
+            id: "f" + Date.now() + Math.floor(Math.random()*100000),
+            gcal: ev.id,
+            time: ev.start || "",
+            end: ev.end || "",
+            title: ev.title || "Untitled flight",
+            type: guessType(ev.title),
+            notes: (ev.notes || "").trim(),
+            done: false
+          });
+          added++;
+        });
+        saveView();
+        renderFlightPlan();
+        settings.lastSync = new Date().toISOString();
+        save("sla_settings", settings);
+        renderFeedStatus();
+        refreshBackupMeta();
+        toast(added ? added + " flight" + (added===1?"":"s") + " received from the tower. 🛬"
+                    : "Flight Plan already up to date.");
+        announce(added ? added + " appointments imported from calendar." : "No new appointments.");
+      })
+      .catch(function(){
+        renderFeedStatus();
+        toast("Couldn't reach the calendar. Check the feed URL and your internet connection.");
+      });
+  });
+
+  renderFeedStatus();
+
+  /* ============================================================
+     BUILD 4: TARMAC · BAGGAGE CAROUSEL · HANGAR
+     Tarmac: today's action items. Open items from previous days
+       enter Carryover Review: Keep today / Park to Carousel / Scrub.
+       Completed items are archived into history at the next daily reset.
+     Carousel: dated reminders, hidden until due, then delivered to
+       the Tarmac automatically each morning.
+     Hangar: frictionless idea parking, with one-tap roll-out to Tarmac.
+     Keys: sla_tarmac · sla_carousel · sla_hangar
+     ============================================================ */
+  var tmState = load("sla_tarmac", {items:[]}); if(!tmState.items) tmState.items = [];
+  var crState = load("sla_carousel", {items:[]}); if(!crState.items) crState.items = [];
+  var hgState = load("sla_hangar", {items:[{id:"h_seed_bcf", text:"BC Ferries edition — a dashboard for ferry crews ⛴️ (Steph's idea!)", created: todayKey}]}); if(!hgState.items) hgState.items = [];
+  var hgEditId = null;
+
+  function saveTm(){ save("sla_tarmac", tmState); }
+  function saveCr(){ save("sla_carousel", crState); }
+  function saveHg(){ save("sla_hangar", hgState); }
+  function newId(prefix){ return prefix + Date.now() + Math.floor(Math.random()*100000); }
+
+  function parseDateKey(k){
+    var p = (k || "").split("-");
+    return new Date(Number(p[0]), Number(p[1])-1, Number(p[2]));
+  }
+  function daysBetween(fromKey, toKey){
+    return Math.round((parseDateKey(toKey) - parseDateKey(fromKey)) / 86400000);
+  }
+  function fmtDateShort(k){
+    var d = parseDateKey(k);
+    return MONTHS[d.getMonth()].charAt(0)+MONTHS[d.getMonth()].slice(1).toLowerCase()+" "+d.getDate();
+  }
+
+  /* ---- Morning housekeeping ---- */
+  /* 1. Archive tarmac items completed on previous days, then remove them */
+  (function(){
+    var keep = [], archived = 0;
+    tmState.items.forEach(function(x){
+      if(x.done && x.doneDate && x.doneDate < todayKey){
+        if(!history[x.doneDate]) history[x.doneDate] = {};
+        history[x.doneDate].tarmacDone = (history[x.doneDate].tarmacDone || 0) + 1;
+        archived++;
+      }else{
+        keep.push(x);
+      }
+    });
+    if(archived){
+      tmState.items = keep;
+      save("sla_history", history);
+      saveTm();
+    }
+  })();
+
+  /* 2. Deliver due Carousel items onto the Tarmac */
+  (function(){
+    var due = crState.items.filter(function(x){ return x.due && x.due <= todayKey; });
+    if(!due.length) return;
+    due.forEach(function(x){
+      tmState.items.push({
+        id: newId("t"), text: x.text, done: false,
+        created: todayKey, fromCarousel: true
+      });
+    });
+    crState.items = crState.items.filter(function(x){ return !(x.due && x.due <= todayKey); });
+    saveTm(); saveCr();
+    setTimeout(function(){
+      toast("🧳 " + due.length + " bag" + (due.length===1?"":"s") + " arrived from the Carousel.");
+      announce(due.length + " reminders arrived from the Carousel onto the Tarmac.");
+    }, 600);
+  })();
+
+  /* ---- TARMAC ---- */
+  var tmList = document.getElementById("tmList");
+  var tmEmpty = document.getElementById("tmEmpty");
+  var tmChip = document.getElementById("tmChip");
+  var tmInput = document.getElementById("tmInput");
+
+  function renderTarmac(){
+    tmList.innerHTML = "";
+    tmEmpty.style.display = tmState.items.length ? "none" : "block";
+    var openCount = 0;
+
+    /* carryovers first, then today's open, then done */
+    var sorted = tmState.items.slice().sort(function(a,b){
+      var aCarry = (!a.done && a.created < todayKey) ? 0 : (!a.done ? 1 : 2);
+      var bCarry = (!b.done && b.created < todayKey) ? 0 : (!b.done ? 1 : 2);
+      return aCarry - bCarry;
+    });
+
+    sorted.forEach(function(item){
+      var isCarry = !item.done && item.created < todayKey;
+      if(!item.done) openCount++;
+      var li = document.createElement("li");
+      li.className = "mini-item" + (item.done ? " done-item" : "") + (isCarry ? " tm-carry" : "");
+
+      var html =
+        '<button class="mini-check" aria-pressed="'+(item.done ? "true" : "false")+'" aria-label="Mark done"></button>'+
+        '<span class="mini-text">'+escapeHtml(item.text)+'</span>';
+      if(isCarry){
+        html += '<span class="tm-carry-badge">Day '+(daysBetween(item.created, todayKey)+1)+'</span>';
+      }
+      if(item.fromCarousel && !item.done){
+        html += '<span class="cr-due">🧳 Arrived</span>';
+      }
+      html += '<button class="mini-x" aria-label="Delete item">✕</button>';
+      if(isCarry){
+        html +=
+          '<span class="tm-carry-actions">'+
+            '<button class="sbtn sbtn-ok" data-carry="keep">Keep today</button>'+
+            '<button class="sbtn sbtn-amber" data-carry="park">Park to Carousel</button>'+
+            '<input type="date" class="tm-park-date" aria-label="New arrival date">'+
+            '<button class="sbtn sbtn-amber tm-park-confirm" style="display:none">Confirm date</button>'+
+            '<button class="sbtn sbtn-danger" data-carry="scrub">Scrub</button>'+
+          '</span>';
+      }
+      li.innerHTML = html;
+
+      li.querySelector(".mini-check").addEventListener("click", function(){
+        item.done = !item.done;
+        item.doneDate = item.done ? todayKey : null;
+        saveTm();
+        if(item.done){ toast("Tarmac item cleared ✓"); }
+        announce(item.done ? "Item marked done." : "Item reopened.");
+        renderTarmac();
+      });
+      li.querySelector(".mini-x").addEventListener("click", function(){
+        if(!cddConfirm("Delete this Tarmac item?")) return;
+        tmState.items = tmState.items.filter(function(x){ return x.id !== item.id; });
+        saveTm();
+        renderTarmac();
+      });
+      if(isCarry){
+        var dateEl = li.querySelector(".tm-park-date");
+        var confirmEl = li.querySelector(".tm-park-confirm");
+        li.querySelector('[data-carry="keep"]').addEventListener("click", function(){
+          item.created = todayKey;
+          saveTm();
+          toast("Kept on today's Tarmac.");
+          renderTarmac();
+        });
+        li.querySelector('[data-carry="park"]').addEventListener("click", function(){
+          var t = new Date(); t.setDate(t.getDate()+1);
+          dateEl.value = localDateKey(t);
+          dateEl.min = localDateKey(t);
+          dateEl.classList.add("show");
+          confirmEl.style.display = "inline-block";
+        });
+        confirmEl.addEventListener("click", function(){
+          if(!dateEl.value || dateEl.value <= todayKey){
+            toast("Pick a future date for the Carousel.");
+            return;
+          }
+          crState.items.push({id: newId("c"), text: item.text, due: dateEl.value});
+          tmState.items = tmState.items.filter(function(x){ return x.id !== item.id; });
+          saveTm(); saveCr();
+          toast("Parked on the Carousel — arrives "+fmtDateShort(dateEl.value)+". 🧳");
+          announce("Item parked to the Carousel.");
+          renderTarmac(); renderCarousel();
+        });
+        li.querySelector('[data-carry="scrub"]').addEventListener("click", function(){
+          if(!cddConfirm("Scrub \""+item.text+"\" for good?")) return;
+          tmState.items = tmState.items.filter(function(x){ return x.id !== item.id; });
+          saveTm();
+          toast("Scrubbed. Sky's cleaner.");
+          renderTarmac();
+        });
+      }
+      tmList.appendChild(li);
+    });
+
+    tmChip.textContent = openCount
+      ? openCount + " open item" + (openCount===1?"":"s")
+      : "All clear";
+    tmChip.className = "chip " + (openCount ? "chip-next" : "chip-live");
+  }
+
+  document.getElementById("tmAdd").addEventListener("click", function(){
+    var text = tmInput.value.trim();
+    if(!text){ tmInput.focus(); return; }
+    tmState.items.push({id: newId("t"), text: text, done: false, created: todayKey});
+    saveTm();
+    tmInput.value = "";
+    tmInput.focus();
+    announce("Tarmac item added.");
+    renderTarmac();
+  });
+  tmInput.addEventListener("keydown", function(e){
+    if(e.key === "Enter") document.getElementById("tmAdd").click();
+  });
+
+  /* ---- BAGGAGE CAROUSEL ---- */
+  var crList = document.getElementById("crList");
+  var crEmpty = document.getElementById("crEmpty");
+  var crChip = document.getElementById("crChip");
+  var crInput = document.getElementById("crInput");
+  var crDate = document.getElementById("crDate");
+  (function(){
+    var t = new Date(); t.setDate(t.getDate()+1);
+    crDate.min = localDateKey(t);
+  })();
+
+  function renderCarousel(){
+    crList.innerHTML = "";
+    var items = crState.items.slice().sort(function(a,b){ return a.due < b.due ? -1 : 1; });
+    crEmpty.style.display = items.length ? "none" : "block";
+    items.forEach(function(item){
+      var inDays = daysBetween(todayKey, item.due);
+      var li = document.createElement("li");
+      li.className = "mini-item";
+      li.innerHTML =
+        '<span class="cr-due">'+fmtDateShort(item.due)+' · in '+inDays+' day'+(inDays===1?"":"s")+'</span>'+
+        '<span class="mini-text">'+escapeHtml(item.text)+'</span>'+
+        '<button class="sbtn sbtn-ok" data-cr="now">Deliver now</button>'+
+        '<button class="mini-x" aria-label="Delete reminder">✕</button>';
+      li.querySelector('[data-cr="now"]').addEventListener("click", function(){
+        tmState.items.push({id: newId("t"), text: item.text, done: false, created: todayKey, fromCarousel: true});
+        crState.items = crState.items.filter(function(x){ return x.id !== item.id; });
+        saveTm(); saveCr();
+        toast("Delivered to the Tarmac. 🧳");
+        renderTarmac(); renderCarousel();
+      });
+      li.querySelector(".mini-x").addEventListener("click", function(){
+        if(!cddConfirm("Delete this reminder?")) return;
+        crState.items = crState.items.filter(function(x){ return x.id !== item.id; });
+        saveCr();
+        renderCarousel();
+      });
+      crList.appendChild(li);
+    });
+    crChip.textContent = items.length
+      ? items.length + " on the belt"
+      : "Belt clear";
+    crChip.className = "chip chip-live";
+  }
+
+  document.getElementById("crAdd").addEventListener("click", function(){
+    var text = crInput.value.trim();
+    if(!text){ crInput.focus(); return; }
+    if(!crDate.value || crDate.value <= todayKey){
+      toast("Pick a future arrival date — that's the whole trick. 🧳");
+      crDate.focus();
+      return;
+    }
+    crState.items.push({id: newId("c"), text: text, due: crDate.value});
+    saveCr();
+    crInput.value = "";
+    toast("Parked — arrives "+fmtDateShort(crDate.value)+".");
+    announce("Reminder parked on the Carousel.");
+    renderCarousel();
+  });
+  crInput.addEventListener("keydown", function(e){
+    if(e.key === "Enter") document.getElementById("crAdd").click();
+  });
+
+  /* ---- THE HANGAR ---- */
+  var hgList = document.getElementById("hgList");
+  var hgEmpty = document.getElementById("hgEmpty");
+  var hgChip = document.getElementById("hgChip");
+  var hgInput = document.getElementById("hgInput");
+
+  function renderHangar(){
+    hgList.innerHTML = "";
+    var items = hgState.items.slice().reverse(); /* newest first */
+    hgEmpty.style.display = items.length ? "none" : "block";
+    items.forEach(function(item){
+      var li = document.createElement("li");
+      li.className = "mini-item";
+      /* 11.1.3: inline edit mode */
+      if(item.id === hgEditId){
+        li.innerHTML =
+          '<input class="mini-edit" type="text" maxlength="300" aria-label="Edit idea">'+
+          '<button class="sbtn" data-hg="save">Save</button>'+
+          '<button class="mini-x" data-hg="cancel" aria-label="Cancel edit">✕</button>';
+        var inp = li.querySelector(".mini-edit");
+        inp.value = item.text;
+        li.querySelector('[data-hg="save"]').addEventListener("click", function(){
+          var t = inp.value.trim();
+          if(!t){ toast("The idea can't be empty — Cancel to leave it as is."); return; }
+          item.text = t;
+          saveHg();
+          hgEditId = null;
+          renderHangar();
+          toast("Idea polished. 💡");
+        });
+        li.querySelector('[data-hg="cancel"]').addEventListener("click", function(){
+          hgEditId = null;
+          renderHangar();
+        });
+        hgList.appendChild(li);
+        var focusInp = inp;
+        setTimeout(function(){ focusInp.focus(); }, 50);
+        return;
+      }
+      li.innerHTML =
+        '<span class="mini-text">'+escapeHtml(item.text)+'</span>'+
+        '<button class="sbtn" data-hg="edit" aria-label="Edit idea">✏️</button>'+
+        '<button class="sbtn" data-hg="out">→ Tarmac</button>'+
+        '<button class="mini-x" aria-label="Delete idea">✕</button>'+
+        '<span class="mini-sub">Parked '+fmtDateShort(item.created)+'</span>';
+      li.querySelector('[data-hg="edit"]').addEventListener("click", function(){
+        hgEditId = item.id;
+        renderHangar();
+      });
+      li.querySelector('[data-hg="out"]').addEventListener("click", function(){
+        tmState.items.push({id: newId("t"), text: item.text, done: false, created: todayKey});
+        hgState.items = hgState.items.filter(function(x){ return x.id !== item.id; });
+        saveTm(); saveHg();
+        toast("Rolled out to the Tarmac. Time to fly. 🛫");
+        announce("Idea moved to the Tarmac.");
+        renderTarmac(); renderHangar();
+      });
+      li.querySelector(".mini-x").addEventListener("click", function(){
+        if(!cddConfirm("Delete this idea from the Hangar?")) return;
+        hgState.items = hgState.items.filter(function(x){ return x.id !== item.id; });
+        saveHg();
+        renderHangar();
+      });
+      hgList.appendChild(li);
+    });
+    hgChip.textContent = items.length
+      ? items.length + " idea" + (items.length===1?"":"s") + " parked"
+      : "Empty hangar";
+    hgChip.className = "chip chip-live";
+  }
+
+  document.getElementById("hgAdd").addEventListener("click", function(){
+    var text = hgInput.value.trim();
+    if(!text){ hgInput.focus(); return; }
+    hgState.items.push({id: newId("h"), text: text, created: todayKey});
+    saveHg();
+    hgInput.value = "";
+    toast("Idea parked in the Hangar. 💡");
+    announce("Idea parked.");
+    renderHangar();
+  });
+  hgInput.addEventListener("keydown", function(e){
+    if(e.key === "Enter") document.getElementById("hgAdd").click();
+  });
+
+  /* floating quick-capture: jump to the Hangar input from anywhere */
+  var fabOverlay = document.getElementById("fabOverlay");
+  var fabText = document.getElementById("fabText");
+  document.getElementById("hangarFab").addEventListener("click", function(){
+    fabText.value = "";
+    fabOverlay.hidden = false;
+    setTimeout(function(){ fabText.focus(); }, 50);
+  });
+  document.getElementById("fabCancel").addEventListener("click", function(){ fabOverlay.hidden = true; });
+  fabOverlay.addEventListener("click", function(e){ if(e.target === fabOverlay) fabOverlay.hidden = true; });
+  document.getElementById("fabPark").addEventListener("click", function(){
+    var text = fabText.value.trim();
+    if(!text){ toast("Write the idea first. 💡"); return; }
+    hgState.items.push({id: newId("h"), text: text, created: todayKey});
+    saveHg();
+    renderHangar();
+    fabOverlay.hidden = true;
+    toast("Idea parked in the Hangar. 💡");
+    announce("Idea saved to the Hangar.");
+  });
+
+  renderTarmac();
+  renderCarousel();
+  renderHangar();
+
+  /* ============================================================
+     BUILD 5: CLIENT FLIGHT CARDS + POST-SESSION DEBRIEF
+     Key: sla_clients — { list: [ {id, name, mission, watch,
+       toolbox, debriefs:[{date,time,title,rating,note,next}]} ] }
+     Debrief opens inline inside a Flight Plan item; saving files
+     it onto the matching client card (creating one if needed)
+     and can route a follow-up to the Tarmac or the Carousel.
+     ============================================================ */
+  var clState = load("sla_clients", {list:[]}); if(!clState.list) clState.list = [];
+  function saveCl(){ save("sla_clients", clState); }
+  var RATE_LABEL = {smooth:"Smooth ✈️", turb:"Turbulence 🌤️", rough:"Rough air ⛈️"};
+
+  function guessClientName(title){
+    var t = (title || "").split("—")[0].split(" - ")[0].trim();
+    return t.length > 1 ? t : (title || "").trim();
+  }
+  function findClientMatch(title){
+    /* 11.1: exact normalized match only — prefix guessing could file
+       notes on lookalike names (Mary vs MaryAnn). If ambiguous,
+       return nothing and let the Captain choose. */
+    var g = guessClientName(title).trim().toLowerCase();
+    if(!g) return null;
+    var hits = clState.list.filter(function(c){
+      return (c.name || "").trim().toLowerCase() === g;
+    });
+    return hits.length === 1 ? hits[0] : null;
+  }
+
+  function debriefPanelHtml(item){
+    var guess = guessClientName(item.title);
+    var match = null;
+    if(item.clientId){
+      match = clState.list.find(function(c){ return c.id === item.clientId; }) || null;
+    }
+    if(!match) match = findClientMatch(item.title);
+    var opts = '<option value="">— which client? —</option>';
+    clState.list.slice().sort(function(a,b){ return a.name < b.name ? -1 : 1; })
+      .forEach(function(c){
+        opts += '<option value="'+c.id+'"'+(match && match.id === c.id ? " selected" : "")+'>'+escapeHtml(c.name)+'</option>';
+      });
+    opts += '<option value="__new"'+(!match && guess ? " selected" : "")+'>➕ New card: "'+escapeHtml(guess)+'"</option>';
+    return '<div class="db-panel">'+
+      '<div class="db-title">60-Second Debrief</div>'+
+      '<div class="db-row"><select class="db-client" aria-label="Which client">'+opts+'</select></div>'+
+      '<div class="db-rate" role="group" aria-label="How was the flight?">'+
+        '<button class="abtn db-r" data-r="smooth">Smooth ✈️</button>'+
+        '<button class="abtn db-r" data-r="turb">Turbulence 🌤️</button>'+
+        '<button class="abtn db-r" data-r="rough">Rough air ⛈️</button>'+
+      '</div>'+
+      '<textarea class="db-note" placeholder="What happened? One or two lines is plenty." maxlength="500"></textarea>'+
+      '<textarea class="db-next" placeholder="Next flight focus (optional)" maxlength="300"></textarea>'+
+      '<div class="db-row db-follow">'+
+        '<input type="text" class="db-fu" placeholder="Follow-up task (optional — routes to Tarmac or Carousel)" maxlength="120" aria-label="Follow-up task">'+
+        '<input type="date" class="db-fu-date" aria-label="Deliver follow-up on this date (leave blank for today)">'+
+      '</div>'+
+      '<div class="fp-form-actions">'+
+        '<button class="pbtn db-save">Save debrief</button>'+
+        '<button class="pbtn-quiet db-cancel">Cancel</button>'+
+      '</div>'+
+    '</div>';
+  }
+
+  function wireDebriefPanel(item, li){
+    var panel = li.querySelector(".db-panel");
+    if(!panel) return;
+    var rating = "";
+    panel.querySelectorAll(".db-r").forEach(function(b){
+      b.addEventListener("click", function(){
+        rating = (rating === b.getAttribute("data-r")) ? "" : b.getAttribute("data-r");
+        panel.querySelectorAll(".db-r").forEach(function(x){
+          x.classList.toggle("on", x.getAttribute("data-r") === rating);
+        });
+      });
+    });
+    panel.querySelector(".db-cancel").addEventListener("click", function(){
+      dbOpenId = null;
+      renderFlightPlan();
+    });
+    panel.querySelector(".db-save").addEventListener("click", function(){
+      var sel = panel.querySelector(".db-client").value;
+      var note = panel.querySelector(".db-note").value.trim();
+      var next = panel.querySelector(".db-next").value.trim();
+      var fu = panel.querySelector(".db-fu").value.trim();
+      var fuDate = panel.querySelector(".db-fu-date").value;
+      if(!sel){ toast("Pick a client (or choose ➕ New card)."); return; }
+      var client;
+      if(sel === "__new"){
+        client = {
+          id: newId("cl"),
+          name: guessClientName(item.title) || item.title || "Unnamed client",
+          mission: "", watch: "", toolbox: "", debriefs: []
+        };
+        clState.list.push(client);
+      }else{
+        client = clState.list.find(function(c){ return c.id === sel; });
+        if(!client){ toast("Hmm, couldn't find that card. Try again."); return; }
+      }
+      if(!client.debriefs) client.debriefs = [];
+      client.debriefs.unshift({
+        date: viewKey,
+        time: item.time || "",
+        title: item.title || "",
+        rating: rating,
+        note: note,
+        next: next
+      });
+      saveCl();
+      if(fu){
+        if(fuDate && fuDate > todayKey){
+          crState.items.push({id: newId("c"), text: fu, due: fuDate});
+          saveCr();
+          renderCarousel();
+        }else{
+          tmState.items.push({id: newId("t"), text: fu, done: false, created: todayKey});
+          saveTm();
+          renderTarmac();
+        }
+      }
+      item.debriefed = true;
+      item.clientId = client.id; /* Build 11: explicit link — no more guessing next time */
+      dbOpenId = null;
+      saveView();
+      renderFlightPlan();
+      renderClients();
+      toast("Debrief filed on "+client.name+"'s flight card. 📋");
+      announce("Debrief saved for "+client.name+".");
+    });
+  }
+
+  /* ---- Client Flight Cards UI ---- */
+  var cfcList = document.getElementById("cfcList");
+  var cfcEmpty = document.getElementById("cfcEmpty");
+  var cfcChip = document.getElementById("cfcChip");
+  var cfcSearch = document.getElementById("cfcSearch");
+  var cfcForm = document.getElementById("cfcForm");
+  var cfcFormTitle = document.getElementById("cfcFormTitle");
+  var cfcName = document.getElementById("cfcName");
+  var cfcMission = document.getElementById("cfcMission");
+  var cfcWatch = document.getElementById("cfcWatch");
+  var cfcToolbox = document.getElementById("cfcToolbox");
+  var cfcOpenId = null;
+  var cfcEditingId = null;
+  var cfcNoteId = null;   /* which card has the Add Note form open (5.1) */
+  var cfcLogAllId = null; /* which card is showing its full logbook (5.1) */
+
+  function lastDebriefSub(c){
+    if(!c.debriefs || !c.debriefs.length) return "No entries yet";
+    var d = c.debriefs[0];
+    var s = (d.kind === "note" ? "Last note " : "Last debrief ") + fmtDateShort(d.date);
+    if(d.rating && RATE_LABEL[d.rating]) s += " · " + RATE_LABEL[d.rating];
+    return s;
+  }
+  function fmtLogDate(k){
+    /* adds the year when the entry isn't from this year */
+    return fmtDateShort(k) + (k && k.slice(0,4) !== todayKey.slice(0,4) ? " " + k.slice(0,4) : "");
+  }
+
+  var cfcShowAll = false;
+
+  function renderClients(){
+    var q = (cfcSearch.value || "").trim().toLowerCase();
+    var items = clState.list.slice().sort(function(a,b){ return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1; });
+    if(q){ items = items.filter(function(c){ return c.name.toLowerCase().indexOf(q) > -1; }); }
+    /* 7.1: collapse the roster by default — search or Show all reveals it */
+    var hint = document.getElementById("cfcCollapsedHint");
+    var showAllBtn = document.getElementById("cfcShowAllBtn");
+    showAllBtn.textContent = cfcShowAll ? "Hide list" : "Show all ("+clState.list.length+")";
+    showAllBtn.style.display = clState.list.length > 5 ? "" : "none";
+    var collapsed = !q && !cfcShowAll && clState.list.length > 5;
+    if(collapsed){
+      items = [];
+      hint.innerHTML = "🗂️ "+clState.list.length+" flight cards on file.<br>Type a name above to find one, or tap Show all.";
+      hint.style.display = "block";
+    }else{
+      hint.style.display = "none";
+    }
+    /* keep the Flight Plan name autocomplete in sync with the roster */
+    var dl = document.getElementById("clientNames");
+    if(dl){
+      dl.innerHTML = clState.list.map(function(c){
+        return '<option value="'+escapeHtml(c.name)+'">';
+      }).join("");
+    }
+    cfcEmpty.style.display = clState.list.length ? "none" : "block";
+    cfcChip.textContent = clState.list.length
+      ? clState.list.length + " card" + (clState.list.length === 1 ? "" : "s") + " on file"
+      : "Live";
+    cfcList.innerHTML = "";
+    items.forEach(function(c){
+      var li = document.createElement("li");
+      li.className = "fp-item" + (c.id === cfcOpenId ? " open" : "");
+      var blocks = "";
+      blocks += '<div class="cfc-block"><span class="cfc-label">Mission</span>'+
+        (c.mission ? escapeHtml(c.mission) : '<span class="n" style="color:var(--ink-soft)">No mission logged yet — tap Edit.</span>')+'</div>';
+      if(c.watch){ blocks += '<div class="cfc-block"><span class="cfc-label">Watch items</span>'+escapeHtml(c.watch)+'</div>'; }
+      if(c.toolbox){ blocks += '<div class="cfc-block"><span class="cfc-label">Toolbox</span>'+escapeHtml(c.toolbox)+'</div>'; }
+      if(c.email || c.phone){
+        blocks += '<div class="cfc-block"><span class="cfc-label">Contact</span>'+
+          escapeHtml([c.email, c.phone].filter(Boolean).join(" · "))+'</div>';
+      }
+      if(c.firstVisit || c.lastVisit){
+        blocks += '<div class="cfc-block"><span class="cfc-label">Square visits</span>'+
+          escapeHtml((c.firstVisit ? "First "+c.firstVisit : "")+
+          (c.firstVisit && c.lastVisit ? " · " : "")+
+          (c.lastVisit ? "Last "+c.lastVisit : ""))+'</div>';
+      }
+      var logHtml = "";
+      if(c.debriefs && c.debriefs.length){
+        var showAll = (cfcLogAllId === c.id);
+        var entries = showAll ? c.debriefs : c.debriefs.slice(0,3);
+        logHtml = '<div class="cfc-block"><span class="cfc-label">'+
+          (showAll ? "Full logbook — "+c.debriefs.length+" entries" : "Recent entries")+
+          '</span></div><ul class="cfc-log">';
+        entries.forEach(function(d){
+          logHtml += '<li><span class="d">'+fmtLogDate(d.date)+
+            (d.kind === "note"
+              ? " · 📝 Note"
+              : (d.rating && RATE_LABEL[d.rating] ? " · "+RATE_LABEL[d.rating] : " · Session"))+
+            '</span>'+
+            (d.note ? '<br>'+escapeHtml(d.note) : '')+
+            (d.next ? '<br><span class="n">Next: '+escapeHtml(d.next)+'</span>' : '')+
+            '</li>';
+        });
+        logHtml += '</ul>';
+      }
+      var noteFormHtml = (c.id === cfcNoteId)
+        ? '<div class="db-panel">'+
+            '<div class="db-title">New note — '+fmtDateShort(todayKey)+'</div>'+
+            '<textarea class="cfc-note-text" placeholder="e.g. Worked upper traps. Knee still sore — check next session." maxlength="500"></textarea>'+
+            '<div class="fp-form-actions">'+
+              '<button class="pbtn cfc-note-save">Save note</button>'+
+              '<button class="pbtn-quiet cfc-note-cancel">Cancel</button>'+
+            '</div>'+
+          '</div>'
+        : '';
+      li.innerHTML =
+        '<button class="fp-row" aria-expanded="'+(c.id === cfcOpenId ? "true" : "false")+'">'+
+          '<span class="fp-main">'+
+            '<span class="fp-title">'+escapeHtml(c.name)+'</span>'+
+            '<span class="fp-sub">'+escapeHtml(lastDebriefSub(c))+'</span>'+
+          '</span>'+
+          '<svg class="fp-caret" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'+
+        '</button>'+
+        '<div class="fp-detail">'+
+          blocks + logHtml + noteFormHtml +
+          '<div class="fp-actions">'+
+            '<button class="abtn" data-act="note">＋ Add note</button>'+
+            (c.debriefs && c.debriefs.length > 3
+              ? '<button class="abtn'+(cfcLogAllId === c.id ? " on abtn-land" : "")+'" data-act="log">'+
+                (cfcLogAllId === c.id ? "Show recent only" : "Full logbook ("+c.debriefs.length+")")+'</button>'
+              : '')+
+            '<button class="abtn" data-act="edit">Edit</button>'+
+            '<button class="abtn abtn-danger" data-act="del">Delete card</button>'+
+          '</div>'+
+        '</div>';
+      li.querySelector(".fp-row").addEventListener("click", function(){
+        cfcOpenId = (cfcOpenId === c.id) ? null : c.id;
+        renderClients();
+      });
+      li.querySelector('[data-act="note"]').addEventListener("click", function(){
+        cfcNoteId = (cfcNoteId === c.id) ? null : c.id;
+        renderClients();
+        if(cfcNoteId === c.id){
+          var ta = cfcList.querySelector(".cfc-note-text");
+          if(ta) ta.focus();
+        }
+      });
+      var logBtn = li.querySelector('[data-act="log"]');
+      if(logBtn){
+        logBtn.addEventListener("click", function(){
+          cfcLogAllId = (cfcLogAllId === c.id) ? null : c.id;
+          renderClients();
+        });
+      }
+      var noteSave = li.querySelector(".cfc-note-save");
+      if(noteSave){
+        noteSave.addEventListener("click", function(){
+          var text = li.querySelector(".cfc-note-text").value.trim();
+          if(!text){ toast("Write the note first, Captain."); return; }
+          if(!c.debriefs) c.debriefs = [];
+          c.debriefs.unshift({date: todayKey, kind: "note", note: text});
+          saveCl();
+          cfcNoteId = null;
+          renderClients();
+          toast("Note filed in "+c.name+"'s logbook. 📝");
+          announce("Note saved for "+c.name+".");
+        });
+        li.querySelector(".cfc-note-cancel").addEventListener("click", function(){
+          cfcNoteId = null;
+          renderClients();
+        });
+      }
+      li.querySelector('[data-act="edit"]').addEventListener("click", function(){
+        cfcEditingId = c.id;
+        cfcName.value = c.name || "";
+        cfcMission.value = c.mission || "";
+        cfcWatch.value = c.watch || "";
+        cfcToolbox.value = c.toolbox || "";
+        cfcFormTitle.textContent = "Edit "+c.name+"'s card";
+        cfcForm.hidden = false;
+        cfcName.focus();
+      });
+      li.querySelector('[data-act="del"]').addEventListener("click", function(){
+        if(!cddConfirm("Delete "+c.name+"'s flight card and all its debriefs?")) return;
+        clState.list = clState.list.filter(function(x){ return x.id !== c.id; });
+        if(cfcOpenId === c.id) cfcOpenId = null;
+        saveCl();
+        toast("Flight card deleted.");
+        renderClients();
+      });
+      cfcList.appendChild(li);
+    });
+  }
+
+  function resetCfcForm(){
+    cfcEditingId = null;
+    cfcName.value = ""; cfcMission.value = ""; cfcWatch.value = ""; cfcToolbox.value = "";
+    cfcFormTitle.textContent = "New Client Flight Card";
+    cfcForm.hidden = true;
+  }
+
+  document.getElementById("cfcNewBtn").addEventListener("click", function(){
+    resetCfcForm();
+    cfcForm.hidden = false;
+    cfcName.focus();
+  });
+  document.getElementById("cfcCancel").addEventListener("click", resetCfcForm);
+  document.getElementById("cfcSave").addEventListener("click", function(){
+    var name = cfcName.value.trim();
+    if(!name){ toast("Every flight card needs a name."); cfcName.focus(); return; }
+    if(cfcEditingId){
+      var c = clState.list.find(function(x){ return x.id === cfcEditingId; });
+      if(c){ c.name = name; c.mission = cfcMission.value.trim(); c.watch = cfcWatch.value.trim(); c.toolbox = cfcToolbox.value.trim(); }
+      toast("Flight card updated.");
+    }else{
+      clState.list.push({
+        id: newId("cl"), name: name,
+        mission: cfcMission.value.trim(), watch: cfcWatch.value.trim(),
+        toolbox: cfcToolbox.value.trim(), debriefs: []
+      });
+      toast("Flight card created for "+name+". 🗂️");
+    }
+    saveCl();
+    resetCfcForm();
+    renderClients();
+  });
+  cfcSearch.addEventListener("input", renderClients);
+  document.getElementById("cfcShowAllBtn").addEventListener("click", function(){
+    cfcShowAll = !cfcShowAll;
+    renderClients();
+  });
+
+  /* ---- 5.2: Square CSV import — dedupe by name, safe to re-run ---- */
+  var cfcImportFile = document.getElementById("cfcImportFile");
+  document.getElementById("cfcImportBtn").addEventListener("click", function(){
+    cfcImportFile.click();
+  });
+  cfcImportFile.addEventListener("change", function(){
+    var f = cfcImportFile.files[0];
+    if(!f) return;
+    var reader = new FileReader();
+    reader.onload = function(){ runSquareImport(String(reader.result)); cfcImportFile.value = ""; };
+    reader.onerror = function(){ toast("Couldn't read that file. Try again."); cfcImportFile.value = ""; };
+    reader.readAsText(f);
+  });
+
+  function parseCsv(text){
+    var rows = [], row = [], field = "", inQ = false;
+    for(var i = 0; i < text.length; i++){
+      var ch = text[i];
+      if(inQ){
+        if(ch === '"'){
+          if(text[i+1] === '"'){ field += '"'; i++; }
+          else{ inQ = false; }
+        }else{ field += ch; }
+      }else if(ch === '"'){ inQ = true; }
+      else if(ch === ","){ row.push(field); field = ""; }
+      else if(ch === "\n" || ch === "\r"){
+        if(ch === "\r" && text[i+1] === "\n") i++;
+        row.push(field); field = "";
+        if(row.length > 1 || row[0] !== "") rows.push(row);
+        row = [];
+      }else{ field += ch; }
+    }
+    if(field !== "" || row.length){ row.push(field); if(row.length > 1 || row[0] !== "") rows.push(row); }
+    return rows;
+  }
+
+  function runSquareImport(text){
+    var rows = parseCsv(text);
+    if(rows.length < 2){ toast("That file looks empty."); return; }
+    var head = rows[0].map(function(h){ return h.trim().toLowerCase(); });
+    var iF = head.indexOf("first name"), iS = head.indexOf("surname"),
+        iE = head.indexOf("email address"), iP = head.indexOf("phone number"),
+        iFV = head.indexOf("first visit"), iLV = head.indexOf("last visit");
+    if(iF < 0){ toast("Hmm — that doesn't look like a Square customer export."); return; }
+    var added = 0, skipped = 0;
+    for(var r = 1; r < rows.length; r++){
+      var row = rows[r]; if(!row) continue;
+      var name = ((row[iF] || "").trim() + " " + (iS > -1 ? (row[iS] || "").trim() : "")).trim();
+      if(!name) continue;
+      var exists = clState.list.some(function(c){
+        return (c.name || "").trim().toLowerCase() === name.toLowerCase();
+      });
+      if(exists){ skipped++; continue; }
+      clState.list.push({
+        id: newId("cl"), name: name, mission: "", watch: "", toolbox: "",
+        email: iE > -1 ? (row[iE] || "").trim() : "",
+        phone: iP > -1 ? (row[iP] || "").replace(/^'+/, "").trim() : "",
+        firstVisit: iFV > -1 ? (row[iFV] || "").trim() : "",
+        lastVisit: iLV > -1 ? (row[iLV] || "").trim() : "",
+        debriefs: []
+      });
+      added++;
+    }
+    saveCl();
+    renderClients();
+    toast("✈️ "+added+" client"+(added === 1 ? "" : "s")+" boarded"+
+      (skipped ? " · "+skipped+" already aboard (skipped)" : "")+".");
+    announce(added+" clients imported from Square. "+skipped+" skipped as duplicates.");
+  }
+
+  renderClients();
+
+  /* ============================================================
+     BUILD 2: FLIGHT DATA & BACKUP
+     ============================================================ */
+  var meta = load("sla_meta", {});
+
+  function fmtStamp(iso){
+    if(!iso) return "never";
+    var d = new Date(iso);
+    return DAYS[d.getDay()]+" "+pad(d.getDate())+" "+MONTHS[d.getMonth()]+" "+d.getFullYear();
+  }
+
+  function refreshBackupMeta(){
+    document.getElementById("lastBackup").textContent = fmtStamp(meta.lastBackupAt);
+    var count = Object.keys(history).length;
+    if(history[todayKey] === undefined &&
+       (egState.level || fpState.items.length ||
+        Object.keys(pfState.items).some(function(k){return pfState.items[k];}))){
+      count += 1;
+    }
+    document.getElementById("daysLogged").textContent = count;
+  }
+
+  function downloadFile(filename, content, mime){
+    var blob = new Blob([content], {type: mime});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+  }
+
+  function exportJson(){
+    var data = {};
+    for(var i=0; i<localStorage.length; i++){
+      var k = localStorage.key(i);
+      if(k && k.indexOf("sla_") === 0){
+        try{ data[k] = JSON.parse(localStorage.getItem(k)); }
+        catch(e){ data[k] = localStorage.getItem(k); }
+      }
+    }
+    var payload = {
+      app: APP_ID,
+      schema: SCHEMA,
+      exportedAt: new Date().toISOString(),
+      data: data
+    };
+    downloadFile("stephs-adventure-backup-"+todayKey+".json",
+      JSON.stringify(payload, null, 2), "application/json");
+    meta.lastBackupAt = new Date().toISOString();
+    save("sla_meta", meta);
+    refreshBackupMeta();
+    hideReminder();
+    toast("Backup exported. Flight data secured. 🧳");
+    announce("Backup exported.");
+  }
+
+  function csvEscape(v){
+    v = String(v == null ? "" : v);
+    return /[",\n]/.test(v) ? '"'+v.replace(/"/g,'""')+'"' : v;
+  }
+  function exportCsv(){
+    var rows = {};
+    Object.keys(history).forEach(function(k){ rows[k] = history[k]; });
+    rows[todayKey] = rows[todayKey] || {};
+    if(egState.level) rows[todayKey].energy = egState.level;
+    rows[todayKey].ck = pfState.items;
+    rows[todayKey].flights = fpState.items;
+
+    var CKS = ["wx","fp","tm","sm"];
+    var lines = ["date,energy_level,energy_label,preflight_items_done,preflight_complete,flights_scheduled,flights_landed,flights_noshow,flights_cancelled,revenue_logged"];
+    Object.keys(rows).sort().forEach(function(dateKey){
+      var r = rows[dateKey];
+      var lvl = r.energy || "";
+      var label = lvl ? LEVELS[lvl] : "";
+      var done = 0;
+      CKS.forEach(function(c){ if(r.ck && r.ck[c]) done++; });
+      var flights = r.flights || [];
+      var landed = flights.filter(function(f){ return f.status === "landed" || (f.done && !f.status); }).length;
+      var noshows = flights.filter(function(f){ return f.status === "noshow"; }).length;
+      var cancels = flights.filter(function(f){ return f.status === "cancelled"; }).length;
+      var revenue = dayRevenue(flights);
+      lines.push([dateKey, lvl, label, done, done===4 ? "yes" : "no",
+                  flights.length, landed, noshows, cancels, revenue.toFixed(2)].map(csvEscape).join(","));
+    });
+    downloadFile("stephs-adventure-log-"+todayKey+".csv", lines.join("\n"), "text/csv");
+    toast("CSV log downloaded.");
+    announce("CSV log downloaded.");
+  }
+
+  var importFile = document.getElementById("importFile");
+  document.getElementById("btnImport").addEventListener("click", function(){
+    importFile.click();
+  });
+  importFile.addEventListener("change", function(){
+    var file = importFile.files && importFile.files[0];
+    importFile.value = "";
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(){
+      var payload;
+      try{ payload = JSON.parse(reader.result); }
+      catch(e){ toast("That file isn't valid JSON. Nothing was changed."); return; }
+      if(!payload || payload.app !== APP_ID || !payload.data){
+        toast("That file isn't a Steph's Life Adventure backup. Nothing was changed.");
+        return;
+      }
+      var when = payload.exportedAt ? fmtStamp(payload.exportedAt) : "unknown date";
+      if(!cddConfirm("Restore backup from "+when+"? This replaces the data currently on this device.")){
+        return;
+      }
+      var toRemove = [];
+      for(var i=0; i<localStorage.length; i++){
+        var k = localStorage.key(i);
+        if(k && k.indexOf("sla_") === 0) toRemove.push(k);
+      }
+      toRemove.forEach(function(k){ localStorage.removeItem(k); });
+      Object.keys(payload.data).forEach(function(k){
+        if(k.indexOf("sla_") === 0){ save(k, payload.data[k]); }
+      });
+      toast("Backup restored. Reloading the cockpit…");
+      setTimeout(function(){ location.reload(); }, 900);
+    };
+    reader.onerror = function(){ toast("Couldn't read that file. Nothing was changed."); };
+    reader.readAsText(file);
+  });
+
+  document.getElementById("btnExportJson").addEventListener("click", exportJson);
+  document.getElementById("btnExportCsv").addEventListener("click", exportCsv);
+
+  /* ----- Weekly backup reminder ----- */
+  var reminderEl = document.getElementById("backupReminder");
+  function hideReminder(){ reminderEl.classList.remove("show"); }
+  function maybeShowReminder(){
+    var snoozedUntil = meta.remindSnoozedUntil || "";
+    if(snoozedUntil && todayKey <= snoozedUntil) return;
+    var hasData = Object.keys(history).length > 0 || egState.level ||
+      fpState.items.length > 0 ||
+      Object.keys(pfState.items).some(function(k){ return pfState.items[k]; });
+    if(!hasData) return;
+    var overdue = true;
+    if(meta.lastBackupAt){
+      var days = (Date.now() - new Date(meta.lastBackupAt).getTime()) / 86400000;
+      overdue = days >= 7;
+      document.getElementById("reminderText").textContent =
+        "it has been "+Math.floor(days)+" days since your last export.";
+    }else{
+      document.getElementById("reminderText").textContent =
+        "you haven't exported a backup yet.";
+    }
+    if(overdue) reminderEl.classList.add("show");
+  }
+  document.getElementById("reminderExport").addEventListener("click", exportJson);
+  document.getElementById("reminderSnooze").addEventListener("click", function(){
+    meta.remindSnoozedUntil = todayKey;
+    save("sla_meta", meta);
+    hideReminder();
+  });
+
+  /* ============================================================
+     BUILD 8: CAPTAIN'S PERSONAL FLIGHT CARD
+     Key: sla_personal — { mission, goals:[{id,text,created}],
+       log:[{date, kind: workout|win|note, note}] (newest first) }
+     Achieving a goal retires it and files a 🏆 win in the log.
+     ============================================================ */
+  var pcState = load("sla_personal", {mission:"", goals:[], log:[]});
+  if(!pcState.goals) pcState.goals = [];
+  if(!pcState.log) pcState.log = [];
+  function savePc(){ save("sla_personal", pcState); }
+  var PC_KIND = {workout:"💪 Workout", win:"🏆 Win", note:"📝 Note"};
+  var pcLogAll = false;
+
+  var pcMissionText = document.getElementById("pcMissionText");
+  var pcMissionForm = document.getElementById("pcMissionForm");
+  var pcMissionInput = document.getElementById("pcMissionInput");
+  var pcGoalList = document.getElementById("pcGoalList");
+  var pcGoalEmpty = document.getElementById("pcGoalEmpty");
+  var pcLogList = document.getElementById("pcLogList");
+  var pcLogEmpty = document.getElementById("pcLogEmpty");
+  var pcLogAllBtn = document.getElementById("pcLogAllBtn");
+  var pcDate = document.getElementById("pcDate");
+  pcDate.value = todayKey;
+
+  function renderPersonal(){
+    pcMissionText.textContent = pcState.mission
+      ? pcState.mission
+      : "No mission logged yet — every pilot needs one.";
+    /* goals */
+    pcGoalEmpty.style.display = pcState.goals.length ? "none" : "block";
+    pcGoalList.innerHTML = "";
+    pcState.goals.forEach(function(g){
+      var li = document.createElement("li");
+      li.className = "fp-item";
+      li.innerHTML =
+        '<div class="fp-row" style="cursor:default">'+
+          '<span class="fp-main"><span class="fp-title">'+escapeHtml(g.text)+'</span></span>'+
+          '<span style="display:flex;gap:8px;align-items:center">'+
+            '<button class="abtn abtn-land" data-act="done">🏆 Achieved</button>'+
+            '<button class="abtn abtn-danger" data-act="del">✕</button>'+
+          '</span>'+
+        '</div>';
+      li.querySelector('[data-act="done"]').addEventListener("click", function(){
+        pcState.goals = pcState.goals.filter(function(x){ return x.id !== g.id; });
+        pcState.log.unshift({date: todayKey, kind: "win", note: "GOAL ACHIEVED: "+g.text});
+        savePc();
+        renderPersonal();
+        toast("🏆 Goal achieved and filed in the log. Outstanding, Captain.");
+        announce("Goal achieved: "+g.text);
+      });
+      li.querySelector('[data-act="del"]').addEventListener("click", function(){
+        if(!cddConfirm("Remove this goal?\n\""+g.text+"\"")) return;
+        pcState.goals = pcState.goals.filter(function(x){ return x.id !== g.id; });
+        savePc();
+        renderPersonal();
+      });
+      pcGoalList.appendChild(li);
+    });
+    /* log */
+    pcLogEmpty.style.display = pcState.log.length ? "none" : "block";
+    pcLogAllBtn.style.display = pcState.log.length > 3 ? "" : "none";
+    pcLogAllBtn.textContent = pcLogAll ? "Show recent only" : "Full logbook ("+pcState.log.length+")";
+    var entries = pcLogAll ? pcState.log : pcState.log.slice(0,3);
+    pcLogList.innerHTML = "";
+    entries.forEach(function(d, idx){
+      var li = document.createElement("li");
+      li.innerHTML =
+        '<span class="d">'+fmtLogDate(d.date)+' · '+(PC_KIND[d.kind] || "📝 Note")+'</span>'+
+        (d.note ? '<br>'+escapeHtml(d.note) : '')+
+        ' <button class="abtn abtn-danger" data-del="1" style="float:right;padding:2px 8px;min-height:0">✕</button>';
+      li.querySelector('[data-del]').addEventListener("click", function(){
+        if(!cddConfirm("Delete this log entry?")) return;
+        var realIdx = pcState.log.indexOf(d);
+        if(realIdx > -1) pcState.log.splice(realIdx, 1);
+        savePc();
+        renderPersonal();
+      });
+      pcLogList.appendChild(li);
+    });
+  }
+
+  document.getElementById("pcMissionEdit").addEventListener("click", function(){
+    pcMissionInput.value = pcState.mission || "";
+    pcMissionForm.hidden = !pcMissionForm.hidden;
+    if(!pcMissionForm.hidden) pcMissionInput.focus();
+  });
+  document.getElementById("pcMissionCancel").addEventListener("click", function(){
+    pcMissionForm.hidden = true;
+  });
+  document.getElementById("pcMissionSave").addEventListener("click", function(){
+    pcState.mission = pcMissionInput.value.trim();
+    savePc();
+    pcMissionForm.hidden = true;
+    renderPersonal();
+    toast("Mission logged. ❤️");
+  });
+  document.getElementById("pcGoalAdd").addEventListener("click", function(){
+    var t = document.getElementById("pcGoalText").value.trim();
+    if(!t){ toast("Name the goal first, Captain."); return; }
+    pcState.goals.push({id: newId("g"), text: t, created: todayKey});
+    savePc();
+    document.getElementById("pcGoalText").value = "";
+    renderPersonal();
+    toast("Goal on the horizon. 🧭");
+  });
+  pcLogAllBtn.addEventListener("click", function(){
+    pcLogAll = !pcLogAll;
+    renderPersonal();
+  });
+  document.getElementById("pcLogAdd").addEventListener("click", function(){
+    var note = document.getElementById("pcNote").value.trim();
+    if(!note){ toast("Write the entry first."); return; }
+    var kind = document.getElementById("pcKind").value;
+    var date = pcDate.value || todayKey;
+    pcState.log.push({date: date, kind: kind, note: note});
+    pcState.log.sort(function(a, b){ return a.date < b.date ? 1 : -1; });
+    savePc();
+    document.getElementById("pcNote").value = "";
+    pcDate.value = todayKey;
+    renderPersonal();
+    toast(PC_KIND[kind]+" logged. ✈️");
+    announce("Personal log entry saved.");
+  });
+
+  renderPersonal();
+
+  /* ============================================================
+     BUILD 9: MAINTENANCE · SQUAWK LIST
+     Keys: sla_maint — { items:[ {id, name, scope, repeat,
+       due, cost, lastDone} ] } · sla_squawks — { items:[
+       {id, text, sev, created} ] }
+     Marking recurring maintenance done advances its due date.
+     Both lists can route items onto today's Tarmac.
+     ============================================================ */
+  var mtState = load("sla_maint", {items:[]}); if(!mtState.items) mtState.items = [];
+  var sqState = load("sla_squawks", {items:[]}); if(!sqState.items) sqState.items = [];
+  function saveMt(){ save("sla_maint", mtState); }
+  function saveSq(){ save("sla_squawks", sqState); }
+  var MT_REPEAT = {none:"one-time", monthly:"monthly", quarterly:"quarterly", yearly:"yearly"};
+  var SQ_SEV = {minor:["Minor","sq-minor"], caution:["⚠️ Caution","sq-caution"], ground:["⛔ Grounded","sq-ground"]};
+
+  function advanceDue(due, repeat){
+    var d = kDate(due);
+    var day = d.getDate();
+    d.setDate(1);
+    if(repeat === "monthly") d.setMonth(d.getMonth()+1);
+    else if(repeat === "quarterly") d.setMonth(d.getMonth()+3);
+    else if(repeat === "yearly") d.setFullYear(d.getFullYear()+1);
+    var dim = new Date(d.getFullYear(), d.getMonth()+1, 0).getDate();
+    d.setDate(Math.min(day, dim));
+    return dKey(d);
+  }
+
+  function renderMaint(){
+    var mtList = document.getElementById("mtList");
+    var mtEmpty = document.getElementById("mtEmpty");
+    mtEmpty.style.display = mtState.items.length ? "none" : "block";
+    mtList.innerHTML = "";
+    var soon = addDaysKey(todayKey, 14);
+    mtState.items.slice().sort(function(a,b){ return (a.due||"9999") < (b.due||"9999") ? -1 : 1; })
+      .forEach(function(x){
+        var status, cls;
+        if(x.due && x.due < todayKey){ status = "⚠️ OVERDUE — was due "+fmtLogDate(x.due); cls = "ex-status-over"; }
+        else if(x.due === todayKey){ status = "⚠️ Due TODAY"; cls = "ex-status-over"; }
+        else if(x.due && x.due <= soon){ status = "Due "+fmtLogDate(x.due); cls = "ex-status-due"; }
+        else{ status = x.due ? "Scheduled "+fmtLogDate(x.due) : "No date"; cls = ""; }
+        var sub = status+" · "+(x.scope === "captain" ? "👩‍✈️ Captain" : "🏠 Home Base")+
+          " · "+MT_REPEAT[x.repeat || "none"]+
+          (x.cost > 0 ? " · ~"+money(x.cost) : "")+
+          (x.lastDone ? " · last done "+fmtLogDate(x.lastDone) : "");
+        var li = document.createElement("li");
+        li.className = "fp-item";
+        li.innerHTML =
+          '<div class="fp-row" style="cursor:default">'+
+            '<span class="fp-main">'+
+              '<span class="fp-title">'+escapeHtml(x.name)+'</span>'+
+              '<span class="fp-sub '+cls+'">'+sub+'</span>'+
+            '</span>'+
+            '<span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'+
+              '<button class="abtn abtn-land" data-act="done">Done ✓</button>'+
+              '<button class="abtn" data-act="tarmac">→ Tarmac</button>'+
+              '<button class="abtn abtn-danger" data-act="del">✕</button>'+
+            '</span>'+
+          '</div>';
+        li.querySelector('[data-act="done"]').addEventListener("click", function(){
+          if(x.repeat && x.repeat !== "none"){
+            x.lastDone = todayKey;
+            x.due = advanceDue(x.due || todayKey, x.repeat);
+            saveMt();
+            toast("Done ✓ — next due "+fmtLogDate(x.due)+".");
+          }else{
+            mtState.items = mtState.items.filter(function(i){ return i.id !== x.id; });
+            saveMt();
+            toast("Maintenance complete — removed from the schedule. ✓");
+          }
+          renderMaint();
+        });
+        li.querySelector('[data-act="tarmac"]').addEventListener("click", function(){
+          tmState.items.push({id: newId("t"), text: "🔧 "+x.name, done: false, created: todayKey});
+          saveTm();
+          renderTarmac();
+          toast("Sent to today's Tarmac. 🔧");
+        });
+        li.querySelector('[data-act="del"]').addEventListener("click", function(){
+          if(!cddConfirm("Delete \""+x.name+"\" from the maintenance schedule?")) return;
+          mtState.items = mtState.items.filter(function(i){ return i.id !== x.id; });
+          saveMt();
+          renderMaint();
+        });
+        mtList.appendChild(li);
+      });
+  }
+
+  function renderSquawks(){
+    var sqList = document.getElementById("sqList");
+    var sqEmpty = document.getElementById("sqEmpty");
+    sqEmpty.style.display = sqState.items.length ? "none" : "block";
+    sqList.innerHTML = "";
+    var order = {ground:0, caution:1, minor:2};
+    sqState.items.slice().sort(function(a,b){ return (order[a.sev]||2) - (order[b.sev]||2); })
+      .forEach(function(x){
+        var sev = SQ_SEV[x.sev] || SQ_SEV.minor;
+        var li = document.createElement("li");
+        li.className = "fp-item";
+        li.innerHTML =
+          '<div class="fp-row" style="cursor:default">'+
+            '<span class="fp-main">'+
+              '<span class="fp-title"><span class="sq-badge '+sev[1]+'">'+sev[0]+'</span> '+escapeHtml(x.text)+'</span>'+
+              '<span class="fp-sub">Logged '+fmtLogDate(x.created)+'</span>'+
+            '</span>'+
+            '<span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'+
+              '<button class="abtn abtn-land" data-act="fixed">Fixed ✓</button>'+
+              '<button class="abtn" data-act="tarmac">→ Tarmac</button>'+
+            '</span>'+
+          '</div>';
+        li.querySelector('[data-act="fixed"]').addEventListener("click", function(){
+          sqState.items = sqState.items.filter(function(i){ return i.id !== x.id; });
+          saveSq();
+          renderSquawks();
+          toast("Squawk cleared. Airworthy again. 🛩️");
+        });
+        li.querySelector('[data-act="tarmac"]').addEventListener("click", function(){
+          tmState.items.push({id: newId("t"), text: "🛠️ Fix: "+x.text, done: false, created: todayKey});
+          saveTm();
+          renderTarmac();
+          toast("Sent to today's Tarmac. 🛠️");
+        });
+        sqList.appendChild(li);
+      });
+  }
+
+  document.getElementById("mtAdd").addEventListener("click", function(){
+    var name = document.getElementById("mtName").value.trim();
+    if(!name){ toast("Name the maintenance task first."); return; }
+    var due = document.getElementById("mtDue").value;
+    if(!due){ toast("When is it next due? Pick a date."); return; }
+    var cost = parseFloat(document.getElementById("mtCost").value);
+    mtState.items.push({
+      id: newId("m"), name: name,
+      scope: document.getElementById("mtScope").value,
+      repeat: document.getElementById("mtRepeat").value,
+      due: due,
+      cost: (isNaN(cost) || cost <= 0) ? 0 : cost
+    });
+    saveMt();
+    document.getElementById("mtName").value = "";
+    document.getElementById("mtDue").value = "";
+    document.getElementById("mtCost").value = "";
+    renderMaint();
+    toast("Maintenance scheduled. 🔧");
+  });
+
+  document.getElementById("sqAdd").addEventListener("click", function(){
+    var t = document.getElementById("sqText").value.trim();
+    if(!t){ toast("Describe the squawk first."); return; }
+    sqState.items.push({
+      id: newId("s"), text: t,
+      sev: document.getElementById("sqSev").value,
+      created: todayKey
+    });
+    saveSq();
+    document.getElementById("sqText").value = "";
+    renderSquawks();
+    toast("Squawk logged. 📋");
+  });
+
+  renderMaint();
+  renderSquawks();
+
+  /* ============================================================
+     BUILD 10: CHALLENGES · CONTENT · EDUCATION
+     Keys: sla_challenges, sla_content, sla_education
+     Content pipeline: idea → drafted → ready → posted 🎉
+     (goal: 4 ready at all times). Completing a Learning item
+     files a 🏆 win on the Captain's Personal Flight Card.
+     ============================================================ */
+  var chState = load("sla_challenges", {items:[]}); if(!chState.items) chState.items = [];
+  var coState = load("sla_content", {items:[]}); if(!coState.items) coState.items = [];
+  var edState = load("sla_education", {items:[]}); if(!edState.items) edState.items = [];
+  function saveCh(){ save("sla_challenges", chState); }
+  function saveCo(){ save("sla_content", coState); }
+  function saveEd(){ save("sla_education", edState); }
+
+  /* tabs */
+  var cceTabs = [["tabCh","chPanel"], ["tabCo","coPanel"], ["tabEd","edPanel"]];
+  cceTabs.forEach(function(pair){
+    document.getElementById(pair[0]).addEventListener("click", function(){
+      cceTabs.forEach(function(p){
+        document.getElementById(p[0]).classList.toggle("on", p[0] === pair[0]);
+        document.getElementById(p[1]).hidden = (p[0] !== pair[0]);
+      });
+    });
+  });
+
+  function fmtMonth(mk){
+    if(!mk) return "";
+    return MONTHS[+mk.slice(5,7)-1] + " " + mk.slice(0,4);
+  }
+
+  function renderChallenges(){
+    var list = document.getElementById("chList");
+    var empty = document.getElementById("chEmpty");
+    empty.style.display = chState.items.length ? "none" : "block";
+    list.innerHTML = "";
+    var thisMonth = todayKey.slice(0,7);
+    chState.items.slice().sort(function(a,b){ return (a.month||"") < (b.month||"") ? 1 : -1; })
+      .forEach(function(x){
+        var current = x.month === thisMonth && !x.done;
+        var li = document.createElement("li");
+        li.className = "fp-item";
+        li.innerHTML =
+          '<div class="fp-row" style="cursor:default">'+
+            '<span class="fp-main">'+
+              '<span class="fp-title">'+(current ? "🔥 " : "")+escapeHtml(x.name)+'</span>'+
+              '<span class="fp-sub">'+fmtMonth(x.month)+(x.done ? " · Completed 🏅" : (current ? " · RUNNING NOW" : ""))+'</span>'+
+            '</span>'+
+            '<span style="display:flex;gap:8px;align-items:center">'+
+              (x.done ? '' : '<button class="abtn abtn-land" data-act="done">Complete 🏅</button>')+
+              '<button class="abtn abtn-danger" data-act="del">✕</button>'+
+            '</span>'+
+          '</div>';
+        var doneBtn = li.querySelector('[data-act="done"]');
+        if(doneBtn){
+          doneBtn.addEventListener("click", function(){
+            x.done = true;
+            saveCh();
+            renderChallenges();
+            toast("Challenge complete! 🏅 Well flown.");
+          });
+        }
+        li.querySelector('[data-act="del"]').addEventListener("click", function(){
+          if(!cddConfirm("Delete challenge \""+x.name+"\"?")) return;
+          chState.items = chState.items.filter(function(i){ return i.id !== x.id; });
+          saveCh();
+          renderChallenges();
+        });
+        list.appendChild(li);
+      });
+  }
+
+  var CO_FLOW = {idea:"drafted", drafted:"ready", ready:"posted"};
+  var CO_BADGE = {idea:["Idea","co-idea"], drafted:["Drafted","co-drafted"], ready:["✅ Ready","co-ready"]};
+  var CO_NEXT = {idea:"→ Drafted", drafted:"→ Ready", ready:"Posted 🎉"};
+
+  function renderContent(){
+    var list = document.getElementById("coList");
+    var empty = document.getElementById("coEmpty");
+    var live = coState.items.filter(function(x){ return x.status !== "posted"; });
+    empty.style.display = live.length ? "none" : "block";
+    var readyCount = live.filter(function(x){ return x.status === "ready"; }).length;
+    document.getElementById("coCounter").textContent =
+      "🎯 Ready to post: "+readyCount+" / 4"+(readyCount >= 4 ? " — pipeline full, Captain!" : "");
+    list.innerHTML = "";
+    var order = {ready:0, drafted:1, idea:2};
+    live.slice().sort(function(a,b){ return (order[a.status]||2) - (order[b.status]||2); })
+      .forEach(function(x){
+        var badge = CO_BADGE[x.status] || CO_BADGE.idea;
+        var li = document.createElement("li");
+        li.className = "fp-item";
+        li.innerHTML =
+          '<div class="fp-row" style="cursor:default">'+
+            '<span class="fp-main">'+
+              '<span class="fp-title"><span class="co-badge '+badge[1]+'">'+badge[0]+'</span> '+escapeHtml(x.idea)+'</span>'+
+              '<span class="fp-sub">Added '+fmtLogDate(x.created)+'</span>'+
+            '</span>'+
+            '<span style="display:flex;gap:8px;align-items:center">'+
+              '<button class="abtn'+(x.status === "ready" ? " abtn-land" : "")+'" data-act="adv">'+CO_NEXT[x.status]+'</button>'+
+              '<button class="abtn abtn-danger" data-act="del">✕</button>'+
+            '</span>'+
+          '</div>';
+        li.querySelector('[data-act="adv"]').addEventListener("click", function(){
+          x.status = CO_FLOW[x.status] || "posted";
+          saveCo();
+          renderContent();
+          if(x.status === "posted") toast("Posted! 🎉 One flew the nest.");
+        });
+        li.querySelector('[data-act="del"]').addEventListener("click", function(){
+          if(!cddConfirm("Delete this post idea?")) return;
+          coState.items = coState.items.filter(function(i){ return i.id !== x.id; });
+          saveCo();
+          renderContent();
+        });
+        list.appendChild(li);
+      });
+  }
+
+  function renderEducation(){
+    var list = document.getElementById("edList");
+    var empty = document.getElementById("edEmpty");
+    empty.style.display = edState.items.length ? "none" : "block";
+    list.innerHTML = "";
+    edState.items.slice().sort(function(a,b){ return (a.due||"9999") < (b.due||"9999") ? -1 : 1; })
+      .forEach(function(x){
+        var li = document.createElement("li");
+        li.className = "fp-item";
+        li.innerHTML =
+          '<div class="fp-row" style="cursor:default">'+
+            '<span class="fp-main">'+
+              '<span class="fp-title">'+(x.kind === "offering" ? "💡 " : "📚 ")+escapeHtml(x.text)+'</span>'+
+              '<span class="fp-sub">'+(x.kind === "offering" ? "Future offering" : "My learning")+
+                (x.due ? " · target "+fmtLogDate(x.due) : "")+'</span>'+
+            '</span>'+
+            '<span style="display:flex;gap:8px;align-items:center">'+
+              '<button class="abtn abtn-land" data-act="done">'+(x.kind === "offering" ? "Launched ✓" : "Completed ✓")+'</button>'+
+              '<button class="abtn abtn-danger" data-act="del">✕</button>'+
+            '</span>'+
+          '</div>';
+        li.querySelector('[data-act="done"]').addEventListener("click", function(){
+          edState.items = edState.items.filter(function(i){ return i.id !== x.id; });
+          saveEd();
+          /* cross-link: education wins land on the Captain's card */
+          pcState.log.unshift({date: todayKey, kind: "win",
+            note: (x.kind === "offering" ? "LAUNCHED: " : "COMPLETED: ")+x.text});
+          savePc();
+          renderEducation();
+          renderPersonal();
+          toast("🏆 Filed as a win on your Personal Flight Card!");
+          announce("Education item completed and logged as a win.");
+        });
+        li.querySelector('[data-act="del"]').addEventListener("click", function(){
+          if(!cddConfirm("Delete \""+x.text+"\"?")) return;
+          edState.items = edState.items.filter(function(i){ return i.id !== x.id; });
+          saveEd();
+          renderEducation();
+        });
+        list.appendChild(li);
+      });
+  }
+
+  document.getElementById("chAdd").addEventListener("click", function(){
+    var name = document.getElementById("chName").value.trim();
+    if(!name){ toast("Name the challenge first."); return; }
+    var month = document.getElementById("chMonth").value || todayKey.slice(0,7);
+    chState.items.push({id: newId("ch"), name: name, month: month, done: false});
+    saveCh();
+    document.getElementById("chName").value = "";
+    document.getElementById("chMonth").value = "";
+    renderChallenges();
+    toast("Challenge launched! 🏅");
+  });
+  document.getElementById("coAdd").addEventListener("click", function(){
+    var idea = document.getElementById("coIdea").value.trim();
+    if(!idea){ toast("Capture the idea first."); return; }
+    coState.items.push({id: newId("co"), idea: idea, status: "idea", created: todayKey});
+    saveCo();
+    document.getElementById("coIdea").value = "";
+    renderContent();
+    toast("Into the pipeline. 📱");
+  });
+  document.getElementById("edAdd").addEventListener("click", function(){
+    var t = document.getElementById("edText").value.trim();
+    if(!t){ toast("What are you learning (or dreaming up)?"); return; }
+    edState.items.push({
+      id: newId("ed"), text: t,
+      kind: document.getElementById("edKind").value,
+      due: document.getElementById("edDate").value || ""
+    });
+    saveEd();
+    document.getElementById("edText").value = "";
+    document.getElementById("edDate").value = "";
+    renderEducation();
+    toast("On the syllabus. 📚");
+  });
+
+  renderChallenges();
+  renderContent();
+  renderEducation();
+
+  /* ============================================================
+     BUILD 7: REVENUE · SALES TRENDS · RUNWAY
+     Reads the daily history (Build 2/3) — no new data entry for
+     revenue or attendance. New key: sla_expenses —
+     { items:[ {id, name, amount, monthly, day | due,
+                paid:{ "YYYY-MM":true } | paidOnce } ] }
+     Runway = this month's revenue − this month's bills.
+     ============================================================ */
+  var exState = load("sla_expenses", {items:[]}); if(!exState.items) exState.items = [];
+  function saveEx(){ save("sla_expenses", exState); }
+  var TYPE_NAME = {pt:"PT", "class":"Class", og:"Open Gym", zoom:"Zoom", admin:"Admin", personal:"Personal", other:"Other"};
+  var WDLONG = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+  function kDate(k){ return new Date(k+"T12:00:00"); }
+  function dKey(d){ return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); }
+  function addDaysKey(k, n){ var d = kDate(k); d.setDate(d.getDate()+n); return dKey(d); }
+  function mondayKey(k){ var d = kDate(k); var dow = (d.getDay()+6)%7; d.setDate(d.getDate()-dow); return dKey(d); }
+  function money(n){ return "$"+Number(n||0).toFixed(2).replace(/\.00$/,""); }
+
+  function allFlightsByDay(){
+    var map = {};
+    Object.keys(history).forEach(function(k){
+      if(history[k] && history[k].flights) map[k] = history[k].flights;
+    });
+    map[todayKey] = fpState.items || [];
+    return map;
+  }
+  function statsRange(map, fromKey, toKey){
+    var s = {rev:0, landed:0, noshow:0, inv:0, byType:{}, byDow:{}};
+    Object.keys(map).forEach(function(k){
+      if(k < fromKey || k > toKey) return;
+      var fl = map[k] || [];
+      s.rev += dayRevenue(fl);
+      fl.forEach(function(f){
+        if(f.payAmount > 0 && f.payMethod === "invoice") s.inv += Number(f.payAmount);
+        var st = f.status || (f.done ? "landed" : "");
+        if(st === "landed"){
+          s.landed++;
+          var t = TYPE_NAME[f.type] || "Other";
+          s.byType[t] = (s.byType[t]||0)+1;
+          var dw = WDLONG[kDate(k).getDay()];
+          s.byDow[dw] = (s.byDow[dw]||0)+1;
+        }else if(st === "noshow"){ s.noshow++; }
+      });
+    });
+    return s;
+  }
+
+  function daysInM(y, m){ return new Date(y, m, 0).getDate(); }
+  function expenseDueKey(x, monthKey){
+    if(x.monthly){
+      if(x.start && monthKey < x.start) return ""; /* hasn't started yet */
+      var y = +monthKey.slice(0,4), m = +monthKey.slice(5,7);
+      var day = Math.min(Math.max(1, +x.day || 1), daysInM(y, m));
+      return monthKey+"-"+pad(day);
+    }
+    return x.due || "";
+  }
+  function nextMonthKey(monthKey){
+    var y = +monthKey.slice(0,4), m = +monthKey.slice(5,7);
+    m++; if(m > 12){ m = 1; y++; }
+    return y+"-"+pad(m);
+  }
+  function isPaid(x, monthKey){
+    if(x.monthly) return !!(x.paid && x.paid[monthKey]);
+    return !!x.paidOnce;
+  }
+  function monthExpenseDueToDate(monthKey){
+    return exState.items.reduce(function(sum, x){
+      var dueK = expenseDueKey(x, monthKey);
+      if(dueK && dueK.slice(0,7) === monthKey && dueK <= todayKey) return sum + (+x.amount || 0);
+      return sum;
+    }, 0);
+  }
+  function monthExpenseTotal(monthKey){
+    return exState.items.reduce(function(sum, x){
+      if(x.monthly) return sum + ((!x.start || monthKey >= x.start) ? (+x.amount || 0) : 0);
+      return sum + ((x.due || "").slice(0,7) === monthKey ? (+x.amount || 0) : 0);
+    }, 0);
+  }
+
+  function expenseRow(x, dueK, paid, monthKey, inDueList){
+    var status, cls;
+    if(!dueK && x.monthly && x.start){
+      status = "Starts "+fmtMonth(x.start)+" · due day "+x.day; cls = "ex-status-due";
+    }
+    else if(paid){ status = "Paid ✓"; cls = "ex-status-paid"; }
+    else if(dueK && dueK < todayKey){ status = "⚠️ OVERDUE — was due "+fmtDateShort(dueK); cls = "ex-status-over"; }
+    else if(dueK === todayKey){ status = "⚠️ Due TODAY"; cls = "ex-status-over"; }
+    else{ status = "Due "+fmtDateShort(dueK); cls = "ex-status-due"; }
+    var li = document.createElement("li");
+    li.className = "fp-item";
+    li.innerHTML =
+      '<div class="fp-row" style="cursor:default">'+
+        '<span class="fp-main">'+
+          '<span class="fp-title">'+escapeHtml(x.name)+' — '+money(x.amount)+
+            (x.monthly ? ' <span style="font-weight:400;color:var(--ink-soft)">(monthly)</span>' : '')+
+          '</span>'+
+          '<span class="fp-sub '+cls+'">'+status+'</span>'+
+        '</span>'+
+        '<span style="display:flex;gap:8px;align-items:center">'+
+          '<button class="abtn" data-act="paid">'+(paid ? "Undo paid" : "Mark paid")+'</button>'+
+          (inDueList ? '' : '<button class="abtn abtn-danger" data-act="del">✕</button>')+
+        '</span>'+
+      '</div>';
+    li.querySelector('[data-act="paid"]').addEventListener("click", function(){
+      if(x.monthly){
+        if(!x.paid) x.paid = {};
+        x.paid[monthKey] = !isPaid(x, monthKey);
+      }else{
+        x.paidOnce = !x.paidOnce;
+      }
+      saveEx();
+      renderRevenue();
+    });
+    var del = li.querySelector('[data-act="del"]');
+    if(del){
+      del.addEventListener("click", function(){
+        if(!cddConfirm("Delete expense \""+x.name+"\"?")) return;
+        exState.items = exState.items.filter(function(i){ return i.id !== x.id; });
+        saveEx();
+        toast("Expense deleted.");
+        renderRevenue();
+      });
+    }
+    return li;
+  }
+
+  function renderExpenses(){
+    var monthKey = todayKey.slice(0,7);
+    var exList = document.getElementById("exList");
+    var exEmpty = document.getElementById("exEmpty");
+    var dueList = document.getElementById("exDueList");
+    var dueEmpty = document.getElementById("exDueEmpty");
+    exList.innerHTML = ""; dueList.innerHTML = "";
+    exEmpty.style.display = exState.items.length ? "none" : "block";
+    var horizon = addDaysKey(todayKey, 14);
+    var dueCount = 0;
+    exState.items.slice().sort(function(a, b){
+      return expenseDueKey(a, monthKey) < expenseDueKey(b, monthKey) ? -1 : 1;
+    }).forEach(function(x){
+      var dueK = expenseDueKey(x, monthKey);
+      var paid = isPaid(x, monthKey);
+      exList.appendChild(expenseRow(x, dueK, paid, monthKey, false));
+      /* Payments-due radar: unpaid within 14 days (or overdue) */
+      if(!paid && dueK && dueK <= horizon){
+        dueCount++;
+        dueList.appendChild(expenseRow(x, dueK, paid, monthKey, true));
+      }else if(x.monthly && paid){
+        /* paid this month — check if next month's due date is inside the radar */
+        var nm = nextMonthKey(monthKey);
+        var nk = expenseDueKey(x, nm);
+        if(nk && nk <= horizon){
+          dueCount++;
+          dueList.appendChild(expenseRow(x, nk, false, nm, true));
+        }
+      }else if(x.monthly && !dueK && x.start){
+        /* hasn't started yet — surface its first-ever due date when close */
+        var fk = expenseDueKey(x, x.start);
+        if(fk && fk <= horizon){
+          dueCount++;
+          dueList.appendChild(expenseRow(x, fk, false, x.start, true));
+        }
+      }
+    });
+    dueEmpty.style.display = dueCount ? "none" : "block";
+  }
+
+  function renderRevenue(){
+    var map = allFlightsByDay();
+    var mon = mondayKey(todayKey), sun = addDaysKey(mon, 6);
+    var w = statsRange(map, mon, sun);
+    var elapsed = Math.round((kDate(todayKey) - kDate(mon)) / 86400000);
+    var lastMon = addDaysKey(mon, -7);
+    var lw = statsRange(map, lastMon, addDaysKey(lastMon, elapsed));
+    var monthKey = rvViewMonth || todayKey.slice(0,7);
+    var m = statsRange(map, monthKey+"-01", monthKey+"-31");
+    var isCurrentMonth = (monthKey === todayKey.slice(0,7));
+    document.getElementById("rvMonthLbl").textContent =
+      isCurrentMonth ? "This month" : fmtMonth(monthKey);
+    document.getElementById("rvPosLbl").textContent =
+      isCurrentMonth ? "Month position (so far)" : fmtMonth(monthKey)+" position (final)";
+    document.getElementById("rvMonthNow").hidden = isCurrentMonth;
+
+    document.getElementById("rvWeek").textContent = money(w.rev);
+    var diff = w.rev - lw.rev;
+    document.getElementById("rvWeekSub").innerHTML =
+      w.landed+" landed · "+w.noshow+" no-show"+(w.noshow === 1 ? "" : "s")+
+      ((lw.rev || w.rev)
+        ? ' · <span class="'+(diff >= 0 ? "rv-up" : "rv-dn")+'">'+(diff >= 0 ? "▲" : "▼")+" "+money(Math.abs(diff))+" vs same point last wk</span>"
+        : "");
+    document.getElementById("rvMonth").textContent = money(m.rev);
+    document.getElementById("rvMonthSub").textContent = m.landed+" sessions landed"+
+      (m.inv > 0
+        ? " · 💵 in hand ≈ "+money(m.rev - m.inv)+" · 🧾 "+money(m.inv)+" invoiced, awaiting"
+        : "");
+
+    var exAll = monthExpenseTotal(monthKey);
+    var exToDate = isCurrentMonth ? monthExpenseDueToDate(monthKey) : exAll;
+    var pos = m.rev - exToDate;
+    var rw = document.getElementById("rvRunway");
+    rw.textContent = money(pos);
+    rw.classList.toggle("neg", pos < 0);
+    document.getElementById("rvRunwaySub").textContent = isCurrentMonth
+      ? money(m.rev)+" in − "+money(exToDate)+" bills due so far · after ALL month's bills: "+money(m.rev - exAll)
+      : money(m.rev)+" earned − "+money(exAll)+" bills that month";
+
+    var bars = document.getElementById("rvBars");
+    bars.innerHTML = "";
+    var weeks = [];
+    for(var i = 3; i >= 0; i--){
+      var wk = addDaysKey(mon, -7*i);
+      weeks.push({k: wk, s: statsRange(map, wk, addDaysKey(wk, 6))});
+    }
+    var maxRev = Math.max.apply(null, weeks.map(function(x){ return x.s.rev; }).concat([1]));
+    weeks.forEach(function(x){
+      var d = kDate(x.k);
+      var el = document.createElement("div");
+      el.className = "rv-bar";
+      el.innerHTML =
+        '<span class="v">'+money(x.s.rev)+'</span>'+
+        '<div class="b" style="height:'+Math.max(3, Math.round(x.s.rev/maxRev*62))+'px'+
+          (x.k === mon ? ';background:#D9532C' : '')+'"></div>'+
+        '<span class="w">'+MONTHS[d.getMonth()]+" "+d.getDate()+'</span>';
+      bars.appendChild(el);
+    });
+
+    var types = Object.keys(m.byType).sort(function(a, b){ return m.byType[b]-m.byType[a]; })
+      .map(function(t){ return t+" "+m.byType[t]; }).join(" · ");
+    document.getElementById("rvTypeLine").textContent =
+      types ? "This month: "+types : "No landed sessions logged this month yet.";
+    var busiest = Object.keys(m.byDow).sort(function(a, b){ return m.byDow[b]-m.byDow[a]; })[0];
+    document.getElementById("rvBusyLine").textContent =
+      busiest ? "Busiest day this month: "+busiest+" ("+m.byDow[busiest]+" landed)" : "";
+
+    renderExpenses();
+  }
+
+  /* Month picker for the report */
+  var rvViewMonth = todayKey.slice(0,7);
+  var rvMonthPick = document.getElementById("rvMonthPick");
+  rvMonthPick.value = rvViewMonth;
+  rvMonthPick.addEventListener("change", function(){
+    rvViewMonth = rvMonthPick.value || todayKey.slice(0,7);
+    renderRevenue();
+  });
+  document.getElementById("rvMonthNow").addEventListener("click", function(){
+    rvViewMonth = todayKey.slice(0,7);
+    rvMonthPick.value = rvViewMonth;
+    renderRevenue();
+  });
+
+  /* Add-expense form */
+  var exRepeat = document.getElementById("exRepeat");
+  var exDay = document.getElementById("exDay");
+  var exDate = document.getElementById("exDate");
+  exRepeat.addEventListener("change", function(){
+    var once = exRepeat.value === "once";
+    exDay.hidden = once;
+    document.getElementById("exStart").hidden = once;
+    exDate.hidden = !once;
+  });
+  document.getElementById("exAdd").addEventListener("click", function(){
+    var name = document.getElementById("exName").value.trim();
+    var amount = parseFloat(document.getElementById("exAmount").value);
+    if(!name){ toast("Give the expense a name (e.g. BC Hydro)."); return; }
+    if(isNaN(amount) || amount <= 0){ toast("Enter the amount."); return; }
+    var monthly = exRepeat.value === "monthly";
+    var item = {id: newId("x"), name: name, amount: amount, monthly: monthly};
+    if(monthly){
+      var day = parseInt(exDay.value, 10);
+      if(isNaN(day) || day < 1 || day > 31){ toast("Which day of the month is it due? (1–31)"); return; }
+      item.day = day;
+      item.start = document.getElementById("exStart").value || "";
+      item.paid = {};
+    }else{
+      if(!exDate.value){ toast("Pick the due date."); return; }
+      item.due = exDate.value;
+      item.paidOnce = false;
+    }
+    exState.items.push(item);
+    saveEx();
+    document.getElementById("exName").value = "";
+    document.getElementById("exAmount").value = "";
+    exDay.value = ""; exDate.value = "";
+    document.getElementById("exStart").value = "";
+    toast("Expense added to the manifest. 🧾");
+    announce("Expense "+name+" added.");
+    renderRevenue();
+  });
+
+  /* Keep the instruments live: refresh whenever the Flight Plan re-renders */
+  var _rfpOriginal = renderFlightPlan;
+  renderFlightPlan = function(){ _rfpOriginal(); renderRevenue(); };
+
+  renderRevenue();
+
+  /* ============================================================
+     BUILD 6: SKY LINK — GOOGLE SHEETS CLOUD SYNC
+     Full-snapshot sync of all sla_ data via a private Apps Script
+     web app. Model: last write wins, with a dirty-flag guardrail.
+     · Any data change schedules a push (4s debounce)
+     · On load, if the cloud is newer and this device has nothing
+       unsynced, the cloud copy loads automatically
+     · If both changed, Sync Now asks the Captain which wins
+     Meta: sla_meta.lastSkyTs (cloud stamp last seen) ·
+           sla_meta.skyDirty (local changes not yet pushed)
+     ============================================================ */
+  var skyStatusEl = document.getElementById("skyStatus");
+  var skySettingsEl = document.getElementById("skySettings");
+  var skyUrlEl = document.getElementById("skyUrl");
+  var skyDeviceEl = document.getElementById("skyDevice");
+  var skyBusy = false, skyPushTimer = null, skyReady = false;
+
+  function collectAll(){
+    var data = {};
+    for(var i=0; i<localStorage.length; i++){
+      var k = localStorage.key(i);
+      if(k && k.indexOf("sla_") === 0){
+        try{ data[k] = JSON.parse(localStorage.getItem(k)); }
+        catch(e){ data[k] = localStorage.getItem(k); }
+      }
+    }
+    return data;
+  }
+
+  function skyTime(iso){
+    var d = new Date(iso);
+    var h = d.getHours(), m = d.getMinutes();
+    var ampm = h >= 12 ? "PM" : "AM";
+    var h12 = h % 12; if(h12 === 0) h12 = 12;
+    return h12+":"+pad(m)+" "+ampm;
+  }
+
+  function renderSkyStatus(msg){
+    if(msg){ skyStatusEl.textContent = msg; return; }
+    if(!settings.syncUrl){
+      skyStatusEl.textContent = "Not connected — open Sky Link settings.";
+      return;
+    }
+    var s = "Connected" + (settings.deviceName ? " as " + settings.deviceName : "");
+    if(meta.skyDirty){ s += " · changes waiting to transmit"; }
+    else if(meta.lastSkyTs){ s += " · synced " + skyTime(meta.lastSkyTs); }
+    skyStatusEl.textContent = s;
+  }
+
+  function skyOnSave(key){
+    if(!skyReady || key === "sla_meta" || !settings.syncUrl) return;
+    if(!meta.skyDirty){ meta.skyDirty = true; save("sla_meta", meta); renderSkyStatus(); }
+    clearTimeout(skyPushTimer);
+    skyPushTimer = setTimeout(skyPush, 4000);
+  }
+
+  function skyPush(force){
+    if(!settings.syncUrl || skyBusy) return;
+    var payload = JSON.stringify(collectAll());
+    /* 11.2 Sky Shield: if this device suddenly holds a fraction of what
+       Sky Link last held, something wiped it — do NOT auto-overwrite
+       the cloud. Manual override only, via the choice overlay. */
+    if(!force && meta.lastSkySize > 4000 && payload.length < meta.lastSkySize * 0.25){
+      renderSkyStatus("🛡️ Sky Shield: this device holds far less data than Sky Link last had — auto-send paused. Tap Sync now to review.");
+      return;
+    }
+    skyBusy = true;
+    renderSkyStatus("🛰️ Transmitting…");
+    fetch(settings.syncUrl, {
+      method: "POST",
+      body: JSON.stringify({
+        device: settings.deviceName || "unnamed device",
+        data: payload
+      })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(res){
+      skyBusy = false;
+      if(res && res.ok && res.ts){
+        meta.lastSkyTs = res.ts;
+        meta.skyDirty = false;
+        meta.lastSkySize = payload.length;
+        save("sla_meta", meta);
+        renderSkyStatus();
+      }else{ throw new Error("bad response"); }
+    })
+    .catch(function(){
+      skyBusy = false;
+      renderSkyStatus("⚠️ Transmission failed — will retry on next change, or tap Sync now.");
+    });
+  }
+
+  function skyApply(res){
+    var data;
+    try{ data = JSON.parse(res.data); }
+    catch(e){ toast("Sky Link data was unreadable. Nothing was changed."); renderSkyStatus(); return; }
+    var toRemove = [];
+    for(var i=0; i<localStorage.length; i++){
+      var k = localStorage.key(i);
+      if(k && k.indexOf("sla_") === 0) toRemove.push(k);
+    }
+    toRemove.forEach(function(k){ localStorage.removeItem(k); });
+    Object.keys(data).forEach(function(k){
+      if(k.indexOf("sla_") === 0){
+        try{ localStorage.setItem(k, JSON.stringify(data[k])); }catch(e){}
+      }
+    });
+    var m = {};
+    try{ m = JSON.parse(localStorage.getItem("sla_meta")) || {}; }catch(e){}
+    m.lastSkyTs = res.ts;
+    m.skyDirty = false;
+    m.lastSkySize = (res.data || "").length;
+    try{ localStorage.setItem("sla_meta", JSON.stringify(m)); }catch(e){}
+    toast("⬇ Latest data received from " + (res.device || "Sky Link") + ". Reloading the cockpit…");
+    setTimeout(function(){ location.reload(); }, 900);
+  }
+
+  function skySyncNow(auto){
+    if(!settings.syncUrl){
+      if(!auto){
+        skySettingsEl.classList.add("show");
+        skyUrlEl.focus();
+        toast("Paste your Sky Link URL first (see Sky Link settings).");
+      }
+      return;
+    }
+    if(skyBusy) return;
+    skyBusy = true;
+    renderSkyStatus("🛰️ Contacting Sky Link…");
+    fetch(settings.syncUrl)
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        skyBusy = false;
+        if(!res || !res.ok) throw new Error("bad payload");
+        var remoteNewer = res.ts && res.data && (!meta.lastSkyTs || res.ts > meta.lastSkyTs);
+        if(remoteNewer && !meta.skyDirty){
+          skyApply(res); /* clean fast-forward */
+        }else if(remoteNewer && meta.skyDirty){
+          if(auto){
+            renderSkyStatus("⚠️ Sky Link has newer data AND this device has unsent changes — tap Sync now to choose.");
+            return;
+          }
+          /* 11.2: explicit choice overlay — never a suppressible popup,
+             and never a silent default. */
+          var msgEl = document.getElementById("skyChoiceMsg");
+          msgEl.textContent = "Sky Link holds newer data (from "+(res.device || "another device")+
+            ", "+skyTime(res.ts)+") — but this device also has changes that haven't been transmitted. Which version should win?";
+          var panel = document.getElementById("skyChoice");
+          panel.hidden = false;
+          document.getElementById("skyChoiceLoad").onclick = function(){
+            panel.hidden = true;
+            skyApply(res);
+          };
+          document.getElementById("skyChoiceKeep").onclick = function(){
+            panel.hidden = true;
+            skyPush(true);
+          };
+          document.getElementById("skyChoiceCancel").onclick = function(){
+            panel.hidden = true;
+            renderSkyStatus("⚠️ Undecided — tap Sync now when ready to choose.");
+          };
+        }else if(meta.skyDirty || !res.ts || !res.data){
+          skyPush(); /* we're ahead, or the cloud is empty — seed it */
+        }else{
+          renderSkyStatus();
+          if(!auto) toast("Already in sync. ✓");
+        }
+      })
+      .catch(function(){
+        skyBusy = false;
+        renderSkyStatus("⚠️ Couldn't reach Sky Link — check the URL and your connection.");
+      });
+  }
+
+  document.getElementById("skySync").addEventListener("click", function(){ skySyncNow(false); });
+  document.getElementById("skyToggle").addEventListener("click", function(){
+    skySettingsEl.classList.toggle("show");
+    skyUrlEl.value = settings.syncUrl || "";
+    skyDeviceEl.value = settings.deviceName || "";
+    if(skySettingsEl.classList.contains("show")) skyUrlEl.focus();
+  });
+  document.getElementById("skySaveUrl").addEventListener("click", function(){
+    var url = skyUrlEl.value.trim();
+    if(url && url.indexOf("https://script.google.com/") !== 0){
+      toast("That doesn't look like an Apps Script URL — it should start with https://script.google.com/");
+      return;
+    }
+    settings.syncUrl = url;
+    settings.deviceName = skyDeviceEl.value.trim();
+    save("sla_settings", settings);
+    skySettingsEl.classList.remove("show");
+    renderSkyStatus();
+    toast(url ? "Sky Link configured. 🛰️" : "Sky Link URL cleared.");
+    if(url) skySyncNow(true);
+  });
+
+  renderSkyStatus();
+  skyReady = true;
+  if(settings.syncUrl){ skySyncNow(true); }
+
+  /* ============================================================
+     BUILD 11: THE REORGANIZATION
+     Five destinations (Cockpit · Clients · Captain · Business ·
+     Ops) via show/hide of tagged sections — no data changes.
+     Adds the at-a-glance strip, the Weekly Review, and explicit
+     client linking. UI state key cddui_dest is deliberately NOT
+     sla_-prefixed so it stays per-device (excluded from Sky Link,
+     export, and wipe).
+     ============================================================ */
+  /* 11.1.2: two-tap confirm — native confirm dialogs are silently
+     suppressed in some iPad/home-screen contexts, which made every
+     delete button appear dead. First tap arms (toast warning),
+     second tap within 3.5s confirms. Works everywhere. */
+  var _confirmArm = {msg: null, t: 0};
+  function cddConfirm(msg){
+    var now = Date.now();
+    if(_confirmArm.msg === msg && (now - _confirmArm.t) < 3500){
+      _confirmArm.msg = null;
+      return true;
+    }
+    _confirmArm.msg = msg;
+    _confirmArm.t = now;
+    toast("⚠️ Tap once more to confirm");
+    return false;
+  }
+
+  var destBtns = document.querySelectorAll("[data-dest-btn]");
+  function showDest(d){
+    document.querySelectorAll("main section").forEach(function(sec){
+      var sd = sec.getAttribute("data-dest") || "cockpit";
+      sec.style.display = (sd === d) ? "" : "none";
+    });
+    destBtns.forEach(function(b){
+      b.classList.toggle("on", b.getAttribute("data-dest-btn") === d);
+    });
+    try{ localStorage.setItem("slaui_dest", d); }catch(e){}
+    window.scrollTo(0, 0);
+  }
+  destBtns.forEach(function(b){
+    b.addEventListener("click", function(){ showDest(b.getAttribute("data-dest-btn")); });
+  });
+
+  function renderGlance(){
+    var el = document.getElementById("glanceRow");
+    if(!el) return;
+    var items = fpState.items || [];
+    var landed = 0, nextF = null;
+    var now = new Date();
+    var nowHM = pad(now.getHours())+":"+pad(now.getMinutes());
+    items.forEach(function(f){
+      var st = f.status || (f.done ? "landed" : "");
+      if(st === "landed") landed++;
+      if(!st && f.time && f.time >= nowHM && (!nextF || f.time < nextF.time)) nextF = f;
+    });
+    var openT = (tmState.items || []).filter(function(t){ return !t.done; }).length;
+    el.innerHTML =
+      '<span>✈️ '+items.length+' flight'+(items.length === 1 ? '' : 's')+'</span>'+
+      '<span>✓ '+landed+' landed</span>'+
+      '<span>💵 '+money(dayRevenue(items))+'</span>'+
+      (nextF ? '<span>🛫 Next: '+escapeHtml(guessClientName(nextF.title) || nextF.title || "")+' '+fmt12(nextF.time)+'</span>' : '')+
+      '<span>📋 '+openT+' on Tarmac</span>';
+  }
+
+  function renderWeeklyReview(){
+    var el = document.getElementById("wrList");
+    if(!el) return;
+    var map = allFlightsByDay();
+    var mon = mondayKey(todayKey);
+    var rev = 0, landed = 0, ns = 0, cx = 0;
+    for(var i = 0; i < 7; i++){
+      var k = addDaysKey(mon, i);
+      if(k > todayKey) break;
+      var fl = map[k] || [];
+      rev += dayRevenue(fl);
+      fl.forEach(function(f){
+        var st = f.status || (f.done ? "landed" : "");
+        if(st === "landed") landed++;
+        else if(st === "noshow") ns++;
+        else if(st === "cancelled") cx++;
+      });
+    }
+    var wk = 0, wins = 0;
+    (pcState.log || []).forEach(function(d){
+      if(d.date >= mon && d.date <= todayKey){
+        if(d.kind === "workout") wk++;
+        if(d.kind === "win") wins++;
+      }
+    });
+    el.innerHTML =
+      '<li><span class="d">Revenue</span><br>'+money(rev)+' logged since Monday</li>'+
+      '<li><span class="d">Sessions</span><br>'+landed+' landed · '+ns+' no-show'+(ns === 1 ? '' : 's')+' · '+cx+' cancelled</li>'+
+      '<li><span class="d">Captain</span><br>'+wk+' workout'+(wk === 1 ? '' : 's')+' logged · '+wins+' win'+(wins === 1 ? '' : 's')+' 🏆</li>';
+  }
+
+  /* keep the instruments live */
+  var _rfp11 = renderFlightPlan;
+  renderFlightPlan = function(){ _rfp11(); renderGlance(); renderWeeklyReview(); };
+  var _rtm11 = renderTarmac;
+  renderTarmac = function(){ _rtm11(); renderGlance(); };
+  var _rp11 = renderPersonal;
+  renderPersonal = function(){ _rp11(); renderWeeklyReview(); };
+
+  /* Today's ONE strategic mission — stored per-day in history */
+  var oneMission = document.getElementById("oneMission");
+  if(history[todayKey] && history[todayKey].mission){
+    oneMission.value = history[todayKey].mission;
+  }
+  oneMission.addEventListener("change", function(){
+    archiveDay(todayKey, {mission: oneMission.value.trim()});
+    if(oneMission.value.trim()) toast("Mission locked. 🎯");
+  });
+
+  renderGlance();
+  renderWeeklyReview();
+  var startDest = "cockpit";
+  try{ startDest = localStorage.getItem("slaui_dest") || "cockpit"; }catch(e){}
+  showDest(startDest);
+
+  refreshBackupMeta();
+  maybeShowReminder();
+
+})();
+</script>
+</body>
+</html>
