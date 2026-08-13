@@ -1,0 +1,189 @@
+{
+  "v": 1,
+  "savedAt": "2026-08-13T02:36:45.245Z",
+  "client": "Steph",
+  "date": "2026-08-13",
+  "coach": "Colleen ",
+  "phase": "Phase 1 / Week 1",
+  "title": "Strength + Mobility ",
+  "checkin": "https://theprestonmethod.github.io/tpm-workouts/tpm-weekly-checkin.html",
+  "notes": "Ok Steph its time. ",
+  "days": {
+    "1": {
+      "warmup": [
+        {
+          "id": "wu-1",
+          "name": "Arm Swings",
+          "pillar": "WU",
+          "category": "Warm-Up",
+          "sets": "1",
+          "reps": "20–30 sec",
+          "rpe": "",
+          "equipment": "None / Bodyweight",
+          "difficulty": "Foundational",
+          "code": "WU-UNI-01",
+          "cues": "Relax shoulders, ribs down, tall spine",
+          "progression": "Increase range gradually",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-1.jpg"
+        },
+        {
+          "id": "wu-3",
+          "name": "Hip Openers",
+          "pillar": "WU",
+          "category": "Warm-Up",
+          "sets": "1",
+          "reps": "20–30 sec",
+          "rpe": "",
+          "equipment": "None / Bodyweight",
+          "difficulty": "Foundational",
+          "code": "WU-UNI-02",
+          "cues": "Relax shoulders, ribs down, tall spine",
+          "progression": "",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-3.jpg"
+        },
+        {
+          "id": "wu-4",
+          "name": "Step Back Lunges",
+          "pillar": "WU",
+          "category": "Warm-Up",
+          "sets": "1",
+          "reps": "10 each side",
+          "rpe": "",
+          "equipment": "None / Bodyweight",
+          "difficulty": "Foundational",
+          "code": "WU-UNI-02",
+          "cues": "Step back softly. Front heel grounded. Torso tall. Control the return.",
+          "progression": "",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-4.jpg"
+        }
+      ],
+      "primary": [
+        {
+          "id": "c-17",
+          "name": "Weight Plate Walking Lunges",
+          "pillar": "C",
+          "category": "Strength",
+          "sets": "2-3",
+          "reps": "10 each leg",
+          "rpe": "",
+          "equipment": "Weight Plate",
+          "difficulty": "Advanced",
+          "code": "PL-17",
+          "cues": "Relax traps — they engage naturally. Core fully engaged, breathing concentrated. Keep arms as straight as possible overhead. Can pause at each step or move continuously.",
+          "progression": "Heavier plate, or continuous walking without stop",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-17.jpg"
+        },
+        {
+          "id": "c-1",
+          "name": "DB Chest Press",
+          "pillar": "C",
+          "category": "Push",
+          "sets": "3",
+          "reps": "6–8 reps",
+          "rpe": "7–8",
+          "equipment": "Dumbbells",
+          "difficulty": "Intermediate",
+          "code": "PM-P1-06-CPress",
+          "cues": "Control descent. Pause at chest. Drive up.",
+          "progression": "Rest 30 sec",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-1.jpg"
+        },
+        {
+          "id": "ex-1780254094074",
+          "name": "Jen-Hex Bar Squat",
+          "pillar": "C",
+          "status": "Active",
+          "category": "Squat",
+          "movementFamily": "Squat",
+          "movementPattern": "Loaded Carry",
+          "bodyRegion": "Legs",
+          "loadStyle": "Power",
+          "sets": "4",
+          "reps": "6",
+          "rpe": "8",
+          "equipment": "",
+          "difficulty": "Advanced",
+          "code": "PL-66-Jen-HexBarSquat",
+          "cues": "keep feet straight, legs wider than hip-width, drive with your heels, use hooks if grip slows you down.",
+          "coachingFocus": "Strength, gluts, quads, spine/core",
+          "contraindications": "",
+          "progression": "",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/hex-bar-squat-90914.jpg"
+        }
+      ],
+      "accessory": [
+        null,
+        null
+      ],
+      "conditioning": [
+        {
+          "id": "ex-1777064186371",
+          "name": "Forearm Plank",
+          "pillar": "B",
+          "status": "Active",
+          "category": "Core",
+          "movementFamily": "Breath/Core",
+          "movementPattern": "Anti-Rotation",
+          "bodyRegion": "Core / Spine",
+          "loadStyle": "Stability",
+          "sets": "3",
+          "reps": "30s",
+          "rpe": "",
+          "equipment": "None / Bodyweight",
+          "difficulty": "Foundational",
+          "code": "SM-CORE-05-fplank",
+          "cues": "Cues: \nPlace elbows under shoulders and actively push the floor away to spread your shoulder blades.\nTuck your tailbone and pull your ribs toward your hips to slightly round your lower back.\nTighten your glutes and core as if someone is about to punch your stomach.\nKeep your gaze on the floor for a long neck and maintain steady, deep breaths.",
+          "coachingFocus": "",
+          "contraindications": "",
+          "progression": "",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/forearm-plank-27715.jpg"
+        }
+      ]
+    },
+    "2": {
+      "warmup": [
+        null,
+        null,
+        null
+      ],
+      "primary": [
+        null,
+        null,
+        null
+      ],
+      "accessory": [
+        null,
+        null
+      ],
+      "conditioning": [
+        null
+      ]
+    },
+    "3": {
+      "warmup": [
+        null,
+        null,
+        null
+      ],
+      "primary": [
+        null,
+        null,
+        null
+      ],
+      "accessory": [
+        null,
+        null
+      ],
+      "conditioning": [
+        null
+      ]
+    }
+  }
+}
