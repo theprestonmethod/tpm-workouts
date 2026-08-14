@@ -1,0 +1,321 @@
+{
+  "v": 1,
+  "savedAt": "2026-08-14T20:28:01.653Z",
+  "client": "Toni Serofin",
+  "date": "2026-08-14",
+  "coach": "Colleen Preston",
+  "phase": "Phase 1 / Weeks 1-4",
+  "title": "Strength + Mobility",
+  "checkin": "https://theprestonmethod.github.io/tpm-workouts/tpm-weekly-checkin.html",
+  "notes": "Hello Toni! Here are 3 days of workouts for you!  You can alternate between them and they are designed to take about 35 minutes since you also do your cardio and stretching during that time. I am including compound movements to give you more muscle groups in an exercise for efficiency, coordination and core. Fill out the Check-in at the end of your workout and if you have questions feel free to send me a text or a note within the Check-in. After about 4 weeks, feel free to book an update session and we will create a new plan together. Enjoy! Colleen~",
+  "days": {
+    "1": {
+      "warmup": [
+        {
+          "id": "wu-1",
+          "name": "Arm Swings",
+          "pillar": "WU",
+          "category": "Warm-Up",
+          "sets": "1",
+          "reps": "20–30 sec",
+          "rpe": "",
+          "equipment": "None / Bodyweight",
+          "difficulty": "Foundational",
+          "code": "WU-UNI-01",
+          "cues": "Relax shoulders, ribs down, tall spine",
+          "progression": "Increase range gradually",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-1.jpg"
+        },
+        {
+          "id": "wu-2",
+          "name": "Torso Twists",
+          "pillar": "WU",
+          "category": "Warm-Up",
+          "sets": "1",
+          "reps": "10–12 each side",
+          "rpe": "",
+          "equipment": "None / Bodyweight",
+          "difficulty": "Foundational",
+          "code": "WU-UNI-01",
+          "cues": "Rotate through upper back, hips mostly forward",
+          "progression": "",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-2.jpg"
+        },
+        {
+          "id": "a-6",
+          "name": "Wall Angels",
+          "pillar": "A",
+          "category": "Mobility",
+          "sets": "2",
+          "reps": "10 reps",
+          "rpe": "",
+          "equipment": "None / Bodyweight",
+          "difficulty": "Foundational",
+          "code": "PL-Plyo-V1",
+          "cues": "Stand with back flat against wall. Slide arms up and down in Y-T-W pattern.",
+          "progression": "",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-6.jpg"
+        }
+      ],
+      "primary": [
+        {
+          "id": "b-1",
+          "name": "Pushups Against the Wall with a Ball",
+          "pillar": "B",
+          "status": "Active",
+          "category": "Push",
+          "movementFamily": "",
+          "movementPattern": "",
+          "bodyRegion": "",
+          "loadStyle": "",
+          "sets": "2",
+          "reps": "10 reps",
+          "rpe": "",
+          "equipment": "Exercise Ball",
+          "difficulty": "Foundational",
+          "code": "SM-PH1-V1-01-WBPU",
+          "cues": "Core engaged, do not let hips drop. Hands below shoulder height. Adjust to avoid wrist pain.",
+          "coachingFocus": "",
+          "contraindications": "",
+          "progression": "Move hands/ball lower to increase difficulty",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-1.jpg"
+        },
+        {
+          "id": "c-1",
+          "name": "DB Chest Press",
+          "pillar": "C",
+          "category": "Push",
+          "sets": "3",
+          "reps": "6–8 reps",
+          "rpe": "7–8",
+          "equipment": "Dumbbells",
+          "difficulty": "Intermediate",
+          "code": "PM-P1-06-CPress",
+          "cues": "Control descent. Pause at chest. Drive up.",
+          "progression": "Rest 30 sec",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-1.jpg"
+        },
+        {
+          "id": "ex-1783046885302",
+          "name": "Machine Chest Press",
+          "pillar": "B",
+          "status": "Active",
+          "category": "Push",
+          "movementFamily": "Push",
+          "movementPattern": "Vertical Push",
+          "bodyRegion": "Chest / Shoulder",
+          "loadStyle": "Strength",
+          "sets": "2",
+          "reps": "12",
+          "rpe": "7",
+          "equipment": "Machine at Gym",
+          "difficulty": "Foundational",
+          "code": "SM-40-Machine-ChestPress",
+          "cues": "Sit tall with your core engaged before you press forward. Pay attention to feeling your chest working and the front of your shoulders assisting.",
+          "coachingFocus": "Strengthening chest muscles",
+          "contraindications": "stop if you feel shoulder pain",
+          "progression": "Reduce weight if you feel any pain.",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/machine-chest-press-16107.jpg"
+        },
+        {
+          "id": "b-5",
+          "name": "Lat Pulldowns",
+          "pillar": "B",
+          "category": "Pull",
+          "sets": "3",
+          "reps": "8 reps",
+          "rpe": "",
+          "equipment": "Cable Machine",
+          "difficulty": "Intermediate",
+          "code": "PL-B-01",
+          "cues": "Pull bar to chin. Squeeze lats. Control return.",
+          "progression": "Increase load when form is solid",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-5.jpg"
+        },
+        {
+          "id": "c-3",
+          "name": "DB Flys — Flat Bench",
+          "pillar": "C",
+          "category": "Push",
+          "sets": "3",
+          "reps": "6–8 reps",
+          "rpe": "7–8",
+          "equipment": "Bench",
+          "difficulty": "Intermediate",
+          "code": "PM-P1-07-DBflys",
+          "cues": "Wide arc with slight elbow bend. Feel chest stretch at bottom.",
+          "progression": "Rest 30 sec",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-3.jpg"
+        },
+        {
+          "id": "ex-1783053895582",
+          "name": "Machine Seated Rows",
+          "pillar": "B",
+          "status": "Active",
+          "category": "Pull",
+          "movementFamily": "Pull",
+          "movementPattern": "Vertical Pull",
+          "bodyRegion": "Back / Shoulder",
+          "loadStyle": "Strength",
+          "sets": "2",
+          "reps": "10-12",
+          "rpe": "7",
+          "equipment": "Machine at Gym",
+          "difficulty": "Intermediate",
+          "code": "SM-42-Machine-SeatedRow",
+          "cues": "",
+          "coachingFocus": "",
+          "contraindications": "",
+          "progression": "",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/machine-seated-rows-92638.jpg"
+        }
+      ],
+      "accessory": [
+        {
+          "id": "b-4",
+          "name": "Reverse Flys",
+          "pillar": "B",
+          "category": "Pull",
+          "sets": "2",
+          "reps": "10 reps",
+          "rpe": "",
+          "equipment": "Dumbbells",
+          "difficulty": "Intermediate",
+          "code": "SM-PH1-03-TriKickB",
+          "cues": "Arms straight in front. Pull back, widen hands, squeeze elbows behind to activate upper back.",
+          "progression": "",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-4.jpg"
+        },
+        {
+          "id": "ex-1783047461420",
+          "name": "Machine - Pec Dec",
+          "pillar": "B",
+          "status": "Active",
+          "category": "Pull",
+          "movementFamily": "Rotate",
+          "movementPattern": "Rotation",
+          "bodyRegion": "Chest / Shoulder",
+          "loadStyle": "Strength",
+          "sets": "2",
+          "reps": "12",
+          "rpe": "7",
+          "equipment": "Machine at Gym",
+          "difficulty": "Foundational",
+          "code": "SM-41-Machine-PecDec",
+          "cues": "",
+          "coachingFocus": "This exercise is to build strength for the smaller muscles in your chest with some assistance from your shoulders.",
+          "contraindications": "",
+          "progression": "",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/machine-pec-dec-10254.jpg"
+        },
+        {
+          "id": "ex-1783193983992",
+          "name": "DB Pec Dec",
+          "pillar": "B",
+          "status": "Active",
+          "category": "Pull",
+          "movementFamily": "Pull",
+          "movementPattern": "Horizontal Pull",
+          "bodyRegion": "Chest / Shoulder",
+          "loadStyle": "Stability",
+          "sets": "2",
+          "reps": "10-12",
+          "rpe": "6",
+          "equipment": "Dumbbells",
+          "difficulty": "Foundational",
+          "code": "SM-51-DBPecDec",
+          "cues": "Keep your elbows the same height as your shoulders. Try to press your elbows together in front of you.",
+          "coachingFocus": "Stabilizer muscles, shoulder and chest",
+          "contraindications": "Do not work through shoulder pain",
+          "progression": "Use less weight or no weight.",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/db-pec-dec-80803.jpg"
+        }
+      ],
+      "conditioning": [
+        {
+          "id": "a-4",
+          "name": "Deadbug",
+          "pillar": "CORE",
+          "category": "Core",
+          "sets": "2",
+          "reps": "10 each side",
+          "rpe": "",
+          "equipment": "None / Bodyweight",
+          "difficulty": "Foundational",
+          "code": "MO-PH1-02-BaLPD",
+          "cues": "Rest head on floor. Do not let lower back arch when straightening leg.",
+          "progression": "Add hold at end range",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-4.jpg"
+        },
+        {
+          "id": "a-8",
+          "name": "Single-Leg Bridge",
+          "pillar": "CORE",
+          "category": "Core",
+          "sets": "2",
+          "reps": "10s hold",
+          "rpe": "",
+          "equipment": "None",
+          "difficulty": "Foundational",
+          "code": "CORE-UNI-03",
+          "cues": "Start with both feet on floor. Lift hips as high as you can with no back pain. When stable, lift one leg and hold 10 seconds. Keep hips level.",
+          "progression": "If back pain or hamstring cramp occurs, lower hips. Progress to full bridge before single-leg",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-8.jpg",
+          "startWeight": "You can work towards a single-leg bridge but don't do it if it causes pain. :) "
+        }
+      ]
+    },
+    "2": {
+      "warmup": [
+        null,
+        null,
+        null
+      ],
+      "primary": [
+        null,
+        null,
+        null
+      ],
+      "accessory": [
+        null,
+        null
+      ],
+      "conditioning": [
+        null
+      ]
+    },
+    "3": {
+      "warmup": [
+        null,
+        null,
+        null
+      ],
+      "primary": [
+        null,
+        null,
+        null
+      ],
+      "accessory": [
+        null,
+        null
+      ],
+      "conditioning": [
+        null
+      ]
+    }
+  }
+}
