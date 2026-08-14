@@ -1,6 +1,6 @@
 {
   "v": 1,
-  "savedAt": "2026-08-14T20:28:01.653Z",
+  "savedAt": "2026-08-14T20:28:30.017Z",
   "client": "Toni Serofin",
   "date": "2026-08-14",
   "coach": "Colleen Preston",
@@ -281,7 +281,29 @@
     },
     "2": {
       "warmup": [
-        null,
+        {
+          "id": "ex-1779812123635",
+          "name": "Recumbent Bike",
+          "pillar": "WU",
+          "status": "Active",
+          "category": "Cardio",
+          "movementFamily": "Locomotion",
+          "movementPattern": "Rotation",
+          "bodyRegion": "Legs",
+          "loadStyle": "Mobility",
+          "sets": "",
+          "reps": "5 - 10 minutes",
+          "rpe": "6-7",
+          "equipment": "Recumbent Bike",
+          "difficulty": "Foundational",
+          "code": "WU-RecumbentBike-M",
+          "cues": "",
+          "coachingFocus": "",
+          "contraindications": "",
+          "progression": "",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/recumbent-bike-66059.jpg"
+        },
         null,
         null
       ],
