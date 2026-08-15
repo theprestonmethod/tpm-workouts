@@ -1,6 +1,6 @@
 {
   "v": 1,
-  "savedAt": "2026-08-15T22:38:55.089Z",
+  "savedAt": "2026-08-15T22:42:20.751Z",
   "client": "Toni Serofin",
   "date": "2026-08-14",
   "coach": "Colleen Preston",
@@ -808,13 +808,12 @@
           "equipment": "None / Bodyweight",
           "difficulty": "Foundational",
           "code": "MF-Core-22-RussianTwists",
-          "cues": "",
-          "coachingFocus": "",
+          "cues": "Heels stay on the ground until you feel that your back muscles and hip flexors can support you. Lean slightly back.",
+          "coachingFocus": "Spinal rotation - oblique core strength.",
           "contraindications": "",
-          "progression": "",
+          "progression": "Progression - add a medicine. If it is too difficult or hurts your back or flexors, do this standing and just twist.",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/russian-twists-no-weight-22432.jpg",
-          "startWeight": ""
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/russian-twists-no-weight-22432.jpg"
         }
       ]
     }
