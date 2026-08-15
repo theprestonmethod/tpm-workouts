@@ -1,6 +1,6 @@
 {
   "v": 1,
-  "savedAt": "2026-08-15T21:26:15.046Z",
+  "savedAt": "2026-08-15T22:05:53.886Z",
   "client": "Toni Serofin",
   "date": "2026-08-14",
   "coach": "Colleen Preston",
@@ -43,7 +43,7 @@
           "progression": "",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-2.jpg",
-          "startWeight": ""
+          "startWeight": "Keep knees slightly bent so you don't move your hips. "
         },
         {
           "id": "a-6",
@@ -66,16 +66,23 @@
       "primary": [
         {
           "id": "b-1",
-          "name": "Pushups Against the Wall",
+          "name": "Pushups Against the Wall with a Ball",
           "pillar": "B",
+          "status": "Active",
           "category": "Push",
+          "movementFamily": "",
+          "movementPattern": "",
+          "bodyRegion": "",
+          "loadStyle": "",
           "sets": "2",
           "reps": "10 reps",
           "rpe": "",
           "equipment": "Exercise Ball",
           "difficulty": "Foundational",
           "code": "SM-PH1-V1-01-WBPU",
-          "cues": "Core engaged, don't let hips drop. Hands below shoulder height. Adjust to avoid wrist pain.",
+          "cues": "Core engaged, do not let hips drop. Hands below shoulder height. Adjust to avoid wrist pain.",
+          "coachingFocus": "",
+          "contraindications": "",
           "progression": "Move hands/ball lower to increase difficulty",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-1.jpg",
@@ -96,7 +103,7 @@
           "progression": "Rest 30 sec",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-1.jpg",
-          "startWeight": ""
+          "startWeight": "You can use this with the ball! Walk out far enough so that your shoulders and head are fully supported - keep hips up so you feel your glutes working as well. 3 sets x 8-10 reps - 10lbs to start then move to 12lbs up to 10 reps. "
         },
         {
           "id": "ex-1783046885302",
@@ -120,7 +127,7 @@
           "progression": "Reduce weight if you feel any pain.",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/machine-chest-press-16107.jpg",
-          "startWeight": ""
+          "startWeight": "Variation for a different day or if no benches are available. 2 sets x 20lbs -  8-10reps"
         },
         {
           "id": "b-5",
@@ -137,7 +144,7 @@
           "progression": "Increase load when form is solid",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-5.jpg",
-          "startWeight": ""
+          "startWeight": "3 x 8-10reps at 35lb - 40lbs"
         },
         {
           "id": "c-3",
@@ -154,7 +161,7 @@
           "progression": "Rest 30 sec",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-3.jpg",
-          "startWeight": ""
+          "startWeight": "3 sets of 10 reps - use 8-10lbs until you feel like you need more weight. Feel free to do this on a ball as well. Same set up as the chest press on the ball.  If you use a ball, then use a little less weight. "
         },
         {
           "id": "ex-1783053895582",
@@ -178,7 +185,7 @@
           "progression": "",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/machine-seated-rows-92638.jpg",
-          "startWeight": ""
+          "startWeight": "3 sets of 10 reps 45lbs"
         }
       ],
       "accessory": [
@@ -245,7 +252,7 @@
           "progression": "Use less weight or no weight.",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/db-pec-dec-80803.jpg",
-          "startWeight": ""
+          "startWeight": "2x8-10 reps Start with 5lbs. Start with this exercise and later see if you would like to try it on the machine. "
         }
       ],
       "conditioning": [
@@ -264,7 +271,7 @@
           "progression": "Add hold at end range",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-4.jpg",
-          "startWeight": ""
+          "startWeight": "Alternating movement. Feel free to do more if you like."
         },
         {
           "id": "a-8",
@@ -281,7 +288,7 @@
           "progression": "If back pain or hamstring cramp occurs, lower hips. Progress to full bridge before single-leg",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-8.jpg",
-          "startWeight": "You can work towards a single-leg bridge but don't do it if it causes pain. :) "
+          "startWeight": "You can work towards a single-leg bridge but don't do it if it causes low back pain. pain. :) "
         }
       ]
     },
@@ -289,26 +296,26 @@
       "warmup": [
         {
           "id": "ex-1779812123635",
-          "name": "Recumbent Bike",
+          "name": "Recumbent Bike M",
           "pillar": "WU",
           "status": "Active",
           "category": "Cardio",
           "movementFamily": "Locomotion",
-          "movementPattern": "",
-          "bodyRegion": "",
-          "loadStyle": "",
+          "movementPattern": "Rotation",
+          "bodyRegion": "Legs",
+          "loadStyle": "Mobility",
           "sets": "",
-          "reps": "5 mins",
+          "reps": "5 - 10 minutes",
           "rpe": "6-7",
           "equipment": "Recumbent Bike",
           "difficulty": "Foundational",
-          "code": "WU-10-Recumbentbike",
+          "code": "WU-RecumbentBike-M",
           "cues": "",
           "coachingFocus": "",
           "contraindications": "",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/recumbent-bike-18242.jpg",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/recumbent-bike-66059.jpg",
           "startWeight": "Try a 10 minute warmup with some intervals in the last 2 minutes -79% effort for 30 seconds then speed and 80-85% effort for 30 seconds x 2. We want your legs warmed up well.  "
         },
         {
@@ -474,7 +481,7 @@
           "equipment": "Band",
           "difficulty": "Foundational",
           "code": "AT-HOME-05",
-          "cues": "Smooth. Don't snap the band. Band around ankle, anchor to chair leg, extend knee forward slowly.",
+          "cues": "Smooth. Do not snap the band. Band around ankle, anchor to chair leg, extend knee forward slowly.",
           "progression": "Lighter band or smaller range if too hard",
           "video": "",
           "startWeight": ""
@@ -545,7 +552,7 @@
           "equipment": "None / Bodyweight",
           "difficulty": "Foundational",
           "code": "MO-PH1-13-LLifts",
-          "cues": "Start with legs at 90°. Only lower where you can control core with no lower back pain.",
+          "cues": "Start with legs at 90. Only lower where you can control core with no lower back pain.",
           "progression": "Increase range as strength improves",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-5.jpg",
@@ -685,7 +692,7 @@
           "equipment": "Dumbbells",
           "difficulty": "Intermediate",
           "code": "PM-P1-09-SSPS",
-          "cues": "Start at ear height. Press overhead. Don't arch lower back.",
+          "cues": "Start at ear height. Press overhead. Do not arch lower back.",
           "progression": "Rest 30 sec",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-9.jpg",
