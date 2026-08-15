@@ -1,6 +1,6 @@
 {
   "v": 1,
-  "savedAt": "2026-08-15T02:55:27.399Z",
+  "savedAt": "2026-08-15T03:05:52.155Z",
   "client": "Toni Serofin",
   "date": "2026-08-14",
   "coach": "Colleen Preston",
@@ -325,7 +325,8 @@
           "cues": "Relax shoulders, keep posture tall, try to reach heel to butt",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-6.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-6.jpg",
+          "startWeight": ""
         },
         {
           "id": "wu-8",
@@ -341,7 +342,8 @@
           "cues": "Drive knee to hip height. Stay tall. Increase speed only if posture stays controlled.",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-8.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-8.jpg",
+          "startWeight": ""
         },
         {
           "id": "wu-3",
@@ -357,7 +359,8 @@
           "cues": "Relax shoulders, ribs down, tall spine",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-3.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-3.jpg",
+          "startWeight": ""
         },
         {
           "id": "wu-10",
@@ -373,7 +376,8 @@
           "cues": "Light support if needed. Swing from hip, not low back. Control both directions.",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-10.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-10.jpg",
+          "startWeight": ""
         },
         {
           "id": "wu-7",
@@ -389,7 +393,8 @@
           "cues": "Drive from heel of bent knee",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-7.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-7.jpg",
+          "startWeight": ""
         }
       ],
       "primary": [
@@ -431,7 +436,8 @@
           "contraindications": "If you are recovering from injury, start slowly and use a counter/bar if needed.",
           "progression": "If you feel knee, ankle or foot pain, move off the Bosu. If you want to increase intensity, run up and down instead of step-ups.",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bosu-step-ups-58099.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bosu-step-ups-58099.jpg",
+          "startWeight": ""
         },
         {
           "id": "ex-1783053472208",
@@ -454,7 +460,8 @@
           "contraindications": "",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/band-lateral-leg-lifts-69897.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/band-lateral-leg-lifts-69897.jpg",
+          "startWeight": ""
         },
         {
           "id": "st-5",
@@ -469,7 +476,8 @@
           "code": "AT-HOME-05",
           "cues": "Smooth. Don't snap the band. Band around ankle, anchor to chair leg, extend knee forward slowly.",
           "progression": "Lighter band or smaller range if too hard",
-          "video": ""
+          "video": "",
+          "startWeight": ""
         },
         {
           "id": "ex-1786497477352",
@@ -492,7 +500,8 @@
           "contraindications": "",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wall-squats-with-pilates-ball-m-21696.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wall-squats-with-pilates-ball-m-21696.jpg",
+          "startWeight": ""
         },
         {
           "id": "ex-1783194858654",
@@ -515,7 +524,8 @@
           "contraindications": "If you feel pain please stop.",
           "progression": "Try without weights and if you need to hold onto something to keep your posture, it is better than leaning to one side.",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/db-calf-raises-56323.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/db-calf-raises-56323.jpg",
+          "startWeight": ""
         },
         null
       ],
@@ -538,7 +548,8 @@
           "cues": "Start with legs at 90°. Only lower where you can control core with no lower back pain.",
           "progression": "Increase range as strength improves",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-5.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-5.jpg",
+          "startWeight": ""
         },
         null
       ]
@@ -559,7 +570,8 @@
           "cues": "Relax shoulders, ribs down, tall spine",
           "progression": "Increase range gradually",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-1.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-1.jpg",
+          "startWeight": ""
         },
         {
           "id": "st-13",
@@ -575,7 +587,8 @@
           "cues": "Start with your good arm first. Test slowly how far you can reach without pain. Goal is to have both arms back and pull elbows toward spine.",
           "progression": "Do not force range — test your pain threshold to find your pain-free limit",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-13.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-13.jpg",
+          "startWeight": ""
         },
         {
           "id": "st-16",
@@ -591,7 +604,8 @@
           "cues": "Press back against wall. Hold arms out straight at shoulder height. Keep one arm pressed to wall while the other crosses to touch the inside of the opposite arm.",
           "progression": "Increase range as mobility improves — always pain-free",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-16.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-16.jpg",
+          "startWeight": ""
         }
       ],
       "primary": [
@@ -609,7 +623,8 @@
           "cues": "Elbows stay at sides. Full range of motion — extend fully at bottom. Control the descent.",
           "progression": "Add weight when 12 reps feel fully controlled",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-13.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-13.jpg",
+          "startWeight": ""
         },
         {
           "id": "ex-1783195488154",
@@ -632,7 +647,8 @@
           "contraindications": "If you lose form it is too heavy - if you move your upper arm it is not correct.",
           "progression": "Reduce weight if you cannot keep form.",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/cable-machine-tricep-pressdowns-flat-bar-85723.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/cable-machine-tricep-pressdowns-flat-bar-85723.jpg",
+          "startWeight": ""
         },
         {
           "id": "ex-1779739832030",
@@ -655,7 +671,8 @@
           "contraindications": "Avoid pain in elbows",
           "progression": "Reduce weight",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bicep-hammer-curls-30141.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bicep-hammer-curls-30141.jpg",
+          "startWeight": ""
         },
         {
           "id": "c-9",
@@ -671,7 +688,8 @@
           "cues": "Start at ear height. Press overhead. Don't arch lower back.",
           "progression": "Rest 30 sec",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-9.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-9.jpg",
+          "startWeight": ""
         },
         {
           "id": "a-10",
@@ -687,7 +705,8 @@
           "cues": "Use a medicine ball or kettlebell. Keep heels on ground to protect your back. Rotate slowly through full range of motion. Keep core braced throughout.",
           "progression": "Lift feet off floor for added challenge when back is fully protected",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-10.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-10.jpg",
+          "startWeight": ""
         },
         {
           "id": "st-9",
@@ -703,7 +722,8 @@
           "cues": "Stand tall, ribs down. Soft bend in elbows. Lift arms out to the side toward shoulder height. Lower slowly with control.",
           "progression": "Add very light weight only when fully pain-free at shoulder height",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-9.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-9.jpg",
+          "startWeight": ""
         }
       ],
       "accessory": [
@@ -721,7 +741,8 @@
           "cues": "Hinge from hip. Maintain long spine. Working leg soft.",
           "progression": "Rest 30 sec",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-6.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-6.jpg",
+          "startWeight": ""
         },
         {
           "id": "ex-1780174868821",
@@ -744,7 +765,8 @@
           "contraindications": "Don't go lower than 90 degrees",
           "progression": "Move up higher if knees bother you.",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/single-leg-wall-sit-65220.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/single-leg-wall-sit-65220.jpg",
+          "startWeight": ""
         }
       ],
       "conditioning": [
@@ -769,7 +791,8 @@
           "contraindications": "",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/russian-twists-no-weight-22432.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/russian-twists-no-weight-22432.jpg",
+          "startWeight": ""
         }
       ]
     }
