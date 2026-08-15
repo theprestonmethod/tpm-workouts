@@ -1,6 +1,6 @@
 {
   "v": 1,
-  "savedAt": "2026-08-15T22:32:42.369Z",
+  "savedAt": "2026-08-15T22:38:55.089Z",
   "client": "Toni Serofin",
   "date": "2026-08-14",
   "coach": "Colleen Preston",
@@ -764,7 +764,7 @@
           "progression": "Rest 30 sec",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-6.jpg",
-          "startWeight": ""
+          "startWeight": "Start with 10lb kettlebell, use fingertips on the wall if you feel you need the support - Kettlebell stays in front of the supporting leg, the fingertip support is the side that the leg is lifting back. "
         },
         {
           "id": "ex-1780174868821",
@@ -788,7 +788,7 @@
           "progression": "Move up higher if knees bother you.",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/single-leg-wall-sit-65220.jpg",
-          "startWeight": ""
+          "startWeight": "this is a stationary exercise (isometric) The supporting leg can be shifted slighty toward the centre of your body, to help with balance. "
         }
       ],
       "conditioning": [
