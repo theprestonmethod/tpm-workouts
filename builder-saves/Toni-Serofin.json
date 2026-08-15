@@ -1,6 +1,6 @@
 {
   "v": 1,
-  "savedAt": "2026-08-15T22:30:26.863Z",
+  "savedAt": "2026-08-15T22:32:42.369Z",
   "client": "Toni Serofin",
   "date": "2026-08-14",
   "coach": "Colleen Preston",
@@ -727,25 +727,9 @@
           "progression": "Rest 30 sec",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-9.jpg",
-          "startWeight": "You can also sit on a ball which will work your core more. "
+          "startWeight": "Start with 5lbs on the ball and increase to 8lbs if it feels safe. You can also sit on a ball which will work your core more. "
         },
-        {
-          "id": "a-10",
-          "name": "Russian Twists",
-          "pillar": "CORE",
-          "category": "Core",
-          "sets": "2",
-          "reps": "20 total",
-          "rpe": "",
-          "equipment": "Medicine Ball",
-          "difficulty": "Intermediate",
-          "code": "CORE-UNI-04",
-          "cues": "Use a medicine ball or kettlebell. Keep heels on ground to protect your back. Rotate slowly through full range of motion. Keep core braced throughout.",
-          "progression": "Lift feet off floor for added challenge when back is fully protected",
-          "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-10.jpg",
-          "startWeight": ""
-        },
+        null,
         {
           "id": "st-9",
           "name": "Lateral Arm Raises",
@@ -761,7 +745,7 @@
           "progression": "Add very light weight only when fully pain-free at shoulder height",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-9.jpg",
-          "startWeight": ""
+          "startWeight": "3lbs - 5lbs to start (higher reps is preferred rather than adding weight until 15 reps is easy). "
         }
       ],
       "accessory": [
