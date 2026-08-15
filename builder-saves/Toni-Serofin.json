@@ -1,6 +1,6 @@
 {
   "v": 1,
-  "savedAt": "2026-08-15T22:13:47.753Z",
+  "savedAt": "2026-08-15T22:29:19.124Z",
   "client": "Toni Serofin",
   "date": "2026-08-14",
   "coach": "Colleen Preston",
@@ -490,7 +490,8 @@
           "contraindications": "",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/band-leg-lifts-69385.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/band-leg-lifts-69385.jpg",
+          "startWeight": "Leg extends straight behind you. Don't bend your knee on the leg that is extending. "
         },
         {
           "id": "ex-1786497477352",
@@ -540,6 +541,30 @@
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/db-calf-raises-56323.jpg",
           "startWeight": ""
         },
+        {
+          "id": "ex-1779812588208",
+          "name": "Leg Press",
+          "pillar": "B",
+          "status": "Active",
+          "category": "Push",
+          "movementFamily": "Push",
+          "movementPattern": "Horizontal Push",
+          "bodyRegion": "Legs",
+          "loadStyle": "Strength",
+          "sets": "3",
+          "reps": "10",
+          "rpe": "8",
+          "equipment": "",
+          "difficulty": "Intermediate",
+          "code": "SM-37-Legpress",
+          "cues": "",
+          "coachingFocus": "",
+          "contraindications": "",
+          "progression": "",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/leg-press-86166.jpg",
+          "startWeight": "Do this if you have energy or alternate on a different day with the wall squats. "
+        },
         null
       ],
       "accessory": [
@@ -562,7 +587,7 @@
           "progression": "Increase range as strength improves",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-5.jpg",
-          "startWeight": ""
+          "startWeight": "Try adding the yoga block to see if it helps or not. "
         },
         null
       ]
@@ -618,7 +643,7 @@
           "progression": "Increase range as mobility improves — always pain-free",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-16.jpg",
-          "startWeight": ""
+          "startWeight": "Don't bend the elbow - You can move away from the wall when you the arm that is reaching needs to move to the stationary arm. "
         }
       ],
       "primary": [
@@ -637,7 +662,7 @@
           "progression": "Add weight when 12 reps feel fully controlled",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-13.jpg",
-          "startWeight": ""
+          "startWeight": "3 x 8 reps 10lbs - start at the bottom, with a soft bent elbow, when you come up, your finishing position should be about 4\" away from the shoulder, not touching the shoulder. "
         },
         {
           "id": "ex-1783195488154",
@@ -661,7 +686,7 @@
           "progression": "Reduce weight if you cannot keep form.",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/cable-machine-tricep-pressdowns-flat-bar-85723.jpg",
-          "startWeight": ""
+          "startWeight": "15lbs - 3 x 8-10 reps "
         },
         {
           "id": "ex-1779739832030",
@@ -685,7 +710,7 @@
           "progression": "Reduce weight",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bicep-hammer-curls-30141.jpg",
-          "startWeight": ""
+          "startWeight": "8lbs - 3 x 8-10 reps - same ROM as the bicep curl"
         },
         {
           "id": "c-9",
@@ -702,7 +727,7 @@
           "progression": "Rest 30 sec",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-9.jpg",
-          "startWeight": ""
+          "startWeight": "You can also sit on a ball which will work your core more. "
         },
         {
           "id": "a-10",
