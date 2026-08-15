@@ -1,6 +1,6 @@
 {
   "v": 1,
-  "savedAt": "2026-08-15T22:42:53.197Z",
+  "savedAt": "2026-08-15T22:57:05.543Z",
   "client": "Toni Serofin",
   "date": "2026-08-14",
   "coach": "Colleen Preston",
@@ -133,7 +133,12 @@
           "id": "b-5",
           "name": "Lat Pulldowns",
           "pillar": "B",
+          "status": "Active",
           "category": "Pull",
+          "movementFamily": "",
+          "movementPattern": "",
+          "bodyRegion": "",
+          "loadStyle": "",
           "sets": "3",
           "reps": "8 reps",
           "rpe": "",
@@ -141,9 +146,11 @@
           "difficulty": "Intermediate",
           "code": "PL-B-01",
           "cues": "Pull bar to chin. Squeeze lats. Control return.",
+          "coachingFocus": "",
+          "contraindications": "",
           "progression": "Increase load when form is solid",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-5.jpg",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/lat-pulldowns-12222.jpg",
           "startWeight": "3 x 8-10reps at 35lb - 40lbs"
         },
         {
@@ -400,7 +407,8 @@
           "cues": "Obliques, shoulders, spinal rotation",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-9.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-9.jpg",
+          "startWeight": ""
         }
       ],
       "primary": [
@@ -707,7 +715,7 @@
           "cues": "Keep your elbows tight to your body.",
           "coachingFocus": "",
           "contraindications": "Avoid pain in elbows",
-          "progression": "Reduce weight",
+          "progression": "Progression - increase weight, Regression - lighter weights or less reps.",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bicep-hammer-curls-30141.jpg",
           "startWeight": "8lbs - 3 x 8-10 reps - same ROM as the bicep curl"
@@ -813,7 +821,8 @@
           "contraindications": "",
           "progression": "Progression - add a medicine. If it is too difficult or hurts your back or flexors, do this standing and just twist.",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/russian-twists-no-weight-22432.jpg"
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/russian-twists-no-weight-22432.jpg",
+          "startWeight": ""
         }
       ]
     }
