@@ -1,6 +1,6 @@
 {
   "v": 1,
-  "savedAt": "2026-08-15T22:05:53.886Z",
+  "savedAt": "2026-08-15T22:12:43.044Z",
   "client": "Toni Serofin",
   "date": "2026-08-14",
   "coach": "Colleen Preston",
@@ -316,7 +316,7 @@
           "progression": "",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/recumbent-bike-66059.jpg",
-          "startWeight": "Try a 10 minute warmup with some intervals in the last 2 minutes -79% effort for 30 seconds then speed and 80-85% effort for 30 seconds x 2. We want your legs warmed up well.  "
+          "startWeight": "During your 15 minute warmup add some intervals in the last 2 minutes -75% effort for 30 seconds then speed and 80-85% effort for 30 seconds x 2. We want your legs warmed up well.  "
         },
         {
           "id": "wu-6",
@@ -387,8 +387,8 @@
           "startWeight": ""
         },
         {
-          "id": "wu-7",
-          "name": "Lateral Lunges",
+          "id": "wu-9",
+          "name": "T-Spine Windmills",
           "pillar": "WU",
           "category": "Warm-Up",
           "sets": "1",
@@ -396,12 +396,11 @@
           "rpe": "",
           "equipment": "None / Bodyweight",
           "difficulty": "Foundational",
-          "code": "WU-UNI-04",
-          "cues": "Drive from heel of bent knee",
+          "code": "WU-UNI-05",
+          "cues": "Obliques, shoulders, spinal rotation",
           "progression": "",
           "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-7.jpg",
-          "startWeight": ""
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-9.jpg"
         }
       ],
       "primary": [
@@ -444,7 +443,7 @@
           "progression": "If you feel knee, ankle or foot pain, move off the Bosu. If you want to increase intensity, run up and down instead of step-ups.",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bosu-step-ups-58099.jpg",
-          "startWeight": ""
+          "startWeight": "2 x 30 seconds each leg "
         },
         {
           "id": "ex-1783053472208",
@@ -484,7 +483,7 @@
           "cues": "Smooth. Do not snap the band. Band around ankle, anchor to chair leg, extend knee forward slowly.",
           "progression": "Lighter band or smaller range if too hard",
           "video": "",
-          "startWeight": ""
+          "startWeight": "When you bring leg back, do not bend the knee. "
         },
         {
           "id": "ex-1786497477352",
@@ -508,7 +507,7 @@
           "progression": "",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wall-squats-with-pilates-ball-m-21696.jpg",
-          "startWeight": ""
+          "startWeight": "You can use a yoga block if there is no ball. "
         },
         {
           "id": "ex-1783194858654",
