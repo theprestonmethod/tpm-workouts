@@ -1,6 +1,6 @@
 {
   "v": 1,
-  "savedAt": "2026-08-18T03:29:03.549Z",
+  "savedAt": "2026-08-18T03:35:12.923Z",
   "client": "Mary Paone",
   "date": "2026-08-18",
   "coach": "Coach Colleen",
@@ -395,6 +395,52 @@
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wall-sit-with-pilates-ball-15698.jpg"
         },
         {
+          "id": "ex-1787023938812",
+          "name": "Machine Leg Press - Single Leg",
+          "pillar": "B",
+          "status": "Active",
+          "category": "Push",
+          "movementFamily": "Push",
+          "movementPattern": "Single-Leg",
+          "bodyRegion": "Legs",
+          "loadStyle": "Stability",
+          "sets": "3",
+          "reps": "10",
+          "rpe": "7",
+          "equipment": "Machine at Gym",
+          "difficulty": "",
+          "code": "SM-99 Machine Leg Press",
+          "cues": "Make sure the weight is much lighter than you would use with both feet on the pad.",
+          "coachingFocus": "Stability - Adductors",
+          "contraindications": "if you feel hip or knee pain, stop.",
+          "progression": "IF it is too difficult, try the leg extension machine with 1 leg.",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/machine-leg-press-single-leg-18143.jpg"
+        },
+        {
+          "id": "ex-1787024021925",
+          "name": "Machine - Single Leg Extension",
+          "pillar": "B",
+          "status": "Active",
+          "category": "Hinge",
+          "movementFamily": "Pull",
+          "movementPattern": "Single-Leg",
+          "bodyRegion": "Legs",
+          "loadStyle": "Strength",
+          "sets": "3",
+          "reps": "8-10",
+          "rpe": "6",
+          "equipment": "Machine at Gym",
+          "difficulty": "Intermediate",
+          "code": "",
+          "cues": "Do not continue with Single-leg if it causes pain.",
+          "coachingFocus": "",
+          "contraindications": "",
+          "progression": "",
+          "video": "",
+          "image": null
+        },
+        {
           "id": "c-6",
           "name": "Single-Leg Deadlift",
           "pillar": "C",
@@ -409,38 +455,36 @@
           "progression": "Rest 30 sec",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-6.jpg"
-        },
-        {
-          "id": "ex-1783199060622",
-          "name": "Machine Hamstring Curl",
-          "pillar": "B",
-          "status": "Active",
-          "category": "Pull",
-          "movementFamily": "Pull",
-          "movementPattern": "Horizontal Pull",
-          "bodyRegion": "Legs",
-          "loadStyle": "Strength",
-          "sets": "3",
-          "reps": "10",
-          "rpe": "7",
-          "equipment": "Machine at Gym",
-          "difficulty": "Intermediate",
-          "code": "SM-54-MHamCurl",
-          "cues": "",
-          "coachingFocus": "",
-          "contraindications": "",
-          "progression": "If you feel your lower back or a cramp in your hamstring, please reduce the weight - or stop if your back hurts.",
-          "video": "",
-          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/machine-hamstring-curl-06156.jpg"
-        },
-        null
+        }
       ],
       "accessory": [
         null,
         null
       ],
       "conditioning": [
-        null
+        {
+          "id": "ex-1777066700743",
+          "name": "Windshield Wipers",
+          "pillar": "B",
+          "status": "Active",
+          "category": "Core",
+          "movementFamily": "Breath/Core",
+          "movementPattern": "Rotation",
+          "bodyRegion": "Core / Spine",
+          "loadStyle": "Control",
+          "sets": "3",
+          "reps": "30s",
+          "rpe": "",
+          "equipment": "None / Bodyweight",
+          "difficulty": "Intermediate",
+          "code": "SM-CORE-17-wndshldwprs",
+          "cues": "T-Position: Lie on your back, arms out wide for support, legs straight up.\nSide Sweep: Lower your legs to one side while keeping both shoulders down.\nCore Pull: Use your obliques to pull the legs back to the center.\nControlled Arc: Move slowly; don't let gravity take over at the bottom.",
+          "coachingFocus": "",
+          "contraindications": "",
+          "progression": "",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/windshield-wipers-99322.jpg"
+        }
       ]
     },
     "3": {
