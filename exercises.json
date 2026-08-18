@@ -3561,5 +3561,28 @@
     "progression": "To make this more difficult, step your feet back further from the wall.",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wall-pushups-14037.jpg"
+  },
+  {
+    "id": "ex-1787023938812",
+    "name": "Machine Leg Press - Single Leg",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Push",
+    "movementFamily": "Push",
+    "movementPattern": "Single-Leg",
+    "bodyRegion": "Legs",
+    "loadStyle": "Stability",
+    "sets": "3",
+    "reps": "10",
+    "rpe": "7",
+    "equipment": "Machine at Gym",
+    "difficulty": "",
+    "code": "SM-99 Machine Leg Press",
+    "cues": "Make sure the weight is much lighter than you would use with both feet on the pad.",
+    "coachingFocus": "Stability - Adductors",
+    "contraindications": "if you feel hip or knee pain, stop.",
+    "progression": "IF it is too difficult, try the leg extension machine with 1 leg.",
+    "video": "",
+    "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/machine-leg-press-single-leg-18143.jpg"
   }
 ]
