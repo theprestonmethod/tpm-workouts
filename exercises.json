@@ -3584,5 +3584,28 @@
     "progression": "IF it is too difficult, try the leg extension machine with 1 leg.",
     "video": "",
     "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/machine-leg-press-single-leg-18143.jpg"
+  },
+  {
+    "id": "ex-1787024021925",
+    "name": "Machine - Single Leg Extension",
+    "pillar": "B",
+    "status": "Active",
+    "category": "Hinge",
+    "movementFamily": "Pull",
+    "movementPattern": "Single-Leg",
+    "bodyRegion": "Legs",
+    "loadStyle": "Strength",
+    "sets": "3",
+    "reps": "8-10",
+    "rpe": "6",
+    "equipment": "Machine at Gym",
+    "difficulty": "Intermediate",
+    "code": "",
+    "cues": "Do not continue with Single-leg if it causes pain.",
+    "coachingFocus": "",
+    "contraindications": "",
+    "progression": "",
+    "video": "",
+    "image": null
   }
 ]
