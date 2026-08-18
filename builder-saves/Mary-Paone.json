@@ -1,0 +1,299 @@
+{
+  "v": 1,
+  "savedAt": "2026-08-18T02:53:49.472Z",
+  "client": "Mary Paone",
+  "date": "2026-08-18",
+  "coach": "Coach Colleen",
+  "phase": "Phase 1 / Week 1",
+  "title": "Mobility Foundations",
+  "checkin": "https://theprestonmethod.github.io/tpm-workouts/tpm-weekly-checkin.html",
+  "notes": "Hello Mary! Here is a workout plan with 3 days of exercises to work through. They are designed to be short strength training workouts that you can do each day as they will target different areas. I hope these will help you! If you experience pain, or you feel the exercise is not working, please send me a note with your Check-In at the end of the workout or an email if you notice something at a later day. Enjoy! Colleen~ Here is a link to videos for warmups; only do the movements that feel safe and work for you. https://youtu.be/at0krfIdgx4 ",
+  "days": {
+    "1": {
+      "warmup": [
+        {
+          "id": "ex-1779920009849",
+          "name": "Rowing Machine",
+          "pillar": "C",
+          "status": "Active",
+          "category": "Pull",
+          "movementFamily": "Pull",
+          "movementPattern": "Horizontal Pull",
+          "bodyRegion": "Full Body",
+          "loadStyle": "Power",
+          "sets": "",
+          "reps": "500-1000m",
+          "rpe": "6-8",
+          "equipment": "",
+          "difficulty": "Intermediate",
+          "code": "SM-36-seatedrows",
+          "cues": "Use it as a warmup or for performance! A very versatile exercise!",
+          "coachingFocus": "Be very aware of your form.",
+          "contraindications": "",
+          "progression": "",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/rowing-machine-06975.jpg",
+          "startWeight": "Start with 500m and increase distance and speed slowly if it doesn't bother your hips."
+        },
+        {
+          "id": "a-6",
+          "name": "Wall Angels",
+          "pillar": "A",
+          "category": "Mobility",
+          "sets": "2",
+          "reps": "10 reps",
+          "rpe": "",
+          "equipment": "None / Bodyweight",
+          "difficulty": "Foundational",
+          "code": "PL-Plyo-V1",
+          "cues": "Stand with back flat against wall. Slide arms up and down in Y-T-W pattern.",
+          "progression": "",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-6.jpg"
+        },
+        {
+          "id": "wu-9",
+          "name": "T-Spine Windmills",
+          "pillar": "WU",
+          "category": "Warm-Up",
+          "sets": "1",
+          "reps": "10 each side",
+          "rpe": "",
+          "equipment": "None / Bodyweight",
+          "difficulty": "Foundational",
+          "code": "WU-UNI-05",
+          "cues": "Obliques, shoulders, spinal rotation",
+          "progression": "",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-9.jpg"
+        },
+        {
+          "id": "st-13",
+          "name": "Chest/Deltoid Stretch",
+          "pillar": "MF",
+          "category": "Shoulder Health",
+          "sets": "1",
+          "reps": "30-60s",
+          "rpe": "",
+          "equipment": "None",
+          "difficulty": "Foundational",
+          "code": "MF-SH-05",
+          "cues": "Start with your good arm first. Test slowly how far you can reach without pain. Goal is to have both arms back and pull elbows toward spine.",
+          "progression": "Do not force range — test your pain threshold to find your pain-free limit",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-13.jpg"
+        }
+      ],
+      "primary": [
+        {
+          "id": "b-1",
+          "name": "Pushups Against the Wall with a Ball",
+          "pillar": "B",
+          "status": "Active",
+          "category": "Push",
+          "movementFamily": "",
+          "movementPattern": "",
+          "bodyRegion": "",
+          "loadStyle": "",
+          "sets": "2",
+          "reps": "10 reps",
+          "rpe": "",
+          "equipment": "Exercise Ball",
+          "difficulty": "Foundational",
+          "code": "SM-PH1-V1-01-WBPU",
+          "cues": "Core engaged, do not let hips drop. Hands below shoulder height. Adjust to avoid wrist pain.",
+          "coachingFocus": "",
+          "contraindications": "",
+          "progression": "Move hands/ball lower to increase difficulty",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-1.jpg"
+        },
+        {
+          "id": "c-1",
+          "name": "DB Chest Press",
+          "pillar": "C",
+          "category": "Push",
+          "sets": "3",
+          "reps": "6–8 reps",
+          "rpe": "7–8",
+          "equipment": "Dumbbells",
+          "difficulty": "Intermediate",
+          "code": "PM-P1-06-CPress",
+          "cues": "Control descent. Pause at chest. Drive up.",
+          "progression": "Rest 30 sec",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-1.jpg",
+          "startWeight": "10lbs - 2-3 sets of 10. RPE 6"
+        },
+        {
+          "id": "c-3",
+          "name": "DB Flys — Flat Bench",
+          "pillar": "C",
+          "category": "Push",
+          "sets": "3",
+          "reps": "6–8 reps",
+          "rpe": "7–8",
+          "equipment": "Bench",
+          "difficulty": "Intermediate",
+          "code": "PM-P1-07-DBflys",
+          "cues": "Wide arc with slight elbow bend. Feel chest stretch at bottom.",
+          "progression": "Rest 30 sec",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-3.jpg"
+        },
+        {
+          "id": "c-13",
+          "name": "DB Bicep Curl",
+          "pillar": "C",
+          "category": "Strength",
+          "sets": "3",
+          "reps": "10-12 each",
+          "rpe": "",
+          "equipment": "Dumbbells",
+          "difficulty": "Intermediate",
+          "code": "PL-11",
+          "cues": "Elbows stay at sides. Full range of motion — extend fully at bottom. Control the descent.",
+          "progression": "Add weight when 12 reps feel fully controlled",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/c-13.jpg"
+        },
+        {
+          "id": "ex-1779739832030",
+          "name": "Bicep Hammer Curls",
+          "pillar": "B",
+          "status": "Active",
+          "category": "Grip / Hand",
+          "movementFamily": "",
+          "movementPattern": "",
+          "bodyRegion": "Arms",
+          "loadStyle": "Strength",
+          "sets": "3",
+          "reps": "8-10",
+          "rpe": "7-8",
+          "equipment": "Dumbbells",
+          "difficulty": "Foundational",
+          "code": "SM-35-dbhammercurls",
+          "cues": "Keep your elbows tight to your body.",
+          "coachingFocus": "",
+          "contraindications": "Avoid pain in elbows",
+          "progression": "Progression - increase weight, Regression - lighter weights or less reps.",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/bicep-hammer-curls-30141.jpg"
+        }
+      ],
+      "accessory": [
+        {
+          "id": "ex-1781734677302",
+          "name": "Pec Dec",
+          "pillar": "B",
+          "status": "Active",
+          "category": "Pull",
+          "movementFamily": "Pull",
+          "movementPattern": "Horizontal Pull",
+          "bodyRegion": "Chest / Shoulder",
+          "loadStyle": "Control",
+          "sets": "2",
+          "reps": "12",
+          "rpe": "6",
+          "equipment": "Dumbbells",
+          "difficulty": "Foundational",
+          "code": "MF-33-PecDec",
+          "cues": "You can do this with or without weights for mobility. For strength make sure you can keep your elbows up with the weight.",
+          "coachingFocus": "Shoulder stability, small chest muscles",
+          "contraindications": "Do not work through any shoulder pain.",
+          "progression": "Try without weights if you cannot keep form.",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/pec-dec-73531.jpg"
+        },
+        {
+          "id": "st-11",
+          "name": "Robots",
+          "pillar": "MF",
+          "category": "Shoulder Health",
+          "sets": "2",
+          "reps": "10 slow",
+          "rpe": "",
+          "equipment": "None",
+          "difficulty": "Foundational",
+          "code": "MF-SH-03",
+          "cues": "Keep arms low to start. Palms facing outward. Keep elbows at comfortable level as you turn palms down. NO pain. Stay low and work slow.",
+          "progression": "Goal image is the end point — not the starting point. Progress gradually",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/st-11.jpg"
+        }
+      ],
+      "conditioning": [
+        {
+          "id": "a-4",
+          "name": "Deadbug",
+          "pillar": "CORE",
+          "category": "Core",
+          "sets": "2",
+          "reps": "10 each side",
+          "rpe": "",
+          "equipment": "None / Bodyweight",
+          "difficulty": "Foundational",
+          "code": "MO-PH1-02-BaLPD",
+          "cues": "Rest head on floor. Do not let lower back arch when straightening leg.",
+          "progression": "Add hold at end range",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-4.jpg"
+        },
+        {
+          "id": "a-8",
+          "name": "Single-Leg Bridge",
+          "pillar": "CORE",
+          "category": "Core",
+          "sets": "2",
+          "reps": "10s hold",
+          "rpe": "",
+          "equipment": "None",
+          "difficulty": "Foundational",
+          "code": "CORE-UNI-03",
+          "cues": "Start with both feet on floor. Lift hips as high as you can with no back pain. When stable, lift one leg and hold 10 seconds. Keep hips level.",
+          "progression": "If back pain or hamstring cramp occurs, lower hips. Progress to full bridge before single-leg",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/a-8.jpg"
+        }
+      ]
+    },
+    "2": {
+      "warmup": [
+        null,
+        null,
+        null
+      ],
+      "primary": [
+        null,
+        null,
+        null
+      ],
+      "accessory": [
+        null,
+        null
+      ],
+      "conditioning": [
+        null
+      ]
+    },
+    "3": {
+      "warmup": [
+        null,
+        null,
+        null
+      ],
+      "primary": [
+        null,
+        null,
+        null
+      ],
+      "accessory": [
+        null,
+        null
+      ],
+      "conditioning": [
+        null
+      ]
+    }
+  }
+}
