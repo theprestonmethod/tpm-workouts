@@ -1,6 +1,6 @@
 {
   "v": 1,
-  "savedAt": "2026-08-19T17:59:45.573Z",
+  "savedAt": "2026-08-19T18:00:35.325Z",
   "client": "Mary Paone",
   "date": "2026-08-18",
   "coach": "Coach Colleen",
@@ -506,7 +506,31 @@
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/windshield-wipers-99322.jpg",
           "startWeight": ""
-        }
+        },
+        {
+          "id": "ex-1777064186371",
+          "name": "Forearm Plank",
+          "pillar": "B",
+          "status": "Active",
+          "category": "Core",
+          "movementFamily": "Breath/Core",
+          "movementPattern": "Anti-Rotation",
+          "bodyRegion": "Core / Spine",
+          "loadStyle": "Stability",
+          "sets": "3",
+          "reps": "30s",
+          "rpe": "",
+          "equipment": "None / Bodyweight",
+          "difficulty": "Foundational",
+          "code": "SM-CORE-05-fplank",
+          "cues": "Cues: \nPlace elbows under shoulders and actively push the floor away to spread your shoulder blades.\nTuck your tailbone and pull your ribs toward your hips to slightly round your lower back.\nTighten your glutes and core as if someone is about to punch your stomach.\nKeep your gaze on the floor for a long neck and maintain steady, deep breaths.",
+          "coachingFocus": "",
+          "contraindications": "",
+          "progression": "",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/forearm-plank-83758.jpg"
+        },
+        null
       ]
     },
     "3": {
