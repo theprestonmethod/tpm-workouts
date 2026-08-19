@@ -1,0 +1,144 @@
+{
+  "v": 1,
+  "savedAt": "2026-08-19T01:28:14.911Z",
+  "client": "Brendan",
+  "date": "2026-08-12",
+  "coach": "",
+  "phase": "",
+  "title": "",
+  "checkin": "https://theprestonmethod.github.io/tpm-workouts/tpm-weekly-checkin.html",
+  "notes": "",
+  "days": {
+    "1": {
+      "warmup": [
+        {
+          "id": "wu-1",
+          "name": "Arm Swings",
+          "pillar": "WU",
+          "category": "Warm-Up",
+          "sets": "1",
+          "reps": "20–30 sec",
+          "rpe": "",
+          "equipment": "None / Bodyweight",
+          "difficulty": "Foundational",
+          "code": "WU-UNI-01",
+          "cues": "Relax shoulders, ribs down, tall spine",
+          "progression": "Increase range gradually",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/wu-1.jpg"
+        },
+        null,
+        null
+      ],
+      "primary": [
+        {
+          "id": "b-3",
+          "name": "DB Tricep Kickbacks",
+          "pillar": "B",
+          "category": "Push",
+          "sets": "2",
+          "reps": "10 each side",
+          "rpe": "",
+          "equipment": "Dumbbells",
+          "difficulty": "Intermediate",
+          "code": "SM-PH1-03-TriKickB",
+          "cues": "Elbows locked to side. Elbows above body height. Neutral spine — look 45° down.",
+          "progression": "Stay in deep lunge for additional challenge",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-3.jpg"
+        },
+        {
+          "id": "c-13",
+          "name": "DB Bicep Curl",
+          "pillar": "C",
+          "status": "Active",
+          "category": "Pull",
+          "movementFamily": "",
+          "movementPattern": "",
+          "bodyRegion": "",
+          "loadStyle": "",
+          "sets": "3",
+          "reps": "10-12 each",
+          "rpe": "",
+          "equipment": "Dumbbells",
+          "difficulty": "Intermediate",
+          "code": "SM-34-Bicepcurls",
+          "cues": "Elbows stay at sides. Full range of motion — extend fully at bottom. Control the descent.",
+          "coachingFocus": "",
+          "contraindications": "",
+          "progression": "Add weight when 12 reps feel fully controlled",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/db-bicep-curl-95269.jpg"
+        },
+        null
+      ],
+      "accessory": [
+        null,
+        null
+      ],
+      "conditioning": [
+        {
+          "id": "ex-1777066798809",
+          "name": "Superman",
+          "pillar": "B",
+          "status": "Active",
+          "category": "Core",
+          "movementFamily": "Breath/Core",
+          "movementPattern": "Spine Mobility",
+          "bodyRegion": "Core / Spine",
+          "loadStyle": "Stability",
+          "sets": "3",
+          "reps": "30s",
+          "rpe": "",
+          "equipment": "None / Bodyweight",
+          "difficulty": "Foundational",
+          "code": "SM-CORE-18-superman",
+          "cues": "Face Down: Lie on your belly with arms and legs extended.\nThe Lift: Exhale and lift your chest, arms, and legs simultaneously off the floor.\nGlute Squeeze: Squeeze your glutes to protect your lower back as you lift.\nLong Neck: Keep your gaze down at the mat to avoid neck strain.",
+          "coachingFocus": "",
+          "contraindications": "",
+          "progression": "",
+          "video": "",
+          "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/superman-97055.jpg"
+        }
+      ]
+    },
+    "2": {
+      "warmup": [
+        null,
+        null,
+        null
+      ],
+      "primary": [
+        null,
+        null,
+        null
+      ],
+      "accessory": [
+        null,
+        null
+      ],
+      "conditioning": [
+        null
+      ]
+    },
+    "3": {
+      "warmup": [
+        null,
+        null,
+        null
+      ],
+      "primary": [
+        null,
+        null,
+        null
+      ],
+      "accessory": [
+        null,
+        null
+      ],
+      "conditioning": [
+        null
+      ]
+    }
+  }
+}
