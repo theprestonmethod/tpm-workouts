@@ -1,6 +1,6 @@
 {
   "v": 1,
-  "savedAt": "2026-08-19T17:56:53.313Z",
+  "savedAt": "2026-08-19T17:59:45.573Z",
   "client": "Mary Paone",
   "date": "2026-08-18",
   "coach": "Coach Colleen",
@@ -620,7 +620,7 @@
           "progression": "Increase load when form is solid",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-5.jpg",
-          "startWeight": "35lbs - 2 x 12 reps"
+          "startWeight": "Use a band to protect your shoulder, pull band in front and toward your chin."
         },
         {
           "id": "b-3",
@@ -637,7 +637,7 @@
           "progression": "Stay in deep lunge for additional challenge",
           "video": "",
           "image": "https://theprestonmethod.github.io/tpm-workouts/images/exercises/b-3.jpg",
-          "startWeight": "8lbs - 2 x 10 ea side"
+          "startWeight": "5-8lbs - 2 x 10 ea side"
         },
         {
           "id": "st-10",
